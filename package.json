@@ -4,7 +4,7 @@
   "description": "Le projet [Lot'ô car](https://www.lotocar.fr/) a commencé avec une base de données dans un Google Spreadsheet à plusieurs feuilles gérée manuellement",
   "main": "index.js",
   "scripts": {
-    "start": "node Corresplot/main.js",
+    "start": "node -r esm server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/DavidBruant/lotocar#readme",
   "dependencies": {
+    "esm": "^3.2.25",
+    "express": "^4.17.1",
     "googleapis": "^41.0.1"
   }
 }

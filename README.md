@@ -33,8 +33,16 @@ Corresplot est une interface utilisateur permettant de faire la correspondance f
 
 - Créer un projet dans la [console Google](https://console.developers.google.com)
 - Créer des accès pour l'API Google Sheet et spécifiquement une "clé API" (pas Oauth)
-- Créer un fichier `google-api-credentials.json`
+- Créer un fichier `.env` avec les variables d'environnement:
+    - `GOOGLE_API_KEY` : clef d'API créée ci-dessus
+    - `GOOGLE_DRIVER_SPREADSHEET_ID` : identifiant du Google Spreadsheet qui sert de base de donnée
 
+## Conventions
+
+### Langue
+
+- Documentation en français
+- Code et messages de commit en anglais
 
 
 ## Licence
