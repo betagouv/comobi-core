@@ -3,6 +3,7 @@ import { google } from 'googleapis'
 const googleAPIKey = process.env.GOOGLE_API_KEY
 const googleDriverSpreadsheetId = process.env.GOOGLE_DRIVER_SPREADSHEET_ID
 
+const sheets = google.sheets({ version: 'v4', auth: googleAPIKey });
 
 const CONDUCTEUR_PROPS = [
     'Départ',
@@ -16,14 +17,20 @@ const CONDUCTEUR_PROPS = [
     'Info'
 ]
 
+const sheetNames = [
+    'Vers Cahors',
+    'De Cahors',
+    'Vers Figeac',
+    'De Figeac',
+    'Divers Aller',
+    'Divers Retour'
+]
 
-export default function listConducteurs() {
-    const sheets = google.sheets({ version: 'v4', auth: googleAPIKey });
-
+function getOneSheetDrivers(sheetName){
     return new Promise((resolve, reject) => {
         sheets.spreadsheets.values.get({
             spreadsheetId: googleDriverSpreadsheetId,
-            range: 'Vers Cahors',
+            range: sheetName,
         }, (err, res) => {
             if (err){
                 reject(err)
@@ -51,5 +58,11 @@ export default function listConducteurs() {
             }
         });
     })
+}
+
+
+export default function getDrivers() {
+    return Promise.all(sheetNames.map(getOneSheetDrivers))
+        .then(driversBySheet => driversBySheet.flat())
 }
 
