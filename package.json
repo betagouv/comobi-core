@@ -4,10 +4,14 @@
   "description": "Le projet [Lot'ô car](https://www.lotocar.fr/) a commencé avec une base de données dans un Google Spreadsheet à plusieurs feuilles gérée manuellement",
   "main": "index.js",
   "scripts": {
-    "start": "node -r esm server.js",
+    "start": "heroku local",
+    "build": "rollup -c",
+    "watch": "rollup -c -w",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "engines" : { "node" : ">=12" },
+  "engines": {
+    "node": ">=12"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/DavidBruant/lotocar.git"
@@ -19,8 +23,24 @@
   },
   "homepage": "https://github.com/DavidBruant/lotocar#readme",
   "dependencies": {
+    "baredux": "github:DavidBruant/baredux",
+    "d3-dsv": "^1.1.1",
+    "d3-fetch": "^1.1.2",
     "esm": "^3.2.25",
     "express": "^4.17.1",
-    "googleapis": "^41.0.1"
+    "googleapis": "^41.0.1",
+    "htm": "^2.2.1",
+    "leaflet": "^1.5.1",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-leaflet": "^2.4.0"
+  },
+  "devDependencies": {
+    "rollup": "^1.16.2",
+    "rollup-plugin-commonjs": "^10.0.0",
+    "rollup-plugin-livereload": "^1.0.1",
+    "rollup-plugin-node-resolve": "^5.1.0",
+    "rollup-plugin-replace": "^2.2.0",
+    "rollup-plugin-terser": "^5.0.0"
   }
 }

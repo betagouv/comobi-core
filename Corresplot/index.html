@@ -10,8 +10,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="icon" href="data:,">
         
-        <link crossorigin="anonymous" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/twbs/bootstrap@v4-dev/dist/css/bootstrap-reboot.css">
-        
+        <link crossorigin="anonymous" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/twbs/bootstrap@v4/dist/css/bootstrap-reboot.css">
+         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+   integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+   crossorigin="anonymous"/>
         <!--
         <script crossorigin="anonymous" src="https://polyfill.io/v3/polyfill.min.js?flags=always&features=default%2Ces2017%2Ces2016%2Ces2015%2Cfetch"></script>
         -->
@@ -19,30 +21,15 @@
             ul > li{
                 list-style-type: '- ';
             }
+
+            .map{
+                height: 70vh;
+            }
         </style>
 
-        <script src="https://d3js.org/d3-dsv.v1.min.js"></script>
-        <script src="https://d3js.org/d3-fetch.v1.min.js"></script>
-
-        <script type="module">
-            d3.json('/drivers').then(drivers => {
-                console.log('drivers', drivers)
-                const ul = document.createElement('ul')
-
-                for(const {Départ, Arrivée, Horaires} of drivers){
-                    const li = document.createElement('li')
-
-                    li.append(`${Départ} => ${Arrivée}. ${Horaires}`)
-
-                    ul.append(li)
-                }
-
-                document.body.append(ul)
-            })
-        </script>
+        <script type="module" src="/build/corresplot-rollup-bundle.js"> </script>
     </head>
     <body>
-        <h1>Yotocar</h1>
-
+        <main/>
     </body>
 </html>
