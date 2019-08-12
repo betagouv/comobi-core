@@ -6,11 +6,8 @@ export default function getPlacesPosition(places){
     const adresseCSVBANBody = new FormData();
     adresseCSVBANBody.append('data', new File([adressesCSV], 'adresses.csv'))
     
-    return csv('https://api-adresse.data.gouv.fr/search/csv/?lat=44.4491&lon=1.43663', {
+    return csv('https://api-adresse.data.gouv.fr/search/csv/', {
         method: 'POST',
         body: adresseCSVBANBody,
-    })
-    .then(results => {
-        return results
     })
 }

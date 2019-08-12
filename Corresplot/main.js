@@ -6,36 +6,39 @@ import {json} from 'd3-fetch'
 
 import Main from './components/Main.js'
 
-import getPlacesPosition from './geography/getPlacesPosition';
+import getDirections from './geography/getDirections.js';
+import driverToTrip from './geography/driverToTrip';
+import googleDirectionsToCorresplotDirections from './geography/googleDirectionsToCorresplotDirections.js'
+import CorresplotMap from './components/Map';
 
 const html = htm.bind(createElement);
 
-function renderUI({drivers, positionsByPlace}){
+function renderUI({driversByTrip, directionsByTrip}){
     render(
-        html`<${Main} ...${{drivers, positionsByPlace}} />`, 
+        html`<${Main} ...${{driversByTrip, directionsByTrip}} />`, 
         document.body
     )
 }
 
 const store = new Store({
     state: {
-        drivers: [],
-        positionsByPlace: new Map()
+        driversByTrip: new Map(),
+        directionsByTrip: new Map()
     },
     mutations: {
-        addDrivers(state, drivers){
-            state.drivers = [...drivers, ...state.drivers]
+        addDrivers(state, driversByTrip){
+            state.driversByTrip = new Map([...driversByTrip, ...state.driversByTrip])
         },
-        addPositionsByPlace(state, positionsByPlace){
-            state.positionsByPlace = new Map([...state.positionsByPlace, ...positionsByPlace])
+        addDirections(state, directionsByTrip){
+            state.directionsByTrip = new Map([...state.directionsByTrip, ...directionsByTrip])
         }
     }
 })
 
 store.subscribe(state => {
-    const {drivers, positionsByPlace} = state
+    const {driversByTrip, directionsByTrip} = state
 
-    renderUI({drivers, positionsByPlace})
+    renderUI({driversByTrip, directionsByTrip})
 })
 
 console.log(store.state)
@@ -43,14 +46,45 @@ console.log(store.state)
 // initial render 
 renderUI(store.state)
 
-json('/drivers')
-.then(drivers => {
-    store.mutations.addDrivers(drivers)
 
-    getPlacesPosition(new Set(drivers.map(d => d['Départ'])))
-    .then(banResults => {
-        store.mutations.addPositionsByPlace(new Map(
-            banResults.map( ({adresse, longitude, latitude}) => ([adresse, {lng: longitude, lat: latitude}]) )
-        ))
-    })
+function cleanupDrivers(drivers){
+    for(const driver of drivers){
+        driver['Départ'] = driver['Départ'].trim()
+        driver['Arrivée'] = driver['Arrivée'].trim()
+    }
+    return drivers
+}
+
+
+json('/drivers')
+.then(cleanupDrivers)
+.then(drivers => {
+    const driversByTrip = new Map()
+
+    for(const driver of drivers){
+        const trip = driverToTrip(driver);
+
+        const tripDrivers = driversByTrip.get(trip) || []
+        tripDrivers.push(driver)
+        driversByTrip.set(trip, tripDrivers)
+    }
+
+    store.mutations.addDrivers(driversByTrip)
+
+    // Limiting to 5 trips for now, because each refresh causes calls to Google Direction API which is payable
+    const trips = [...driversByTrip.keys()].slice(0, 5)
+
+    console.log('trips', trips)
+
+    
+    Promise.all(trips.map(trip => {
+        return getDirections(trip)
+        .then(googleDirections => {
+            const corresplotDirections = googleDirectionsToCorresplotDirections(googleDirections)
+            return corresplotDirections ? [trip, corresplotDirections] : undefined
+        })
+    }))
+    .then(directions => store.mutations.addDirections(new Map(directions.filter(x => !!x))))
+    .catch(console.error)
+
 })
