@@ -9,21 +9,19 @@ import Main from './components/Main.js'
 import getDirections from './geography/getDirections.js';
 import driverToTrip from './geography/driverToTrip';
 import googleDirectionsToCorresplotDirections from './geography/googleDirectionsToCorresplotDirections.js'
-import CorresplotMap from './components/Map';
+
+import _actions from './actions.js';
 
 const html = htm.bind(createElement);
-
-function renderUI({driversByTrip, directionsByTrip}){
-    render(
-        html`<${Main} ...${{driversByTrip, directionsByTrip}} />`, 
-        document.body
-    )
-}
 
 const store = new Store({
     state: {
         driversByTrip: new Map(),
-        directionsByTrip: new Map()
+        directionsByTrip: new Map(),
+        tripRequest: {
+            origin: '',
+            destination: ''
+        }
     },
     mutations: {
         addDrivers(state, driversByTrip){
@@ -31,21 +29,39 @@ const store = new Store({
         },
         addDirections(state, directionsByTrip){
             state.directionsByTrip = new Map([...state.directionsByTrip, ...directionsByTrip])
+        },
+        setTripRequest(state, tripRequest){
+            state.tripRequest = tripRequest
         }
     }
 })
 
-store.subscribe(state => {
-    const {driversByTrip, directionsByTrip} = state
+const actions = _actions(store)
 
-    renderUI({driversByTrip, directionsByTrip})
+function renderUI(store){
+    const {driversByTrip, directionsByTrip, tripRequest} = store.state
+    //const {setTripRequest} = store.mutations
+    const {setTripRequestAndFindDirections} = actions
+
+    render(
+        html`<${Main} ...${{
+            driversByTrip, directionsByTrip, tripRequest, 
+            onTripRequestChange: setTripRequestAndFindDirections}
+        } />`, 
+        document.body
+    )
+}
+
+
+
+store.subscribe(state => {
+    renderUI(store)
 })
 
 console.log(store.state)
 
 // initial render 
-renderUI(store.state)
-
+renderUI(store)
 
 function cleanupDrivers(drivers){
     for(const driver of drivers){
@@ -71,7 +87,7 @@ json('/drivers')
 
     store.mutations.addDrivers(driversByTrip)
 
-    // Limiting to 5 trips for now, because each refresh causes calls to Google Direction API which is payable
+    // Limiting to 5 trips for now, because each refresh causes calls to Google Direction API which is paid for
     const trips = [...driversByTrip.keys()].slice(0, 5)
 
     console.log('trips', trips)

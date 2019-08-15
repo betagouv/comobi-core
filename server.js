@@ -1,10 +1,14 @@
 import express from 'express'
 import got from 'got'
 
+import memoize from 'fast-memoize';
+
 import getDrivers from './spreadsheetDatabase/getDrivers.js'
 
 const app = express()
 const PORT = process.env.PORT || 39528
+
+const memzGot = memoize(url => got(url))
 
 app.use(express.static('.'))
 
@@ -20,7 +24,7 @@ app.get('/directions', (req, res) => {
 
     const googleDirectionsAPIURL = `https://maps.googleapis.com/maps/api/directions/json?origin=${encodeURIComponent(origin)}&destination=${encodeURIComponent(destination)}&mode=driving&units=metric&region=fr&key=${googleAPIKey}`
 
-    got(googleDirectionsAPIURL)
+    memzGot(googleDirectionsAPIURL)
     .then(({statusCode, body}) => res.status(statusCode).set('Content-Type', 'application/json').send(body) )
     .catch(({statusCode, body}) => {
         res.status(statusCode).send(body)

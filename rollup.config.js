@@ -16,8 +16,11 @@ export default {
 		resolve(), 
 		commonjs({
 			namedExports: {
-				'node_modules/react/index.js': ['createElement', 'createContext', 'forwardRef', 'useContext', 'Component', 'Fragment', 'Children', 'cloneElement'],
+				// react
+				'node_modules/react/index.js': ['createElement', 'createContext', 'forwardRef', 'useContext', 'Component', 'Fragment', 'Children', 'cloneElement', 'useState', 'useEffect'],
+				// react-dom
 				'node_modules/react-dom/index.js': ['createPortal', 'render'],
+				// leaflet
 				'node_modules/leaflet/dist/leaflet-src.js': ['Control', 'Circle', 'CircleMarker', 'DomUtil', 'FeatureGroup', 'GeoJSON', 'GridLayer', 'ImageOverlay', 'latLngBounds', 'LayerGroup', 'Map', 'Marker', 'Polygon', 'Polyline', 'Popup', 'Rectangle', 'TileLayer', 'Tooltip', 'VideoOverlay']
 			}
 		}),

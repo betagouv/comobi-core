@@ -18,13 +18,91 @@
         <script crossorigin="anonymous" src="https://polyfill.io/v3/polyfill.min.js?flags=always&features=default%2Ces2017%2Ces2016%2Ces2015%2Cfetch"></script>
         -->
         <style>
-            ul > li{
-                list-style-type: '- ';
+            main{
+                display: flex;
+                flex-direction: row;
+            }
+
+            h1{
+                text-align: center;
+            }
+
+            a[href^="mailto:"]::before {
+                content: "📧 ";
+            }
+
+            a[href^="tel:"]::before {
+                content: "📞 ";
             }
 
             .map{
-                height: 70vh;
+                flex: 1;
+                height: 85vh;
             }
+
+            .trip-selection{
+                width: 30em;
+            }
+
+            .trip-request-entry{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .trip-request-entry .geography{
+                display: flex;
+                flex-direction: row;
+            }
+            .trip-request-entry .geography label{
+                text-align: center;
+            }
+
+            .trip-request-entry button[type="submit"]{
+                width: 6em;
+                padding: 0.5em;
+            }
+
+            .drivers-list{
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+
+            .drivers-list li.driver{
+                padding: 0.3em;
+                padding-left: 3em;
+                border-bottom: 1px solid #777;
+            }
+
+            .drivers-list li.driver:hover{
+                background-color: #EEE;
+            }
+
+            .drivers-list li.driver .name{
+                display: block;
+                font-weight: bold;
+            }
+
+            .drivers-list li.driver .proposed-trip{
+                display: block;
+                font-size: 0.7em;
+                color: grey;
+            }
+
+            .drivers-list li.driver .contact{
+                display: flex;
+                flex-direction: row;
+            }
+
+            .drivers-list li.driver .contact > *{
+                flex: 1;
+            }
+
+            .map .trip-request{
+                stroke: purple;
+            }
+
         </style>
 
         <script type="module" src="/build/corresplot-rollup-bundle.js"> </script>

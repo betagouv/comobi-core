@@ -18,9 +18,7 @@ const attribution = `Map data &copy; <a href="https://www.openstreetmap.org/">Op
 
 const zoom = 10;
 
-export default function CorresplotMap({directionsByTrip}){
-    console.log('directionsByTrip', directionsByTrip)
-
+export default function CorresplotMap({directionsByTrip, tripRequest}){
     directionsByTrip = directionsByTrip || new Map()
 
     return html`
@@ -30,13 +28,29 @@ export default function CorresplotMap({directionsByTrip}){
                 url=${tileLayerURL}
             />
             ${
-                [...directionsByTrip.entries()].map(([trip, directions]) => {
-                    const str = tripString(trip)
-                    return html`
-                        <${GeoJSON} key=${str} data=${directions.geoJSON}>
-                            <${Popup}>${str}<//>
-                        <//>`
-                })
+                tripRequest && directionsByTrip.has(tripRequest) ? 
+                    html`
+                        <${GeoJSON} className="trip-request" data=${directionsByTrip.get(tripRequest).geoJSON}>
+                            <${Popup}>${tripString(tripRequest)}<//>
+                        <//>` : 
+                    undefined
             }
         <//>`
 }
+
+/*
+
+Code to display all the trips:
+
+${
+    [...directionsByTrip.entries()].map(([trip, directions]) => {
+        const str = tripString(trip)
+        return html`
+            <${GeoJSON} key=${str} data=${directions.geoJSON}>
+                <${Popup}>${str}<//>
+            <//>`
+    })
+}
+
+
+ */
