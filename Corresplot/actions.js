@@ -1,12 +1,29 @@
 import { makeTrip } from './geography/driverToTrip';
 import getDirections from './geography/getDirections.js';
 import googleDirectionsToCorresplotDirections from './geography/googleDirectionsToCorresplotDirections.js'
+import getPlacesPosition from './geography/getPlacesPosition.js'
 
 export default function _actions(store){
     return {
-        setTripRequestAndFindDirections(tripRequest){
+        setAndPrepareForTripRequest(tripRequest){
             const {origin, destination} = tripRequest
+            tripRequest = undefined;
             const trip = makeTrip(origin, destination)
+
+            const proposedTrips = [...store.state.driversByTrip.keys()]
+
+            const positionByPlace = store.state.positionByPlace
+
+            const placesWithoutPositions = new Set(proposedTrips.map(({origin, destination}) => [origin, destination]).flat())
+            for(const place of positionByPlace.keys()){
+                placesWithoutPositions.delete(place)
+            }
+
+            getPlacesPosition(placesWithoutPositions)
+            .then(positionByPlace => {
+                store.mutations.addPositions(positionByPlace);
+            })
+            .catch(console.error)
             
             const directions = store.state.directionsByTrip.get(trip)
             if(!directions){

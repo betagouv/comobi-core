@@ -70,13 +70,48 @@
             }
 
             .drivers-list li.driver{
+                display: flex;
+                flex-direction: row;
+                justify-content: left;
+                align-items: center;
+
                 padding: 0.3em;
-                padding-left: 3em;
                 border-bottom: 1px solid #777;
             }
 
             .drivers-list li.driver:hover{
                 background-color: #EEE;
+            }
+
+            .drivers-list li.driver :nth-child(2){
+                flex: 1;
+            }
+
+            .drivers-list li.driver .trip-details{
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+
+                padding: 1em;
+                border: 5px solid transparent;
+                border-radius: 50%;
+
+                width: 6em;
+                height: 6em;
+                text-align: center;
+                font-weight: bold;
+                margin: 0.5em;
+            }
+
+            .drivers-list li.driver .trip-details.minor-detour{
+                border-color: green;
+            }
+            .drivers-list li.driver .trip-details.medium-detour{
+                border-color: orange;
+            }
+            .drivers-list li.driver .trip-details.major-detour{
+                border-color: red;
             }
 
             .drivers-list li.driver .name{

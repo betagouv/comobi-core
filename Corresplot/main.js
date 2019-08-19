@@ -6,9 +6,8 @@ import {json} from 'd3-fetch'
 
 import Main from './components/Main.js'
 
-import getDirections from './geography/getDirections.js';
 import driverToTrip from './geography/driverToTrip';
-import googleDirectionsToCorresplotDirections from './geography/googleDirectionsToCorresplotDirections.js'
+import computeTripDetails from './geography/computeTripDetails';
 
 import _actions from './actions.js';
 
@@ -18,6 +17,7 @@ const store = new Store({
     state: {
         driversByTrip: new Map(),
         directionsByTrip: new Map(),
+        positionByPlace: new Map(),
         tripRequest: {
             origin: '',
             destination: ''
@@ -25,10 +25,14 @@ const store = new Store({
     },
     mutations: {
         addDrivers(state, driversByTrip){
-            state.driversByTrip = new Map([...driversByTrip, ...state.driversByTrip])
+            // BUG if there are drivers for the same trip in both driversByTrip and state.driversByTrip, only some are kept because they use the same key
+            state.driversByTrip = new Map([...state.driversByTrip, ...driversByTrip])
         },
         addDirections(state, directionsByTrip){
             state.directionsByTrip = new Map([...state.directionsByTrip, ...directionsByTrip])
+        },
+        addPositions(state, positionByPlace){
+            state.positionByPlace = new Map([...state.positionByPlace, ...positionByPlace])
         },
         setTripRequest(state, tripRequest){
             state.tripRequest = tripRequest
@@ -39,15 +43,19 @@ const store = new Store({
 const actions = _actions(store)
 
 function renderUI(store){
-    const {driversByTrip, directionsByTrip, tripRequest} = store.state
+    const {driversByTrip, directionsByTrip, positionByPlace, tripRequest} = store.state
     //const {setTripRequest} = store.mutations
-    const {setTripRequestAndFindDirections} = actions
+    const {setAndPrepareForTripRequest} = actions
+
+    const proposedTrips = [...driversByTrip.keys()]
+
+    const tripDetailsByTrip = computeTripDetails(proposedTrips, tripRequest, positionByPlace)
 
     render(
-        html`<${Main} ...${{
-            driversByTrip, directionsByTrip, tripRequest, 
-            onTripRequestChange: setTripRequestAndFindDirections}
-        } />`, 
+        html`<${Main} ...${ {
+            driversByTrip, directionsByTrip, tripRequest, tripDetailsByTrip,
+            onTripRequestChange(tripRequest){ setAndPrepareForTripRequest(tripRequest) }
+        } } />`, 
         document.body
     )
 }
@@ -86,21 +94,5 @@ json('/drivers')
     }
 
     store.mutations.addDrivers(driversByTrip)
-
-    // Limiting to 5 trips for now, because each refresh causes calls to Google Direction API which is paid for
-    const trips = [...driversByTrip.keys()].slice(0, 5)
-
-    console.log('trips', trips)
-
-    
-    Promise.all(trips.map(trip => {
-        return getDirections(trip)
-        .then(googleDirections => {
-            const corresplotDirections = googleDirectionsToCorresplotDirections(googleDirections)
-            return corresplotDirections ? [trip, corresplotDirections] : undefined
-        })
-    }))
-    .then(directions => store.mutations.addDirections(new Map(directions.filter(x => !!x))))
-    .catch(console.error)
 
 })
