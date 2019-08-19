@@ -9,6 +9,7 @@ const html = htm.bind(React.createElement);
 export default function({driversByTrip, tripRequest, tripDetailsByTrip, onTripRequestChange}){
     return html`
         <section className="trip-selection">
+            <h1>Lotocar</h1>
             <${TripRequestEntry} tripRequest=${tripRequest} onTripRequestChange=${onTripRequestChange}/>
             <${DriverList} driversByTrip=${driversByTrip} tripDetailsByTrip=${tripDetailsByTrip}/>
         </section>

@@ -25,6 +25,13 @@
 
             h1{
                 text-align: center;
+                text-decoration: underline;
+            }
+
+            h2{
+                margin-left: 1em;
+                font-size: 1.3em;
+                color: #555;
             }
 
             a[href^="mailto:"]::before {
@@ -37,11 +44,13 @@
 
             .map{
                 flex: 1;
-                height: 85vh;
+                height: 100vh;
             }
 
-            .trip-selection{
+            .trip-selection{    
                 width: 30em;
+                height: 100vh;
+                overflow: scroll;
             }
 
             .trip-request-entry{
