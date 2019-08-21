@@ -1,10 +1,10 @@
 import {csv} from 'd3-fetch';
 
 const BAN_SEARCH_LOT_SUFFIX = ' lot';
-const BAN_INPUT_KEY = 'adresse'
+const BAN_PLACE_INPUT_KEY = 'adresse'
 
 export default function getPlacesPosition(places){
-    const adressesCSV = `${BAN_INPUT_KEY}\n` + [...places].slice(0, 200).join(`${BAN_SEARCH_LOT_SUFFIX}\n`)
+    const adressesCSV = `${BAN_PLACE_INPUT_KEY}\n` + [...places].map(p => `${p}${BAN_SEARCH_LOT_SUFFIX}`).join(`\n`)
     const adresseCSVBANBody = new FormData();
     adresseCSVBANBody.append('data', new File([adressesCSV], 'adresses.csv'))
     
@@ -15,13 +15,15 @@ export default function getPlacesPosition(places){
         const map = new Map()
 
         for(const banResult of banResults){
-            const {adresse, latitude, longitude} = banResult;
+            const {latitude, longitude} = banResult;
+            const placeName = banResult[BAN_PLACE_INPUT_KEY]
+
             if(latitude && longitude){
-                const key = adresse.slice(0, adresse.indexOf(BAN_SEARCH_LOT_SUFFIX))
+                const key = placeName.slice(0, placeName.indexOf(BAN_SEARCH_LOT_SUFFIX))
                 map.set(key, {latitude: parseFloat(latitude), longitude: parseFloat(longitude), banResult})
             }
             else{
-                console.warn('No lat/long', adresse, banResult)
+                console.warn('No lat/long', placeName, banResult)
             }
         }
 

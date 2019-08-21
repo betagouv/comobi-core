@@ -14,7 +14,11 @@ export default function _actions(store){
 
             const positionByPlace = store.state.positionByPlace
 
-            const placesWithoutPositions = new Set(proposedTrips.map(({origin, destination}) => [origin, destination]).flat())
+            const placesWithoutPositions = new Set([
+                ...proposedTrips.map(({origin, destination}) => [origin, destination]).flat(),
+                trip.origin,
+                trip.destination
+            ])
             for(const place of positionByPlace.keys()){
                 placesWithoutPositions.delete(place)
             }
