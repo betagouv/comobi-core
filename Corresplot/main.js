@@ -18,6 +18,7 @@ const store = new Store({
         driversByTrip: new Map(),
         directionsByTrip: new Map(),
         positionByPlace: new Map(),
+        displayedDriverTrips: new Set(),
         tripRequest: {
             origin: '',
             destination: ''
@@ -36,6 +37,21 @@ const store = new Store({
         },
         setTripRequest(state, tripRequest){
             state.tripRequest = tripRequest
+        },
+        displayedDriverTrips: {
+            add(state, trip){
+                const newDisplayedDriverTrips = new Set(state.displayedDriverTrips)
+                newDisplayedDriverTrips.add(trip)
+                state.displayedDriverTrips = newDisplayedDriverTrips
+            },
+            delete(state, trip){
+                const newDisplayedDriverTrips = new Set(state.displayedDriverTrips)
+                newDisplayedDriverTrips.delete(trip)
+                state.displayedDriverTrips = newDisplayedDriverTrips
+            },
+            clear(state){
+                state.displayedDriverTrips = new Set()
+            }
         }
     }
 })
@@ -43,9 +59,9 @@ const store = new Store({
 const actions = _actions(store)
 
 function renderUI(store){
-    const {driversByTrip, directionsByTrip, positionByPlace, tripRequest} = store.state
+    const {driversByTrip, directionsByTrip, positionByPlace, tripRequest, displayedDriverTrips} = store.state
     //const {setTripRequest} = store.mutations
-    const {setAndPrepareForTripRequest} = actions
+    const {setAndPrepareForTripRequest, toggleTripDisplay} = actions
 
     const proposedTrips = [...driversByTrip.keys()]
 
@@ -53,8 +69,9 @@ function renderUI(store){
 
     render(
         html`<${Main} ...${ {
-            driversByTrip, directionsByTrip, tripRequest, tripDetailsByTrip,
-            onTripRequestChange(tripRequest){ setAndPrepareForTripRequest(tripRequest) }
+            driversByTrip, directionsByTrip, tripRequest, tripDetailsByTrip, displayedDriverTrips,
+            onTripRequestChange(tripRequest){ setAndPrepareForTripRequest(tripRequest) },
+            onTripClick: toggleTripDisplay
         } } />`, 
         document.body
     )

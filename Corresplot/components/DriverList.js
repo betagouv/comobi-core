@@ -3,7 +3,7 @@ import htm from 'htm'
 
 const html = htm.bind(React.createElement);
 
-function Driver({driver, tripDetails}){
+function Driver({driver, tripDetails, onDriverClick}){
     const {Départ, Arrivée, Horaires, Conducteurs, Contact, Adresse} = driver
 
     const phoneLink = Contact ? `tel:${Contact.trim()}` : undefined
@@ -26,7 +26,7 @@ function Driver({driver, tripDetails}){
     const additionalTime = (distanceWithDetour - originalDistance)*(70/60)
 
     return html`
-        <li className="driver">
+        <li className="driver" onClick=${onDriverClick}>
             <section className="${detourClassName} trip-details">
                 <span>${tripDetails ? `+${Math.ceil(additionalTime)}mins` : undefined}</span>
             </section>
@@ -41,7 +41,7 @@ function Driver({driver, tripDetails}){
         </li>`
 }
 
-export default function DriversList({driversByTrip, tripRequest, tripDetailsByTrip}){
+export default function DriversList({driversByTrip, tripRequest, tripDetailsByTrip, onTripClick}){
     const orderedTrips = [...driversByTrip.keys()].sort((trip1, trip2) => {
         const details1 = tripDetailsByTrip.get(trip1) || {originalDistance: 0, distanceWithDetour: Infinity}
         const details2 = tripDetailsByTrip.get(trip2) || {originalDistance: 0, distanceWithDetour: Infinity}
@@ -61,7 +61,7 @@ export default function DriversList({driversByTrip, tripRequest, tripDetailsByTr
                     const tripDetails = tripDetailsByTrip.get(trip)
 
                     return drivers.map((driver, j) => {
-                        return html`<${Driver} driver=${driver} tripDetails=${tripDetails}/>`
+                        return html`<${Driver} driver=${driver} tripDetails=${tripDetails} onDriverClick=${() => onTripClick(trip)}/>`
                     })
                 })
             }

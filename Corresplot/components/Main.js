@@ -6,11 +6,11 @@ import Map from './Map.js'
 
 const html = htm.bind(React.createElement);
 
-export default function({driversByTrip, directionsByTrip, tripRequest, tripDetailsByTrip, onTripRequestChange}){
+export default function({driversByTrip, directionsByTrip, tripRequest, tripDetailsByTrip, displayedDriverTrips, onTripRequestChange, onTripClick}){
     return html`
         <main>
-            <${Map} directionsByTrip=${directionsByTrip} tripRequest=${tripRequest}/>
-            <${TripSelection} driversByTrip=${driversByTrip} tripRequest=${tripRequest} tripDetailsByTrip=${tripDetailsByTrip} onTripRequestChange=${onTripRequestChange}/>
+            <${Map} directionsByTrip=${directionsByTrip} tripRequest=${tripRequest} displayedDriverTrips=${displayedDriverTrips}/>
+            <${TripSelection} driversByTrip=${driversByTrip} tripRequest=${tripRequest} tripDetailsByTrip=${tripDetailsByTrip} onTripRequestChange=${onTripRequestChange} onTripClick=${onTripClick}/>
         </main>
     `
 }

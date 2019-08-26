@@ -42,6 +42,29 @@ export default function _actions(store){
             }
 
             store.mutations.setTripRequest(trip)
+        },
+        toggleTripDisplay(trip){
+            const {displayedDriverTrips} = store.state;
+
+            if(displayedDriverTrips.has(trip)){
+                store.mutations.displayedDriverTrips.delete(trip)
+            }
+            else{
+                store.mutations.displayedDriverTrips.add(trip)
+
+                // making sure we have directions to draw
+                const directions = store.state.directionsByTrip.get(trip)
+                if(!directions){
+                    getDirections(trip)
+                    .then(googleDirections => {
+                        const corresplotDirections = googleDirectionsToCorresplotDirections(googleDirections)
+                        if(corresplotDirections){
+                            store.mutations.addDirections(new Map([[trip, corresplotDirections]]))
+                        }
+                    })
+                    .catch(console.error)
+                }
+            }
         }
     }
 }
