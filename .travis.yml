@@ -1,0 +1,30 @@
+# Language and env
+
+language: node_js
+node_js: 
+  - node # latest stable
+
+# What is built
+
+branches:
+  only:
+  - master
+
+# Travis Lifecycle
+
+install:
+  - npm ci
+
+script: npm run build
+
+deploy:
+  provider: heroku
+  app: lotocar-bmufwtylt6u
+  api_key:
+    secure: "7c830965-c835-4344-8640-a64d6b318ffb"
+
+
+# Other configs
+
+git:
+  depth: 10

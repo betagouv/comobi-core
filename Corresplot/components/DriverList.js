@@ -34,8 +34,8 @@ function Driver({driver, tripDetails, onDriverClick}){
                 <span className="name">${Conducteurs}</span>
                 <span className="proposed-trip">(${Départ} - ${Arrivée} - ${Horaires})</span>
                 <span className="contact">
-                    <a href="${phoneLink}">Téléphone</a>
-                    <a href="${emailLink}">Email</a>
+                    <a href="${phoneLink}">${Contact ? Contact.trim() : `(pas de téléphone)`}</a>
+                    <a href="${emailLink}">${Adresse && Adresse.includes('@') ? `email` : `(pas d'email)`}</a>
                 </span>
             </section>
         </li>`
