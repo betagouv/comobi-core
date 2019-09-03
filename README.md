@@ -1,4 +1,4 @@
-# Lotocar
+# Lotocar [![Build Status](https://travis-ci.org/DavidBruant/lotocar.svg?branch=master)](https://travis-ci.org/DavidBruant/lotocar)
 
 Le projet [Lot'ô car](https://www.lotocar.fr/) a commencé avec une base de données dans un Google Spreadsheet à plusieurs feuilles gérée manuellement
 
