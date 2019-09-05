@@ -6,31 +6,30 @@ const googleDriverSpreadsheetId = process.env.GOOGLE_DRIVER_SPREADSHEET_ID
 const sheets = google.sheets({ version: 'v4', auth: googleAPIKey });
 
 const CONDUCTEUR_PROPS = [
+    'Date',
     'Départ',
-    'Arrivée',
-    'Parcours',
-    'Conducteurs',
-    'Horaires',
-    'Contact',
     'Adresse',
-    'Mail',
-    'Info'
+    'Actif ou Retraité',
+    'Arrivée',
+    'Trajet',
+    'Jours',
+    'Heure départ',
+    'Heure retour',
+    'Prénom', 
+    'Nom',
+    'N° de téléphone',
+    'Adresse e-mail',
+    'Contact préféré',
+    'Communication',
+    'Remarques éventuelles'
 ]
 
-const sheetNames = [
-    'Vers Cahors',
-    'De Cahors',
-    'Vers Figeac',
-    'De Figeac',
-    'Divers Aller',
-    'Divers Retour'
-]
 
-function getOneSheetDrivers(sheetName){
+export default function getDrivers() {
     return new Promise((resolve, reject) => {
         sheets.spreadsheets.values.get({
             spreadsheetId: googleDriverSpreadsheetId,
-            range: sheetName,
+            range: 'Réponses au formulaire 1',
         }, (err, res) => {
             if (err){
                 reject(err)
@@ -38,31 +37,22 @@ function getOneSheetDrivers(sheetName){
             else{
                 const rows = res.data.values;
     
-                // First 3 rows are cosmetic ones
-                const dataRows = rows.slice(3)
+                // first row is column names, ignoring
+                const dataRows = rows.slice(1)
         
                 const conducteurs = dataRows.map(row => {
                     const conducteur = {};
-        
-                    // first element is always blank in spreadsheet
-                    row = row.slice(1);
         
                     CONDUCTEUR_PROPS.forEach((prop, i) => {
                         conducteur[prop] = row[i]
                     })
         
                     return conducteur
-                }).filter(c => c['Départ'] && c['Arrivée'] && (c['Contact'] || c['Mail']))
+                }).filter(c => c['Départ'] && c['Arrivée'] && (c['N° de téléphone'] || c['Adresse e-mail']))
 
                 resolve(conducteurs)
             }
         });
     })
-}
-
-
-export default function getDrivers() {
-    return Promise.all(sheetNames.map(getOneSheetDrivers))
-        .then(driversBySheet => driversBySheet.flat())
 }
 

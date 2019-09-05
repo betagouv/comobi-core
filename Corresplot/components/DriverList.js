@@ -4,10 +4,11 @@ import htm from 'htm'
 const html = htm.bind(React.createElement);
 
 function Driver({driver, tripDetails, onDriverClick}){
-    const {Départ, Arrivée, Horaires, Conducteurs, Contact, Adresse} = driver
+    const {Départ, Arrivée, Jours, 'Heure départ': heureDépart, 'Heure retour': heureRetour, Prénom, Nom, 'N° de téléphone': phone,
+    'Adresse e-mail': email} = driver
 
-    const phoneLink = Contact ? `tel:${Contact.trim()}` : undefined
-    const emailLink = Adresse && Adresse.includes('@') ? `mailto:${Adresse.trim()}` : undefined
+    const phoneLink = phone ? `tel:${phone.trim()}` : undefined
+    const emailLink = email && email.includes('@') ? `mailto:${email.trim()}` : undefined
 
     let originalDistance, distanceWithDetour, detourClassName;
 
@@ -31,11 +32,11 @@ function Driver({driver, tripDetails, onDriverClick}){
                 <span>${tripDetails ? `+${Math.ceil(additionalTime)}mins` : undefined}</span>
             </section>
             <section>
-                <span className="name">${Conducteurs}</span>
-                <span className="proposed-trip">(${Départ} - ${Arrivée} - ${Horaires})</span>
+                <span className="name">${Prénom} ${Nom}</span>
+                <span className="proposed-trip">(${Départ} - ${Arrivée} - ${Jours} - Aller: ${heureDépart} - Retour: ${heureRetour})</span>
                 <span className="contact">
-                    <a href="${phoneLink}">${Contact ? Contact.trim() : `(pas de téléphone)`}</a>
-                    <a href="${emailLink}">${Adresse && Adresse.includes('@') ? `email` : `(pas d'email)`}</a>
+                    <a href="${phoneLink}">${phone ? phone.trim() : `(pas de téléphone)`}</a>
+                    <a href="${emailLink}">${email && email.includes('@') ? `email` : `(pas d'email)`}</a>
                 </span>
             </section>
         </li>`
