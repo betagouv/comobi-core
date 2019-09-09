@@ -3,6 +3,8 @@ import htm from 'htm'
 
 const html = htm.bind(React.createElement);
 
+const KM = 1000; // meters
+
 function Driver({driver, tripDetails, onDriverClick}){
     const {Départ, Arrivée, Jours, 'Heure départ': heureDépart, 'Heure retour': heureRetour, Prénom, Nom, 'N° de téléphone': phone,
     'Adresse e-mail': email} = driver
@@ -24,7 +26,7 @@ function Driver({driver, tripDetails, onDriverClick}){
     }
 
     // in minutes, assuming average 70km/h
-    const additionalTime = (distanceWithDetour - originalDistance)*(70/60)
+    const additionalTime = ((distanceWithDetour - originalDistance)/KM)*(70/60)
 
     return html`
         <li className="driver" onClick=${onDriverClick}>

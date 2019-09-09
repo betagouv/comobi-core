@@ -69,7 +69,7 @@ function renderUI(store){
 
     render(
         html`<${Main} ...${ {
-            driversByTrip, directionsByTrip, tripRequest, tripDetailsByTrip, displayedDriverTrips,
+            driversByTrip, directionsByTrip, tripRequest, tripDetailsByTrip, displayedDriverTrips, positionByPlace,
             onTripRequestChange(tripRequest){ setAndPrepareForTripRequest(tripRequest) },
             onTripClick: toggleTripDisplay
         } } />`, 
@@ -111,5 +111,4 @@ json('/drivers')
     }
 
     store.mutations.addDrivers(driversByTrip)
-
 })

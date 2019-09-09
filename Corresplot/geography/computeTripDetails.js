@@ -1,11 +1,9 @@
 import LatLon from 'geodesy/latlon-spherical.js';
 
-const KM = 1000; // meters per kilometers
-
 function distance2(p1, p2){
     const ll1 = new LatLon(p1.latitude, p1.longitude);
     const ll2 = new LatLon(p2.latitude, p2.longitude);
-    return ll1.distanceTo(ll2) / KM;
+    return ll1.distanceTo(ll2);
 }
 
 function distance(...points){
@@ -23,6 +21,7 @@ export default function computeTripDetails(proposedTrips, tripRequest, positionB
     for(const proposedTrip of proposedTrips){
         const tripPositionsWithDetour = [proposedTrip.origin, tripRequest.origin, tripRequest.destination, proposedTrip.destination].map(place => positionByPlace.get(place))
 
+        // if not all positions have a place, do not compute
         if(tripPositionsWithDetour.every(p => Object(p) === p)){
             const originalDistance = distance(tripPositionsWithDetour[0], tripPositionsWithDetour[3])
             const distanceWithDetour = distance(...tripPositionsWithDetour)

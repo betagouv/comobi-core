@@ -23,28 +23,33 @@ export default function _actions(store){
                 placesWithoutPositions.delete(place)
             }
 
-            getPlacesPosition(placesWithoutPositions)
+            const newPositionByPlaceP = getPlacesPosition(placesWithoutPositions)
             .then(positionByPlace => {
                 store.mutations.addPositions(positionByPlace);
+                return positionByPlace
             })
             .catch(console.error)
             
             const directions = store.state.directionsByTrip.get(trip)
             if(!directions){
-                getDirections(trip)
-                .then(googleDirections => {
-                    const corresplotDirections = googleDirectionsToCorresplotDirections(googleDirections)
-                    if(corresplotDirections){
-                        store.mutations.addDirections(new Map([[trip, corresplotDirections]]))
-                    }
+                newPositionByPlaceP
+                .then(newPositionByPlace => {
+                    getDirections(trip, new Map([...positionByPlace, ...newPositionByPlace]))
+                    .then(googleDirections => {
+                        const corresplotDirections = googleDirectionsToCorresplotDirections(googleDirections)
+                        if(corresplotDirections){
+                            store.mutations.addDirections(new Map([[trip, corresplotDirections]]))
+                        }
+                    })
+                    .catch(console.error)
                 })
-                .catch(console.error)
+                
             }
 
             store.mutations.setTripRequest(trip)
         },
         toggleTripDisplay(trip){
-            const {displayedDriverTrips} = store.state;
+            const {displayedDriverTrips, positionByPlace} = store.state;
 
             if(displayedDriverTrips.has(trip)){
                 store.mutations.displayedDriverTrips.delete(trip)
@@ -55,7 +60,7 @@ export default function _actions(store){
                 // making sure we have directions to draw
                 const directions = store.state.directionsByTrip.get(trip)
                 if(!directions){
-                    getDirections(trip)
+                    getDirections(trip, positionByPlace)
                     .then(googleDirections => {
                         const corresplotDirections = googleDirectionsToCorresplotDirections(googleDirections)
                         if(corresplotDirections){

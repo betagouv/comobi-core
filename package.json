@@ -27,6 +27,7 @@
     "baredux": "github:DavidBruant/baredux",
     "d3-dsv": "^1.1.1",
     "d3-fetch": "^1.1.2",
+    "delay": "^4.3.0",
     "esm": "^3.2.25",
     "express": "^4.17.1",
     "fast-memoize": "^2.5.1",
@@ -35,6 +36,7 @@
     "got": "^9.6.0",
     "htm": "^2.2.1",
     "leaflet": "^1.5.1",
+    "p-retry": "^4.1.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-leaflet": "^2.4.0"

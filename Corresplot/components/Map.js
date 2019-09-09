@@ -18,7 +18,7 @@ const attribution = `Map data &copy; <a href="https://www.openstreetmap.org/">Op
 
 const zoom = 10;
 
-export default function CorresplotMap({directionsByTrip, tripRequest, displayedDriverTrips}){
+export default function CorresplotMap({directionsByTrip, tripRequest, displayedDriverTrips, positionByPlace}){
     directionsByTrip = directionsByTrip || new Map()
 
     return html`
@@ -44,5 +44,22 @@ export default function CorresplotMap({directionsByTrip, tripRequest, displayedD
                     <//>`
                 )   
             }
+            
         <//>`
 }
+
+
+// useful when one wants to show places positions on a map
+/*['Le Boulvé', 'Cahors (Pradines)', 'Cahors', 'Girac']
+.map(place => {
+    const position = positionByPlace.get(place)
+    if(position){
+        console.log('position', place, position)
+        const leafletPosition = {lat: position.latitude, lng: position.longitude}
+        return html`
+            <${Marker} position=${leafletPosition}>
+                <${Popup}>${place}<//>
+            <//>`
+    }
+})*/   
+            
