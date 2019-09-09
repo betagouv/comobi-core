@@ -4,6 +4,8 @@ import htm from 'htm'
 const html = htm.bind(React.createElement);
 
 const KM = 1000; // meters
+const AVERAGE_SPEED = 60/60; // km/min
+const STRAIGHT_LINE_TO_ROAD_DISTANCE_RATIO = 1.5;
 
 function Driver({driver, tripDetails, onDriverClick}){
     const {Départ, Arrivée, Jours, 'Heure départ': heureDépart, 'Heure retour': heureRetour, Prénom, Nom, 'N° de téléphone': phone,
@@ -12,21 +14,23 @@ function Driver({driver, tripDetails, onDriverClick}){
     const phoneLink = phone ? `tel:${phone.trim()}` : undefined
     const emailLink = email && email.includes('@') ? `mailto:${email.trim()}` : undefined
 
-    let originalDistance, distanceWithDetour, detourClassName;
+    let originalDistance, distanceWithDetour, detourClassName, additionalDistanceKM;
 
     if(tripDetails){
         originalDistance = tripDetails.originalDistance;
         distanceWithDetour = tripDetails.distanceWithDetour;
 
-        detourClassName = distanceWithDetour <= 1.1*originalDistance ? 
+        additionalDistanceKM = (distanceWithDetour - originalDistance)*STRAIGHT_LINE_TO_ROAD_DISTANCE_RATIO/KM
+
+        detourClassName = additionalDistanceKM <= 5*AVERAGE_SPEED ? 
         'minor-detour' : 
-        (distanceWithDetour <= 1.5*originalDistance ?
+        (additionalDistanceKM <= 15*AVERAGE_SPEED ?
             'medium-detour' : 
             'major-detour')
     }
 
-    // in minutes, assuming average 70km/h
-    const additionalTime = ((distanceWithDetour - originalDistance)/KM)*(70/60)
+    // in minutes, assuming average 60km/h
+    const additionalTime = additionalDistanceKM*AVERAGE_SPEED
 
     return html`
         <li className="driver" onClick=${onDriverClick}>

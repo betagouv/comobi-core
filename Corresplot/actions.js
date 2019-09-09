@@ -47,6 +47,7 @@ export default function _actions(store){
             }
 
             store.mutations.setTripRequest(trip)
+            store.mutations.displayedDriverTrips.clear()
         },
         toggleTripDisplay(trip){
             const {displayedDriverTrips, positionByPlace} = store.state;
