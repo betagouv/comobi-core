@@ -10,7 +10,7 @@ export default function _actions(store){
             tripRequest = undefined;
             const trip = makeTrip(origin, destination)
 
-            const proposedTrips = [...store.state.driversByTrip.keys()]
+            const proposedTrips = [...store.state.tripProposalsByTrip.keys()]
 
             const positionByPlace = store.state.positionByPlace
 

@@ -7,9 +7,11 @@ const KM = 1000; // meters
 const AVERAGE_SPEED = 60/60; // km/min
 const STRAIGHT_LINE_TO_ROAD_DISTANCE_RATIO = 1.5;
 
-function Driver({driver, tripDetails, onDriverClick}){
-    const {Départ, Arrivée, Jours, 'Heure départ': heureDépart, 'Heure retour': heureRetour, Prénom, Nom, 'N° de téléphone': phone,
-    'Adresse e-mail': email} = driver
+function TripProposal({tripProposal, tripDetails, onDriverClick}){
+    const {
+        Départ, Arrivée, Jours, 'Heure départ': heureDépart, 
+        driver: {Prénom, Nom, 'N° de téléphone': phone, 'Adresse e-mail': email}
+    } = tripProposal
 
     const phoneLink = phone ? `tel:${phone.trim()}` : undefined
     const emailLink = email && email.includes('@') ? `mailto:${email.trim()}` : undefined
@@ -39,7 +41,9 @@ function Driver({driver, tripDetails, onDriverClick}){
             </section>
             <section>
                 <span className="name">${Prénom} ${Nom}</span>
-                <span className="proposed-trip">(${Départ} - ${Arrivée} - ${Jours} - Aller: ${heureDépart} - Retour: ${heureRetour})</span>
+                <span className="proposed-trip">
+                    ${Départ} - ${Arrivée} - <span className="datetime">${Jours} - Heure: ${heureDépart}</span>
+                </span>
                 <span className="contact">
                     <a href="${phoneLink}">${phone ? phone.trim() : `(pas de téléphone)`}</a>
                     <a href="${emailLink}">${email && email.includes('@') ? `email` : `(pas d'email)`}</a>
@@ -48,8 +52,8 @@ function Driver({driver, tripDetails, onDriverClick}){
         </li>`
 }
 
-export default function DriversList({driversByTrip, tripRequest, tripDetailsByTrip, onTripClick}){
-    const orderedTrips = [...driversByTrip.keys()].sort((trip1, trip2) => {
+export default function DriversList({tripProposalsByTrip, tripRequest, tripDetailsByTrip, onTripClick}){
+    const orderedTrips = [...tripProposalsByTrip.keys()].sort((trip1, trip2) => {
         const details1 = tripDetailsByTrip.get(trip1) || {originalDistance: 0, distanceWithDetour: Infinity}
         const details2 = tripDetailsByTrip.get(trip2) || {originalDistance: 0, distanceWithDetour: Infinity}
 
@@ -64,11 +68,11 @@ export default function DriversList({driversByTrip, tripRequest, tripDetailsByTr
         <ul key="ul" className="drivers-list">
             ${
                 orderedTrips.map(trip => {
-                    const drivers = driversByTrip.get(trip)
+                    const tripProposals = tripProposalsByTrip.get(trip)
                     const tripDetails = tripDetailsByTrip.get(trip)
 
-                    return drivers.map((driver, j) => {
-                        return html`<${Driver} driver=${driver} tripDetails=${tripDetails} onDriverClick=${() => onTripClick(trip)}/>`
+                    return tripProposals.map((tripProposal, j) => {
+                        return html`<${TripProposal} tripProposal=${tripProposal} tripDetails=${tripDetails} onDriverClick=${() => onTripClick(trip)}/>`
                     })
                 })
             }

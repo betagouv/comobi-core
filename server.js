@@ -16,7 +16,7 @@ app.use(express.static('.'))
 
 app.get('/', (req, res) => res.redirect('/Corresplot/'))
 
-app.get('/drivers', (req, res) => {
+app.get('/driver-trip-proposals', (req, res) => {
     getDrivers().then(drivers => res.json(drivers))
 })
 
