@@ -5,7 +5,7 @@ const html = htm.bind(React.createElement);
 
 const KM = 1000; // meters
 const AVERAGE_SPEED = 60/60; // km/min
-const STRAIGHT_LINE_TO_ROAD_DISTANCE_RATIO = 1.5;
+const STRAIGHT_LINE_TO_ROAD_DISTANCE_RATIO = 1.4;
 
 function TripProposal({tripProposal, tripDetails, onDriverClick}){
     const {

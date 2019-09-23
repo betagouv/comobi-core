@@ -4,13 +4,14 @@ import got from 'got';
 
 export default function getPlacesPosition(places){
     return Promise.all([...places].map((place, i) => {
+        const geoAPIURL = `https://geo.api.gouv.fr/communes?format=geojson&nom=${encodeURIComponent(place)}`
+
         return delay(places.size >= 20 ? i*25 : 0)
-        .then(pRetry( () => got(`https://geo.api.gouv.fr/communes?format=geojson&nom=${encodeURIComponent(place)}`) ))
-        .then(geojsonResult => {
+        .then( () => pRetry( () => got(geoAPIURL, {json: true}) ))
+        .then(({body: geojsonResult}) => {
             // picking the first result ([0]) is fairly arbitrary
             // let's see how far we go with this
             const relevantResult = geojsonResult.features[0]
-            console.log('geo api', place, relevantResult)
             if(!relevantResult){
                 return undefined
             }
@@ -26,6 +27,7 @@ export default function getPlacesPosition(places){
             }
         })
         .catch(err => {
+            console.error('Error from geo API', err)
             return undefined;
         })
     }))

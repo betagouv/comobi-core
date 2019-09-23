@@ -36,8 +36,23 @@ Corresplot est une interface utilisateur permettant de faire la correspondance f
 - Créer un fichier `.env` avec les variables d'environnement:
     - `GOOGLE_API_KEY` : clef d'API créée ci-dessus
     - `GOOGLE_DRIVER_SPREADSHEET_ID` : identifiant du Google Spreadsheet qui sert de base de donnée
+    - `LOCALISATION_KNOWLEDGE_GOOGLE_SPREADSHEET_ID` : identifiant du Google Spreadsheet qui sert de base de connaissance pour la localisation
 
-## Conventions
+
+#### Base de connaissance de localisation
+
+Parfois des communes sont fusionnées ou alors, les personnes habitant quelque part utilisent des noms pour les lieux qui ne sont pas les noms officiels (source gouvernementale) ou utilisée dans les API existantes. Ou alors, elles utilisent des noms raccourcis ambigües (dans le Lot, quand on parle de "Villeneuve", il est évident duquel on parle, alors qu'il existe plusieurs villes en France avec le nom "Villeneuve")
+Pour ces cas-là, nous mettons en place un Google Spreadsheet qui permet de consigner cette connaissance locale
+
+Ce Google Spreadsheet contient 3 colonnes : 
+- noms
+    - on peut rentrer plusieurs noms en les séparant par des virgules afin de leur assigner la même position
+- latitude
+- longitude
+
+Pour trouver les **latitude/longitude**, une manière de faire consiste à aller dans Google Maps, viser le lieu que l'on souhaite, faire un **clic droit**, sélectionner "Plus d'infos sur cet endroit" et en bas de l'écran, on peut voir les latitude/longitude
+
+
 
 ### Langue
 

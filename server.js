@@ -4,6 +4,7 @@ import got from 'got'
 import memoize from 'fast-memoize';
 
 import getDrivers from './spreadsheetDatabase/getDrivers.js'
+import getLotocarPositionByPlace from './spreadsheetDatabase/getLotocarPositionByPlace.js'
 import positionByPlace from './Corresplot/geography/positionByPlace.js';
 import getPlacesPosition from './server/getPlacesPosition.js';
 
@@ -67,8 +68,9 @@ app.get('/directions', (req, res) => {
 
 app.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`))
 
-// initialize data
+// # Initialize data
 const LOT_CODE = 46;
+// ## First from all Lot communes
 got(`https://geo.api.gouv.fr/departements/${LOT_CODE}/communes?format=geojson`, {json: true})
 .then(({body: lotGeojson}) => {
     const communes = lotGeojson.features;
@@ -84,7 +86,16 @@ got(`https://geo.api.gouv.fr/departements/${LOT_CODE}/communes?format=geojson`, 
         positionByPlace.set(name, {latitude, longitude})
     }
 })
+// ## Then from local knowledge
 .then(() => {
-    throw `TODO initialize positionByPlace with driver list`
+    return getLotocarPositionByPlace()
+    .then(lotocarPositionByPlace => {
+        console.log('lotocarPositionByPlace', lotocarPositionByPlace)
+
+        // this may override existing entries and that's on purpose
+        for(const [name, position] of lotocarPositionByPlace){
+            positionByPlace.set(name, position)
+        }
+    })
 })
 .catch(console.error)
