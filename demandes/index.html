@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <meta name="referrer" content="same-origin">
+        
+        <title>Analyses des demandes - Lotocar</title>
+        
+        <meta name="description" content=" ">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" href="data:,">
+        
+        <link crossorigin="anonymous" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/twbs/bootstrap@v4/dist/css/bootstrap-reboot.css">
+         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+   integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+   crossorigin="anonymous"/>
+        <!--
+        <script crossorigin="anonymous" src="https://polyfill.io/v3/polyfill.min.js?flags=always&features=default%2Ces2017%2Ces2016%2Ces2015%2Cfetch"></script>
+        -->
+        <style>
+            main{
+                display: flex;
+                flex-direction: row;
+            }
+
+            h1{
+                text-align: center;
+                text-decoration: underline;
+            }
+
+            h2{
+                margin-left: 1em;
+                font-size: 1.3em;
+                color: #555;
+            }
+
+            .map{
+                flex: 1;
+                height: 100vh;
+            }
+
+            .request-marker{
+                border: 0;
+
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+
+                color: white;
+                text-align: center;
+            }
+
+            .request-marker .origin{
+                width: 50%;
+                background-color: darkgreen;
+            }
+            .request-marker .destination{
+                width: 50%;
+                background-color: darkred;
+            }
+
+
+        </style>
+
+        <script type="module" src="/build/demandes-rollup-bundle.js"> </script>
+    </head>
+    <body>
+        <main/>
+    </body>
+</html>

@@ -1,7 +1,7 @@
-import { makeTrip } from './geography/driverToTrip';
-import getDirections from './geography/getDirections.js';
-import googleDirectionsToCorresplotDirections from './geography/googleDirectionsToCorresplotDirections.js'
-import getPlacesPosition from './geography/getPlacesPosition.js'
+import { makeTrip } from '../geography/driverToTrip';
+import getDirections from '../geography/getDirections.js';
+import googleDirectionsToCorresplotDirections from '../geography/googleDirectionsToCorresplotDirections.js'
+import getPlacesPosition from '../geography/getPlacesPosition.js'
 
 export default function _actions(store){
     return {

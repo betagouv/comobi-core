@@ -3,7 +3,7 @@ import htm from 'htm'
 
 import { Map, TileLayer, Marker, Popup, GeoJSON } from 'react-leaflet'
 
-import tripString from '../geography/tripString.js'
+import tripString from '../../geography/tripString.js'
 
 const html = htm.bind(React.createElement);
 

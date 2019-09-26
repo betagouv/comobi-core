@@ -41,7 +41,7 @@ export default function getDrivers() {
                 const dataRows = rows.slice(1)
         
                 const conducteurs = dataRows.map(row => {
-                    const conducteur = {};
+                    const conducteur = Object.create(null);
         
                     CONDUCTEUR_PROPS.forEach((prop, i) => {
                         conducteur[prop] = row[i]

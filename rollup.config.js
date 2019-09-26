@@ -5,14 +5,8 @@ import replace from 'rollup-plugin-replace'
 
 const production = !process.env.ROLLUP_WATCH;
 
-export default {
-	input: 'Corresplot/main.js',
-	output: {
-		file: 'build/corresplot-rollup-bundle.js',
-		format: 'esm', // immediately-invoked function expression — suitable for <script> tags
-		sourcemap: true
-	},
-	plugins: [
+function makePlugins(){ 
+	return [
 		resolve(), 
 		commonjs({
 			namedExports: {
@@ -27,4 +21,25 @@ export default {
 		replace({ 'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV) }),
 		production && terser()
 	]
-};
+}
+
+export default [
+	{
+		input: 'Corresplot/main.js',
+		output: {
+			file: 'build/corresplot-rollup-bundle.js',
+			format: 'esm',
+			sourcemap: true
+		},
+		plugins: makePlugins()
+	},
+	{
+		input: 'demandes/main.js',
+		output: {
+			file: 'build/demandes-rollup-bundle.js',
+			format: 'esm',
+			sourcemap: true
+		},
+		plugins: makePlugins()
+	}
+]

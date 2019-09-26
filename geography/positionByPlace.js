@@ -3,7 +3,7 @@
 // In the worst case, it could lead to memory exhaustion and server shutting down in the worst case
 const positionByPlace = new Map()
 
-function normalizePlaceName(place){
+export function normalizePlaceName(place){
     return place.trim().toLowerCase()
 }
 
