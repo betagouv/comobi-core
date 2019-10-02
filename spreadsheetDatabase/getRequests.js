@@ -5,8 +5,11 @@ const googleRequestsSpreadsheetId = process.env.GOOGLE_REQUESTS_SPREADSHEET_ID
 
 const sheets = google.sheets({ version: 'v4', auth: googleAPIKey });
 
+import {REQUEST_STATUS_KEY} from './requestStatusConstants.js'
+
+
 const REQUESTS_COLUMNS = [
-    'Date demande', 'Raisons', 'Départ', 'Arrivée', 'Date départ', 'heure départ', 'Motif', 'Retour', 'Heure', 'Prénom', 'Nom', 'N° de téléphone','Adresse e-mail', 'Communication', 'Informations supplémentaires', 'Motif de refus'
+    'Date demande', 'Raisons', 'Départ', 'Arrivée', 'Date départ', 'heure départ', 'Motif', 'Retour', 'Heure', 'Prénom', 'Nom', 'N° de téléphone','Adresse e-mail', 'Communication', 'Informations supplémentaires', 'Motif de refus', REQUEST_STATUS_KEY
 ]
 
 
@@ -28,8 +31,9 @@ export default function getDrivers() {
                 const requests = dataRows.map(row => {
                     const request = Object.create(null);
         
-                    REQUESTS_COLUMNS.slice(0, 9).forEach((prop, i) => {
-                        request[prop] = row[i]
+                    [...REQUESTS_COLUMNS.slice(0, 9), REQUEST_STATUS_KEY].forEach((prop) => {
+                        const index = REQUESTS_COLUMNS.indexOf(prop);
+                        request[prop] = row[index];
                     })
         
                     return request

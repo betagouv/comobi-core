@@ -74,7 +74,26 @@ export default function RequestsMap({requests, positionByPlace}){
                     `
                 })
             }
-        <//>`
+        <//>
+        <section className="legend">
+            <h1>Légende</h1>
+            <h2>Trajets non-honorés parce que pas de conducteur.rice pertinent.e</h2>
+            <ul>
+                <li>
+                    <div className="request-marker">
+                        <div className="origin">4</div>
+                    </div>
+                    4 personnes souhaitaient partir de cette ville
+                </li>
+                <li>
+                    <div className="request-marker">
+                        <div className="destination">7</div>
+                    </div>
+                    7 personnes souhaitaient arriver à cette ville
+                </li>
+            </ul>
+        </section>
+    `
 }
 
 /*

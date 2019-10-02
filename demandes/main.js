@@ -8,16 +8,22 @@ import getPlacesPosition from '../geography/getPlacesPosition.js'
 
 import Main from './components/Main.js'
 
+import {REQUEST_STATUS_KEY, REQUEST_STATUS_NO_RELEVANT_DRIVER_VALUE} from '../spreadsheetDatabase/requestStatusConstants.js'
+
 const html = htm.bind(createElement);
 
 const store = {
-    requests: undefined,
+    requests: [],
     positionByPlace
 }
 
 function renderUI(){
+    const relevantRequests = store.requests.filter(r => r[REQUEST_STATUS_KEY] === REQUEST_STATUS_NO_RELEVANT_DRIVER_VALUE)
+
+    console.log('all requests', store.requests.length, 'relevant requests', relevantRequests.length)
+
     render(
-        html`<${Main} requests=${store.requests} positionByPlace=${positionByPlace} />`, 
+        html`<${Main} requests=${relevantRequests} positionByPlace=${positionByPlace} />`, 
         document.body.querySelector('main')
     )
 }
@@ -42,8 +48,6 @@ json('/requests')
         placeNames.add( Départ )
         placeNames.add( Arrivée )
     }
-
-    console.log()
 
     return getPlacesPosition(placeNames)
     .then(newPositionByPlace => {

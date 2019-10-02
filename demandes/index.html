@@ -49,17 +49,67 @@
 
                 color: white;
                 text-align: center;
+                font-weight: bold;
+            }
+
+            .request-marker .origin,
+            .request-marker .destination{
+                min-width: 50%;
             }
 
             .request-marker .origin{
-                width: 50%;
                 background-color: darkgreen;
             }
             .request-marker .destination{
-                width: 50%;
                 background-color: darkred;
             }
 
+            .legend{
+                position: fixed;
+                bottom: 0;
+                left: 0;
+
+                height: 10em;
+                max-width: 24em;
+                z-index: 1000; /* because leaflet */
+
+                background-color: beige;
+            }
+
+            .legend h1{
+                font-size: 1.1em;
+                margin: 0;
+                margin-left: 1em;
+                text-align: left;
+            }
+            
+            .legend h2{
+                font-size: 1em;
+                margin: 0;
+                margin-left: 1em;
+                text-align: left;
+            }
+
+
+
+            .legend .request-marker{
+                height: 20px;
+                width: 20px;
+
+                display: inline-block;
+                margin-right: 1em;
+            }
+
+            .legend ul{
+                margin: 0;
+                padding: 0;
+                list-style: none;
+            }
+
+            .legend ul li{
+                margin: 0;
+                padding: 0.3em;
+            }
 
         </style>
 
