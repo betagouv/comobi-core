@@ -23,8 +23,13 @@ app.get('/driver-trip-proposals', (req, res) => {
 })
 
 app.get('/positions', (req, res) => {
-    const {places} = req.query;
-
+    /* In order to reduce the risk of max GET header size limit, 
+        - p is a shorthand for places
+        - we use the p=a&p=2 syntax instead of p[]=a&p[]=2, and treat the edge case of a single element array
+    */ 
+    const {p: placeOrPlaces} = req.query
+    const places = Array.isArray(placeOrPlaces) ? placeOrPlaces : [placeOrPlaces]
+    
     const result = Object.create(null)
 
     const placesWithoutPositions = new Set(places);
