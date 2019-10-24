@@ -37,7 +37,8 @@ Corresplot est une interface utilisateur permettant de faire la correspondance f
     - `GOOGLE_API_KEY` : clef d'API créée ci-dessus
     - `GOOGLE_DRIVER_SPREADSHEET_ID` : identifiant du Google Spreadsheet qui sert de base de donnée
     - `LOCALISATION_KNOWLEDGE_GOOGLE_SPREADSHEET_ID` : identifiant du Google Spreadsheet qui sert de base de connaissance pour la localisation
-
+ 
+ - Puis lancer `npm start` pour le serveur et `npm watch` pour le code client.
 
 #### Base de connaissance de localisation
 
