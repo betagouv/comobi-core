@@ -72,6 +72,9 @@
                 padding: 0.5em;
             }
 
+            .trip-request-entry .status {
+                text-align: center;
+            }
             .drivers-list{
                 list-style: none;
                 padding: 0;
@@ -86,6 +89,11 @@
 
                 padding: 0.3em;
                 border-bottom: 1px solid #777;
+
+                cursor: pointer;
+            }
+            .drivers-list li.driver.displayed {
+                border-right: .6rem solid #38f;
             }
 
             .drivers-list li.driver:hover{
@@ -157,6 +165,5 @@
         <script type="module" src="/build/corresplot-rollup-bundle.js"> </script>
     </head>
     <body>
-        <main/>
     </body>
 </html>
