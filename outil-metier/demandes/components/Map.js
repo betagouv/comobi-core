@@ -4,7 +4,7 @@ import htm from 'htm'
 import { Map as LeafletMap, TileLayer, Marker, Popup, GeoJSON } from 'react-leaflet'
 import L from 'leaflet'
 
-import {normalizePlaceName} from '../../geography/positionByPlace.js'
+import {normalizePlaceName} from '../../../geography/positionByPlace.js'
 
 const html = htm.bind(React.createElement);
 

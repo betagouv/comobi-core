@@ -3,8 +3,8 @@ import htm from 'htm'
 
 import { Map, TileLayer, Marker, Popup, GeoJSON } from 'react-leaflet'
 
-import tripString from '../../geography/tripString.js'
-import { makeTrip } from '../../geography/driverToTrip.js'
+import tripString from '../../../geography/tripString.js'
+import { makeTrip } from '../../../geography/driverToTrip.js'
 
 const html = htm.bind(React.createElement)
 

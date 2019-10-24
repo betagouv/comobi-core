@@ -4,7 +4,8 @@
   "description": "Le projet [Lot'ô car](https://www.lotocar.fr/) a commencé avec une base de données dans un Google Spreadsheet à plusieurs feuilles gérée manuellement",
   "main": "index.js",
   "scripts": {
-    "start": "heroku local",
+    "start:outil-metier": "(cp outil-metier/Procfile .; cp outil-metier/.env .; heroku local)",
+    "start:direct": "(cp direct/Procfile .; cp direct/.env .; heroku local)",
     "build": "rollup -c",
     "watch": "rollup -c -w",
     "test": "echo \"Error: no test specified\" && exit 1"

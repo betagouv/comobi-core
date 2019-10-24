@@ -3,12 +3,12 @@ import {render} from 'react-dom'
 import htm from 'htm'
 import {json} from 'd3-fetch'
 
-import positionByPlace from '../geography/positionByPlace.js'
-import getPlacesPosition from '../geography/getPlacesPosition.js'
+import positionByPlace from '../../geography/positionByPlace.js'
+import getPlacesPosition from '../../geography/getPlacesPosition.js'
 
 import Main from './components/Main.js'
 
-import {REQUEST_STATUS_KEY, REQUEST_STATUS_NO_RELEVANT_DRIVER_VALUE} from '../spreadsheetDatabase/requestStatusConstants.js'
+import {REQUEST_STATUS_KEY, REQUEST_STATUS_NO_RELEVANT_DRIVER_VALUE} from '../../spreadsheetDatabase/requestStatusConstants.js'
 
 const html = htm.bind(createElement);
 

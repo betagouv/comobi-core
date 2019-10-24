@@ -3,18 +3,18 @@ import got from 'got'
 
 import memoize from 'fast-memoize';
 
-import getDrivers from './spreadsheetDatabase/getDrivers.js'
-import getRequests from './spreadsheetDatabase/getRequests.js'
-import getLotocarPositionByPlace from './spreadsheetDatabase/getLotocarPositionByPlace.js'
-import positionByPlace from './geography/positionByPlace.js';
-import getPlacesPosition from './server/getPlacesPosition.js';
+import getDrivers from '../spreadsheetDatabase/getDrivers.js'
+import getRequests from '../spreadsheetDatabase/getRequests.js'
+import getLotocarPositionByPlace from '../spreadsheetDatabase/getLotocarPositionByPlace.js'
+import positionByPlace from '../geography/positionByPlace.js';
+import getPlacesPosition from '../server/getPlacesPosition.js';
 
 const app = express()
 const PORT = process.env.PORT || 39528
 
 const memzGot = memoize(url => got(url))
 
-app.use(express.static('.'))
+app.use(express.static(__dirname))
 
 app.get('/', (req, res) => res.redirect('/Corresplot/'))
 
@@ -79,7 +79,7 @@ app.get('/requests', (req, res) => {
     .catch(err => res.status(500).send(err))
 })
 
-app.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`))
+app.listen(PORT, () => console.log(`L'application outil métier écoute sur le port ${PORT}!`))
 
 
 

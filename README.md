@@ -28,6 +28,13 @@ Corresplot est une interface utilisateur permettant de faire la correspondance f
             - Sûrement mettre en place un cache afin de stocker les résultats et les réutiliser sans refaire des appels à l'API qui est payante
         - Peut-être [l'API Itinéraires de l'IGN](https://geoservices.ign.fr/documentation/geoservices/itineraires.html) qui sera gratuite pour le Service Public, mais dont l'inscription a l'air plus relou à très court terme
 
+#### Heroku
+
+Il y a 2 applis : "outil métier" (plutôt interne à l'équipe Lotocar) et "direct" (plutôt publique pour que les personnes se mettent en relation entre elles).
+Il y a une partie serveur et une app Heroku par application
+
+Chaque application a son Procfile. On utilise le [heroku-buildpack-multi-procfile](https://github.com/heroku/heroku-buildpack-multi-procfile) à cet effet
+
 
 ### Installation
 
@@ -37,8 +44,20 @@ Corresplot est une interface utilisateur permettant de faire la correspondance f
     - `GOOGLE_API_KEY` : clef d'API créée ci-dessus
     - `GOOGLE_DRIVER_SPREADSHEET_ID` : identifiant du Google Spreadsheet qui sert de base de donnée
     - `LOCALISATION_KNOWLEDGE_GOOGLE_SPREADSHEET_ID` : identifiant du Google Spreadsheet qui sert de base de connaissance pour la localisation
- 
- - Puis lancer `npm start` pour le serveur et `npm watch` pour le code client.
+- Dupliquer ce `.env` à la fois dans `outil-metier` et dans `direct`
+
+
+#### Build
+
+`npm run watch`
+
+#### Start
+
+```sh
+npm run start:outil-metier
+npm run start:direct
+```
+
 
 #### Base de connaissance de localisation
 

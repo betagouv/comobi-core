@@ -25,18 +25,18 @@ function makePlugins(){
 
 export default [
 	{
-		input: 'Corresplot/main.js',
+		input: 'outil-metier/Corresplot/main.js',
 		output: {
-			file: 'build/corresplot-rollup-bundle.js',
+			file: 'outil-metier/build/corresplot-rollup-bundle.js',
 			format: 'esm',
 			sourcemap: true
 		},
 		plugins: makePlugins()
 	},
 	{
-		input: 'demandes/main.js',
+		input: 'outil-metier/demandes/main.js',
 		output: {
-			file: 'build/demandes-rollup-bundle.js',
+			file: 'outil-metier/build/demandes-rollup-bundle.js',
 			format: 'esm',
 			sourcemap: true
 		},

@@ -6,8 +6,8 @@ import { json } from 'd3-fetch'
 
 import Main from './components/Main.js'
 
-import { makeTrip as driverTripProposalToTrip } from '../geography/driverToTrip'
-import computeTripDetails from '../geography/computeTripDetails'
+import { makeTrip as driverTripProposalToTrip } from '../../geography/driverToTrip'
+import computeTripDetails from '../../geography/computeTripDetails'
 
 import _actions from './actions.js'
 
