@@ -1,0 +1,33 @@
+{
+  "addons": [
+
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ],
+  "env": {
+    "GOOGLE_API_KEY": {
+      "required": true
+    },
+    "GOOGLE_DRIVER_SPREADSHEET_ID": {
+      "required": true
+    },
+    "GOOGLE_REQUESTS_SPREADSHEET_ID": {
+      "required": true
+    },
+    "LOCALISATION_KNOWLEDGE_GOOGLE_SPREADSHEET_ID": {
+      "required": true
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1
+    }
+  },
+  "name": "lotocar",
+  "scripts": {
+  },
+  "stack": "heroku-18"
+}
