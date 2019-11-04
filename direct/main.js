@@ -117,6 +117,5 @@ json('/driver-trip-proposals').then(tripProposals => {
 		currentEntries.push(tripProposal)
 		tripProposalsByTrip.set(trip, currentEntries)
 	}
-	debugger
 	store.mutations.addTripProposals(tripProposalsByTrip)
 })

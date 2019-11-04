@@ -6,62 +6,108 @@ import {
 	STATUS_ERROR,
 	STATUS_VALUE
 } from '../asyncStatusHelpers'
+import { json } from 'd3-fetch'
 
 const html = htm.bind(React.createElement)
 
-export default function TripRequestEntry({ tripRequest, onTripRequestChange }) {
-	const [origin, setOrigin] = useState(tripRequest.origin)
-	const [destination, setDestination] = useState(tripRequest.destination)
-
-	// pass new trip to state if it came from props
-	useEffect(() => {
-		setOrigin(tripRequest.origin)
-	}, [tripRequest.origin])
-	useEffect(() => {
-		setDestination(tripRequest.destination)
-	}, [tripRequest.destination])
-
-	function onSubmit(e) {
-		e.preventDefault()
-		onTripRequestChange({
-			origin,
-			destination
+const searchCity = (input, setOptions) =>
+	json(
+		`https://geo.api.gouv.fr/communes?nom=${input}&fields=nom,code,departement,region&boost=population`
+	)
+		.then(json => setOptions(json))
+		.catch(function(error) {
+			console.error(
+				'Erreur dans la recherche de communes à partir du code postal',
+				error
+			)
+			setOptions([])
 		})
-	}
+
+const CityInput = ({ label, input, setInput }) => {
+	const [options, setOptions] = useState([])
+
+	return html`
+		<div>
+			<label>
+				<strong>${label}</strong>
+				<input
+					type="text"
+					value=${input.text}
+					onChange=${e => {
+						const value = e.target.value
+						setInput({ text: value, validated: false })
+						if (value.length > 2) searchCity(e.target.value, setOptions)
+						// Vérifier qu'aucune ville n'est exclue : https://fr.wikipedia.org/wiki/Liste_de_toponymes_courts
+					}}
+				/>
+				${input.validated && '✔'}
+			</label>
+			${!input.validated &&
+				html`
+					<${Options} options=${options} onClick=${setInput} />
+				`}
+		</div>
+	`
+}
+export default function TripRequestEntry({ tripRequest, onTripRequestChange }) {
+	const [origin, setOrigin] = useState({ text: '', validated: false })
+	const [destination, setDestination] = useState({ text: '', validated: false })
+
+	useEffect(() => {
+		origin.validated &&
+			destination.validated &&
+			onTripRequestChange({
+				origin: origin.text,
+				destination: destination.text
+			})
+	}, [origin, destination])
+
 	let requestStatus = tripRequest[ASYNC_STATUS]
 
 	return html`
-		<h2 key="h2">Demande de trajet</h2>
-		<form key="form" className="trip-request-entry" onSubmit=${onSubmit}>
+		<h2 key="h2">Où allez-vous ?</h2>
+		<form key="form" className="trip-request-entry">
 			<section className="geography">
-				<label>
-					<strong>Départ</strong>
-					<input
-						className="origin"
-						type="text"
-						value=${origin}
-						onChange=${e => setOrigin(e.target.value)}
-					/>
-				</label>
-				<label>
-					<strong>Arrivée</strong>
-					<input
-						className="destination"
-						type="text"
-						value=${destination}
-						onChange=${e => setDestination(e.target.value)}
-					/>
-				</label>
+				<${CityInput} label="Départ" input=${origin} setInput=${setOrigin} />
+				<${CityInput}
+					label="Arrivée"
+					input=${destination}
+					setInput=${setDestination}
+				/>
 			</section>
-
-			<button type="submit">Ok</button>
-			${requestStatus !== STATUS_VALUE &&
-				html`
-					<${RequestStatus} status=${requestStatus} />
-				`}
 		</form>
 	`
 }
+
+const Options = ({ options, onClick }) =>
+	html`
+		<ul style=${{ width: '100%' }}>
+			${options
+				.map(
+					({ nom, departement }) =>
+						html`
+							<li
+								style=${{
+									cursor: 'pointer'
+								}}
+								onClick=${() => onClick({ text: nom, validated: true })}
+							>
+								<span> ${nom}</span
+								><span
+									style=${{
+										color:
+											departement && departement.nom === 'Lot'
+												? 'green'
+												: 'grey'
+									}}
+									>${departement ? ' (' + departement.nom + ')' : ''}
+								</span>
+							</li>
+						`
+				)
+				.slice(0, 5)}
+		</ul>
+	`
 
 const RequestStatus = ({ status }) => html`
 	<div className="status">

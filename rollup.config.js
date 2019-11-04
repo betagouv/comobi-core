@@ -35,6 +35,7 @@ function makePlugins() {
 					'GeoJSON',
 					'GridLayer',
 					'ImageOverlay',
+					'SVGOverlay',
 					'latLngBounds',
 					'LayerGroup',
 					'Map',

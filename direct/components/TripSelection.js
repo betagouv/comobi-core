@@ -26,6 +26,8 @@ export default function({
 				tripDetailsByTrip=${tripDetailsByTrip}
 				displayedDriverTrips=${displayedDriverTrips}
 				onTripClick=${onTripClick}
+				validTripRequest=${tripRequest.destination !== '' &&
+					tripRequest.origin !== ''}
 			/>
 		</section>
 	`
