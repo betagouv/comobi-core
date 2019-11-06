@@ -19,7 +19,9 @@ script: npm run build
 
 deploy:
   provider: heroku
-  app: lotocar-bmufwtylt6u
+  app: 
+    - lotocar-bmufwtylt6u
+    - trajets-lotocar
   api_key:
     secure: dyBFH+OkIJaL193yA0ONC4EX9YbEZQOIOZqpAWTXlK2fA26wbnheD3vMYQa8cCc5eLcdmotGwq5FPkUZoXGNfHTlmzehhEGyAMa4mkcUjSGFlkpC6a3y+Rq4iPywdfy+L8rApvIcN9H91t3YKtPE+W61jmqAsfISRiSm2KVhNQRbns8+KyPWw1hWXdyJshGXkoCkxYLExGIFBhxmRz80i3K+3NyFW+83qPqd2yAuXDjZT2UM8vtvaMoPAHVdwX8xvAn4P6eQFinv7GPz+0rD4azetSv96J1UeIDKvjl44ykbDYlEw/Zd6gxFp/KfTBWqmfPoVBRcRihbmGHZ3fPSlbhupgnh3xthUhcYxGe6nJoX7U7TV5Tstz+XGEzONvpWYZ++llKwMpyeQaJhQmfMx2XkeyIyc7JaTPPNCc3L04fDUITKh8zBqA04G9F2Mqb/pkaC1dPEGHVonmr2Z9I9YgckIZELkUA0L7+Rmz2hHxhyih+zHfDQ5A8MVecjjGDEPTa1mOwRBbaFzPD0Y8U29cjAPVhV9QJdKTzrXYK5aJrBIuEh63EW5Lmwv7ZfVkuZEe1fZKGtJGMXxEtLBUO1Aeno476j7vUZC7vrwn0yXNVv0xdFL3LMVTfonZtz7h2q5zGE4xzb5GYx75dBPH/iESsY8A92hLA9nc5suZKQrCE=
 
