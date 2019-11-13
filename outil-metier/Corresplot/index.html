@@ -1,174 +1,179 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
-    <head>
-        <meta charset="utf-8">
-        <meta name="referrer" content="same-origin">
-        
-        <title>Trouver des conducteurs pertients - Lotocar</title>
-        
-        <meta name="description" content=" ">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="icon" href="data:,">
-        
-        <link crossorigin="anonymous" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/twbs/bootstrap@v4/dist/css/bootstrap-reboot.css">
-         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
-   integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
-   crossorigin="anonymous"/>
-        <!--
+	<head>
+		<meta charset="utf-8" />
+		<meta name="referrer" content="same-origin" />
+
+		<title>Trouver des conducteurs pertients - Lotocar</title>
+
+		<meta name="description" content=" " />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="icon" href="data:," />
+
+		<link
+			crossorigin="anonymous"
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/gh/twbs/bootstrap@v4/dist/css/bootstrap-reboot.css"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+			integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+			crossorigin="anonymous"
+		/>
+		<!--
         <script crossorigin="anonymous" src="https://polyfill.io/v3/polyfill.min.js?flags=always&features=default%2Ces2017%2Ces2016%2Ces2015%2Cfetch"></script>
         -->
-        <style>
-            main{
-                display: flex;
-                flex-direction: row;
-            }
+		<style>
+			main {
+				display: flex;
+				flex-direction: row;
+			}
 
-            h1{
-                text-align: center;
-                text-decoration: underline;
-            }
+			h1 {
+				text-align: center;
+				text-decoration: underline;
+			}
 
-            h2{
-                margin-left: 1em;
-                font-size: 1.3em;
-                color: #555;
-            }
+			h2 {
+				margin-left: 1em;
+				font-size: 1.3em;
+				color: #555;
+			}
 
-            a[href^="mailto:"]::before {
-                content: "📧 ";
-            }
+			a[href^='mailto:']::before {
+				content: '📧 ';
+			}
 
-            a[href^="tel:"]::before {
-                content: "📞 ";
-            }
+			a[href^='tel:']::before {
+				content: '📞 ';
+			}
 
-            .map{
-                flex: 1;
-                height: 100vh;
-            }
+			.map {
+				flex: 1;
+				height: 100vh;
+			}
 
-            .trip-selection{    
-                width: 30em;
-                height: 100vh;
-                overflow: scroll;
-            }
+			.trip-selection {
+				width: 30em;
+				height: 100vh;
+				overflow: scroll;
+			}
 
-            .trip-request-entry{
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-            }
+			.trip-request-entry {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+			}
 
-            .trip-request-entry .geography{
-                display: flex;
-                flex-direction: row;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            .trip-request-entry .geography label{
-                text-align: center;
-            }
-            .trip-request-entry .geography label input {
-                margin-left: .6rem
-            }
+			.trip-request-entry .geography {
+				display: flex;
+				flex-direction: row;
+				flex-wrap: wrap;
+				justify-content: center;
+			}
+			.trip-request-entry .geography label {
+				text-align: center;
+			}
+			.trip-request-entry .geography label input {
+				margin-left: 0.6rem;
+			}
 
-            .trip-request-entry button[type="submit"]{
-                width: 6em;
-                padding: 0.5em;
-            }
+			.trip-request-entry button[type='submit'] {
+				width: 6em;
+				padding: 0.5em;
+			}
 
-            .trip-request-entry .status {
-                text-align: center;
-            }
-            .drivers-list{
-                list-style: none;
-                padding: 0;
-                margin: 0;
-            }
+			.trip-request-entry .status {
+				text-align: center;
+			}
+			.drivers-list {
+				list-style: none;
+				padding: 0;
+				margin: 0;
+			}
 
-            .drivers-list li.driver{
-                display: flex;
-                flex-direction: row;
-                justify-content: left;
-                align-items: center;
+			.drivers-list li.driver {
+				display: flex;
+				flex-direction: row;
+				justify-content: left;
+				align-items: center;
 
-                padding: 0.3em;
-                border-bottom: 1px solid #777;
+				padding: 0.3em;
+				border-bottom: 1px solid #777;
 
-                cursor: pointer;
-            }
-            .drivers-list li.driver.displayed {
-                border-right: .6rem solid #38f;
-            }
+				cursor: pointer;
+			}
+			.drivers-list li.driver.displayed {
+				border-right: 0.6rem solid #38f;
+			}
 
-            .drivers-list li.driver:hover{
-                background-color: #EEE;
-            }
+			.drivers-list li.driver:hover {
+				background-color: #eee;
+			}
 
-            .drivers-list li.driver :nth-child(2){
-                flex: 1;
-            }
+			.drivers-list li.driver :nth-child(2) {
+				flex: 1;
+			}
 
-            .drivers-list li.driver .trip-details{
-                display: flex;
-                flex-direction: row;
-                justify-content: center;
-                align-items: center;
+			.drivers-list li.driver .trip-details {
+				display: flex;
+				flex-direction: row;
+				justify-content: center;
+				align-items: center;
 
-                padding: 1em;
-                border: 5px solid transparent;
-                border-radius: 50%;
+				padding: 1em;
+				border: 5px solid transparent;
+				border-radius: 50%;
 
-                width: 6em;
-                height: 6em;
-                text-align: center;
-                font-weight: bold;
-                margin: 0.5em;
-            }
+				width: 6em;
+				height: 6em;
+				text-align: center;
+				font-weight: bold;
+				margin: 0.5em;
+			}
 
-            .drivers-list li.driver .trip-details.minor-detour{
-                border-color: green;
-            }
-            .drivers-list li.driver .trip-details.medium-detour{
-                border-color: orange;
-            }
-            .drivers-list li.driver .trip-details.major-detour{
-                border-color: red;
-            }
+			.drivers-list li.driver .trip-details.minor-detour {
+				border-color: green;
+			}
+			.drivers-list li.driver .trip-details.medium-detour {
+				border-color: orange;
+			}
+			.drivers-list li.driver .trip-details.major-detour {
+				border-color: red;
+			}
 
-            .drivers-list li.driver .name{
-                display: block;
-                font-weight: bold;
-            }
+			.drivers-list li.driver .name {
+				display: block;
+				font-weight: bold;
+			}
 
-            .drivers-list li.driver .proposed-trip{
-                display: block;
-            }
-            .drivers-list li.driver .proposed-trip .datetime{
-                color: chocolate;
-            }
+			.drivers-list li.driver .proposed-trip {
+				display: block;
+			}
+			.drivers-list li.driver .proposed-trip .datetime {
+				color: chocolate;
+			}
 
-            .drivers-list li.driver .contact{
-                display: flex;
-                flex-direction: row;
-            }
+			.drivers-list li.driver .contact {
+				display: flex;
+				flex-direction: row;
+			}
 
-            .drivers-list li.driver .contact > *{
-                flex: 1;
-            }
+			.drivers-list li.driver .contact > * {
+				flex: 1;
+			}
 
-            .map .driver-trip{
-                stroke-width: 2;
-            }
-            .map .trip-request{
-                stroke: purple;
-                stroke-width: 6;
-            }
+			.map .driver-trip {
+				stroke-width: 2;
+			}
+			.map .trip-request {
+				stroke: purple;
+				stroke-width: 6;
+			}
+		</style>
 
-        </style>
-
-        <script type="module" src="/build/corresplot-rollup-bundle.js"> </script>
-    </head>
-    <body>
-    </body>
+		<script type="module" src="/build/corresplot.js"></script>
+	</head>
+	<body></body>
 </html>

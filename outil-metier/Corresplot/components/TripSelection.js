@@ -16,7 +16,7 @@ export default function({
 }) {
 	return html`
 		<section className="trip-selection">
-			<h1>Lotocar</h1>
+			<h1>Loto car</h1>
 			<${TripRequestEntry}
 				tripRequest=${tripRequest}
 				onTripRequestChange=${onTripRequestChange}

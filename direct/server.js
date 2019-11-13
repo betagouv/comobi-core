@@ -1,18 +1,31 @@
 import express from 'express'
 import got from 'got'
 
+import webpack from 'webpack'
+import middleware from 'webpack-dev-middleware'
+import config from './webpack.config.js'
+const compiler = webpack(config)
+
 import memoize from 'fast-memoize'
 
 import getDrivers from '../spreadsheetDatabase/getDrivers.js'
-import getRequests from '../spreadsheetDatabase/getRequests.js'
 import getLotocarPositionByPlace from '../spreadsheetDatabase/getLotocarPositionByPlace.js'
 import positionByPlace from '../geography/positionByPlace.js'
 import getPlacesPosition from '../server/getPlacesPosition.js'
 
 const app = express()
 const PORT = process.env.PORT || 39528
+const devMode = process.env.NODE_ENV === 'development'
 
-const memzGot = memoize(url => got(url))
+if (devMode) {
+	app.use(
+		middleware(compiler, {
+			hot: true,
+			publicPath: '/build/'
+			// webpack-dev-middleware options
+		})
+	)
+}
 
 app.use(express.static(__dirname))
 
@@ -113,6 +126,8 @@ app.get('/positions', (req, res) => {
 			.catch(err => res.status(500).send(err))
 	}
 })
+
+if (devMode) app.use(require('webpack-hot-middleware')(compiler))
 
 app.listen(PORT, () =>
 	console.log(`L'application directe écoute sur le port ${PORT}!`)

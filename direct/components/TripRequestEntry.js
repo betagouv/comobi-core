@@ -7,6 +7,7 @@ import {
 	STATUS_VALUE
 } from '../asyncStatusHelpers'
 import { json } from 'd3-fetch'
+import styled from 'styled-components'
 
 const html = htm.bind(React.createElement)
 
@@ -23,14 +24,25 @@ const searchCity = (input, setOptions) =>
 			setOptions([])
 		})
 
+let Input = styled.input`
+	margin: 0 0.6rem 0 0.6rem;
+	border: 3px solid steelblue;
+	border-radius: 0.3rem;
+	padding: 0.2rem 0.3rem;
+	font-size: 110%;
+`
+
 const CityInput = ({ label, input, setInput }) => {
 	const [options, setOptions] = useState([])
 
 	return html`
 		<div>
 			<label>
-				<strong>${label}</strong>
-				<input
+				<${styled.strong`
+					display: inline-block;
+					width: 4.5rem;
+				`}>${label}</strong>
+				<${Input}
 					type="text"
 					value=${input.text}
 					onChange=${e => {
@@ -50,8 +62,14 @@ const CityInput = ({ label, input, setInput }) => {
 	`
 }
 export default function TripRequestEntry({ tripRequest, onTripRequestChange }) {
-	const [origin, setOrigin] = useState({ text: '', validated: false })
-	const [destination, setDestination] = useState({ text: '', validated: false })
+	const [origin, setOrigin] = useState({
+		text: tripRequest.origin,
+		validated: false
+	})
+	const [destination, setDestination] = useState({
+		text: tripRequest.destination,
+		validated: false
+	})
 
 	useEffect(() => {
 		origin.validated &&
@@ -62,14 +80,16 @@ export default function TripRequestEntry({ tripRequest, onTripRequestChange }) {
 			})
 	}, [origin, destination])
 
-	let requestStatus = tripRequest[ASYNC_STATUS]
-
 	return html`
-		<h2 key="h2">Où allez-vous ?</h2>
+		<${styled.h2`
+			text-align: center;
+			margin: 0 0 1.5rem;
+		`} key="h2">Où allez-vous ?</h2>
 		<form key="form" className="trip-request-entry">
 			<section className="geography">
-				<${CityInput} label="Départ" input=${origin} setInput=${setOrigin} />
+				<${CityInput} key="départ" label="Départ" input=${origin} setInput=${setOrigin} />
 				<${CityInput}
+					key="arrivée"
 					label="Arrivée"
 					input=${destination}
 					setInput=${setDestination}
@@ -81,15 +101,19 @@ export default function TripRequestEntry({ tripRequest, onTripRequestChange }) {
 
 const Options = ({ options, onClick }) =>
 	html`
-		<ul style=${{ width: '100%' }}>
+		<${styled.ul`
+			list-style-type: none;
+			padding-left: 1rem;
+			li {
+				cursor: pointer;
+			}
+		`} style=${{ width: '100%' }}>
 			${options
 				.map(
 					({ nom, departement }) =>
 						html`
 							<li
-								style=${{
-									cursor: 'pointer'
-								}}
+								key=${nom + departement}
 								onClick=${() => onClick({ text: nom, validated: true })}
 							>
 								<span> ${nom}</span

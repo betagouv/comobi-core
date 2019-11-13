@@ -16,7 +16,6 @@ export default function({
 }) {
 	return html`
 		<section className="trip-selection">
-			<h1>Lotocar</h1>
 			<${TripRequestEntry}
 				tripRequest=${tripRequest}
 				onTripRequestChange=${onTripRequestChange}

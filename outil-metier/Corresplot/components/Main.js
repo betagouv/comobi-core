@@ -6,7 +6,7 @@ import Map from './Map.js'
 
 const html = htm.bind(React.createElement)
 
-export default function({
+let Main = function({
 	tripProposalsByTrip,
 	directionsByTrip,
 	tripRequest,
@@ -35,3 +35,12 @@ export default function({
 		</main>
 	`
 }
+
+let ExportedApp = Main
+
+if (process.env.NODE_ENV !== 'production') {
+	const { hot } = require('react-hot-loader')
+	ExportedApp = hot(module)(Main)
+}
+
+export default ExportedApp

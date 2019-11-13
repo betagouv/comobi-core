@@ -1,55 +1,61 @@
 {
-  "name": "lotocar",
-  "version": "1.0.0",
-  "description": "Le projet [Lot'ô car](https://www.lotocar.fr/) a commencé avec une base de données dans un Google Spreadsheet à plusieurs feuilles gérée manuellement",
-  "main": "index.js",
-  "scripts": {
-    "start:outil-metier": "(cp outil-metier/Procfile .; cp outil-metier/.env .; heroku local)",
-    "start:direct": "(cp direct/Procfile .; cp direct/.env .; heroku local)",
-    "build": "rollup -c",
-    "watch": "rollup -c -w",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "engines": {
-    "node": ">=12"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/DavidBruant/lotocar.git"
-  },
-  "author": "David Bruant <bruant.d@gmail.com> (https://twitter.com/DavidBruant)",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/DavidBruant/lotocar/issues"
-  },
-  "homepage": "https://github.com/DavidBruant/lotocar#readme",
-  "dependencies": {
-    "@mapbox/polyline": "^1.1.0",
-    "baredux": "github:DavidBruant/baredux",
-    "classnames": "^2.2.6",
-    "d3-dsv": "^1.1.1",
-    "d3-fetch": "^1.1.2",
-    "delay": "^4.3.0",
-    "esm": "^3.2.25",
-    "express": "^4.17.1",
-    "fast-memoize": "^2.5.1",
-    "geodesy": "^2.2.0",
-    "googleapis": "^41.0.1",
-    "got": "^9.6.0",
-    "htm": "^2.2.1",
-    "leaflet": "^1.5.1",
-    "lodash-es": "^4.17.15",
-    "p-retry": "^4.1.0",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-leaflet": "^2.4.0"
-  },
-  "devDependencies": {
-    "rollup": "^1.16.2",
-    "rollup-plugin-commonjs": "^10.0.0",
-    "rollup-plugin-livereload": "^1.0.1",
-    "rollup-plugin-node-resolve": "^5.1.0",
-    "rollup-plugin-replace": "^2.2.0",
-    "rollup-plugin-terser": "^5.0.0"
-  }
+	"name": "lotocar",
+	"version": "1.0.0",
+	"description": "Le projet [Lot'ô car](https://www.lotocar.fr/) a commencé avec une base de données dans un Google Spreadsheet à plusieurs feuilles gérée manuellement",
+	"main": "index.js",
+	"scripts": {
+		"start": "(cp direct/Procfile .; cp direct/.env .; heroku local)",
+		"start:outil-metier": "(cp outil-metier/Procfile .; cp outil-metier/.env .; heroku local)",
+		"build": "webpack --config direct/webpack.config.js; webpack --config outil-metier/webpack.config.js",
+		"dev": "PORT=5000 NODE_ENV=development nodenv -E direct/.env direct/server.js --exec 'node -r esm'",
+		"dev:outil-metier": "PORT=5000 NODE_ENV=development nodenv -E outil-metier/.env outil-metier/server.js --exec 'node -r esm'",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"engines": {
+		"node": ">=12"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/DavidBruant/lotocar.git"
+	},
+	"author": "David Bruant <bruant.d@gmail.com> (https://twitter.com/DavidBruant)",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/DavidBruant/lotocar/issues"
+	},
+	"homepage": "https://github.com/DavidBruant/lotocar#readme",
+	"dependencies": {
+		"@mapbox/polyline": "^1.1.0",
+		"baredux": "github:DavidBruant/baredux",
+		"classnames": "^2.2.6",
+		"d3-dsv": "^1.1.1",
+		"d3-fetch": "^1.1.2",
+		"delay": "^4.3.0",
+		"esm": "^3.2.25",
+		"express": "^4.17.1",
+		"fast-memoize": "^2.5.1",
+		"geodesy": "^2.2.0",
+		"googleapis": "^41.0.1",
+		"got": "^9.6.0",
+		"htm": "^2.2.1",
+		"leaflet": "^1.5.1",
+		"lodash-es": "^4.17.15",
+		"p-retry": "^4.1.0",
+		"react": "^16.8.6",
+		"react-dom": "^16.8.6",
+		"react-hot-loader": "^4.12.15",
+		"react-leaflet": "^2.4.0",
+		"styled-components": "^4.4.1",
+		"webpack": "^4.41.2",
+		"webpack-cli": "^3.3.10",
+		"webpack-dev-server": "^3.9.0",
+		"webpack-hot-middleware": "^2.25.0"
+	},
+	"devDependencies": {
+		"@babel/core": "^7.6.4",
+		"@babel/preset-env": "^7.6.3",
+		"babel-loader": "^8.0.6",
+		"file-loader": "^4.2.0",
+		"node-env-run": "^3.0.2"
+	}
 }
