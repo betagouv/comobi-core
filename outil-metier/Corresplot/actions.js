@@ -8,6 +8,7 @@ import {
 	STATUS_ERROR,
 	STATUS_VALUE
 } from './asyncStatusHelpers'
+import { flatten } from 'lodash-es'
 
 export default function _actions(store) {
 	return {
@@ -21,9 +22,9 @@ export default function _actions(store) {
 			const positionByPlace = store.state.positionByPlace
 
 			const placesWithoutPositions = new Set([
-				...proposedTrips
-					.map(({ origin, destination }) => [origin, destination])
-					.flat(),
+				...flatten(
+					proposedTrips.map(({ origin, destination }) => [origin, destination])
+				),
 				trip.origin,
 				trip.destination
 			])
