@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import htm from 'htm'
 import classNames from 'classnames'
 import styled from 'styled-components'
+import { SimpleButton, ContactLinkButton } from './ButtonStyle'
 
 const KM = 1000 // meters
 const AVERAGE_SPEED = 60 / 60 // km/min
@@ -14,6 +15,7 @@ export default function TripProposal({
 	isDisplayed,
 	onDriverClick
 }) {
+	const [selected, setSelected] = useState(false)
 	const {
 		Départ,
 		Arrivée,
@@ -66,6 +68,20 @@ export default function TripProposal({
 			className=${classNames('driver', { displayed: isDisplayed })}
 			onClick=${onDriverClick}
 		>
+		${
+			selected
+				? html`
+						<div>
+							<${FormContact}
+								from=${Départ}
+								to=${Arrivée}
+								moreInfo=${`Conducteur sélectionné: ${Prénom} ${Nom}`}
+							/>
+							<${TelephoneContact} />
+							<${SimpleButton} onClick=${() => setSelected(false)}>Retour</button>
+						</div>
+				  `
+				: html`
         <${styled.div`
 					display: flex;
 					align-items: center;
@@ -91,24 +107,28 @@ export default function TripProposal({
 				</span>
 			</section>
             </div>
-				<${StandardContact} />
+			<${ContactLinkButton} onClick=${() =>
+						setSelected(true)}>Faire une demande</${ContactLinkButton}>`
+		}
 		</li>
 	`
 }
 
-const StandardContact = ({}) => {
+const TelephoneContact = ({}) => {
 	const tel = '0531600903'
 	return html`
-		<${styled.a`
-			background: rgba(147, 196, 125, 1);
-			padding: 0.1rem 0.4rem;
-			border-radius: 0.3rem;
-			color: white;
-			width: 14rem;
-			margin: 0.4rem auto 0.2rem;
-			display: block;
-			text-align: center;
-		`} href="tel:${tel}">Lotocar (${tel})</a>
+		<${ContactLinkButton} href="tel:${tel}"
+			>Lotocar (${tel}) 
+		</${ContactLinkButton}>
+	`
+}
+const FormContact = ({ from, to, moreInfo }) => {
+	return html`
+		<${ContactLinkButton} 
+		target="_blank"
+		href=${`https://docs.google.com/forms/d/e/1FAIpQLSf-bhTbcJ36S7PQK167zxaEkvaMSBzg8yOwQx0fDUQMd4_pYQ/viewform?entry.227174060=${from}&entry.44825971=${to}&entry.1204459643=${moreInfo}`}>
+		📄 Demande en ligne
+		</${ContactLinkButton}>
 	`
 }
 
