@@ -4,7 +4,7 @@
 		<meta charset="utf-8" />
 		<meta name="referrer" content="same-origin" />
 
-		<title>Trouver des conducteurs pertients - Lotocar</title>
+		<title>Trouver un trajet - Lotocar</title>
 
 		<meta
 			name="Description"
@@ -166,6 +166,29 @@
 				stroke-width: 6;
 			}
 		</style>
+
+		<!-- Matomo -->
+
+		<script>
+			var _paq = window._paq || []
+			/* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+			_paq.push(['trackPageView'])
+			_paq.push(['enableLinkTracking'])
+			;(function() {
+				var u = '//stats.data.gouv.fr/'
+				_paq.push(['setTrackerUrl', u + 'piwik.php'])
+				_paq.push(['setSiteId', '101'])
+				var d = document,
+					g = d.createElement('script'),
+					s = d.getElementsByTagName('script')[0]
+				g.type = 'text/javascript'
+				g.async = true
+				g.defer = true
+				g.src = u + 'piwik.js'
+				s.parentNode.insertBefore(g, s)
+			})()
+		</script>
+		<!-- End Matomo Code -->
 
 		<script type="module" src="build/bundle.js"></script>
 	</head>

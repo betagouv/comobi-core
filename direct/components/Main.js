@@ -5,6 +5,7 @@ import TripSelection from './TripSelection.js'
 import logo from '../logo.png'
 import logoLot from '../logo-lot.png'
 import styled from 'styled-components'
+import Privacy from './Privacy'
 
 const html = htm.bind(React.createElement)
 
@@ -80,6 +81,7 @@ const Footer = () => html`
 					<div>
 						Tél : 05 31 60 09 03
 					</div>
+					<${Privacy}/>
 					<div><a href="https://6b49e0e7-23a4-497b-931e-cb12669b2b05.filesusr.com/ugd/8db2ce_bfddb80831494ecc832301c3a4dc0105.pdf">Conditions générales d'utilisation</a></div>
 				</section>
 			</footer>

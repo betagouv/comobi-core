@@ -72,12 +72,19 @@ export default function TripRequestEntry({ tripRequest, onTripRequestChange }) {
 	})
 
 	useEffect(() => {
-		origin.validated &&
-			destination.validated &&
+		if (origin.validated && destination.validated) {
 			onTripRequestChange({
 				origin: origin.text,
 				destination: destination.text
 			})
+			if (_paq)
+				_paq.push([
+					'trackEvent',
+					'trajets',
+					'recherche',
+					origin.text + ' | ' + destination.text
+				])
+		}
 	}, [origin, destination])
 
 	return html`
