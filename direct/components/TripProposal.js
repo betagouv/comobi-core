@@ -21,12 +21,8 @@ export default function TripProposal({
 		Arrivée,
 		Jours,
 		'Heure départ': heureDépart,
-		driver: { Prénom, Nom, 'N° de téléphone': phone, 'Adresse e-mail': email }
+		driver: { Prénom, Nom, phone }
 	} = tripProposal
-
-	const phoneLink = phone ? `tel:${phone.trim()}` : undefined
-	const emailLink =
-		email && email.includes('@') ? `mailto:${email.trim()}` : undefined
 
 	let originalDistance,
 		distanceWithDetour,
@@ -77,7 +73,7 @@ export default function TripProposal({
 								to=${Arrivée}
 								moreInfo=${`Conducteur sélectionné: ${Prénom} ${Nom}`}
 							/>
-							<${TelephoneContact} />
+							<${TelephoneContact} number=${phone} />
 							<${SimpleButton} onClick=${() => setSelected(false)}>Retour</button>
 						</div>
 				  `
@@ -114,11 +110,11 @@ export default function TripProposal({
 	`
 }
 
-const TelephoneContact = ({}) => {
-	const tel = '0531600903'
+const TelephoneContact = ({number}) => {
+	const tel = number || '0531600903'
 	return html`
 		<${ContactLinkButton} href="tel:${tel}"
-			>Lotocar (${tel}) 
+			>${number ? `Contacter directement la personne` : `Lotocar`} (${tel}) 
 		</${ContactLinkButton}>
 	`
 }

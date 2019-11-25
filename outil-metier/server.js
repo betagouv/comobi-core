@@ -14,6 +14,8 @@ import getLotocarPositionByPlace from '../spreadsheetDatabase/getLotocarPosition
 import positionByPlace from '../geography/positionByPlace.js'
 import getPlacesPosition from '../server/getPlacesPosition.js'
 
+import driverTripProposalsRoute from '../server/driverTripProposalsRoute.js'
+
 const app = express()
 const PORT = process.env.PORT || 39528
 
@@ -35,9 +37,7 @@ app.use(express.static(__dirname))
 
 app.get('/', (req, res) => res.redirect('/Corresplot/'))
 
-app.get('/driver-trip-proposals', (req, res) => {
-	getDrivers().then(drivers => res.json(drivers))
-})
+app.get('/driver-trip-proposals', driverTripProposalsRoute(driverTripProposal => driverTripProposal))
 
 app.get('/positions', (req, res) => {
 	/* In order to reduce the risk of max GET header size limit, 

@@ -8,7 +8,7 @@
 		"start:outil-metier": "(cp outil-metier/Procfile .; cp outil-metier/.env .; heroku local)",
 		"build": "webpack --config direct/webpack.config.js; webpack --config outil-metier/webpack.config.js",
 		"dev": "PORT=5000 NODE_ENV=development nodenv -E direct/.env direct/server.js --exec 'node -r esm'",
-		"dev:outil-metier": "PORT=5000 NODE_ENV=development nodenv -E outil-metier/.env outil-metier/server.js --exec 'node -r esm'",
+		"dev:outil-metier": "PORT=5001 NODE_ENV=development nodenv -E outil-metier/.env outil-metier/server.js --exec 'node -r esm'",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"engines": {

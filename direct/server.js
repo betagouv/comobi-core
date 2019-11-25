@@ -6,12 +6,11 @@ import middleware from 'webpack-dev-middleware'
 import config from './webpack.config.js'
 const compiler = webpack(config)
 
-import memoize from 'fast-memoize'
-
-import getDrivers from '../spreadsheetDatabase/getDrivers.js'
 import getLotocarPositionByPlace from '../spreadsheetDatabase/getLotocarPositionByPlace.js'
 import positionByPlace from '../geography/positionByPlace.js'
 import getPlacesPosition from '../server/getPlacesPosition.js'
+
+import driverTripProposalsRoute, {PASSAGER_CONTACT_DIRECT_ACCEPT} from '../server/driverTripProposalsRoute.js'
 
 const app = express()
 const PORT = process.env.PORT || 39528
@@ -31,63 +30,18 @@ app.use(express.static(__dirname))
 
 app.get('/', (req, res) => res.redirect('/Corresplot/'))
 
-app.get('/driver-trip-proposals', (req, res) => {
-	getDrivers()
-		.then(function cleanupDriverTripProposals(driverTripProposals) {
-			for (const driverTripProposal of driverTripProposals) {
-				driverTripProposal['Départ'] = driverTripProposal['Départ'].trim()
-				driverTripProposal['Arrivée'] = driverTripProposal['Arrivée'].trim()
-			}
-			return driverTripProposals
-		})
-		.then(function driverTripProposalsToTripProposals(driverTripProposals) {
-			const tripProposals = []
 
-			for (const driverTripProposal of driverTripProposals) {
-				const {
-					Départ,
-					Arrivée,
-					Trajet,
-					Jours,
-					'Heure départ': HeureDépart,
-					'Heure retour': HeureRetour,
-					Adresse,
-					Prénom,
-					Nom,
-					'N° de téléphone': tel,
-					'Adresse e-mail': email,
-					'Contact préféré': favContact
-				} = driverTripProposal
+function makeDriverObject(driverTripProposal){
+	const {Prénom, Nom, 'Contact direct passager': directContact, 'N° de téléphone': phone} = driverTripProposal
 
-				const driver = Object.freeze({
-					Prénom,
-					Nom: Nom && Nom[0].toUpperCase() + '.'
-				})
+	return {
+		Prénom,
+		Nom: Nom && Nom[0].toUpperCase() + '.',
+		phone: directContact === PASSAGER_CONTACT_DIRECT_ACCEPT ? phone : undefined
+	}
+}
 
-				tripProposals.push({
-					Départ,
-					Arrivée,
-					Trajet,
-					Jours,
-					'Heure départ': HeureDépart,
-					driver
-				})
-
-				if (HeureRetour) {
-					tripProposals.push({
-						Départ: Arrivée,
-						Arrivée: Départ,
-						Trajet: undefined, // should be the reverse Trajet. Will this ever matter?
-						Jours,
-						'Heure départ': HeureRetour,
-						driver
-					})
-				}
-			}
-
-			res.json(tripProposals)
-		})
-})
+app.get('/driver-trip-proposals', driverTripProposalsRoute(makeDriverObject))
 
 app.get('/positions', (req, res) => {
 	/* In order to reduce the risk of max GET header size limit, 

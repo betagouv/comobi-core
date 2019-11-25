@@ -20,8 +20,12 @@ const CONDUCTEUR_PROPS = [
     'N° de téléphone',
     'Adresse e-mail',
     'Contact préféré',
-    'Communication',
-    'Remarques éventuelles'
+    'Moyen de communication préféré',
+    'Juste avant de finir, comment avez-vous connu  Lotocar ?',
+    'Remarques éventuelles',
+    'Type de covoit',
+    'Employeur',
+    'Contact direct passager'
 ]
 
 
