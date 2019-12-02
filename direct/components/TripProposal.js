@@ -13,7 +13,8 @@ export default function TripProposal({
 	tripProposal,
 	tripDetails,
 	isDisplayed,
-	onDriverClick
+	onDriverClick,
+	tripRequest
 }) {
 	const [selected, setSelected] = useState(false)
 	const {
@@ -21,7 +22,7 @@ export default function TripProposal({
 		Arrivée,
 		Jours,
 		'Heure départ': heureDépart,
-		driver: { Prénom, Nom, phone }
+		driver: { Prénom, Nom, phone, Employeur }
 	} = tripProposal
 
 	let originalDistance,
@@ -69,9 +70,11 @@ export default function TripProposal({
 				? html`
 						<div>
 							<${FormContact}
-								from=${Départ}
-								to=${Arrivée}
-								moreInfo=${`Conducteur sélectionné: ${Prénom} ${Nom}`}
+								from=${tripRequest.origin}
+								to=${tripRequest.destination}
+								moreInfo=${`
+									Conducteur sélectionné: ${Prénom} ${Nom}, de ${Départ} à ${Arrivée}.
+								`}
 							/>
 							<${TelephoneContact} number=${phone} />
 							<${SimpleButton} onClick=${() => setSelected(false)}>Retour</button>
@@ -92,6 +95,10 @@ export default function TripProposal({
 				<span className="name">${Prénom} ${Nom}</span>
 				<span className="proposed-trip">
 					${Départ} - ${Arrivée}
+					${Employeur &&
+						html`
+							<div>💼 ${Employeur}</div>
+						`}
 					${Jours &&
 						html`
 							<div className="datetime">🗓️ ${Jours}</div>
@@ -103,14 +110,21 @@ export default function TripProposal({
 				</span>
 			</section>
             </div>
-			<${ContactLinkButton} onClick=${() =>
-						setSelected(true)}>Faire une demande</${ContactLinkButton}>`
+			<${ContactLinkButton} onClick=${() => {
+						trackDemande('Faire une demande')
+						setSelected(true)
+				  }}>Faire une demande</${ContactLinkButton}>`
 		}
 		</li>
 	`
 }
 
-const TelephoneContact = ({number}) => {
+const trackDemande = whichButton => {
+	if (typeof _paq !== 'undefined')
+		_paq.push(['trackEvent', 'trajets', 'demande', whichButton])
+}
+
+const TelephoneContact = ({ number }) => {
 	const tel = number || '0531600903'
 	return html`
 		<${ContactLinkButton} href="tel:${tel}"

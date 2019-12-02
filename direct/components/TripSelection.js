@@ -27,6 +27,7 @@ export default function({
 				onTripClick=${onTripClick}
 				validTripRequest=${tripRequest.destination !== '' &&
 					tripRequest.origin !== ''}
+				tripRequest=${tripRequest}
 			/>
 		</section>
 	`

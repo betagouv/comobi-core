@@ -10,7 +10,8 @@ export default function DriversList({
 	validTripRequest,
 	tripDetailsByTrip,
 	displayedDriverTrips,
-	onTripClick
+	onTripClick,
+	tripRequest
 }) {
 	const orderedTrips = [...tripProposalsByTrip.keys()].sort((trip1, trip2) => {
 		const details1 = tripDetailsByTrip.get(trip1) || {
@@ -62,6 +63,7 @@ export default function DriversList({
 							tripDetails=${tripDetails}
 							isDisplayed=${displayedDriverTrips.has(trip)}
 							onDriverClick=${() => onTripClick(trip)}
+							tripRequest=${tripRequest}
 						/>
 					`
 				})
