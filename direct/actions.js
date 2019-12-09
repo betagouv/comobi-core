@@ -36,8 +36,8 @@ export default function _actions(store) {
 					store.mutations.addPositions(positionByPlace)
 
 					if (
-						!positionByPlace.has(trip.origin) ||
-						!positionByPlace.has(trip.destination)
+						!store.state.positionByPlace.has(trip.origin) ||
+						!store.state.positionByPlace.has(trip.destination)
 					) {
 						store.mutations.setTripRequest({
 							...store.state.tripRequest,
@@ -57,8 +57,6 @@ export default function _actions(store) {
 				...trip,
 				[ASYNC_STATUS]: STATUS_PENDING
 			})
-
-			store.mutations.displayedDriverTrips.clear()
 		}
 	}
 }

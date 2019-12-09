@@ -18,6 +18,34 @@ const app = express()
 const PORT = process.env.PORT || 39528
 const devMode = process.env.NODE_ENV === 'development'
 
+const LOT_CODE = 46
+const lotGeojsonP = got(
+	`https://geo.api.gouv.fr/departements/${LOT_CODE}/communes?format=geojson`,
+	{ json: true }
+)
+.then(({body}) => body)
+
+const lotocarPositionByPlaceP = getLotocarPositionByPlace();
+
+const validPlaceNamesP = Promise.all([lotGeojsonP, lotocarPositionByPlaceP])
+.then(([lotGeojson, lotocarPositionByPlace]) => {
+	const placeNames = new Set()
+
+	const communes = lotGeojson.features
+
+	for (const commune of communes) {
+		const placeName = commune.properties.nom
+		placeNames.add(placeName)
+	}
+
+	for (const [name, position] of lotocarPositionByPlace) {
+		placeNames.add(name)
+	}
+
+	return [...placeNames]
+})
+
+
 if (devMode) {
 	app.use(
 		middleware(compiler, {
@@ -89,40 +117,43 @@ app.get('/positions', (req, res) => {
 	}
 })
 
+app.get('/valid-place-names', (req, res) => {
+	validPlaceNamesP
+	.then(validPlaceNames => res.json(validPlaceNames))
+	.catch(err => res.status(500).send(err))
+})
+
 if (devMode) app.use(require('webpack-hot-middleware')(compiler))
 
 app.listen(PORT, () =>
 	console.log(`L'application directe écoute sur le port ${PORT}!`)
 )
 
+
 // # Initialize data
-const LOT_CODE = 46
 // ## First from all Lot communes
-got(
-	`https://geo.api.gouv.fr/departements/${LOT_CODE}/communes?format=geojson`,
-	{ json: true }
-)
-	.then(({ body: lotGeojson }) => {
-		const communes = lotGeojson.features
+lotGeojsonP
+.then(lotGeojson => {
+	const communes = lotGeojson.features
 
-		for (const commune of communes) {
-			const name = commune.properties.nom
-			// > GeoJSON describes an order for coordinates: they should go, in order:
-			// > [longitude, latitude, elevation]
-			// > This order can be surprising. Historically, the order of coordinates is usually “latitude, longitude”
-			// https://macwright.org/2015/03/23/geojson-second-bite#position
-			const [longitude, latitude] = commune.geometry.coordinates
+	for (const commune of communes) {
+		const name = commune.properties.nom
+		// > GeoJSON describes an order for coordinates: they should go, in order:
+		// > [longitude, latitude, elevation]
+		// > This order can be surprising. Historically, the order of coordinates is usually “latitude, longitude”
+		// https://macwright.org/2015/03/23/geojson-second-bite#position
+		const [longitude, latitude] = commune.geometry.coordinates
 
-			positionByPlace.set(name, { latitude, longitude })
+		positionByPlace.set(name, { latitude, longitude })
+	}
+})
+// ## Then from local knowledge
+.then(() => {
+	return lotocarPositionByPlaceP.then(lotocarPositionByPlace => {
+		// this may override existing entries and that's on purpose
+		for (const [name, position] of lotocarPositionByPlace) {
+			positionByPlace.set(name, position)
 		}
 	})
-	// ## Then from local knowledge
-	.then(() => {
-		return getLotocarPositionByPlace().then(lotocarPositionByPlace => {
-			// this may override existing entries and that's on purpose
-			for (const [name, position] of lotocarPositionByPlace) {
-				positionByPlace.set(name, position)
-			}
-		})
-	})
-	.catch(console.error)
+})
+.catch(console.error)

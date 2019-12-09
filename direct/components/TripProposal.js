@@ -12,7 +12,6 @@ const html = htm.bind(React.createElement)
 export default function TripProposal({
 	tripProposal,
 	tripDetails,
-	isDisplayed,
 	onDriverClick,
 	tripRequest
 }) {
@@ -62,7 +61,7 @@ export default function TripProposal({
 				width: 100%;
 			}
 		`}
-			className=${classNames('driver', { displayed: isDisplayed })}
+			className=${classNames('driver')}
 			onClick=${onDriverClick}
 		>
 		${

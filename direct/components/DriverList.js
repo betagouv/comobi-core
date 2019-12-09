@@ -5,23 +5,25 @@ import TripProposal from './TripProposal'
 
 const html = htm.bind(React.createElement)
 
+import {
+	STATUS_PENDING,
+	STATUS_ERROR,
+	STATUS_VALUE
+} from '../asyncStatusHelpers'
+
 export default function DriversList({
 	tripProposalsByTrip,
 	validTripRequest,
+	tripRequestAsyncStatus,
 	tripDetailsByTrip,
-	displayedDriverTrips,
 	onTripClick,
 	tripRequest
 }) {
-	const orderedTrips = [...tripProposalsByTrip.keys()].sort((trip1, trip2) => {
-		const details1 = tripDetailsByTrip.get(trip1) || {
-			originalDistance: 0,
-			distanceWithDetour: Infinity
-		}
-		const details2 = tripDetailsByTrip.get(trip2) || {
-			originalDistance: 0,
-			distanceWithDetour: Infinity
-		}
+	const orderedTrips = [...tripProposalsByTrip.keys()]
+	.filter(trip => tripDetailsByTrip.has(trip))
+	.sort((trip1, trip2) => {
+		const details1 = tripDetailsByTrip.get(trip1)
+		const details2 = tripDetailsByTrip.get(trip2)
 
 		const detour1 = details1.distanceWithDetour - details1.originalDistance
 		const detour2 = details2.distanceWithDetour - details2.originalDistance
@@ -29,12 +31,11 @@ export default function DriversList({
 		return detour1 - detour2
 	})
 
-	if (!orderedTrips.length) return null
 	if (!validTripRequest)
 		return html`
 			<div style=${{ textAlign: 'center', marginTop: '2rem' }}>
 				<p style=${{ marginBottom: '0rem' }}>
-					${orderedTrips.length} trajets disponibles sur Lotocar
+					${tripProposalsByTrip.size} trajets disponibles sur Lotocar
 				</p>
 				<a href="http://bit.ly/inscription-conducteur"
 					>J'ai une voiture et je veux aider</a
@@ -45,7 +46,11 @@ export default function DriversList({
 		<${styled.h2`
 			margin-top: 1rem;
 			text-align: center;
-		`} key="h2">Conducteur.rice.s</h2>
+		`} key="h2">${
+			tripRequestAsyncStatus === STATUS_PENDING ? 
+				`(recherche en cours)`
+				: ( orderedTrips.length === 0 ? `(aucun résultat)` : `Conducteur.rice.s` )
+			}</h2>
 		<${styled.ul`
 			margin: 0 auto;
 			max-width: 30rem;
@@ -61,7 +66,6 @@ export default function DriversList({
 							key=${JSON.stringify(tripProposal)}
 							tripProposal=${tripProposal}
 							tripDetails=${tripDetails}
-							isDisplayed=${displayedDriverTrips.has(trip)}
 							onDriverClick=${() => onTripClick(trip)}
 							tripRequest=${tripRequest}
 						/>
