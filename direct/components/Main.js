@@ -9,13 +9,12 @@ import Privacy from './Privacy'
 
 const html = htm.bind(React.createElement)
 
-let Main = function({
+let Main = function ({
 	tripProposalsByTrip,
 	tripRequest,
 	tripDetailsByTrip,
 	validPlaceNames,
 	onTripRequestChange,
-	onTripClick
 }) {
 	return html`
 		<${styled.main`
@@ -39,7 +38,6 @@ let Main = function({
 				tripDetailsByTrip=${tripDetailsByTrip}
 				validPlaceNames=${validPlaceNames}
 				onTripRequestChange=${onTripRequestChange}
-				onTripClick=${onTripClick}
 			/></div>
 			<${Footer} />
 		</main>

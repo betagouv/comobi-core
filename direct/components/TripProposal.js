@@ -2,16 +2,14 @@ import React, { useState } from 'react'
 import htm from 'htm'
 import classNames from 'classnames'
 import styled from 'styled-components'
-import { SimpleButton, ContactLinkButton } from './ButtonStyle'
-
-const KM = 1000 // meters
-const AVERAGE_SPEED = 60 / 60 // km/min
-const STRAIGHT_LINE_TO_ROAD_DISTANCE_RATIO = 1.4
-
+import {
+	SimpleButton,
+	ContactLinkButton as ContactButtonStyle
+} from './ButtonStyle'
 const html = htm.bind(React.createElement)
+
 export default function TripProposal({
 	tripProposal,
-	tripDetails,
 	onDriverClick,
 	tripRequest
 }) {
@@ -21,33 +19,8 @@ export default function TripProposal({
 		Arrivée,
 		Jours,
 		'Heure départ': heureDépart,
-		driver: { Prénom, Nom, phone, Employeur }
+		driver: { Prénom, Nom, phone, Employeur: ArrivéePrécise }
 	} = tripProposal
-
-	let originalDistance,
-		distanceWithDetour,
-		detourClassName,
-		additionalDistanceKM
-
-	if (tripDetails) {
-		originalDistance = tripDetails.originalDistance
-		distanceWithDetour = tripDetails.distanceWithDetour
-
-		additionalDistanceKM =
-			((distanceWithDetour - originalDistance) *
-				STRAIGHT_LINE_TO_ROAD_DISTANCE_RATIO) /
-			KM
-
-		detourClassName =
-			additionalDistanceKM <= 5 * AVERAGE_SPEED
-				? 'minor-detour'
-				: additionalDistanceKM <= 15 * AVERAGE_SPEED
-				? 'medium-detour'
-				: 'major-detour'
-	}
-
-	// in minutes, assuming average 60km/h
-	const additionalTime = additionalDistanceKM * AVERAGE_SPEED
 
 	return html`
 		<${styled.li`
@@ -57,63 +30,76 @@ export default function TripProposal({
 			border-radius: 1rem;
 			box-shadow: 0 1px 3px rgba(41, 117, 209, 0.12),
 				0 1px 2px rgba(41, 117, 209, 0.24);
-			> * {
-				width: 100%;
-			}
 		`}
 			className=${classNames('driver')}
 			onClick=${onDriverClick}
 		>
-		${
-			selected
-				? html`
-						<div>
-							<${FormContact}
-								from=${tripRequest.origin}
-								to=${tripRequest.destination}
-								moreInfo=${`
-									Conducteur sélectionné: ${Prénom} ${Nom}, de ${Départ} à ${Arrivée}.
-								`}
-							/>
-							<${TelephoneContact} number=${phone} />
-							<${SimpleButton} onClick=${() => setSelected(false)}>Retour</button>
-						</div>
-				  `
-				: html`
+		${html`
         <${styled.div`
-					display: flex;
-					align-items: center;
-					justify-content: space-evenly;
-					> section {
-						margin-left: 0.6rem;
-						max-width: 55%;
+					margin: 0.3rem 1rem;
+					.quand {
+						display: flex;
+						align-items: center;
+						width: 80%;
+						margin: 0.3rem 0;
+					}
+					.quand > span {
+						margin-right: 0.6rem;
+					}
+					small {
+						display: block;
 					}
 				`}>
-		<${Detour} ...${{ detourClassName, tripDetails, additionalTime }} />
-			<section>
-				<span className="name">${Prénom} ${Nom}</span>
-				<span className="proposed-trip">
-					${Départ} - ${Arrivée}
-					${Employeur &&
+				<div className="proposed-trip">
+					<strong>🚙 ${Départ} - ${Arrivée}</strong>
+					${ArrivéePrécise &&
 						html`
-							<div>💼 ${Employeur}</div>
+							<small>📌 ${ArrivéePrécise}</small>
 						`}
-					${Jours &&
+					${(Jours || heureDépart !== '-') &&
 						html`
-							<div className="datetime">🗓️ ${Jours}</div>
-						`}				
-						${heureDépart !== '-' &&
+							<div className="quand">
+								<span>🗓️</span
+								><span>
+									${html`
+										<span className="datetime">${Jours}</span>
+									`}
+									${heureDépart !== '-' &&
+										html`
+											<span className="datetime"> à ${heureDépart}</span>
+										`}
+								</span>
+							</div>
+						`}
+				</div>
+				<div>👱 ${Prénom} ${Nom}</div>
+			</div>`}
+			${
+				selected
+					? html`
+						<div>
+						${!phone &&
 							html`
-								<div className="datetime">⌚ à ${heureDépart}</div>
+								<${FormContact}
+									from=${tripRequest.origin}
+									to=${tripRequest.destination}
+									moreInfo=${`
+									Conducteur sélectionné: ${Prénom} ${Nom}, de ${Départ} à ${Arrivée}.
+								`}
+								/>
 							`}
-				</span>
-			</section>
-            </div>
-			<${ContactLinkButton} onClick=${() => {
-						trackDemande('Faire une demande')
-						setSelected(true)
-				  }}>Faire une demande</${ContactLinkButton}>`
-		}
+						<${TelephoneContact} number=${phone} />
+						<${SimpleButton} onClick=${() => setSelected(false)}>Retour</button>
+						</div>
+				  `
+					: html`
+			<${ContactButtonStyle} onClick=${() => {
+							trackDemande('Faire une demande')
+							setSelected(true)
+					  }}>${
+							phone ? '📞 Contact direct' : 'Faire une demande'
+					  }</${ContactButtonStyle}>`
+			}
 		</li>
 	`
 }
@@ -126,35 +112,19 @@ const trackDemande = whichButton => {
 const TelephoneContact = ({ number }) => {
 	const tel = number || '0531600903'
 	return html`
-		<${ContactLinkButton} href="tel:${tel}"
-			>${number ? `Contacter directement la personne` : `Lotocar`} (${tel}) 
-		</${ContactLinkButton}>
-	`
+		<${ContactButtonStyle} href="tel:${tel}"> ${
+		number ? `` : `Demande via Lotocar`
+	} ${tel}
+		</${ContactButtonStyle}>
+		`
 }
 const FormContact = ({ from, to, moreInfo }) => {
 	return html`
-		<${ContactLinkButton} 
-		target="_blank"
-		href=${`https://docs.google.com/forms/d/e/1FAIpQLSf-bhTbcJ36S7PQK167zxaEkvaMSBzg8yOwQx0fDUQMd4_pYQ/viewform?entry.227174060=${from}&entry.44825971=${to}&entry.1204459643=${moreInfo}`}>
-		📄 Demande en ligne
-		</${ContactLinkButton}>
-	`
+		<${ContactButtonStyle}
+	target="_blank"
+	href=${`https://docs.google.com/forms/d/e/1FAIpQLSf-bhTbcJ36S7PQK167zxaEkvaMSBzg8yOwQx0fDUQMd4_pYQ/viewform?entry.227174060=${from}&entry.44825971=${to}&entry.1204459643=${moreInfo}`}
+	>
+	📄 Demande en ligne
+		</${ContactButtonStyle}>
+		`
 }
-
-const Detour = ({ detourClassName, tripDetails, additionalTime }) =>
-	html`
-		<section className="${detourClassName} trip-details">
-			${additionalTime === 0
-				? html`
-						<span>Pas de détour</span>
-				  `
-				: html`
-						<span>
-							${tripDetails && 'détour'}
-							<br />${tripDetails
-								? `${Math.ceil(additionalTime)}mins`
-								: undefined}
-						</span>
-				  `}
-		</section>
-	`

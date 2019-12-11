@@ -1,175 +1,168 @@
 <!DOCTYPE html>
 <html lang="fr">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="referrer" content="same-origin" />
 
-		<title>Trouver un trajet - Lotocar</title>
+<head>
+	<meta charset="utf-8" />
+	<meta name="referrer" content="same-origin" />
 
-		<meta
-			name="Description"
-			content="Covoiturage solidaire dans le Lot. Découvrez ici les trajets enregistrés."
-		/>
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="icon" href="data:," />
+	<title>Trouver un trajet - Lotocar</title>
 
-		<link
-			crossorigin="anonymous"
-			rel="stylesheet"
-			href="https://cdn.jsdelivr.net/gh/twbs/bootstrap@v4/dist/css/bootstrap-reboot.css"
-		/>
+	<meta name="Description" content="Covoiturage solidaire dans le Lot. Découvrez ici les trajets enregistrés." />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="icon" href="data:," />
 
-		<link
-			href="https://fonts.googleapis.com/css?family=Montserrat:500|Work+Sans&display=swap"
-			rel="stylesheet"
-		/>
+	<link crossorigin="anonymous" rel="stylesheet"
+		href="https://cdn.jsdelivr.net/gh/twbs/bootstrap@v4/dist/css/bootstrap-reboot.css" />
 
-		<script crossorigin="anonymous" src="https://polyfill.io/v3/polyfill.min.js?features=default%2CArray.prototype.flat%2CArray.prototype.includes%2CObject.entries%2CObject.fromEntries%2CPromise%2CPromise.prototype.finally%2CObject.values%2Cfetch%2Ces2018%2Ces2017%2Ces2016%2Ces2015"></script>
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:500|Work+Sans&display=swap" rel="stylesheet" />
 
-		<style>
-			html {
-				height: 100%;
-			}
-			body {
-				font-family: 'Work Sans', sans-serif;
-				height: 100%;
-			}
+	<script crossorigin="anonymous"
+		src="https://polyfill.io/v3/polyfill.min.js?features=default%2CArray.prototype.flat%2CArray.prototype.includes%2CObject.entries%2CObject.fromEntries%2CPromise%2CPromise.prototype.finally%2CObject.values%2Cfetch%2Ces2018%2Ces2017%2Ces2016%2Ces2015"></script>
 
-			h1,
-			h2,
-			h3,
-			h4,
-			h5 {
-				font-family: 'Montserrat', sans-serif;
-			}
+	<style>
+		html {
+			height: 100%;
+		}
 
-			h1 {
-				text-align: center;
-				text-decoration: underline;
-			}
+		body {
+			font-family: 'Work Sans', sans-serif;
+			height: 100%;
+		}
 
-			h2 {
-				font-size: 1.3em;
-			}
+		h1,
+		h2,
+		h3,
+		h4,
+		h5 {
+			font-family: 'Montserrat', sans-serif;
+		}
 
-			a[href^='mailto:']::before {
-				content: '📧 ';
-			}
+		h1 {
+			text-align: center;
+			text-decoration: underline;
+		}
 
-			a[href^='tel:']::before {
-				content: '📞 ';
-			}
+		h2 {
+			font-size: 1.3em;
+		}
 
-			.map {
-				flex: 1;
-				height: 100vh;
-			}
+		a[href^='mailto:']::before {
+			content: '📧 ';
+		}
 
-			.trip-selection {
-				margin: 0 auto;
-			}
+		a[href^='tel:']::before {
+			content: '📞 ';
+		}
 
-			.trip-request-entry {
-				display: flex;
-				flex-direction: column;
-				align-items: center;
-			}
+		.map {
+			flex: 1;
+			height: 100vh;
+		}
 
-			.trip-request-entry .geography {
-			}
-			.trip-request-entry .geography label {
-				text-align: center;
-			}
+		.trip-selection {
+			margin: 0 auto;
+		}
 
-			.trip-request-entry .geography label input {
-				margin-left: 0.6rem;
-			}
+		.trip-request-entry {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
 
-			.trip-request-entry button[type='submit'] {
-				padding: 0.5em;
-			}
+		.trip-request-entry .geography {}
 
-			.trip-request-entry .status {
-				text-align: center;
-			}
-			.drivers-list {
-				list-style: none;
-				padding: 0;
-				margin: 0;
-			}
+		.trip-request-entry .geography label {
+			text-align: center;
+		}
 
-			.drivers-list li.driver {
-			}
+		.trip-request-entry .geography label input {
+			margin-left: 0.6rem;
+		}
 
-			.drivers-list li.driver :nth-child(2) {
-				flex: 1;
-			}
+		.trip-request-entry button[type='submit'] {
+			padding: 0.5em;
+		}
 
-			.drivers-list li.driver .trip-details {
-				display: flex;
-				flex-direction: row;
-				justify-content: center;
-				align-items: center;
+		.trip-request-entry .status {
+			text-align: center;
+		}
 
-				padding: 1em;
-				border: 5px solid transparent;
-				border-radius: 50%;
+		.drivers-list {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+		}
 
-				width: 6em;
-				height: 6em;
-				text-align: center;
-				font-weight: bold;
-				margin: 0.5em;
-			}
 
-			.drivers-list li.driver .trip-details.minor-detour {
-				border-color: green;
-			}
-			.drivers-list li.driver .trip-details.medium-detour {
-				border-color: orange;
-			}
-			.drivers-list li.driver .trip-details.major-detour {
-				border-color: red;
-			}
+		.drivers-list li.driver .trip-details {
+			display: flex;
+			flex-direction: row;
+			justify-content: center;
+			align-items: center;
 
-			.drivers-list li.driver .name {
-				display: block;
-				font-weight: bold;
-			}
+			padding: 1em;
+			border: 5px solid transparent;
+			border-radius: 50%;
 
-			.drivers-list li.driver .proposed-trip {
-				display: block;
-			}
-			.drivers-list li.driver .proposed-trip .datetime {
-				color: chocolate;
-			}
+			width: 6em;
+			height: 6em;
+			text-align: center;
+			font-weight: bold;
+			margin: 0.5em;
+		}
 
-			.drivers-list li.driver .contact {
-				display: flex;
-				flex-direction: row;
-			}
+		.drivers-list li.driver .trip-details.minor-detour {
+			border-color: green;
+		}
 
-			.drivers-list li.driver .contact > * {
-				flex: 1;
-			}
+		.drivers-list li.driver .trip-details.medium-detour {
+			border-color: orange;
+		}
 
-			.map .driver-trip {
-				stroke-width: 2;
-			}
-			.map .trip-request {
-				stroke: purple;
-				stroke-width: 6;
-			}
-		</style>
+		.drivers-list li.driver .trip-details.major-detour {
+			border-color: red;
+		}
 
-		<!-- Matomo -->
+		.drivers-list li.driver .name {
+			display: block;
+			font-weight: bold;
+		}
 
-		<script>
-			var _paq = window._paq || []
-			/* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-			_paq.push(['trackPageView'])
-			_paq.push(['enableLinkTracking'])
-			;(function() {
+		.drivers-list li.driver .proposed-trip {
+			display: block;
+		}
+
+		.drivers-list li.driver .proposed-trip .datetime {
+			color: chocolate;
+		}
+
+		.drivers-list li.driver .contact {
+			display: flex;
+			flex-direction: row;
+		}
+
+		.drivers-list li.driver .contact>* {
+			flex: 1;
+		}
+
+		.map .driver-trip {
+			stroke-width: 2;
+		}
+
+		.map .trip-request {
+			stroke: purple;
+			stroke-width: 6;
+		}
+	</style>
+
+	<!-- Matomo -->
+
+	<script>
+		var _paq = window._paq || []
+		/* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+		_paq.push(['trackPageView'])
+		_paq.push(['enableLinkTracking'])
+			; (function () {
 				var u = '//stats.data.gouv.fr/'
 				_paq.push(['setTrackerUrl', u + 'piwik.php'])
 				_paq.push(['setSiteId', '101'])
@@ -182,10 +175,12 @@
 				g.src = u + 'piwik.js'
 				s.parentNode.insertBefore(g, s)
 			})()
-		</script>
-		<!-- End Matomo Code -->
+	</script>
+	<!-- End Matomo Code -->
 
-		<script type="module" src="build/bundle.js"></script>
-	</head>
-	<body></body>
+	<script type="module" src="build/bundle.js"></script>
+</head>
+
+<body></body>
+
 </html>

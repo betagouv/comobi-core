@@ -40,7 +40,7 @@ const store = new Store({
 		setTripRequest(state, tripRequest) {
 			state.tripRequest = tripRequest
 		},
-		setValidPlaceNames(state, validPlaceNames){
+		setValidPlaceNames(state, validPlaceNames) {
 			state.validPlaceNames = validPlaceNames
 		}
 	}
@@ -70,16 +70,15 @@ function renderUI(store) {
 		html`
 			<${Main}
 				...${{
-					tripProposalsByTrip,
-					tripRequest,
-					tripDetailsByTrip,
-					positionByPlace,
-					validPlaceNames,
-					onTripRequestChange(tripRequest) {
-						setAndPrepareForTripRequest(tripRequest)
-					},
-					onTripClick: toggleTripDisplay
-				}}
+				tripProposalsByTrip,
+				tripRequest,
+				tripDetailsByTrip,
+				positionByPlace,
+				validPlaceNames,
+				onTripRequestChange(tripRequest) {
+					setAndPrepareForTripRequest(tripRequest)
+				},
+			}}
 			/>
 		`,
 		document.body
