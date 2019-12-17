@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import htm from 'htm'
 import {
 	ASYNC_STATUS,
@@ -58,7 +58,11 @@ const CityInput = ({ label, input, setInput }) => {
 		</div>
 	`
 }
-export default function TripRequestEntry({ tripRequest, validPlaceNames, onTripRequestChange }) {
+export default function TripRequestEntry({
+	tripRequest,
+	validPlaceNames,
+	onTripRequestChange
+}) {
 	const [origin, setOrigin] = useState({
 		text: tripRequest.origin,
 		validated: false
@@ -68,8 +72,13 @@ export default function TripRequestEntry({ tripRequest, validPlaceNames, onTripR
 		validated: false
 	})
 
-	useEffect(() => {
-		if (origin.validated && destination.validated) {
+	return html`
+		<${styled.h2`
+			text-align: center;
+			margin: 0 0 1.5rem;
+		`} key="h2">Où allez-vous ?</h2>
+		<form key="form" className="trip-request-entry" onSubmit=${e => {
+			e.preventDefault()
 			onTripRequestChange({
 				origin: origin.text,
 				destination: destination.text
@@ -81,27 +90,13 @@ export default function TripRequestEntry({ tripRequest, validPlaceNames, onTripR
 					'recherche',
 					origin.text + ' | ' + destination.text
 				])
-		}
-	}, [origin, destination])
-
-	return html`
-		<${styled.h2`
-			text-align: center;
-			margin: 0 0 1.5rem;
-		`} key="h2">Où allez-vous ?</h2>
-		<form key="form" className="trip-request-entry" onSubmit=${e => {
-			e.preventDefault();
-			onTripRequestChange({
-				origin: origin.text,
-				destination: destination.text
-			})
 		}}>
 			<datalist id="valid-place-names">
-				${
-					validPlaceNames.map(validPlaceName => {
-						return html`<option key=${validPlaceName} value=${validPlaceName} />`
-					})
-				}
+				${validPlaceNames.map(validPlaceName => {
+					return html`
+						<option key=${validPlaceName} value=${validPlaceName} />
+					`
+				})}
 			</datalist>
 			<section className="geography">
 				<${CityInput} key="départ" label="Départ" input=${origin} setInput=${setOrigin} />
