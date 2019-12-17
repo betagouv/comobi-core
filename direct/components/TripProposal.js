@@ -94,7 +94,7 @@ export default function TripProposal({
 				  `
 					: html`
 			<${ContactButtonStyle} onClick=${() => {
-							trackDemande('Faire une demande')
+							trackDemande(phone ? 'contact direct' : 'faire une demande')
 							setSelected(true)
 					  }}>${
 							phone ? '📞 Contact direct' : 'Faire une demande'
@@ -121,6 +121,7 @@ const TelephoneContact = ({ number }) => {
 const FormContact = ({ from, to, moreInfo }) => {
 	return html`
 		<${ContactButtonStyle}
+		onClick=${() => trackDemande('formulaire')}
 	target="_blank"
 	href=${`https://docs.google.com/forms/d/e/1FAIpQLSf-bhTbcJ36S7PQK167zxaEkvaMSBzg8yOwQx0fDUQMd4_pYQ/viewform?entry.227174060=${from}&entry.44825971=${to}&entry.1204459643=${moreInfo}`}
 	>
