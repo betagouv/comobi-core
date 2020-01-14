@@ -123,6 +123,12 @@ app.get('/valid-place-names', (req, res) => {
 		.catch(err => res.status(500).send(err))
 })
 
+app.get('*', function(req, res) {
+	res.sendFile('index.html', {
+		root: __dirname
+	})
+})
+
 if (devMode) app.use(require('webpack-hot-middleware')(compiler))
 
 app.listen(PORT, () =>
