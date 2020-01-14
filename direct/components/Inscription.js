@@ -4,7 +4,7 @@ import { Button } from './Home'
 const html = htm.bind(React.createElement)
 import styled from 'styled-components'
 
-const Container = styled.div`
+export const Container = styled.div`
 	max-width: 35rem;
 	margin: 0 auto;
 	background: #eef3ea;
