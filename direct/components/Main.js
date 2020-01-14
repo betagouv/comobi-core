@@ -6,15 +6,18 @@ import logo from '../logo.png'
 import logoLot from '../logo-lot.png'
 import styled from 'styled-components'
 import Privacy from './Privacy'
+import Inscription from './Inscription'
+import Home from './Home'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 const html = htm.bind(React.createElement)
 
-let Main = function ({
+let Main = function({
 	tripProposalsByTrip,
 	tripRequest,
 	tripDetailsByTrip,
 	validPlaceNames,
-	onTripRequestChange,
+	onTripRequestChange
 }) {
 	return html`
 		<${styled.main`
@@ -32,13 +35,27 @@ let Main = function ({
 				flex-grow: 1;
 				margin-top: 1rem;
 			`}>
+			<${Router}>
+			<${Switch}>
+			<${Route} exact path="/">
+				<${Home} />
+			<//>
+			<${Route} path="/inscription">
+				<${Inscription} />
+			<//>
+			<${Route} path="/recherche">
 			<${TripSelection}
-				tripProposalsByTrip=${tripProposalsByTrip}
-				tripRequest=${tripRequest}
-				tripDetailsByTrip=${tripDetailsByTrip}
-				validPlaceNames=${validPlaceNames}
-				onTripRequestChange=${onTripRequestChange}
-			/></div>
+			...${{
+				tripProposalsByTrip,
+				tripRequest,
+				tripDetailsByTrip,
+				validPlaceNames,
+				onTripRequestChange
+			}}<//>
+			<//>
+			<//><//>
+
+			</div>
 			<${Footer} />
 		</main>
 	`
