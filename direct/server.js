@@ -129,6 +129,11 @@ app.get('*', function(req, res) {
 	})
 })
 
+app.post('/inscription', function(req, res) {
+	// Update spreadsheet with this API (batchUpdate or append) : https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/batchUpdate
+	res.send({ ok: true })
+})
+
 if (devMode) app.use(require('webpack-hot-middleware')(compiler))
 
 app.listen(PORT, () =>
