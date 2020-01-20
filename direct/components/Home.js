@@ -39,14 +39,20 @@ const BoutonProposer = ({ title = 'Proposer mon trajet' }) => html`
 
 export default () => html`
 	<${styled.div`
-		max-width: 35rem;
-		margin: 0 1rem;
+		max-width: 45rem;
+		margin: 0 auto;
+		padding: 0 1rem;
 		display: flex;
 		align-items: center;
 		flex-direction: column;
 		h1 {
 			text-decoration: none;
 			font-size: 250%;
+		}
+
+		section:first-child {
+			padding: 1rem;
+			background-color: aliceblue;
 		}
 		section:first-child p {
 			text-align: center;
@@ -73,6 +79,8 @@ export default () => html`
 			<h1><${NomService} /></h1>
 			<p>${instance['sous-titre']}</p>
 			<${Image} src=${instance.image} />
+			<${BoutonRechercher} />
+			<${BoutonProposer} />
 		</section>
 		<section>
 			<h2>${instance.slogan}</h2>
@@ -117,11 +125,24 @@ export default () => html`
 				grandir Mâcon Voit'Emploi !
 			</p>
 
-			<img src=${require('./images/voiture.png')} />
-			<${BoutonProposer} title="Je me déclare conducteur !" />
-
-			<img src=${require('./images/passager.png')} />
-			<${BoutonRechercher} title="Je recherche un trajet !" />
+			<${styled.div`
+				display: flex;
+				justify-content: center;
+				flex-wrap: wrap;
+				> div {
+					margin: 1rem;
+				}
+			`}
+			>
+				<div>
+					<img src=${require('./images/voiture.png')} />
+					<${BoutonProposer} title="Je me déclare conducteur !" />
+				</div>
+				<div>
+					<img src=${require('./images/passager.png')} />
+					<${BoutonRechercher} title="Je recherche un trajet !" />
+				</div>
+			</div>
 		</section>
 		<${FAQ} />
 	<//>

@@ -70,11 +70,39 @@ const Header = () => html`
 				margin-bottom: 2rem;
 				img {
 					margin: 1rem;
+					width: 8rem;
 				}
 				border-bottom: 1px solid #4682b438;
 			`}>
-				<img src=${logo} alt="Logo Lotocar" width="79px" height="79px" />
-				<img src=${logoLot} alt="Logo préfecture du Lot" width="79px" height="79px" />
+			${
+				instance.logo
+					? html`
+							<img src=${instance.logo} alt="Logo" width="79px" height="79px" />
+							<img
+								class="navbar__logo"
+								src="
+							          
+					            https://d33wubrfki0l68.cloudfront.net/cbc2e53520301452a60252cbbd165df72df793f1/7c86f/assets/images/logo-marianne.svg
+					          
+					          "
+								alt="beta.gouv.fr"
+							/>
+							<img
+								src="https://d33wubrfki0l68.cloudfront.net/8a59b7696f7c0a39fa0904ddac1769a772e249e5/a88f5/assets/additional/images/logo-betagouvfr.svg"
+								class="navbar__gouvfr"
+								alt="gouv.fr"
+							/>
+					  `
+					: html`
+							<img src=${logo} alt="Logo Lotocar" width="79px" height="79px" />
+							<img
+								src=${logoLot}
+								alt="Logo préfecture du Lot"
+								width="79px"
+								height="79px"
+							/>
+					  `
+			}
 			</header>
 `
 
