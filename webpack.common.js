@@ -1,7 +1,8 @@
 // You can't use import statements here
 let webpack = require('webpack')
-
 let devMode = process.env.NODE_ENV === 'development'
+
+console.log(process.env.INSTANCE)
 
 module.exports = {
 	module: {
@@ -26,9 +27,18 @@ module.exports = {
 				use: {
 					loader: 'file-loader'
 				}
+			},
+			{
+				test: /\.yaml$/,
+				use: 'js-yaml-loader'
 			}
 		]
 	},
 	mode: devMode ? 'development' : 'production',
-	plugins: [...(devMode ? [new webpack.HotModuleReplacementPlugin()] : [])]
+	plugins: [
+		devMode && new webpack.HotModuleReplacementPlugin(),
+		new webpack.DefinePlugin({
+			INSTANCE: JSON.stringify(process.env.INSTANCE)
+		})
+	].filter(Boolean)
 }

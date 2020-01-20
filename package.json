@@ -58,6 +58,7 @@
 		"@babel/preset-env": "^7.6.3",
 		"babel-loader": "^8.0.6",
 		"file-loader": "^4.2.0",
+		"js-yaml-loader": "^1.2.2",
 		"node-env-run": "^3.0.2"
 	}
 }
