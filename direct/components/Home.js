@@ -90,6 +90,7 @@ export default () => html`
 				seule fois ou de manière régulière !
 			</p>
 			<p><${NomService} /> = entraide + économies + écologie !</p>
+			<img src=${require('./images/carte-france-macon.png')} />
 		</section>
 		<section>
 			<h2>Passagers, recherchez un trajet en ligne</h2>
