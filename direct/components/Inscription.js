@@ -4,6 +4,8 @@ import { Button } from './Home'
 const html = htm.bind(React.createElement)
 import styled from 'styled-components'
 
+// This component is not used, but is designed to replace the Google Form implementation
+
 export const Container = styled.div`
 	max-width: 35rem;
 	margin: 0 auto;

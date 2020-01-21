@@ -4,6 +4,7 @@ description: C'est un service de covoiturage gratuit, mis en place par la statio
 slogan: 'Evitons les interminables files de voitures garées le long de la route, covoiturons ! '
 image: https://images.unsplash.com/photo-1543609323-3a20e86976de?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80
 # image sympa :https://www.valberg.com/csx/scripts/resizer.php?filename=DATASITERESP001/img3/b5/41/FR.i3lku86h57g&mime=image%2Fjpeg&&originalname=Vue%20Mont%20Mounier%20depuis%20la%20Croix%20du%20Sapet.JPG
+formulaire: https://docs.google.com/forms/d/e/1FAIpQLSeInZJD79GJ-qg3Tkjz47uqsVgsZVy5awevxvhB67jK8KGGJQ/viewform?usp=sf_link
 logo: https://upload.wikimedia.org/wikipedia/fr/c/cf/Valberg_logo_2012.svg
 contact:
   nom: Station Valberg

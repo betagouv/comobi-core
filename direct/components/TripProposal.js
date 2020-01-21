@@ -7,6 +7,7 @@ import {
 	ContactLinkButton as ContactButtonStyle
 } from './ButtonStyle'
 const html = htm.bind(React.createElement)
+const instance = require(`../../instances/${INSTANCE}.yaml`)
 
 export default function TripProposal({
 	tripProposal,
@@ -110,10 +111,10 @@ const trackDemande = whichButton => {
 }
 
 const TelephoneContact = ({ number }) => {
-	const tel = number || '0531600903'
+	const tel = number || instance.contact.téléphone || '0531600903'
 	return html`
 		<${ContactButtonStyle} href="tel:${tel}"> ${
-		number ? `` : `Demande via Lotocar`
+		number ? `` : `Demande via ${instance.nom}`
 	} ${tel}
 		</${ContactButtonStyle}>
 		`

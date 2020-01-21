@@ -3,6 +3,7 @@ import htm from 'htm'
 import styled from 'styled-components'
 import TripProposal from './TripProposal'
 import computeDetour from './computeDetour'
+const instance = require(`../../instances/${INSTANCE}.yaml`)
 
 const html = htm.bind(React.createElement)
 
@@ -23,17 +24,22 @@ export default function DriversList({
 		.filter(trip => tripDetailsByTrip.has(trip))
 		.map(trip => {
 			const tripDetails = tripDetailsByTrip.get(trip)
-			const { originalDistance = 0, distanceWithDetour = Infinity } = tripDetails
+			const {
+				originalDistance = 0,
+				distanceWithDetour = Infinity
+			} = tripDetails
 			const detour = computeDetour(originalDistance, distanceWithDetour)
 			return [trip, detour]
 		})
-		.sort(([_1, { additionalTime: a1 }], [_2, { additionalTime: a2 }]) => a1 - a2)
+		.sort(
+			([_1, { additionalTime: a1 }], [_2, { additionalTime: a2 }]) => a1 - a2
+		)
 
 	if (!validTripRequest)
 		return html`
 			<div style=${{ textAlign: 'center', marginTop: '2rem' }}>
 				<p style=${{ marginBottom: '0rem' }}>
-					${tripProposalsByTrip.size} trajets disponibles sur Lotocar
+					${tripProposalsByTrip.size} trajets disponibles sur ${instance.nom}
 				</p>
 				<a href="http://bit.ly/inscription-conducteur"
 					>J'ai une voiture et je veux aider</a
@@ -76,17 +82,19 @@ export default function DriversList({
 			}
 		`}>
 			<h2 key="détour0">${
-		tripRequestAsyncStatus === STATUS_PENDING ?
-			`(recherche en cours)`
-			: (orderedTrips.length === 0 ? `(aucun résultat)` : `Trajets disponibles`)
-		}</h2>
+				tripRequestAsyncStatus === STATUS_PENDING
+					? `(recherche en cours)`
+					: orderedTrips.length === 0
+					? `(aucun résultat)`
+					: `Trajets disponibles`
+			}</h2>
 			${directTrips}
 			${(trips10 || trips20) &&
-		html`
+				html`
 					<h3 key="détour0">Trajets indirects</h3>
 				`}
 			${trips10 &&
-		html`
+				html`
 					<small
 						>Un <em>détour de plus de 10 minutes</em> sera nécessaire pour vous
 						récupérer :</small
@@ -94,7 +102,7 @@ export default function DriversList({
 					${trips10}
 				`}
 			${trips20 &&
-		html`
+				html`
 					<small
 						>Un <em>détour conséquent (entre 20 et 45 minutes)</em> sera
 						nécessaire pour vous récupérer :</small
@@ -105,12 +113,7 @@ export default function DriversList({
 	`
 }
 
-const displayTrips = (
-	tripProposalsByTrip,
-	trips,
-	tripRequest,
-	filter
-) => {
+const displayTrips = (tripProposalsByTrip, trips, tripRequest, filter) => {
 	let selectedTrips = trips
 		.slice(0, 20)
 		.filter(filter)

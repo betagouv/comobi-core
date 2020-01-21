@@ -28,13 +28,12 @@ const Image = styled.img`
 	display: block;
 	margin: 1rem;
 `
-const centeredStyle = 'display: block; margin: 0 auto'
 const BoutonRechercher = ({ title = 'Rechercher un trajet' }) => html`
 	<${Link} to="/recherche"><${Button('rgba(70, 130, 180, 1)')}>${title}<//><//>
 `
 
 const BoutonProposer = ({ title = 'Proposer mon trajet' }) => html`
-	<${Link} to="/inscription"><${Button('#9fba93')}>${title}<//><//>
+	<a href="${instance.formulaire}"><${Button('#9fba93')}>${title}<//></a>
 `
 
 export default () => html`
