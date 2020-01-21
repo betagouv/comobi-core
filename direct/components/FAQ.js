@@ -54,9 +54,7 @@ export default function FAQ() {
 					</p>
 				</li>
 				<li>
-					<h3>
-						Qu'est-ce que c'est, Macon Voit'Emploi ?
-					</h3>
+					<h3>Qu'est-ce que c'est, <${NomService} /> ?</h3>
 
 					<p>
 						<${Description} />
