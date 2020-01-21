@@ -5,7 +5,8 @@ const googleDriverSpreadsheetId = process.env.GOOGLE_DRIVER_SPREADSHEET_ID
 
 const sheets = google.sheets({ version: 'v4', auth: googleAPIKey })
 
-const CONDUCTEUR_PROPS = [
+// This header was used in the first instance for the LOT department
+const LEGACY_CONDUCTEUR_PROPS = [
 	'Date',
 	'Départ',
 	'Adresse',
@@ -25,8 +26,36 @@ const CONDUCTEUR_PROPS = [
 	'Remarques éventuelles',
 	'Type de covoit',
 	'Employeur',
-	'Contact direct passager'
+	'Contact direct passager',
+	'DateProposée'
 ]
+
+// This generic new header is a simpler version for the next instances (Valber, Mâcon)
+const GENERIC_CONDUCTEUR_PROPS = [
+	'Date',
+	'Départ',
+	'Arrivée',
+	'Employeur',
+	'Jours',
+	'Heure départ',
+	'Heure retour',
+	'Type de covoit',
+	'Prénom',
+	'Nom',
+	'N° de téléphone',
+	'Adresse e-mail',
+	'Contact préféré',
+	'Moyen de communication préféré',
+	'Juste avant de finir, comment avez-vous connu  Lotocar ?',
+	'Remarques éventuelles',
+	'Contact direct passager',
+	'DateProposée'
+]
+
+const CONDUCTEUR_PROPS =
+	process.env.CODE_DEPARTEMENT === '46'
+		? LEGACY_CONDUCTEUR_PROPS
+		: GENERIC_CONDUCTEUR_PROPS
 
 export default function getDrivers() {
 	return new Promise((resolve, reject) => {
