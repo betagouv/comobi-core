@@ -23,11 +23,6 @@ export const Button = color => styled.button`
 	margin: 0.6rem auto;
 `
 
-const Image = styled.img`
-	height: 20vh;
-	display: block;
-	margin: 1rem;
-`
 const BoutonRechercher = ({ title = 'Rechercher un trajet' }) => html`
 	<${Link} to="/recherche"><${Button('rgba(70, 130, 180, 1)')}>${title}<//><//>
 `
@@ -38,28 +33,15 @@ const BoutonProposer = ({ title = 'Proposer mon trajet' }) => html`
 
 export default () => html`
 	<${styled.div`
-		max-width: 45rem;
-		margin: 0 auto;
-		padding: 0 1rem;
 		display: flex;
 		align-items: center;
 		flex-direction: column;
+		margin-top: 0;
 		h1 {
 			text-decoration: none;
 			font-size: 250%;
 		}
 
-		section:first-child {
-			padding: 1rem;
-			background-color: aliceblue;
-		}
-		section:first-child p {
-			text-align: center;
-			font-size: 130%;
-		}
-		section:first-child img {
-			width: 13rem;
-		}
 		img {
 			width: 10rem;
 			margin: 0 auto;
@@ -67,19 +49,51 @@ export default () => html`
 		}
 
 		section {
+			max-width: 45rem;
+			padding: 0 1rem;
 			margin: 2rem 0;
 		}
 		section a {
 			display: block;
 			margin: 0 auto;
 		}
+		section:first-child {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			padding: 6rem;
+			width: 100%;
+			max-width: 100%;
+			position: relative;
+			margin-top: 0;
+			background: url("${instance.image}") no-repeat center center fixed;
+		}
+
+		section:first-child p, section:first-child h1 {
+				padding: 0 1.3rem;
+				background: white;
+		}
+		section:first-child p {
+			text-align: center;
+			font-size: 130%;
+		}
+		section:first-child img {
+			width: 100%;
+		}
 	`}>
 		<section>
 			<h1><${NomService} /></h1>
 			<p>${instance['sous-titre']}</p>
-			<${Image} src=${instance.image} />
+			<${styled.div`
+				display: flex;
+				flex-direction: row;
+				a {
+					margin: 0 1rem !important;
+				}
+			`}>
 			<${BoutonRechercher} />
 			<${BoutonProposer} />
+			<//>
 		</section>
 		<section>
 			<h2>${instance.slogan}</h2>

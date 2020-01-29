@@ -34,7 +34,6 @@ let Main = function({
 		<${Header} />
 			<${styled.div`
 				flex-grow: 1;
-				margin-top: 1rem;
 			`}>
 			<${Router}>
 			<${Switch}>
@@ -67,7 +66,6 @@ const Header = () => html`
 				display: flex;
 				justify-content: center;
 				width: 100%;
-				margin-bottom: 2rem;
 				img {
 					margin: 1rem;
 					width: 8rem;
