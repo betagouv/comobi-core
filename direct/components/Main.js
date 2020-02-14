@@ -66,6 +66,7 @@ const Header = () => html`
 				display: flex;
 				justify-content: center;
 				width: 100%;
+				flex-wrap: wrap;
 				img {
 					margin: 1rem;
 					width: 8rem;

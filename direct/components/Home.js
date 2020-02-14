@@ -68,6 +68,12 @@ export default () => html`
 			margin-top: 0;
 			background: url("${instance.image}") no-repeat center center fixed;
 		}
+		@media (max-width: 800px){
+		
+		section:first-child {
+		padding: 2rem;
+		}
+		}
 
 		section:first-child p, section:first-child h1 {
 				padding: 0 1.3rem;
