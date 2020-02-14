@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 
 export default function FAQ() {
 	return html`
-		<div>
+		<section>
 			<h2>Questions fréquentes</h2>
 			<ul>
 				<li>
@@ -61,6 +61,6 @@ export default function FAQ() {
 					</p>
 				</li>
 			</ul>
-		</div>
+		</section>
 	`
 }
