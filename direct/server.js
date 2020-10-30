@@ -1,7 +1,7 @@
 import express from 'express'
-import got from 'got'
+//import got from 'got'
 
-import webpack from 'webpack'
+/*import webpack from 'webpack'
 import middleware from 'webpack-dev-middleware'
 import config from './webpack.config.js'
 const compiler = webpack(config)
@@ -13,13 +13,14 @@ import getPlacesPosition from '../server/getPlacesPosition.js'
 import driverTripProposalsRoute, {
 	PASSAGER_CONTACT_DIRECT_ACCEPT
 } from '../server/driverTripProposalsRoute.js'
+*/
 
 const app = express()
 const PORT = process.env.PORT || 39528
 const devMode = process.env.NODE_ENV === 'development'
 
 const LOT_CODE = process.env.CODE_DEPARTEMENT || '46'
-const lotGeojsonP = got(
+/*const lotGeojsonP = got(
 	`https://geo.api.gouv.fr/departements/${LOT_CODE}/communes?format=geojson`,
 	{ json: true }
 ).then(({ body }) => body)
@@ -54,11 +55,11 @@ if (devMode) {
 			// webpack-dev-middleware options
 		})
 	)
-}
+}*/
 
 app.use(express.static(__dirname))
 
-app.get('/', (req, res) => res.redirect('/Corresplot/'))
+/*app.get('/', (req, res) => res.redirect('/Corresplot/'))
 
 function makeDriverObject(driverTripProposal) {
 	const {
@@ -80,10 +81,10 @@ function makeDriverObject(driverTripProposal) {
 app.get('/driver-trip-proposals', driverTripProposalsRoute(makeDriverObject))
 
 app.get('/positions', (req, res) => {
-	/* In order to reduce the risk of max GET header size limit, 
-        - p is a shorthand for places
-        - we use the p=a&p=2 syntax instead of p[]=a&p[]=2, and treat the edge case of a single element array
-    */
+	//In order to reduce the risk of max GET header size limit, 
+       // - p is a shorthand for places
+       // - we use the p=a&p=2 syntax instead of p[]=a&p[]=2, and treat the edge case of a single element array
+  
 
 	const { p: placeOrPlaces } = req.query
 	const places = Array.isArray(placeOrPlaces) ? placeOrPlaces : [placeOrPlaces]
@@ -135,6 +136,7 @@ app.post('/inscription', function(req, res) {
 })
 
 if (devMode) app.use(require('webpack-hot-middleware')(compiler))
+*/
 
 app.listen(PORT, () =>
 	console.log(`L'application directe écoute sur le port ${PORT}!`)
@@ -142,7 +144,7 @@ app.listen(PORT, () =>
 
 // # Initialize data
 // ## First from all Lot communes
-lotGeojsonP
+/*lotGeojsonP
 	.then(lotGeojson => {
 		const communes = lotGeojson.features
 
@@ -167,3 +169,4 @@ lotGeojsonP
 		})
 	})
 	.catch(console.error)
+*/
