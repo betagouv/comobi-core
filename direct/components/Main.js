@@ -118,13 +118,8 @@ const Footer = () => html`
 					text-align: center;
 				`}>
 					<div>
-						Email : ${instance.contact.mel}
+						Comobi Azur
 					</div>
-					<div>
-						Tél : ${instance.contact.téléphone}
-					</div>
-					<${Privacy}/>
-					<div><a href="https://6b49e0e7-23a4-497b-931e-cb12669b2b05.filesusr.com/ugd/8db2ce_bfddb80831494ecc832301c3a4dc0105.pdf">Conditions générales d'utilisation</a></div>
 				</section>
 			</footer>
 
