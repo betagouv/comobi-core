@@ -137,33 +137,6 @@ export default () => html`
 			<${BoutonProposer} />
 			<img src=${require('./images/hero.png')} />
 		</section>
-		<section>
-			<h2>Nous avons besoin de vous !</h2>
-			<p>
-				Vous avez une voiture et l'envie de partager ? Vous recherchez des
-				solutions pour vous déplacer ? Nous avons besoin de vous pour faire
-				grandir Mâcon Voit'Emploi !
-			</p>
-
-			<${styled.div`
-				display: flex;
-				justify-content: center;
-				flex-wrap: wrap;
-				> div {
-					margin: 1rem;
-				}
-			`}
-			>
-				<div>
-					<img src=${require('./images/voiture.png')} />
-					<${BoutonProposer} title="Je me déclare conducteur !" />
-				</div>
-				<div>
-					<img src=${require('./images/passager.png')} />
-					<${BoutonRechercher} title="Je recherche un trajet !" />
-				</div>
-			</div>
-		</section>
 		<${FAQ} />
 	<//>
 `
