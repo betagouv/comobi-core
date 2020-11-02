@@ -1,12 +1,15 @@
 import React from 'react'
 import htm from 'htm'
+import styled from 'styled-components'
 const html = htm.bind(React.createElement)
 import { Description, NomService } from './Home'
 import { Link } from 'react-router-dom'
 
 export default function FAQ() {
 	return html`
-		<section>
+		<${styled.section`
+			background-color: #ecf0f1;
+		`}>
 			<h2>Questions fréquentes</h2>
 			<ul>
 				<li>
