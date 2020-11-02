@@ -50,7 +50,6 @@ export default function getLotocarPositionByPlace() {
 										positionByPlace.set(name, { latitude, longitude })
 								}
 							}
-							console.log(positionByPlace.size)
 							resolve(positionByPlace)
 						}
 					}
