@@ -49,9 +49,8 @@ export default () => html`
 		}
 
 		section {
-			max-width: 45rem;
-			padding: 0 1rem;
-			margin: 2rem 0;
+			width: 100%;
+            padding: 1rem calc( max(5px, ( 100vw - 50em ) / 2 ));
 		}
 		section a {
 			display: block;
