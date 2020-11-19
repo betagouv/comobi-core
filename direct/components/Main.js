@@ -111,14 +111,37 @@ const Footer = () => html`
 					background: #4682b4;
 					color: white;
 					padding: 0.3rem 1rem;
+					text-align: center;
 					a {
 						color: inherit;
 						text-decoration: underline;
 					}
-					text-align: center;
+					p {
+
+					}
 				`}>
 					<div>
-						Comobi Azur
+						Azur.CoMobi
+					</div>
+				</section>
+				<${styled.section`
+					background: #4682b4;
+					color: white;
+					padding: 0.3rem 1rem;
+					text-align: center;
+					a {
+						color: inherit;
+						text-decoration: underline;
+					}
+					p {
+						margin: 0;
+					}
+				`}>
+					<div>
+						<p>Contact : </p>
+						<p>${instance.contact.nom} </p>
+						<p>${instance.contact.mel} </p>
+						<p>${instance.contact.tel} </p>
 					</div>
 				</section>
 			</footer>
