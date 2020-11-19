@@ -10,9 +10,6 @@ import FAQ from './FAQ.js'
 export const NomService = () => html`
 	<span>${instance.nom}</span>
 `
-export const Description = () => html`
-	<span>${instance.description}</span>
-`
 
 export const Button = color => styled.button`
 	display: block;
@@ -103,7 +100,7 @@ export default () => html`
 		<section>
 			<h2>${instance.slogan}</h2>
 			<p>
-				Simple, gratuit, solidaire, azur.comobi est un service de covoiturage de proximité qui met en relation des conducteurs avec des personnes souhaitant partager leur trajet parce qu’ils n’ont pas de véhicule, permis ou parce qu’il préfèrent économiser leurs trajets !
+				${instance.description}
 			</p>
 			<p><${NomService} /> = entraide + économies + écologie !</p>
 			<img src=${require('./images/carte-france-macon.png')} />
@@ -115,11 +112,6 @@ export default () => html`
 				Vous vous rendez sur la zone de Lingostière, à l’aéroport ou la gare SNCF de Nice, c’est possible aussi d’inscrire votre trajet. 
 				C’est un service pour les habitants, animé par ses habitants !
 			</p>
-			<p>
-				Vous pouvez rechercher un conducteur en ligne et le contacter
-				directement !
-			</p>
-
 			<${BoutonRechercher} />
 			<img src=${require('./images/calendrier.png')} />
 		</section>
@@ -134,15 +126,6 @@ export default () => html`
 
 			<${BoutonProposer} />
 			<img src=${require('./images/hero.png')} />
-		</section>
-		<section>
-			<p>
-				Pas de transports en communs ? votre territoire vous propose une solution facile !
-				et le prix : gratuit, mais vous pouvez aussi vous arranger 
-				avec votre conducteur si vos trajets sont réguliers. 
-				Le service <${NomService} /> lui reste gratuit, pas d’échange d’argent via le site, 
-				c’est un service public accessible à tous !
-			</p>
 		</section>
 		<${FAQ} />
 	<//>

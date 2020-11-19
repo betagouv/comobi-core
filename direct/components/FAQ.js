@@ -9,6 +9,9 @@ export default function FAQ() {
 	return html`
 		<${styled.section`
 			background-color: #ecf0f1;
+			p a {
+				display: inline;
+			}
 		`}>
 			<h2>Questions fréquentes</h2>
 			<ul>
@@ -61,10 +64,10 @@ export default function FAQ() {
 					</p>
 				</li>
 				<li>
-					<h3>Qu'est-ce que c'est, <${NomService} /> ?</h3>
+					<h3>SECTION COVID</h3>
 
 					<p>
-						<${Description} />
+						DESCRIPTION COVID
 					</p>
 				</li>
 			</ul>

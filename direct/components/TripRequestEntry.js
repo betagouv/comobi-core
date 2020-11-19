@@ -77,14 +77,6 @@ export default function TripRequestEntry({
 			text-align: center;
 			margin: 0 0 1.5rem;
 		`} key="h2">Où allez-vous ?</h2>
-		<p>
-			azur.comobi permet de réaliser tous les trajets du quotidien : école, sports, activités, loisirs, travail, crèche…. sur tout le bassin de vie et de déplacements autour de Valberg, depuis Puget-Théniers à Villars/Var en passant par Daluis. 
-			Vous vous rendez sur la zone de Lingostière, à l’aéroport ou la gare SNCF de Nice, <a href=${formulaire}>c’est possible aussi d’inscrire votre trajet</a>. 
-			C’est un service pour les habitants, animé par ses habitants !
-		</p>
-		<p> 
-			Retrouvez la liste des points de covoiturage dans la liste déroulante.
-		</p>
 		<form key="form" className="trip-request-entry" onSubmit=${e => {
 			e.preventDefault()
 			onTripRequestChange({
