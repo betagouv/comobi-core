@@ -19,6 +19,10 @@ export default function FAQ() {
 						les faire gratuitement. Pour les covoiturages réguliers, c'est à
 						décider entre le conducteur et le passager. <${NomService} /> ne
 						touche aucune rémunération.
+						et le prix : gratuit, mais vous pouvez aussi vous arranger avec 
+						votre conducteur si vos trajets sont réguliers. 
+						Le service <${NomService} /> lui reste gratuit, pas d’échange d’argent via le site, 
+						c’est un service public accessible à tous !
 					</p>
 				</li>
 				<li>

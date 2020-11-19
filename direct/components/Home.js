@@ -103,9 +103,7 @@ export default () => html`
 		<section>
 			<h2>${instance.slogan}</h2>
 			<p>
-				<${NomService} /> met en relation des conducteurs réguliers avec des
-				passagers qui s'adaptent à leurs trajet et horaires. Que ça soit une
-				seule fois ou de manière régulière !
+				Simple, gratuit, solidaire, azur.comobi est un service de covoiturage de proximité qui met en relation des conducteurs avec des personnes souhaitant partager leur trajet parce qu’ils n’ont pas de véhicule, permis ou parce qu’il préfèrent économiser leurs trajets !
 			</p>
 			<p><${NomService} /> = entraide + économies + écologie !</p>
 			<img src=${require('./images/carte-france-macon.png')} />
@@ -113,8 +111,9 @@ export default () => html`
 		<section>
 			<h2>Passagers, recherchez un trajet en ligne</h2>
 			<p>
-				Vous souhaitez vous rendre à un entretien d’embauche ? A une formation
-				ou un nouvel emploi ?
+				azur.comobi permet de réaliser tous les trajets du quotidien : école, sports, activités, loisirs, travail, crèche…. sur tout le bassin de vie et de déplacements autour de Valberg, depuis Puget-Théniers à Villars/Var en passant par Daluis. 
+				Vous vous rendez sur la zone de Lingostière, à l’aéroport ou la gare SNCF de Nice, c’est possible aussi d’inscrire votre trajet. 
+				C’est un service pour les habitants, animé par ses habitants !
 			</p>
 			<p>
 				Vous pouvez rechercher un conducteur en ligne et le contacter
@@ -135,6 +134,15 @@ export default () => html`
 
 			<${BoutonProposer} />
 			<img src=${require('./images/hero.png')} />
+		</section>
+		<section>
+			<p>
+				Pas de transports en communs ? votre territoire vous propose une solution facile !
+				et le prix : gratuit, mais vous pouvez aussi vous arranger 
+				avec votre conducteur si vos trajets sont réguliers. 
+				Le service <${NomService} /> lui reste gratuit, pas d’échange d’argent via le site, 
+				c’est un service public accessible à tous !
+			</p>
 		</section>
 		<${FAQ} />
 	<//>
