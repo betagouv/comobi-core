@@ -102,7 +102,6 @@ export default () => html`
 			<p>
 				${instance.description}
 			</p>
-			<p><${NomService} /> = entraide + économies + écologie !</p>
 			<img src=${require('./images/carte-france-macon.png')} />
 		</section>
 		<section>
@@ -118,12 +117,6 @@ export default () => html`
 		<section>
 			<h2>Conducteurs, vous avez un super-pouvoir</h2>
 			<p>... Celui de partager vos trajets en voiture !</p>
-			<p>
-				Indiquez vos lieux de départ, d'arrivée et horaires habituels : pas de
-				détour à faire ! Covoiturage régulier et/ou ponctuel : c'est vous qui
-				choisissez.
-			</p>
-
 			<${BoutonProposer} />
 			<img src=${require('./images/hero.png')} />
 		</section>

@@ -67,7 +67,10 @@ export default function FAQ() {
 					<h3>SECTION COVID</h3>
 
 					<p>
-						DESCRIPTION COVID
+						Le site est fonctionnel et les trajets possibles en période de renforcement des
+						mesures sanitaires. Nous appelons à la responsabilité des passagers et
+						conducteurs pour respecter les gestes barrières et recommandations
+						disponibles <a href="https://www.gouvernement.fr/sites/default/files/affiche_gestes_barrieres_covoiturage_a4.pdf">ici</a>.
 					</p>
 				</li>
 			</ul>
