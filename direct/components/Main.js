@@ -142,6 +142,8 @@ const Footer = () => html`
 						<p>${instance.contact.nom} </p>
 						<p>${instance.contact.mel} </p>
 						<p>${instance.contact.tel} </p>
+						<p>Vie privée</p>
+						<p>Conditions générales d'utilisation</p>
 					</div>
 				</section>
 			</footer>
