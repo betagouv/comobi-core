@@ -138,11 +138,8 @@ const Footer = () => html`
 					}
 				`}>
 					<div>
-						<p>Contact : </p>
-						<p>${instance.contact.mel} </p>
-						<p>${instance.contact.tel} </p>
-						<p>Vie privée</p>
-						<p>Conditions générales d'utilisation</p>
+						<p>Email : ${instance.contact.mel} </p>
+						<p>Tél : ${instance.contact.tel} </p>
 					</div>
 				</section>
 			</footer>
