@@ -67,7 +67,7 @@ export default function FAQ() {
 					<h3>Qu'en est-il de la protection des données personnelles ?</h3>
 					<p>
 						Les seules données collectées sont celles fournies par les conducteurs et conductrices.
-						Ces données sont utilisées uniquement lors la mise en relation avec les passager·ère·s.
+						Ces données sont utilisées uniquement pour la mise en relation avec les passager·ère·s.
 						Pour toute modification ou suppression, vous pouvez contacter <a href="mailto:mdjenaihi@valberg.com">Maureen DJENAIHI</a>.
 					</p>
 				</li>
