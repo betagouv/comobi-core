@@ -10,9 +10,6 @@ import FAQ from './FAQ.js'
 export const NomService = () => html`
 	<span>${instance.nom}</span>
 `
-export const Description = () => html`
-	<span>${instance.description}</span>
-`
 
 export const Button = color => styled.button`
 	display: block;
@@ -103,36 +100,23 @@ export default () => html`
 		<section>
 			<h2>${instance.slogan}</h2>
 			<p>
-				<${NomService} /> met en relation des conducteurs réguliers avec des
-				passagers qui s'adaptent à leurs trajet et horaires. Que ça soit une
-				seule fois ou de manière régulière !
+				${instance.description}
 			</p>
-			<p><${NomService} /> = entraide + économies + écologie !</p>
 			<img src=${require('./images/carte-france-macon.png')} />
 		</section>
 		<section>
 			<h2>Passagers, recherchez un trajet en ligne</h2>
 			<p>
-				Vous souhaitez vous rendre à un entretien d’embauche ? A une formation
-				ou un nouvel emploi ?
+				azur.comobi permet de réaliser tous les trajets du quotidien : école, sports, activités, loisirs, travail, crèche…. sur tout le bassin de vie et de déplacements autour de Valberg, depuis Puget-Théniers à Villars/Var en passant par Daluis. 
+				Vous vous rendez sur la zone de Lingostière, à l’aéroport ou la gare SNCF de Nice, c’est possible aussi d’inscrire votre trajet. 
+				C’est un service pour les habitants, animé par ses habitants !
 			</p>
-			<p>
-				Vous pouvez rechercher un conducteur en ligne et le contacter
-				directement !
-			</p>
-
 			<${BoutonRechercher} />
 			<img src=${require('./images/calendrier.png')} />
 		</section>
 		<section>
 			<h2>Conducteurs, vous avez un super-pouvoir</h2>
 			<p>... Celui de partager vos trajets en voiture !</p>
-			<p>
-				Indiquez vos lieux de départ, d'arrivée et horaires habituels : pas de
-				détour à faire ! Covoiturage régulier et/ou ponctuel : c'est vous qui
-				choisissez.
-			</p>
-
 			<${BoutonProposer} />
 			<img src=${require('./images/hero.png')} />
 		</section>

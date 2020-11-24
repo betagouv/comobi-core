@@ -9,16 +9,17 @@ export default function FAQ() {
 	return html`
 		<${styled.section`
 			background-color: #ecf0f1;
+			p a {
+				display: inline;
+			}
 		`}>
 			<h2>Questions fréquentes</h2>
 			<ul>
 				<li>
 					<h3>Est-ce qu'il faut payer ?</h3>
 					<p>
-						Pour les covoiturages ponctuels, nous demandons aux conducteurs de
-						les faire gratuitement. Pour les covoiturages réguliers, c'est à
-						décider entre le conducteur et le passager. <${NomService} /> ne
-						touche aucune rémunération.
+						le prix : gratuit, mais vous pouvez aussi vous arranger avec votre conducteur si vos trajets sont réguliers. 
+						Le service ${NomService} lui reste gratuit, pas d’échange d’argent via le site, c’est un service public accessible à tous !
 					</p>
 				</li>
 				<li>
@@ -57,10 +58,21 @@ export default function FAQ() {
 					</p>
 				</li>
 				<li>
-					<h3>Qu'est-ce que c'est, <${NomService} /> ?</h3>
+					<h3>Qu'en est-il de la protection des données personnelles ?</h3>
+					<p>
+						Les seules données collectées sont celles fournies par les conducteurs et conductrices.
+						Ces données sont utilisées uniquement pour la mise en relation avec les passager·ère·s.
+						Pour toute modification ou suppression, vous pouvez contacter <a href="mailto:mdjenaihi@valberg.com">Maureen DJENAIHI</a>.
+					</p>
+				</li>
+				<li>
+					<h3>Et en période de COVID ?</h3>
 
 					<p>
-						<${Description} />
+						Le site est fonctionnel et les trajets possibles en période de renforcement des
+						mesures sanitaires. Nous appelons à la responsabilité des passagers et
+						conducteurs pour respecter les gestes barrières et recommandations
+						disponibles <a href="https://www.gouvernement.fr/sites/default/files/affiche_gestes_barrieres_covoiturage_a4.pdf">ici</a>.
 					</p>
 				</li>
 			</ul>
