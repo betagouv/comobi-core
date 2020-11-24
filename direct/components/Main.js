@@ -139,7 +139,6 @@ const Footer = () => html`
 				`}>
 					<div>
 						<p>Contact : </p>
-						<p>${instance.contact.nom} </p>
 						<p>${instance.contact.mel} </p>
 						<p>${instance.contact.tel} </p>
 						<p>Vie privée</p>

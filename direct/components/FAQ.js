@@ -64,7 +64,15 @@ export default function FAQ() {
 					</p>
 				</li>
 				<li>
-					<h3>SECTION COVID</h3>
+					<h3>Qu'en est-il de la protection des données personnelles ?</h3>
+					<p>
+						Les seules données collectées sont celles fournies par les conducteurs et conductrices.
+						Ces données sont utilisées uniquement lors la mise en relation avec les passager·ère·s.
+						Pour toute modification ou suppression, vous pouvez contacter <a href="mailto:mdjenaihi@valberg.com">Maureen DJENAIHI</a>.
+					</p>
+				</li>
+				<li>
+					<h3>Et en période de COVID ?</h3>
 
 					<p>
 						Le site est fonctionnel et les trajets possibles en période de renforcement des
