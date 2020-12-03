@@ -40,9 +40,10 @@ export default () => html`
 		}
 
 		img {
-			width: 10rem;
+			width: 50%;
 			margin: 0 auto;
 			display: block;
+			object-fit: contain;
 		}
 
 		section {
@@ -62,7 +63,9 @@ export default () => html`
 			max-width: 100%;
 			position: relative;
 			margin-top: 0;
-			background: url("${instance.image}") no-repeat center center fixed;
+			background-size: cover;
+			background-image: url("${require('./images/header.jpg')}");
+			background-position: center center;
 		}
 		@media (max-width: 800px){
 		
@@ -102,7 +105,7 @@ export default () => html`
 			<p>
 				${instance.description}
 			</p>
-			<img src=${require('./images/carte-france-macon.png')} />
+			<img src=${require('./images/carte.jpg')} />
 		</section>
 		<section>
 			<h2>Passagers, recherchez un trajet en ligne</h2>
@@ -112,13 +115,13 @@ export default () => html`
 				C’est un service pour les habitants, animé par ses habitants !
 			</p>
 			<${BoutonRechercher} />
-			<img src=${require('./images/calendrier.png')} />
+			<img src=${require('./images/calendrier.png')} height="100px"/>
 		</section>
 		<section>
 			<h2>Conducteurs, vous avez un super-pouvoir</h2>
 			<p>... Celui de partager vos trajets en voiture !</p>
 			<${BoutonProposer} />
-			<img src=${require('./images/hero.png')} />
+			<img src=${require('./images/logo_azur_comobi.jpg')} height="100px"/>
 		</section>
 		<${FAQ} />
 	<//>

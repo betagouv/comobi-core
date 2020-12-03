@@ -2,8 +2,6 @@ import React from 'react'
 import htm from 'htm'
 
 import TripSelection from './TripSelection.js'
-import logo from '../logo.png'
-import logoLot from '../logo-lot.png'
 import styled from 'styled-components'
 import Privacy from './Privacy'
 import Inscription from './Inscription'
@@ -64,44 +62,20 @@ let Main = function({
 const Header = () => html`
 			<${styled.header`
 				display: flex;
-				justify-content: center;
+				justify-content: space-around;
 				width: 100%;
 				flex-wrap: wrap;
+				height: 6rem;
+				padding: 1rem 10vw;
 				img {
-					margin: 1rem;
-					width: 8rem;
+					height: 100%;
+					object-fit: contain;
 				}
 				border-bottom: 1px solid #4682b438;
 			`}>
-			${
-				instance.logo
-					? html`
-							<img src=${instance.logo} alt="Logo" width="79px" height="79px" />
-							<img
-								class="navbar__logo"
-								src="
-							          
-					            https://d33wubrfki0l68.cloudfront.net/cbc2e53520301452a60252cbbd165df72df793f1/7c86f/assets/images/logo-marianne.svg
-					          
-					          "
-								alt="beta.gouv.fr"
-							/>
-							<img
-								src="https://d33wubrfki0l68.cloudfront.net/8a59b7696f7c0a39fa0904ddac1769a772e249e5/a88f5/assets/additional/images/logo-betagouvfr.svg"
-								class="navbar__gouvfr"
-								alt="gouv.fr"
-							/>
-					  `
-					: html`
-							<img src=${logo} alt="Logo Lotocar" width="79px" height="79px" />
-							<img
-								src=${logoLot}
-								alt="Logo préfecture du Lot"
-								width="79px"
-								height="79px"
-							/>
-					  `
-			}
+				<img src="${require('./images/logo_azur_comobi.jpg')}" alt="" />
+				<img src="${require('./images/logo_greendeal_DPT_06.png')}" alt="" />
+				<img src="${require('./images/logo_departement06.jpg')}" alt="" />
 			</header>
 `
 
