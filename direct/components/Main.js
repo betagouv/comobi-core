@@ -65,17 +65,14 @@ const Header = () => html`
 				justify-content: space-around;
 				width: 100%;
 				flex-wrap: wrap;
-				height: 6rem;
-				padding: 1rem 10vw;
 				img {
 					height: 100%;
+					max-width: 100%;
 					object-fit: contain;
 				}
 				border-bottom: 1px solid #4682b438;
 			`}>
-				<img src="${require('./images/logo_azur_comobi.jpg')}" alt="" />
-				<img src="${require('./images/logo_greendeal_DPT_06.png')}" alt="" />
-				<img src="${require('./images/logo_departement06.jpg')}" alt="" />
+				<img src="${require('./images/Bandeau azur.comobi.jpg')}" alt="" />
 			</header>
 `
 

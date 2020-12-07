@@ -63,20 +63,17 @@ export default () => html`
 			max-width: 100%;
 			position: relative;
 			margin-top: 0;
-			background-size: cover;
-			background-image: url("${require('./images/header.jpg')}");
-			background-position: center center;
 		}
 		@media (max-width: 800px){
 		
-		section:first-child {
-		padding: 2rem;
-		}
+			section:first-child {
+				padding: 2rem 0;
+			}
 		}
 
 		section:first-child p, section:first-child h1 {
-				padding: 0 1.3rem;
-				background: white;
+			padding: 0 1.3rem;
+			background: white;
 		}
 		section:first-child p {
 			text-align: center;
@@ -87,17 +84,14 @@ export default () => html`
 		}
 	`}>
 		<section>
-			<h1><${NomService} /></h1>
-			<p>${instance['sous-titre']}</p>
 			<${styled.div`
 				display: flex;
 				flex-direction: row;
-				a {
-					margin: 0 1rem !important;
-				}
+				justify-content: space-evenly;
+				width: 100%;
 			`}>
-			<${BoutonRechercher} />
-			<${BoutonProposer} />
+				<${BoutonRechercher} />
+				<${BoutonProposer} />
 			<//>
 		</section>
 		<section>
@@ -121,7 +115,7 @@ export default () => html`
 			<h2>Conducteurs, vous avez un super-pouvoir</h2>
 			<p>... Celui de partager vos trajets en voiture !</p>
 			<${BoutonProposer} />
-			<img src=${require('./images/logo_azur_comobi.jpg')} height="100px"/>
+			<img src=${require('./images/Logo azurcomobi-vertical.png')} height="100px"/>
 		</section>
 		<${FAQ} />
 	<//>
