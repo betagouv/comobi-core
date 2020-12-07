@@ -60,61 +60,60 @@ let Main = function({
 }
 
 const Header = () => html`
-			<${styled.header`
-				display: flex;
-				justify-content: space-around;
-				width: 100%;
-				flex-wrap: wrap;
-				img {
-					height: 100%;
-					max-width: 100%;
-					object-fit: contain;
-				}
-				border-bottom: 1px solid #4682b438;
-			`}>
-				<img src="${require('./images/Bandeau azur.comobi.jpg')}" alt="" />
-			</header>
+	<${styled.header`
+		display: flex;
+		justify-content: space-around;
+		width: 100%;
+		flex-wrap: wrap;
+		img {
+			height: 100%;
+			max-width: 100%;
+			object-fit: contain;
+		}
+		border-bottom: 1px solid #4682b438;
+	`}>
+		<img src="${require('./images/Bandeau azur.comobi.jpg')}" alt="" />
+	</header>
 `
 
 const Footer = () => html`
-			<footer>
-				<${styled.section`
-					background: #4682b4;
-					color: white;
-					padding: 0.3rem 1rem;
-					text-align: center;
-					a {
-						color: inherit;
-						text-decoration: underline;
-					}
-					p {
+	<footer>
+		<${styled.section`
+			background: #4682b4;
+			color: white;
+			padding: 0.3rem 1rem;
+			text-align: center;
+			a {
+				color: inherit;
+				text-decoration: underline;
+			}
+			p {
 
-					}
-				`}>
-					<div>
-						Azur.CoMobi
-					</div>
-				</section>
-				<${styled.section`
-					background: #4682b4;
-					color: white;
-					padding: 0.3rem 1rem;
-					text-align: center;
-					a {
-						color: inherit;
-						text-decoration: underline;
-					}
-					p {
-						margin: 0;
-					}
-				`}>
-					<div>
-						<p>Email : ${instance.contact.mel} </p>
-						<p>Tél : ${instance.contact.tel} </p>
-					</div>
-				</section>
-			</footer>
-
+			}
+		`}>
+			<div>
+				Azur.CoMobi
+			</div>
+		</section>
+		<${styled.section`
+			background: #4682b4;
+			color: white;
+			padding: 0.3rem 1rem;
+			text-align: center;
+			a {
+				color: inherit;
+				text-decoration: underline;
+			}
+			p {
+				margin: 0;
+			}
+		`}>
+			<div>
+				<p>Email : ${instance.contact.mel} </p>
+				<p>Tél : ${instance.contact.tel} </p>
+			</div>
+		</section>
+	</footer>
 `
 let ExportedApp = Main
 
