@@ -17,15 +17,21 @@ export const Button = color => styled.button`
 	border: none;
 	color: white;
 	padding: 0.6rem 1rem;
-	margin: 0.6rem auto;
+	margin: 0 5px;
 `
 
 const BoutonRechercher = ({ title = 'Rechercher un trajet' }) => html`
-	<${Link} to="/recherche"><${Button('rgba(70, 130, 180, 1)')}>${title}<//><//>
+	<${styled.a`
+		display: flex;
+		justify-content: center;
+	`} href="/recherche"><${Button('rgba(70, 130, 180, 1)')}>${title}<//><//>
 `
 
 const BoutonProposer = ({ title = 'Proposer mon trajet' }) => html`
-	<a href="${instance.formulaire}"><${Button('#9fba93')}>${title}<//></a>
+	<${styled.a`
+		display: flex;
+		justify-content: center;
+	`} href="${instance.formulaire}"><${Button('#9fba93')}>${title}<//><//>
 `
 
 export default () => html`
@@ -40,7 +46,7 @@ export default () => html`
 		}
 
 		img {
-			width: 50%;
+			width: 100%;
 			margin: 0 auto;
 			display: block;
 			object-fit: contain;
@@ -51,23 +57,22 @@ export default () => html`
             padding: 1rem calc( max(5px, ( 100vw - 50em ) / 2 ));
 		}
 		section a {
-			display: block;
-			margin: 0 auto;
+			margin: 0.5rem auto;
 		}
 		section:first-child {
 			display: flex;
 			flex-direction: column;
 			align-items: center;
-			padding: 6rem;
 			width: 100%;
 			max-width: 100%;
 			position: relative;
 			margin-top: 0;
+			background-color: #c5d3ed;
 		}
 		@media (max-width: 800px){
 		
 			section:first-child {
-				padding: 2rem 0;
+				padding: 1rem 0;
 			}
 		}
 
@@ -99,7 +104,7 @@ export default () => html`
 			<p>
 				${instance.description}
 			</p>
-			<img src=${require('./images/carte.jpg')} />
+			<img src=${require('./images/plan comobi-v02-sans illus.png')} />
 		</section>
 		<section>
 			<h2>Passagers, recherchez un trajet en ligne</h2>
