@@ -66,7 +66,6 @@ const Header = () => html`
 		width: 100%;
 		flex-wrap: wrap;
 		img {
-			height: auto;
 			max-width: 100%;
 			object-fit: contain;
 		}
