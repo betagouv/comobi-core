@@ -70,7 +70,6 @@ const Header = () => html`
 			max-width: 100%;
 			object-fit: contain;
 		}
-		border-bottom: 1px solid #4682b438;
 	`}>
 		<img src="${require('./images/Bandeau azur.comobi.jpg')}" alt="" />
 	</header>

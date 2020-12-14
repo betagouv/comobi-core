@@ -15,7 +15,7 @@ export const Button = color => styled.button`
 	display: block;
 	background: ${color};
 	border: none;
-	color: white;
+	color: black;
 	padding: 0.6rem 1rem;
 	margin: 0 5px;
 `
@@ -24,14 +24,14 @@ const BoutonRechercher = ({ title = 'Rechercher un trajet' }) => html`
 	<${styled.a`
 		display: flex;
 		justify-content: center;
-	`} href="/recherche"><${Button('rgba(70, 130, 180, 1)')}>${title}<//><//>
+	`} href="/recherche"><${Button('#37cdb4')}>${title}<//><//>
 `
 
 const BoutonProposer = ({ title = 'Proposer mon trajet' }) => html`
 	<${styled.a`
 		display: flex;
 		justify-content: center;
-	`} href="${instance.formulaire}"><${Button('#9fba93')}>${title}<//><//>
+	`} href="${instance.formulaire}"><${Button('#3afa53')}>${title}<//><//>
 `
 
 export default () => html`
@@ -67,7 +67,7 @@ export default () => html`
 			max-width: 100%;
 			position: relative;
 			margin-top: 0;
-			background-color: #c5d3ed;
+			background-color: #c6fff4;
 		}
 		@media (max-width: 800px){
 		
