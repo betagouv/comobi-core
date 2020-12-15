@@ -61,16 +61,17 @@ let Main = function({
 
 const Header = () => html`
 	<${styled.header`
-		display: flex;
-		justify-content: space-around;
+		display: block;
 		width: 100%;
-		flex-wrap: wrap;
 		img {
 			max-width: 100%;
 			object-fit: contain;
+
+			min-height: 5vh;
+			background-color: #b8e4e7;
 		}
 	`}>
-		<img src="${require('./images/Bandeau azur.comobi.jpg')}" alt="" />
+		<img src="${require('./images/Bandeau azur comobi.png')}" alt="Bandeau azur.comobi.fr avec le logo comobi et les logos des collectivités qui financent" />
 	</header>
 `
 
@@ -84,9 +85,6 @@ const Footer = () => html`
 			a {
 				color: inherit;
 				text-decoration: underline;
-			}
-			p {
-
 			}
 		`}>
 			<div>

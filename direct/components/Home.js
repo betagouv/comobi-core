@@ -15,7 +15,7 @@ export const Button = color => styled.button`
 	display: block;
 	background: ${color};
 	border: none;
-	color: black;
+	color: white;
 	padding: 0.6rem 1rem;
 	margin: 0 5px;
 `
@@ -67,7 +67,7 @@ export default () => html`
 			max-width: 100%;
 			position: relative;
 			margin-top: 0;
-			background-color: #c6e8eb;
+			background-color: #b8e4e7;
 		}
 		@media (max-width: 800px){
 		
