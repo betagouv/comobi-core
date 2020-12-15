@@ -110,7 +110,7 @@ export default () => html`
 			<h2>Passagers, recherchez un trajet en ligne</h2>
 			<p>
 				azur.comobi permet de réaliser tous les trajets du quotidien : école, sports, activités, loisirs, travail, crèche…. sur tout le bassin de vie et de déplacements autour de Valberg, depuis Puget-Théniers à Villars/Var en passant par Daluis. 
-				Vous vous rendez sur la zone de Lingostière, à l’aéroport ou la gare SNCF de Nice, c’est possible aussi d’inscrire votre trajet. 
+				Vous vous rendez sur la zone de Lingostière, à l’aéroport ou la gare SNCF de Nice, il est possible aussi d’inscrire votre trajet. 
 				C’est un service pour les habitants, animé par ses habitants !
 			</p>
 			<${BoutonRechercher} />

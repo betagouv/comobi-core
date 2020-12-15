@@ -18,7 +18,7 @@ export default function FAQ() {
 				<li>
 					<h3>Est-ce qu'il faut payer ?</h3>
 					<p>
-						le prix : gratuit, mais vous pouvez aussi vous arranger avec votre conducteur si vos trajets sont réguliers. 
+						Le prix : gratuit, mais vous pouvez aussi vous arranger avec votre conducteur si vos trajets sont réguliers. 
 						Le service ${NomService} lui reste gratuit, pas d’échange d’argent via le site, c’est un service public accessible à tous !
 					</p>
 				</li>
@@ -45,7 +45,7 @@ export default function FAQ() {
 				</li>
 				<li>
 					<h3>
-						Comment ça se passe côté assurances et s'il y a un accident pendant
+						Comment ça se passe côté assurances et en cas d'accident pendant
 						le covoiturage ?
 					</h3>
 
