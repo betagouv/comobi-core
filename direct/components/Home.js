@@ -104,7 +104,7 @@ export default () => html`
 			<p>
 				${instance.description}
 			</p>
-			<img src=${require('./images/plan comobi-v02-sans illus.png')} />
+			<img src=${require('./images/plan comobi-sans illus.png')} />
 		</section>
 		<section>
 			<h2>Passagers, recherchez un trajet en ligne</h2>
