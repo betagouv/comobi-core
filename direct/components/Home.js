@@ -24,14 +24,14 @@ const BoutonRechercher = ({ title = 'Rechercher un trajet' }) => html`
 	<${styled.a`
 		display: flex;
 		justify-content: center;
-	`} href="/recherche"><${Button('#37cdb4')}>${title}<//><//>
+	`} href="/recherche"><${Button('#199bb0')}>${title}<//><//>
 `
 
 const BoutonProposer = ({ title = 'Proposer mon trajet' }) => html`
 	<${styled.a`
 		display: flex;
 		justify-content: center;
-	`} href="${instance.formulaire}"><${Button('#3afa53')}>${title}<//><//>
+	`} href="${instance.formulaire}"><${Button('#22aa75')}>${title}<//><//>
 `
 
 export default () => html`
@@ -67,7 +67,7 @@ export default () => html`
 			max-width: 100%;
 			position: relative;
 			margin-top: 0;
-			background-color: #c6fff4;
+			background-color: #c6e8eb;
 		}
 		@media (max-width: 800px){
 		
