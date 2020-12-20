@@ -62,7 +62,7 @@ export default function FAQ() {
 					<p>
 						Les seules données collectées sont celles fournies par les conducteurs et conductrices.
 						Ces données sont utilisées uniquement pour la mise en relation avec les passager·ère·s.
-						Pour toute modification ou suppression, vous pouvez contacter <a href="mailto:mdjenaihi@valberg.com">Maureen DJENAIHI</a>.
+						Pour toute modification ou suppression, vous pouvez contacter <a href="mailto:azurcomobi@valberg.com">le service covoiturage</a>.
 					</p>
 				</li>
 				<li>
