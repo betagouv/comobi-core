@@ -35,17 +35,30 @@ export default function DriversList({
 			([_1, { additionalTime: a1 }], [_2, { additionalTime: a2 }]) => a1 - a2
 		)
 
-	if (!validTripRequest)
+	if (!validTripRequest){
+		/*
+		To be re-enabled after Dec 28th 2020
+		https://github.com/betagouv/comobi_valberg/issues/31
+		
 		return html`
 			<div style=${{ textAlign: 'center', marginTop: '2rem' }}>
 				<p style=${{ marginBottom: '0rem' }}>
 					${tripProposalsByTrip.size} trajets disponibles sur ${instance.nom}
 				</p>
-				<a href="http://bit.ly/inscription-conducteur"
+				<a href="${instance.formulaire}"
 					>J'ai une voiture et je veux aider</a
 				>
 			</div>
+		`*/
+		return html`
+			<div style=${{ textAlign: 'center', marginTop: '2rem' }}>
+				<a href="${instance.formulaire}">
+					J'ai une voiture et je veux m'inscrire
+				</a>
+			</div>
 		`
+	}
+
 	const tripsByAdditionalTime = request =>
 		displayTrips(
 			tripProposalsByTrip,

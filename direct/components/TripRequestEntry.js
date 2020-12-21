@@ -63,6 +63,10 @@ export default function TripRequestEntry({
 	validPlaceNames,
 	onTripRequestChange
 }) {
+	/*
+	To be re-enabled after Dec 28th 2020
+	https://github.com/betagouv/comobi_valberg/issues/31
+
 	const [origin, setOrigin] = useState({
 		text: tripRequest.origin,
 		validated: false
@@ -110,6 +114,18 @@ export default function TripRequestEntry({
 			<button type="submit">Rechercher</button>
 		</form>
 	`
+	*/
+	return html`
+		<${styled.h2`
+			text-align: center;
+			margin: 1.5rem 0;
+		`}>azur.comobi sera ouvert aux passagers et passagères le 28 décembre 2020 !</h2>
+		<${styled.p`
+			text-align: center;
+			margin: 1.5rem 0;
+		`}>Pour le moment, les conducteurs et conductrices s'inscrivent...</p>
+	`
+	
 }
 
 const Options = ({ options, onClick }) =>
