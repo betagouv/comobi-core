@@ -31,6 +31,7 @@
 		"d3-dsv": "^1.1.1",
 		"d3-fetch": "^1.1.2",
 		"delay": "^4.3.0",
+		"escape-string-regexp": "^4.0.0",
 		"esm": "^3.2.25",
 		"express": "^4.17.1",
 		"fast-memoize": "^2.5.1",
