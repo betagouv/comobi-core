@@ -111,7 +111,7 @@ const trackDemande = whichButton => {
 }
 
 const TelephoneContact = ({ number }) => {
-	const tel = number || instance.contact.téléphone || '0531600903'
+	const tel = number || instance.contact.tel || 'indisponible'
 	return html`
 		<${ContactButtonStyle} href="tel:${tel}"> ${
 		number ? `` : `Demande via ${instance.nom}`
