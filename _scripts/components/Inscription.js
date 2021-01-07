@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import htm from 'htm'
-import { Button } from './Home'
 const html = htm.bind(React.createElement)
 import styled from 'styled-components'
 
@@ -20,6 +19,15 @@ export const Container = styled.div`
 	input {
 		margin-top: 1rem;
 	}
+`
+
+export const Button = color => styled.button`
+	display: block;
+	background: ${color};
+	border: none;
+	color: white;
+	padding: 0.6rem 1rem;
+	margin: 0 5px;
 `
 
 export default () => {

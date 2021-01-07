@@ -81,7 +81,7 @@ function renderUI(store) {
 			}}
 			/>
 		`,
-		document.body
+		document.querySelector('.react-component')
 	)
 }
 
@@ -94,7 +94,7 @@ console.log(store.state)
 // initial render
 renderUI(store)
 
-json('/driver-trip-proposals').then(tripProposals => {
+json(`/driver-trip-proposals`).then(tripProposals => {
 	const tripProposalsByTrip = new Map()
 
 	for (const tripProposal of tripProposals) {
@@ -107,4 +107,5 @@ json('/driver-trip-proposals').then(tripProposals => {
 	store.mutations.addTripProposals(tripProposalsByTrip)
 })
 
-json('/valid-place-names').then(store.mutations.setValidPlaceNames)
+json(`/valid-place-names`).then(store.mutations.setValidPlaceNames)
+

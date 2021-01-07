@@ -1,9 +1,17 @@
 node_modules
 
-.env
+.env*
 Procfile
 
 build
 
+# jekyll
+_site/*
+.sass-cache
+.jekyll-cache
+.jekyll-metadata
+vendor
+
 *.DS_Store
 
+frontend_build

@@ -1,22 +1,20 @@
 import express from 'express'
-import got from 'got'
+import cors from 'cors'
 
-import webpack from 'webpack'
-import middleware from 'webpack-dev-middleware'
-import config from './webpack.config.js'
-const compiler = webpack(config)
 
-import getLotocarPositionByPlace from '../spreadsheetDatabase/getLotocarPositionByPlace.js'
-import positionByPlace from '../geography/positionByPlace.js'
-import getPlacesPosition from '../server/getPlacesPosition.js'
+import getLotocarPositionByPlace from './spreadsheetDatabase/getLotocarPositionByPlace.js'
+import positionByPlace from './geography/positionByPlace.js'
+import getPlacesPosition from './server/getPlacesPosition.js'
 
 import driverTripProposalsRoute, {
 	PASSAGER_CONTACT_DIRECT_ACCEPT
-} from '../server/driverTripProposalsRoute.js'
+} from './server/driverTripProposalsRoute.js'
 
 const app = express()
 const PORT = process.env.PORT || 39528
 const devMode = process.env.NODE_ENV === 'development'
+app.use(cors())
+
 
 const lotocarPositionByPlaceP = getLotocarPositionByPlace()
 
@@ -31,7 +29,7 @@ const validPlaceNamesP = lotocarPositionByPlaceP
 		return [...placeNames]
 	})
 
-if (devMode) {
+/*if (devMode) {
 	app.use(
 		middleware(compiler, {
 			hot: true,
@@ -39,7 +37,7 @@ if (devMode) {
 			// webpack-dev-middleware options
 		})
 	)
-}
+}*/
 
 app.use(express.static(__dirname))
 
@@ -108,18 +106,32 @@ app.get('/valid-place-names', (req, res) => {
 		.catch(err => res.status(500).send(err))
 })
 
-app.get('*', function(req, res) {
+app.get('/', function(req, res) {
 	res.sendFile('index.html', {
 		root: __dirname
 	})
 })
 
+app.get('/recherche', function(req, res) {
+	res.sendFile('recherche.html', {
+		root: __dirname
+	})
+})
+
+app.get('/*', function(req, res) {
+	res.sendFile('404.html', {
+		root: __dirname
+	})
+})
+
+// NOT USED
+/*
 app.post('/inscription', function(req, res) {
 	// Update spreadsheet with this API (batchUpdate or append) : https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/batchUpdate
 	res.send({ ok: true })
-})
+})*/
 
-if (devMode) app.use(require('webpack-hot-middleware')(compiler))
+// if (devMode) app.use(require('webpack-hot-middleware')(compiler))
 
 app.listen(PORT, () =>
 	console.log(`L'application directe écoute sur le port ${PORT}!`)

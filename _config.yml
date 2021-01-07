@@ -1,0 +1,25 @@
+titre: "Azur.CoMobi"
+mail: "azurcomobi@valberg.com"
+tel: "04 93 23 24 25"
+nom: "Station Valberg"
+formulaire: "https://docs.google.com/forms/d/e/1FAIpQLSeInZJD79GJ-qg3Tkjz47uqsVgsZVy5awevxvhB67jK8KGGJQ/viewform?usp=sf_link"
+
+couleurs: 
+  bouton_rechercher: "#199bb0"
+  bouton_proposer: "#22aa75"
+  odd_section_color: "#ecf0f1"
+
+bandeau:
+  image: "/assets/images/Bandeau_azur_comobi.png"
+  texte: "Bandeau azur.comobi.fr avec le logo comobi et les logos des collectivités qui financent"
+
+## Les sections suivantes ne sont pas à modifier
+sass:
+  sass_dir: _sass
+  style: compressed
+
+exclude:
+  - _scripts/
+
+keep_files:
+  - build

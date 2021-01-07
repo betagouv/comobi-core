@@ -1,0 +1,79 @@
+<head>
+  <title>{{ site.titre }}</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/assets/css/styles.css">
+
+	<link crossorigin="anonymous" rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/twbs/bootstrap@v4/dist/css/bootstrap-reboot.css" />
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:500|Work+Sans&display=swap" rel="stylesheet" />
+  <script crossorigin="anonymous"
+      src="https://polyfill.io/v3/polyfill.min.js?features=default%2CArray.prototype.flat%2CArray.prototype.includes%2CObject.entries%2CObject.fromEntries%2CPromise%2CPromise.prototype.finally%2CObject.values%2Cfetch%2Ces2018%2Ces2017%2Ces2016%2Ces2015"></script>
+      
+  <!-- Matomo -->
+
+  <script>
+    var _paq = window._paq || []
+    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+    _paq.push(['trackPageView'])
+    _paq.push(['enableLinkTracking'])
+      ; (function () {
+        var u = '//stats.data.gouv.fr/'
+        _paq.push(['setTrackerUrl', u + 'piwik.php'])
+        _paq.push(['setSiteId', '101'])
+        var d = document,
+          g = d.createElement('script'),
+          s = d.getElementsByTagName('script')[0]
+        g.type = 'text/javascript'
+        g.async = true
+        g.defer = true
+        g.src = u + 'piwik.js'
+        s.parentNode.insertBefore(g, s)
+      })()
+  </script>
+  <!-- End Matomo Code -->
+
+
+{% comment %} 
+Styles are added based on the page.styles variable
+This variable is defined in front-matter with:
+---
+styles:
+    - href: "./yo.css"
+    - href: "./font-maybe.css"
+---
+{% endcomment %}
+
+    {%- if page.styles -%} {%- for style in page.styles -%}
+    <link crossorigin="anonymous" rel="stylesheet" href="{{ style.href }}">
+    {%- endfor -%} {%- endif -%}
+
+
+
+{% comment %} 
+Scripts are added based on the page.scripts variable
+This variable is defined in front-matter with:
+
+---
+scripts:
+    - src: "./script1.js"
+      defer: true
+      async: false
+      crossorigin: "anonymous"
+    - src: "./script2.js"
+      defer: true
+      type: "module"
+---
+
+{% endcomment %}
+
+    {%- if page.scripts -%} {%- for script in page.scripts -%}
+    <script src="{{ script.src }}" 
+        {% if script.type %} type="{{ script.type }}" {% endif %}
+        {% if script.defer %} defer {% endif %}
+        {% if script.async %} async {% endif %}
+        crossorigin="{% if script.crossorigin %}{{ script.crossorigin }}{% else %}anonymous{% endif %}"></script>
+    {%- endfor -%} {%- endif -%}
+</head>

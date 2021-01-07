@@ -1,0 +1,261 @@
+$footer-background: #4682b4;
+$main-background: rgb(255, 255, 246);
+$main-font: 'Work Sans', sans-serif;
+$header-background: rgb(184, 228, 231);
+
+
+.current {
+  color: green;
+}
+
+html {
+	height: 100%;
+}
+
+body {
+	font-family: $main-font;
+	height: 100%;
+	background-color: $main-background!important;
+	display: flex;
+	flex-direction: column;
+	margin: 0px;
+	.header, .footer {
+		flex-shrink: 0;
+	}
+}
+
+
+h1, h2, h3, h4, h5 {
+	font-family: 'Montserrat', sans-serif;
+}
+
+h1 {
+	font-size: 1.3em;
+}
+
+h2 {
+	font-size: 1.3em;
+}
+
+a {
+	text-decoration: none;
+	color: rgb(0, 123, 255);
+}
+a[href^='mailto:']::before {
+	content: '📧 ';
+}
+a[href^='tel:']::before {
+	content: '📞 ';
+}
+
+///// BTN ////
+.btn {
+	display: block;
+	border: none;
+	padding: 0.6rem 1rem;
+	margin: 0 5px;
+	color: white;
+}
+
+.contact-link {
+	background: rgba(147, 196, 125, 1);
+	color: white;
+	width: 14rem;
+}
+
+.simple {
+	background: none;
+	border: 1px solid black;
+}
+
+.footer {
+	background: $footer-background;
+	color: white;
+	padding: 0.3rem 1rem;
+	text-align: center;
+	p {
+		margin: 0;
+	}
+	a {
+		color: white;
+	}
+}
+
+.header {
+	display: block;
+	width: 100%;
+	background-color: $header-background;
+
+	img {
+		max-width: 100%;
+		object-fit: contain;
+		min-height: 5vh;
+	}
+}
+
+.btn-list {
+	display: flex;
+	flex-direction: column;
+	-moz-box-align: center;
+	align-items: center;
+	max-width: 100%;
+	position: relative;
+	margin-top: 0px;
+	padding: 1rem calc(max(5px, -25em + 50vw));
+	background-color: $header-background;
+
+	div {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-evenly;
+		width: 100%;
+	}
+	a {
+		display: flex;
+		-moz-box-pack: center;
+		justify-content: center;
+		text-decoration: none;
+		margin: 0.5rem auto;
+	}
+}
+
+section.home-section {
+	padding: 1rem calc(max(5px, -25em + 50vw));
+	.large {
+		width: 100%;
+		margin: 0px auto;
+		display: block;
+		object-fit: contain;
+		height: 100%;
+	}
+ 	.btn {
+ 		text-decoration: none;
+		margin: 0.6rem auto;
+		width: max-content;
+		padding: 0.8rem;
+	}
+	img {
+		display: block;
+		margin: 0px auto;
+		width: 100%;
+		object-fit: contain;
+		height: 100px;
+	}
+}
+
+.react-component {
+	padding: 1rem calc(max(5px, -25em + 50vw));
+	display: flex;
+	justify-content: center;
+	align-content: end;
+	background-color: $main-background;
+	ul {
+    list-style-type: none;
+	}
+}
+
+.trip-request-entry a {
+	@extend .search;
+	width: max-content;
+	margin: 0 auto;
+}
+
+// TODO : Clean css
+.map {
+	flex: 1;
+	height: 100vh;
+}
+
+.trip-selection {
+	margin: 0 auto;
+}
+
+.trip-request-entry {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.trip-request-entry .geography {}
+
+.trip-request-entry .geography label {
+	text-align: center;
+}
+
+.trip-request-entry .geography label input {
+	margin-left: 0.6rem;
+}
+
+.trip-request-entry button[type='submit'] {
+	padding: 0.5em;
+}
+
+.trip-request-entry .status {
+	text-align: center;
+}
+
+.drivers-list {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.drivers-list li.driver .trip-details {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+
+	padding: 1em;
+	border: 5px solid transparent;
+	border-radius: 50%;
+
+	width: 6em;
+	height: 6em;
+	text-align: center;
+	font-weight: bold;
+	margin: 0.5em;
+}
+
+.drivers-list li.driver .trip-details.minor-detour {
+	border-color: green;
+}
+
+.drivers-list li.driver .trip-details.medium-detour {
+	border-color: orange;
+}
+
+.drivers-list li.driver .trip-details.major-detour {
+	border-color: red;
+}
+
+.drivers-list li.driver .name {
+	display: block;
+	font-weight: bold;
+}
+
+.drivers-list li.driver .proposed-trip {
+	display: block;
+}
+
+.drivers-list li.driver .proposed-trip .datetime {
+	color: chocolate;
+}
+
+.drivers-list li.driver .contact {
+	display: flex;
+	flex-direction: row;
+}
+
+.drivers-list li.driver .contact>* {
+	flex: 1;
+}
+
+.map .driver-trip {
+	stroke-width: 2;
+}
+
+.map .trip-request {
+	stroke: purple;
+	stroke-width: 6;
+}
