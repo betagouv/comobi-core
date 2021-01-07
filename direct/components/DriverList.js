@@ -36,10 +36,6 @@ export default function DriversList({
 		)
 
 	if (!validTripRequest){
-		/*
-		To be re-enabled after Dec 28th 2020
-		https://github.com/betagouv/comobi_valberg/issues/31
-		
 		return html`
 			<div style=${{ textAlign: 'center', marginTop: '2rem' }}>
 				<p style=${{ marginBottom: '0rem' }}>
@@ -48,13 +44,6 @@ export default function DriversList({
 				<a href="${instance.formulaire}"
 					>J'ai une voiture et je veux aider</a
 				>
-			</div>
-		`*/
-		return html`
-			<div style=${{ textAlign: 'center', marginTop: '2rem' }}>
-				<a href="${instance.formulaire}">
-					J'ai une voiture et je veux m'inscrire
-				</a>
 			</div>
 		`
 	}
