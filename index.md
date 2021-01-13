@@ -2,13 +2,12 @@
 layout: home
 ---
 # Pas de transports en communs ? votre territoire vous propose une solution facile ! 
-Simple, gratuit, solidaire, azur.comobi est un service de covoiturage de proximité qui met en relation des conducteurs avec des personnes souhaitant partager leur trajet, parce qu’elles n’ont pas de véhicule, de permis, ou parce qu’ils préfèrent faire un geste pour la planète !
-
-[Rechercher un trajet](/recherche){:target="_blank" .btn .serach }
-![Carte](/assets/images/carte.png){: .large}
+ CoMobi est un outil minimaliste permettant à un territoire peu dense d’expérimenter la mise en place de covoiturage solidaire simplement et à moindre frais. Il permet : 
+  - aux conducteurs.rices, de proposer leur(s) trajet(s) en voiture,
+  - aux personnes non-motorisées, de rechercher un conducteur qui fait leur trajet, et de le contacter en direct,
+  - aux territoires administrateurs, d’assurer une partie des mises en relation, par exemple via un standard téléphonique.
 
 # Passagers, recherchez un trajet en ligne
-azur.comobi permet de réaliser tous les trajets du quotidien : école, sports, activités, loisirs, travail, crèche…. sur tout le bassin de vie et de déplacements autour de Valberg, depuis Puget-Théniers à Villars/Var en passant par Daluis. Vous vous rendez sur la zone de Lingostière, à l’aéroport ou la gare SNCF de Nice, il est possible aussi d’inscrire votre trajet. C’est un service pour les habitants, animé par ses habitants !
 
 [Rechercher un trajet](/recherche){:target="_blank" .btn .search }
 ![Calendrier](/assets/images/calendrier.png)
@@ -16,8 +15,10 @@ azur.comobi permet de réaliser tous les trajets du quotidien : école, sports, 
 # Conducteurs, vous avez un super-pouvoir
 ... Celui de partager vos trajets en voiture !
 
+Indiquez vos lieux de départ, d'arrivée et horaires habituels : pas de détour à faire ! Covoiturage régulier et/ou ponctuel : c'est vous qui choisissez.
+
 [Proposer mon trajet](https://docs.google.com/forms/d/e/1FAIpQLSeInZJD79GJ-qg3Tkjz47uqsVgsZVy5awevxvhB67jK8KGGJQ/viewform?usp=sf_link){:target="_blank" .btn .proposal }
-![Hero](/assets/images/logo-azurcomobi-vertical.png)
+![Hero](/assets/images/hero.png)
 
 <!-- section -->
 # Questions fréquentes
@@ -39,7 +40,7 @@ L'assurance responsabilité civile du conducteur (comprise dans l'assurance auto
 - Qu'en est-il de la protection des données personnelles ?
 Les seules données collectées sont celles fournies par les conducteurs et conductrices.
 Ces données sont utilisées uniquement pour la mise en relation avec les passager·ère·s.
-Pour toute modification ou suppression, vous pouvez contacter [le service covoiturage](mailto:azurcomobi@valberg.com).
+Pour toute modification ou suppression, vous pouvez contacter [le service covoiturage](mailto:comobi@beta.gouv.fr).
 
 - Et en période de COVID ?
 Le site est fonctionnel et les trajets possibles en période de renforcement des mesures sanitaires. Nous appelons à la responsabilité des passagers et conducteurs pour respecter les gestes barrières et recommandations disponibles [ici](https://www.gouvernement.fr/sites/default/files/affiche_mesures_barrieres_covoiturage.pdf){:target="_blank"}.
