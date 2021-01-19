@@ -19,7 +19,5 @@ sass:
   style: compressed
 
 exclude:
-  - _scripts/
-
-keep_files:
-  - build
+  - direct/
+  - outil-metier/
