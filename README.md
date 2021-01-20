@@ -45,7 +45,11 @@ Chaque application a son Procfile. On utilise le [heroku-buildpack-multi-procfil
 
 #### Pour développer en local
 
-Pour lancer l'application "trajets direct" : `npm run dev`.
+Pour lancer l'application "trajets direct" : 
+```
+$ npm run dev:direct // build, create frontend_build and update _site
+$ npm run dev // start server
+```
 Pour lancer l'application "outil métier" : `npm run dev:outil-metier`.
 
 #### Start
