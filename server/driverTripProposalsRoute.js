@@ -32,6 +32,7 @@ export default function(makeDriverObject){
                     Arrivée,
                     Trajet,
                     Jours,
+                    Jour,
                     'Heure départ': HeureDépart,
                     'Heure retour': HeureRetour
                 } = driverTripProposal
@@ -43,6 +44,7 @@ export default function(makeDriverObject){
                     Arrivée,
                     Trajet,
                     Jours,
+                    Jour,
                     'Heure départ': HeureDépart,
                     driver
                 })

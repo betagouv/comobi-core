@@ -19,8 +19,9 @@ export default function TripProposal({
 		Départ,
 		Arrivée,
 		Jours,
+		Jour,
 		'Heure départ': heureDépart,
-		driver: { Prénom, Nom, phone, Employeur: ArrivéePrécise }
+		driver: { Prénom, Nom, phone, 'Lieu précis': ArrivéePrécise }
 	} = tripProposal
 
 	return html`
@@ -57,14 +58,14 @@ export default function TripProposal({
 						html`
 							<small>📌 ${ArrivéePrécise}</small>
 						`}
-					${(Jours || heureDépart !== '-') &&
-						html`
+						${html`
 							<div className="quand">
 								<span>🗓️</span
 								><span>
-									${html`
-										<span className="datetime">${Jours}</span>
-									`}
+									${(Jours !== '') ? 
+									html`<span className="datetime">${Jours}</span>` : 
+									(Jour !== '') && html`<span className="datetime">Le ${Jour}</span>`
+									}
 									${heureDépart !== '-' &&
 										html`
 											<span className="datetime"> à ${heureDépart}</span>
