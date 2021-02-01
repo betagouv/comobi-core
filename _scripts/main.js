@@ -13,6 +13,7 @@ import _actions from './actions.js'
 
 const html = htm.bind(createElement)
 
+// describe store
 const store = new Store({
 	state: {
 		tripProposalsByTrip: new Map(),
@@ -85,15 +86,16 @@ function renderUI(store) {
 	)
 }
 
+// add a listener: when the state is modified renderUI is called
 store.subscribe(state => {
 	renderUI(store)
 })
-
 console.log(store.state)
 
 // initial render
 renderUI(store)
 
+// call server and initialize state tripProposals list
 json(`/driver-trip-proposals`).then(tripProposals => {
 	const tripProposalsByTrip = new Map()
 
@@ -107,5 +109,6 @@ json(`/driver-trip-proposals`).then(tripProposals => {
 	store.mutations.addTripProposals(tripProposalsByTrip)
 })
 
+// call server and initialize state validPlaceName
 json(`/valid-place-names`).then(store.mutations.setValidPlaceNames)
 

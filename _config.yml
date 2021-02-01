@@ -1,8 +1,8 @@
 titre: "Neutre.CoMobi"
 mail: "comobi@beta.gouv.fr"
 tel: "04 00 00 00 00"
-nom: "Version"
-formulaire: "https://docs.google.com/forms/d/e/1FAIpQLSeInZJD79GJ-qg3Tkjz47uqsVgsZVy5awevxvhB67jK8KGGJQ/viewform?usp=sf_link"
+nom: "Version Neutre"
+formulaire: "https://docs.google.com/forms/d/e/1FAIpQLSfirgGZ4B_OnP3oe9q_CxMi3Lm5hpCyk_GSIdm9wtizvq3RMA/viewform?usp=sf_link"
 
 couleurs: 
   bouton_rechercher: "#199bb0"
@@ -10,8 +10,8 @@ couleurs:
   odd_section_color: "#ecf0f1"
 
 bandeau:
-  image: "/assets/images/Bandeau_azur_comobi.png"
-  texte: "Bandeau azur.comobi.fr avec le logo comobi et les logos des collectivités qui financent"
+  image: "/assets/images/logo-comobi-long-web.png"
+  texte: "Bandeau neutre"
 
 ## Les sections suivantes ne sont pas à modifier
 sass:
@@ -19,7 +19,5 @@ sass:
   style: compressed
 
 exclude:
-  - _scripts/
-
-keep_files:
-  - build
+  - direct/
+  - outil-metier/

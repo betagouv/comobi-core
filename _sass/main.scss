@@ -24,6 +24,10 @@ body {
 	}
 }
 
+main {
+	flex: 1;
+}
+
 
 h1, h2, h3, h4, h5 {
 	font-family: 'Montserrat', sans-serif;
@@ -258,4 +262,10 @@ section.home-section {
 .map .trip-request {
 	stroke: purple;
 	stroke-width: 6;
+}
+
+@media only screen and (min-width: 768px) {
+	.btn-list {
+		flex-direction: row;
+	}
 }
