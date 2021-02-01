@@ -21,7 +21,7 @@ Corresplot est une interface utilisateur permettant de faire la correspondance f
 Deux applications sont disponibles : 'Direct' et 'Outil-metier'
 
 ## Comobi
-L'idée est de généraliser et de rendre plus générique le projet Lot'ô car afin qu'il puisse être déployée facilement et rapidement par qui en aurait envie.
+L'idée est de généraliser et de rendre plus générique le projet Lot'ô car afin qu'il puisse être déployée facilement et rapidement.
 
 ### Architecture
 - Jekyll permet de gérer la partie statique de l'application web :
@@ -69,7 +69,7 @@ $ npm run dev // start server
 ```
 
 ### Déploiement sur heroku
-Lorsque la branche master est déployée un build automatique est lancé par github pour : 
+Lorsque la branche master est déployée un build automatique est lancé par github comprenant les étapes suivantes : 
   - build des scripts react
   - build de l'application avec jekyll
   - mise a jour d'une branche nommée Heroku
