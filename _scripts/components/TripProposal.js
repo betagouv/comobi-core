@@ -10,8 +10,8 @@ const html = htm.bind(React.createElement)
 const config = require(`../../_config.yml`)
 
 export default function TripProposal({
+	tripKey,
 	tripProposal,
-	onDriverClick,
 	tripRequest
 }) {
 	const [selected, setSelected] = useState(false)
@@ -21,9 +21,9 @@ export default function TripProposal({
 		Jours,
 		Jour,
 		'Heure départ': heureDépart,
-		driver: { Prénom, Nom, phone, 'Lieu précis': ArrivéePrécise }
+		driver: { Prénom, Nom, contact, lieu, modeContact }
 	} = tripProposal
-
+	console.log(tripKey)
 	return html`
 		<${styled.li`
 			padding: 0.5em;
@@ -34,7 +34,7 @@ export default function TripProposal({
 				0 1px 2px rgba(41, 117, 209, 0.24);
 		`}
 			className=${classNames('driver')}
-			onClick=${onDriverClick}
+			key=${tripKey}
 		>
 		${html`
         <${styled.div`
@@ -51,12 +51,12 @@ export default function TripProposal({
 					small {
 						display: block;
 					}
-				`}>
+				`} key=${tripKey} >
 				<div className="proposed-trip">
 					<strong>🚙 ${Départ} - ${Arrivée}</strong>
-					${ArrivéePrécise &&
+					${lieu &&
 						html`
-							<small>📌 ${ArrivéePrécise}</small>
+							<small>📌 ${lieu}</small>
 						`}
 						${html`
 							<div className="quand">
@@ -80,7 +80,7 @@ export default function TripProposal({
 				selected
 					? html`
 						<div>
-						${!phone &&
+						${!contact &&
 							html`
 								<${FormContact}
 									from=${tripRequest.origin}
@@ -90,16 +90,16 @@ export default function TripProposal({
 								`}
 								/>
 							`}
-						<${TelephoneContact} number=${phone} />
+						<${DriverContact} modeContact=${modeContact} contact=${contact} />
 						<${SimpleButton} onClick=${() => setSelected(false)}>Retour</button>
 						</div>
 				  `
 					: html`
 			<${ContactButtonStyle} onClick=${() => {
-							trackDemande(phone ? 'contact direct' : 'faire une demande')
+							trackDemande(contact ? 'contact direct' : 'faire une demande')
 							setSelected(true)
 					  }}>${
-							phone ? '📞 Contact direct' : 'Faire une demande'
+							contact ? '📞 Contacter direct' : 'Faire une demande'
 					  }</${ContactButtonStyle}>`
 			}
 		</li>
@@ -111,14 +111,21 @@ const trackDemande = whichButton => {
 		_paq.push(['trackEvent', 'trajets', 'demande', whichButton])
 }
 
-const TelephoneContact = ({ number }) => {
-	const tel = number || config.tel || 'indisponible'
+const DriverContact = ({ modeContact, contact }) => {
+	// contact is a phone number, an email or undefined
+	if(modeContact === 'Email') {
+		return html`
+			<${ContactButtonStyle} href="mailto
+			:${contact}">
+				${contact}
+			</${ContactButtonStyle}>`;
+	}
+	const tel = contact || config.tel || 'indisponible'
 	return html`
-		<${ContactButtonStyle} href="tel:${tel}"> ${
-		number ? `` : `Demande via ${config.nom}`
-	} ${tel}
-		</${ContactButtonStyle}>
-		`
+		<${ContactButtonStyle} href="tel:${contact}"> 
+			${contact ? `` : `Demande via ${config.nom}`} ${tel}
+		</${ContactButtonStyle}>`;
+	 
 }
 const FormContact = ({ from, to, moreInfo }) => {
 	return html`

@@ -20,11 +20,9 @@ const CONDUCTEUR_PROPS = [
 	'N° de téléphone',
 	'Adresse e-mail',
 	'Contact préféré',
-	'Moyen de communication préféré',
-	'Juste avant de finir, comment avez-vous connu  Lotocar ?',
-	'Remarques éventuelles',
-	'Contact direct passager',
-	'DateProposée'
+	'Communication',
+	'Consentement',
+	'Remarques éventuelles'
 ]
 
 export default function getDrivers() {
