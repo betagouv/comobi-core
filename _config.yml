@@ -12,7 +12,7 @@ couleurs:
 
 bandeau:
   image: "/assets/images/logo-comobi-long-web.png"
-  texte: "Bandeau Comobi"
+  texte: "Bandeau Neutre"
 
 ## Les sections suivantes ne sont pas à modifier
 sass:
