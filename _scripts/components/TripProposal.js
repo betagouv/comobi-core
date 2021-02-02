@@ -132,7 +132,7 @@ const FormContact = ({ from, to, moreInfo }) => {
 		<${ContactButtonStyle}
 		onClick=${() => trackDemande('formulaire')}
 	target="_blank"
-	href=${`https://docs.google.com/forms/d/e/1FAIpQLScfZKk6qeVPw3zDVHnYl2Hzw6urgAXRYBXftW1WNb7CA325mA/viewform?usp=pp_url&entry.227174060=${from}&entry.44825971=${to}`}
+	href=${config.formulaire_passager}
 	>
 	📄 Demande en ligne
 		</${ContactButtonStyle}>
