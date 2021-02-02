@@ -3,8 +3,6 @@ const path = require("path");
 let webpack = require('webpack')
 let devMode = process.env.NODE_ENV === 'development'
 
-console.log(process.env.INSTANCE);
-
 module.exports = {
 	module: {
 		rules: [
