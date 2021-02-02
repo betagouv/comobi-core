@@ -1,0 +1,3 @@
+config.xml merge=ours
+*.md merge=ours
+/assets/images/* merge=ours
