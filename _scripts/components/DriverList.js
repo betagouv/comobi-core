@@ -88,7 +88,7 @@ export default function DriversList({
 			<h2 key="direct">${
 				tripRequestAsyncStatus === STATUS_PENDING
 					? `(recherche en cours)`
-					: orderedTrips.length === 0
+					: directTrips === undefined
 					? `(aucun résultat)`
 					: `Trajets disponibles`
 			}</h2>
