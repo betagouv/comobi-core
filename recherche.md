@@ -6,6 +6,5 @@ scripts:
       crossorigin: "anonymous"
 ---
 
-Je racone des trucs iciciciici
 <!-- La "div" avec la class "react-component" permet l'affichage du formulaire de recherche -->
 <div class="react-component"></div>
