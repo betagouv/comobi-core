@@ -133,7 +133,7 @@ const displayTrips = (key, tripProposalsByTrip, trips, tripRequest, filter) => {
 				`
 				})
 			})
-	return (!selectedTrips.length) ? undefined :
+	return !selectedTrips.length ? undefined :
 		html`
 			<ul key=${key} className="drivers-list">
 				${selectedTrips}

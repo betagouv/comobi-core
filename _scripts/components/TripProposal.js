@@ -112,7 +112,7 @@ const trackDemande = whichButton => {
 
 const DriverContact = ({ modeContact, contact }) => {
 	// contact is a phone number, an email or undefined
-	if(modeContact === 'Email') {
+	if(modeContact === 'Email' && contact !== undefined) {
 		return html`
 			<${ContactButtonStyle} href="mailto
 			:${contact}">
