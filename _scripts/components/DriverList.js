@@ -48,17 +48,19 @@ export default function DriversList({
 		`
 	}
 
-	const tripsByAdditionalTime = request =>
+	const tripsByAdditionalTime = (request, key) =>
 		displayTrips(
+			key,
 			tripProposalsByTrip,
 			orderedTrips,
 			tripRequest,
 			([_, { additionalTime }]) => request(additionalTime)
 		)
 
-	const directTrips = tripsByAdditionalTime(time => time < 5),
-		trips10 = tripsByAdditionalTime(time => time >= 10 && time < 20),
-		trips20 = tripsByAdditionalTime(time => time >= 20 && time < 45)
+	const directTrips = tripsByAdditionalTime(time => time < 5, 1),
+		trips10 = tripsByAdditionalTime(time => time >= 10 && time < 20, 2),
+		trips20 = tripsByAdditionalTime(time => time >= 20 && time < 45, 3)
+	
 	return html`
 		<${styled.div`
 			h2,
@@ -83,59 +85,58 @@ export default function DriversList({
 				font-style: normal;
 			}
 		`}>
-			<h2 key="détour0">${
+			<h2 key="direct">${
 				tripRequestAsyncStatus === STATUS_PENDING
 					? `(recherche en cours)`
-					: orderedTrips.length === 0
+					: directTrips === undefined
 					? `(aucun résultat)`
 					: `Trajets disponibles`
 			}</h2>
 			${directTrips}
 			${(trips10 || trips20) &&
 				html`
-					<h3 key="détour0">Trajets indirects</h3>
+					<h3 key="indirect">Trajets indirects</h3>
 				`}
 			${trips10 &&
 				html`
-					<small
-						>Un <em>détour de plus de 10 minutes</em> sera nécessaire pour vous
-						récupérer :</small
-					>
+					<small key="10">
+						Un <em>détour de plus de 10 minutes</em> sera nécessaire pour vousrécupérer :</small>
 					${trips10}
 				`}
 			${trips20 &&
 				html`
-					<small
-						>Un <em>détour conséquent (entre 20 et 45 minutes)</em> sera
-						nécessaire pour vous récupérer :</small
-					>
+					<small key="20">
+						Un <em>détour conséquent (entre 20 et 45 minutes)</em> sera nécessaire pour vous récupérer :</small>
 					${trips20}
 				`}
 		</div>
 	`
 }
 
-const displayTrips = (tripProposalsByTrip, trips, tripRequest, filter) => {
+const displayTrips = (key, tripProposalsByTrip, trips, tripRequest, filter) => {
 	let selectedTrips = trips
 		.slice(0, 20)
 		.filter(filter)
-		.map(([trip]) => {
+		.map(([trip], i) => {
+			
+			// get all tripProposal corresponding to the object trip {origin, destination}
 			const tripProposals = tripProposalsByTrip.get(trip)
-
 			return tripProposals.map(
-				(tripProposal, j) => html`
+				(tripProposal, j) => {
+					const key = `${trip.origin}${i+j}`;
+					return html`
 					<${TripProposal}
-						key=${JSON.stringify(tripProposal)}
+						tripKey=${key}
 						tripProposal=${tripProposal}
 						tripRequest=${tripRequest}
 					/>
 				`
-			)
-		})
-	if (!selectedTrips.length) return undefined
-	return html`
-		<ul className="drivers-list">
-			${selectedTrips}
-		</ul>
-	`
+				})
+			})
+	return !selectedTrips.length ? undefined :
+		html`
+			<ul key=${key} className="drivers-list">
+				${selectedTrips}
+			</ul>
+		`
 }

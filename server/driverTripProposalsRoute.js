@@ -2,6 +2,7 @@ import getDrivers from '../spreadsheetDatabase/getDrivers.js'
 
 export const PASSAGER_CONTACT_DIRECT_ACCEPT = true;
 export const PASSAGER_CONTACT_DIRECT_REFUSE = false;
+
 const PASSAGER_CONTACT_DIRECT_NO_ANSWER = PASSAGER_CONTACT_DIRECT_REFUSE; // qui ne dit mot... ne consent pas
 
 export default function(makeDriverObject){
@@ -13,13 +14,10 @@ export default function(makeDriverObject){
                 driverTripProposal['Départ'] = driverTripProposal['Départ'].trim()
                 driverTripProposal['Arrivée'] = driverTripProposal['Arrivée'].trim()
                 
-                const passagerDirectValue = driverTripProposal['Contact direct passager'] && driverTripProposal['Contact direct passager'].trim() || '';
-                
-                driverTripProposal['Contact direct passager'] = passagerDirectValue === 'Oui' ?
-                    PASSAGER_CONTACT_DIRECT_ACCEPT : 
-                    (passagerDirectValue.startsWith('Non') ? 
-                        PASSAGER_CONTACT_DIRECT_REFUSE : 
-                        PASSAGER_CONTACT_DIRECT_NO_ANSWER)
+                const passagerDirectValue = driverTripProposal['Consentement'] && 
+                    driverTripProposal['Consentement'].trim() || '';
+                driverTripProposal['Consentement'] = passagerDirectValue === 'Je consens' ?
+                    PASSAGER_CONTACT_DIRECT_ACCEPT : PASSAGER_CONTACT_DIRECT_REFUSE;
             }
             return driverTripProposals
         })
@@ -32,9 +30,10 @@ export default function(makeDriverObject){
                     Arrivée,
                     Trajet,
                     Jours,
+                    Jour,
                     'Heure départ': HeureDépart,
                     'Heure retour': HeureRetour
-                } = driverTripProposal
+                } = driverTripProposal 
 
                 const driver = Object.freeze(makeDriverObject(driverTripProposal))
 
@@ -43,6 +42,7 @@ export default function(makeDriverObject){
                     Arrivée,
                     Trajet,
                     Jours,
+                    Jour,
                     'Heure départ': HeureDépart,
                     driver
                 })

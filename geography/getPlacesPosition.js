@@ -2,8 +2,6 @@ import {json} from 'd3-fetch'
 import {chunk} from 'lodash-es'
 
 export default function(places){
-    console.log('places', places)
-
     // places can be a large set, which in turn may lead to a large URL
     // splitting the set so we don't run into "too large URL" HTTP errors
     return Promise.all(chunk([...places], 100).map(somePlaces => {

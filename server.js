@@ -75,16 +75,19 @@ function makeDriverObject(driverTripProposal) {
 	const {
 		Prénom,
 		Nom,
-		'Contact direct passager': directContact,
+		'Adresse e-mail': email,
+		'Consentement': consentement,
 		'N° de téléphone': phone,
-		Employeur
+		'Lieu précis': lieu,
+		'Contact préféré': modeContact
 	} = driverTripProposal
 
 	return {
 		Prénom,
 		Nom: Nom && Nom[0].toUpperCase() + '.',
-		phone: directContact === PASSAGER_CONTACT_DIRECT_ACCEPT ? phone : undefined,
-		Employeur
+		modeContact,
+		contact: consentement === PASSAGER_CONTACT_DIRECT_ACCEPT ? (modeContact === 'Email' ? email : phone) : undefined, 
+		lieu
 	}
 }
 
