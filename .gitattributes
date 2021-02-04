@@ -1,3 +1,0 @@
-_config.yml merge=ours
-*.md merge=ours
-/assets/images/* merge=ours
