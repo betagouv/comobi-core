@@ -23,7 +23,6 @@ export default function TripProposal({
 		'Heure départ': heureDépart,
 		driver: { Prénom, Nom, contact, lieu, modeContact }
 	} = tripProposal
-	console.log(tripKey)
 	return html`
 		<${styled.li`
 			padding: 0.5em;

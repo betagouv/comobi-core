@@ -92,7 +92,6 @@ function renderUI(store) {
 store.subscribe(state => {
 	renderUI(store)
 })
-console.log(store.state)
 
 // initial render
 renderUI(store)
