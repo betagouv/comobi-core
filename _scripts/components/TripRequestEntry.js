@@ -25,8 +25,9 @@ function makeInputPatternFromList(list){
 const styledLabel = styled.label` display: block; `
 
 const CityInput = ({ label, validPlaceNames, value, setValue }) => {
-    const pattern = makeInputPatternFromList(validPlaceNames)
+    // const pattern = makeInputPatternFromList(validPlaceNames)
     const validationMessage = `Vous devez saisir un de ces lieux : ${validPlaceNames.join(', ')}`
+    const [options, setOptions] = useState([])
 
     return html`
         <${styledLabel}>
@@ -37,12 +38,12 @@ const CityInput = ({ label, validPlaceNames, value, setValue }) => {
             <${cityInputElement}
                 type="text"
                 list=${datalistId}
-                pattern=${pattern}
                 value=${value}
                 onChange=${e => {
                     e.target.setCustomValidity('');
                     const value = e.target.value
                     setValue(value)
+                    searchCity(e.target.value, setOptions)
                 }}
                 onInvalid=${e => {
                     e.target.setCustomValidity(validationMessage);
