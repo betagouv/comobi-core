@@ -10,8 +10,8 @@ const html = htm.bind(React.createElement)
 const config = require(`../../_config.yml`)
 
 export default function TripProposal({
+	tripKey,
 	tripProposal,
-	onDriverClick,
 	tripRequest
 }) {
 	const [selected, setSelected] = useState(false)
@@ -19,10 +19,10 @@ export default function TripProposal({
 		Départ,
 		Arrivée,
 		Jours,
+		Jour,
 		'Heure départ': heureDépart,
-		driver: { Prénom, Nom, phone, Employeur: ArrivéePrécise }
+		driver: { Prénom, Nom, contact, lieu, modeContact }
 	} = tripProposal
-
 	return html`
 		<${styled.li`
 			padding: 0.5em;
@@ -33,7 +33,7 @@ export default function TripProposal({
 				0 1px 2px rgba(41, 117, 209, 0.24);
 		`}
 			className=${classNames('driver')}
-			onClick=${onDriverClick}
+			key=${tripKey}
 		>
 		${html`
         <${styled.div`
@@ -50,21 +50,21 @@ export default function TripProposal({
 					small {
 						display: block;
 					}
-				`}>
+				`} key=${tripKey} >
 				<div className="proposed-trip">
 					<strong>🚙 ${Départ} - ${Arrivée}</strong>
-					${ArrivéePrécise &&
+					${lieu &&
 						html`
-							<small>📌 ${ArrivéePrécise}</small>
+							<small>📌 ${lieu}</small>
 						`}
-					${(Jours || heureDépart !== '-') &&
-						html`
+						${html`
 							<div className="quand">
 								<span>🗓️</span
 								><span>
-									${html`
-										<span className="datetime">${Jours}</span>
-									`}
+									${(Jours !== '') ? 
+									html`<span className="datetime">${Jours}</span>` : 
+									(Jour !== '') && html`<span className="datetime">Le ${Jour}</span>`
+									}
 									${heureDépart !== '-' &&
 										html`
 											<span className="datetime"> à ${heureDépart}</span>
@@ -79,7 +79,7 @@ export default function TripProposal({
 				selected
 					? html`
 						<div>
-						${!phone &&
+						${!contact &&
 							html`
 								<${FormContact}
 									from=${tripRequest.origin}
@@ -89,16 +89,16 @@ export default function TripProposal({
 								`}
 								/>
 							`}
-						<${TelephoneContact} number=${phone} />
+						<${DriverContact} modeContact=${modeContact} contact=${contact} />
 						<${SimpleButton} onClick=${() => setSelected(false)}>Retour</button>
 						</div>
 				  `
 					: html`
 			<${ContactButtonStyle} onClick=${() => {
-							trackDemande(phone ? 'contact direct' : 'faire une demande')
+							trackDemande(contact ? 'contact direct' : 'faire une demande')
 							setSelected(true)
 					  }}>${
-							phone ? '📞 Contact direct' : 'Faire une demande'
+							contact ? '📞 Contacter direct' : 'Faire une demande'
 					  }</${ContactButtonStyle}>`
 			}
 		</li>
@@ -110,23 +110,31 @@ const trackDemande = whichButton => {
 		_paq.push(['trackEvent', 'trajets', 'demande', whichButton])
 }
 
-const TelephoneContact = ({ number }) => {
-	const tel = number || config.tel || 'indisponible'
+const DriverContact = ({ modeContact, contact }) => {
+	// contact is a phone number, an email or undefined
+	if(modeContact === 'Email' && contact !== undefined) {
+		return html`
+			<${ContactButtonStyle} href="mailto
+			:${contact}">
+				${contact}
+			</${ContactButtonStyle}>`;
+	}
+	const tel = contact || config.tel || 'indisponible'
 	return html`
-		<${ContactButtonStyle} href="tel:${tel}"> ${
-		number ? `` : `Demande via ${config.nom}`
-	} ${tel}
-		</${ContactButtonStyle}>
-		`
+		<${ContactButtonStyle} href="tel:${contact}"> 
+			${contact ? `` : `Demande via ${config.nom}`} ${tel}
+		</${ContactButtonStyle}>`;
+	 
 }
 const FormContact = ({ from, to, moreInfo }) => {
 	return html`
 		<${ContactButtonStyle}
 		onClick=${() => trackDemande('formulaire')}
 	target="_blank"
-	href=${`https://docs.google.com/forms/d/e/1FAIpQLSf-bhTbcJ36S7PQK167zxaEkvaMSBzg8yOwQx0fDUQMd4_pYQ/viewform?entry.227174060=${from}&entry.44825971=${to}&entry.1204459643=${moreInfo}`}
+	href=${config.formulaire_passager}
 	>
 	📄 Demande en ligne
 		</${ContactButtonStyle}>
 		`
 }
+

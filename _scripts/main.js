@@ -16,6 +16,8 @@ const html = htm.bind(createElement)
 // describe store
 const store = new Store({
 	state: {
+		/* tripProposalsByTrip: A map with (origin, destination) object as key and tripProposal list as value
+		corresponding to this (origin, destination) object */
 		tripProposalsByTrip: new Map(),
 		positionByPlace: new Map(),
 		tripRequest: {
@@ -90,7 +92,6 @@ function renderUI(store) {
 store.subscribe(state => {
 	renderUI(store)
 })
-console.log(store.state)
 
 // initial render
 renderUI(store)
@@ -98,14 +99,18 @@ renderUI(store)
 // call server and initialize state tripProposals list
 json(`/driver-trip-proposals`).then(tripProposals => {
 	const tripProposalsByTrip = new Map()
-
+	// a trip proposal is an object with trip and driver infos
 	for (const tripProposal of tripProposals) {
+		// create a trip: a object with origin and destination
 		const trip = makeTrip(tripProposal.Départ, tripProposal.Arrivée)
+		// list of trip with same origin and destination
 		const currentEntries = tripProposalsByTrip.get(trip) || []
 
+		// add the current tripProposal in the list
 		currentEntries.push(tripProposal)
 		tripProposalsByTrip.set(trip, currentEntries)
 	}
+	// add the tripProposalsByTrip map in the store
 	store.mutations.addTripProposals(tripProposalsByTrip)
 })
 
