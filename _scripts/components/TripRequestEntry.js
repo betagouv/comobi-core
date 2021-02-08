@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 import htm from 'htm'
 import styled from 'styled-components'
-import escapeRegexp from 'escape-string-regexp'
-
 const html = htm.bind(React.createElement)
 
 const cityInputElement = styled.input`
@@ -14,10 +12,6 @@ const cityInputElement = styled.input`
 
 const datalistId = "valid-place-names"
 
-function makeInputPatternFromList(list){
-    return [...list].map(s => escapeRegexp(s)).join('|')
-}
-
 // styledLabel is defined outside of CityInput because if it's defined inside,
 // it interacts badly with React hooks (useState) in a way that defocuses the input
 // after each character is typed
@@ -25,8 +19,6 @@ function makeInputPatternFromList(list){
 const styledLabel = styled.label` display: block; `
 
 const CityInput = ({ label, validPlaceNames, value, setValue }) => {
-    const pattern = makeInputPatternFromList(validPlaceNames)
-    const validationMessage = `Vous devez saisir un de ces lieux : ${validPlaceNames.join(', ')}`
 
     return html`
         <${styledLabel}>
@@ -37,18 +29,11 @@ const CityInput = ({ label, validPlaceNames, value, setValue }) => {
             <${cityInputElement}
                 type="text"
                 list=${datalistId}
-                pattern=${pattern}
                 value=${value}
                 onChange=${e => {
                     e.target.setCustomValidity('');
                     const value = e.target.value
                     setValue(value)
-                }}
-                onInvalid=${e => {
-                    e.target.setCustomValidity(validationMessage);
-                }}
-                onBlur=${e => {
-                    e.target.checkValidity() // this triggers an 'invalid' event if input is invalid
                 }}
             />
         </label>

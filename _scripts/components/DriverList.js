@@ -61,6 +61,8 @@ export default function DriversList({
 		trips10 = tripsByAdditionalTime(time => time >= 10 && time < 20, 2),
 		trips20 = tripsByAdditionalTime(time => time >= 20 && time < 45, 3)
 	
+	const hasNoTrip = directTrips === undefined && trips10 === undefined && trips20 === undefined;
+	
 	return html`
 		<${styled.div`
 			h2,
@@ -88,7 +90,7 @@ export default function DriversList({
 			<h2 key="direct">${
 				tripRequestAsyncStatus === STATUS_PENDING
 					? `(recherche en cours)`
-					: directTrips === undefined
+					: hasNoTrip
 					? `(aucun résultat)`
 					: `Trajets disponibles`
 			}</h2>
