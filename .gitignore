@@ -17,10 +17,9 @@ vendor
 frontend_build
 
 ## all specific files
-404.html      
-README.md    
-_config.yml  
-assets/images       
-index.md     
+404.html
+_config.yml
+assets/images 
+index.md
 recherche.md
 .github
