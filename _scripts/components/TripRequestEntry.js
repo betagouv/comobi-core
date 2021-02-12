@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import htm from 'htm'
 import styled from 'styled-components'
+import escapeRegexp from 'escape-string-regexp'
+const config = require('../../_config.yml')
 const html = htm.bind(React.createElement)
 
 const cityInputElement = styled.input`
@@ -18,26 +20,65 @@ const datalistId = "valid-place-names"
 // This is a band-aid; the root cause has not been found
 const styledLabel = styled.label` display: block; `
 
-const CityInput = ({ label, validPlaceNames, value, setValue }) => {
+const inputWithOutValidation = (label, value, setValue) => {
+    return html`
+<${styledLabel}>
+    <${styled.strong`
+        display: inline-block;
+        width: 4.5rem;
+    `}>${label}</strong>
+    <${cityInputElement}
+        type="text"
+        list=${datalistId}
+        value=${value}
+        onChange=${e => {
+            e.target.setCustomValidity('');
+            const value = e.target.value
+            setValue(value)
+        }}
+    />
+</label>
+`}
+
+const inputWithValidation = (label, validPlaceNames, value, setValue) => {
+    const pattern = validPlaceNames.map(s => escapeRegexp(s)).join('|')
+    const validationMessage = `Vous devez saisir un de ces lieux : ${validPlaceNames.join(', ')}`
 
     return html`
-        <${styledLabel}>
-            <${styled.strong`
-                display: inline-block;
-                width: 4.5rem;
-            `}>${label}</strong>
-            <${cityInputElement}
-                type="text"
-                list=${datalistId}
-                value=${value}
-                onChange=${e => {
-                    e.target.setCustomValidity('');
-                    const value = e.target.value
-                    setValue(value)
-                }}
-            />
-        </label>
+    <${styledLabel}>
+        <${styled.strong`
+            display: inline-block;
+            width: 4.5rem;
+        `}>${label}</strong>
+        <${cityInputElement}
+            type="text"
+            list=${datalistId}
+            pattern=${pattern}
+            value=${value}
+            onChange=${e => {
+                e.target.setCustomValidity('');
+                const value = e.target.value
+                setValue(value)
+            }}
+            onInvalid=${e => {
+                e.target.setCustomValidity(validationMessage);
+            }}
+            onBlur=${e => {
+                e.target.checkValidity() // this triggers an 'invalid' event if input is invalid
+            }}
+        />
+    </label>
     `
+}
+
+/** Si la liste est restreinte à une liste donnée
+alors la valeur saisie doit être comprise dans cette liste
+dans ce cas on ajouter une validation sur l'input
+*/
+const CityInput = ({ label, validPlaceNames, value, setValue }) => {
+    return config.liste_ville.restreinte === true ?  
+        inputWithValidation(label, validPlaceNames, value, setValue)
+        : inputWithOutValidation(label, value, setValue);
 }
 
 export default function TripRequestEntry({
