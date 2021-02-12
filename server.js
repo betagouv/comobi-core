@@ -6,6 +6,9 @@ import getLotocarPositionByPlace from './spreadsheetDatabase/getLotocarPositionB
 import positionByPlace from './geography/positionByPlace.js'
 import getPlacesPosition from './server/getPlacesPosition.js'
 
+const yaml = require('js-yaml');
+const fs   = require('fs');
+
 import driverTripProposalsRoute, {
 	PASSAGER_CONTACT_DIRECT_ACCEPT
 } from './server/driverTripProposalsRoute.js'
@@ -14,6 +17,15 @@ const app = express()
 const PORT = process.env.PORT || 39528
 const devMode = process.env.NODE_ENV === 'development'
 app.use(cors())
+
+// Get document, or throw exception on error
+let CONFIG = {}
+try {
+  CONFIG = yaml.load(fs.readFileSync('_config.yml', 'utf8'));
+  console.log(CONFIG);
+} catch (e) {
+  console.log(e);
+}
 
 const LOT_CODE = process.env.CODE_DEPARTEMENT || '34'
 // get all cities for the herault depatment
@@ -24,38 +36,29 @@ const lotGeojsonP = got(
 
 const lotocarPositionByPlaceP = getLotocarPositionByPlace()
 
-const validPlaceNamesP = Promise.all([
-	lotGeojsonP,
-	lotocarPositionByPlaceP
+const getPlaceNameList = (positionByPlace) => {
+	const placeNames = new Set()
+	for (const [name, position] of positionByPlace) {
+		placeNames.add(name)
+	}
+	return placeNames
+}
+const validPlaceNamesP = CONFIG !== undefined && CONFIG.liste_ville.restreinte === true ? 
+	lotocarPositionByPlaceP.then(positionByPlace => [...getPlaceNameList(positionByPlace)])
+	: Promise.all([
+		lotGeojsonP,
+		lotocarPositionByPlaceP
 	])
-	.then(([lotGeojson, lotocarPositionByPlace]) => {
-		const placeNames = new Set()
+		.then(([lotGeojson, positionByPlace]) => {
+			const placeNames = getPlaceNameList(positionByPlace);
 
-		const communes = lotGeojson.features
-
-		for (const commune of communes) {
-			const placeName = commune.properties.nom
-			placeNames.add(placeName)
-		}
-
-		for (const [name, position] of lotocarPositionByPlace) {
-			placeNames.add(name)
-		}
-
-		return [...placeNames]
-	})
-
-/*const validPlaceNamesP = lotocarPositionByPlaceP
-	.then(lotocarPositionByPlace => {
-		const placeNames = new Set()
-
-		for (const [name, position] of lotocarPositionByPlace) {
-			placeNames.add(name)
-		}
-
-		return [...placeNames]
-	})
-	*/
+			const communes = lotGeojson.features
+			for (const commune of communes) {
+				const placeName = commune.properties.nom
+				placeNames.add(placeName)
+			}
+			return [...placeNames]
+		})
 
 /*if (devMode) {
 	app.use(
