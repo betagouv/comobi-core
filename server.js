@@ -43,7 +43,7 @@ const getPlaceNameList = (positionByPlace) => {
 	}
 	return placeNames
 }
-const validPlaceNamesP = CONFIG !== undefined && CONFIG.liste_ville.restreinte === true ? 
+const validPlaceNamesP = CONFIG.liste_ville !== undefined && CONFIG.liste_ville.restreinte === true ? 
 	lotocarPositionByPlaceP.then(positionByPlace => [...getPlaceNameList(positionByPlace)])
 	: Promise.all([
 		lotGeojsonP,

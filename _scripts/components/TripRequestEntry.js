@@ -76,7 +76,7 @@ alors la valeur saisie doit être comprise dans cette liste
 dans ce cas on ajouter une validation sur l'input
 */
 const CityInput = ({ label, validPlaceNames, value, setValue }) => {
-    return config.liste_ville.restreinte === true ?  
+    return config.liste_ville !== undefined && config.liste_ville.restreinte === true ?  
         inputWithValidation(label, validPlaceNames, value, setValue)
         : inputWithOutValidation(label, value, setValue);
 }
