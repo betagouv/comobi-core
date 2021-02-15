@@ -22,7 +22,6 @@ app.use(cors())
 let CONFIG = {}
 try {
   CONFIG = yaml.load(fs.readFileSync('_config.yml', 'utf8'));
-  console.log(CONFIG);
 } catch (e) {
   console.log(e);
 }

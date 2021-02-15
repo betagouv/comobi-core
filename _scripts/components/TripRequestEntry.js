@@ -77,7 +77,7 @@ dans ce cas on ajouter une validation sur l'input
 */
 const CityInput = ({ label, validPlaceNames, value, setValue }) => {
     const validation = config.liste_ville !== undefined && config.liste_ville.restreinte.toLowerCase() === "oui";
-    return validation ? inputWithValidation(validation, label, validPlaceNames, value, setValue)
+    return validation ? inputWithValidation(label, validPlaceNames, value, setValue)
         : inputWithOutValidation(label, value, setValue)
 }
 
