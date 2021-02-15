@@ -53,13 +53,13 @@ const inputWithValidation = (label, validPlaceNames, value, setValue) => {
         <${cityInputElement}
             type="text"
             list=${datalistId}
-            pattern=${pattern}
             value=${value}
             onChange=${e => {
                 e.target.setCustomValidity('');
                 const value = e.target.value
                 setValue(value)
             }}
+            pattern=${pattern}
             onInvalid=${e => {
                 e.target.setCustomValidity(validationMessage);
             }}
@@ -76,9 +76,9 @@ alors la valeur saisie doit être comprise dans cette liste
 dans ce cas on ajouter une validation sur l'input
 */
 const CityInput = ({ label, validPlaceNames, value, setValue }) => {
-    return config.liste_ville !== undefined && config.liste_ville.restreinte === "oui" ?  
-        inputWithValidation(label, validPlaceNames, value, setValue)
-        : inputWithOutValidation(label, value, setValue);
+    const validation = config.liste_ville !== undefined && config.liste_ville.restreinte.toLowerCase() === "oui";
+    return validation ? inputWithValidation(validation, label, validPlaceNames, value, setValue)
+        : inputWithOutValidation(label, value, setValue)
 }
 
 export default function TripRequestEntry({
