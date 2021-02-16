@@ -6,8 +6,8 @@ import getLotocarPositionByPlace from './spreadsheetDatabase/getLotocarPositionB
 import positionByPlace from './geography/positionByPlace.js'
 import getPlacesPosition from './server/getPlacesPosition.js'
 
-const yaml = require('js-yaml');
-const fs   = require('fs');
+import yaml from 'js-yaml';
+import fs from 'fs';
 
 import driverTripProposalsRoute, {
 	PASSAGER_CONTACT_DIRECT_ACCEPT
