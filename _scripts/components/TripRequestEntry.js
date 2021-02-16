@@ -56,16 +56,6 @@ const CityInput = ({ label, validPlaceNames, value, setValue }) => {
     `
 }
 
-/** Si la liste est restreinte à une liste donnée
-alors la valeur saisie doit être comprise dans cette liste
-dans ce cas on ajouter une validation sur l'input
-*/
-const CityInput = ({ label, validPlaceNames, value, setValue }) => {
-    const validation = config.liste_ville !== undefined && config.liste_ville.restreinte.toLowerCase() === "oui";
-    return validation ? inputWithValidation(label, validPlaceNames, value, setValue)
-        : inputWithOutValidation(label, value, setValue)
-}
-
 export default function TripRequestEntry({
     tripRequest,
     validPlaceNames,
