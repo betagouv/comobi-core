@@ -20,28 +20,13 @@ const datalistId = "valid-place-names"
 // This is a band-aid; the root cause has not been found
 const styledLabel = styled.label` display: block; `
 
-const inputWithOutValidation = (label, value, setValue) => {
-    return html`
-<${styledLabel}>
-    <${styled.strong`
-        display: inline-block;
-        width: 4.5rem;
-    `}>${label}</strong>
-    <${cityInputElement}
-        type="text"
-        list=${datalistId}
-        value=${value}
-        onChange=${e => {
-            e.target.setCustomValidity('');
-            const value = e.target.value
-            setValue(value)
-        }}
-    />
-</label>
-`}
-
-const inputWithValidation = (label, validPlaceNames, value, setValue) => {
-    const pattern = validPlaceNames.map(s => escapeRegexp(s)).join('|')
+/** Si la liste est restreinte à une liste donnée
+alors la valeur saisie doit être comprise dans cette liste
+dans ce cas on ajouter une validation sur l'input
+*/
+const CityInput = ({ label, validPlaceNames, value, setValue }) => {
+    const validation = config.liste_ville_restreinte !== undefined && config.liste_ville_restreinte.toLowerCase() === "oui";
+    const pattern = validation ? validPlaceNames.map(s => escapeRegexp(s)).join('|') : undefined;
     const validationMessage = `Vous devez saisir un de ces lieux : ${validPlaceNames.join(', ')}`
 
     return html`
@@ -59,26 +44,16 @@ const inputWithValidation = (label, validPlaceNames, value, setValue) => {
                 const value = e.target.value
                 setValue(value)
             }}
-            pattern=${pattern}
-            onInvalid=${e => {
+            pattern=${validation ? pattern : undefined}
+            onInvalid=${validation ? e => {
                 e.target.setCustomValidity(validationMessage);
-            }}
-            onBlur=${e => {
+            } : undefined}
+            onBlur=${validation ? e => {
                 e.target.checkValidity() // this triggers an 'invalid' event if input is invalid
-            }}
+            }:undefined}
         />
     </label>
     `
-}
-
-/** Si la liste est restreinte à une liste donnée
-alors la valeur saisie doit être comprise dans cette liste
-dans ce cas on ajouter une validation sur l'input
-*/
-const CityInput = ({ label, validPlaceNames, value, setValue }) => {
-    const validation = config.liste_ville !== undefined && config.liste_ville.restreinte.toLowerCase() === "oui";
-    return validation ? inputWithValidation(label, validPlaceNames, value, setValue)
-        : inputWithOutValidation(label, value, setValue)
 }
 
 export default function TripRequestEntry({
