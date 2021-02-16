@@ -1,11 +1,20 @@
 <footer>
 	<section class="footer">
-  	<div>
-  		{{ site.titre }}
-  	</div>
-    <div>
-      <p>Email :  <a href="mailto:{{ site.mail }}">{{ site.mail }} <a></p>
-      <p>Tél : <a href="tel:{{ site.tel }}">{{ site.tel }} <a> </p>
-    </div>
+		<div class="comobi">
+			<p>Distribué par <img src="images/logo-comobi-sfb.png" /> </p>
+			<a href="http://wwww.comobi.fr">site internet</a>
+			<a href="{{ site.codesource.comobi }}">code source Comobi</a>
+			<a href="{{ site.codesource.instance }}">code source {{ site.titre }}</a>
+		</div>
+		<div class="center">
+				<p>Nous contacter - {{ site.titre }} <br /> </p>
+				<p>Email :  <a href="mailto:{{ site.mail }}">{{ site.mail }} </a></p>
+				<p>Tél : <a href="tel:{{ site.tel }}">{{ site.tel }} </a> </p>
+		</div>
+		<div class="logo-list">
+				<img src="images/ANCT_logo.jpg"/>
+				<img src="images/beta_gouv_logo.jpg"/>
+				<img src="images/ademe_logo.jpg"/>
+		</div>
 	</section>
 </footer>

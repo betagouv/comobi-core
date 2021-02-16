@@ -73,22 +73,42 @@ a[href^='tel:']::before {
 }
 
 .footer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 	background: $footer-background;
 	color: white;
-	padding: 0.3rem 1rem;
+	padding: 1.3rem 4rem;
 	text-align: center;
+	width: 100%;
 	p {
 		margin: 0;
 	}
 	a {
 		color: white;
 	}
+	img {
+		width: 100px;
+		padding: 2px;
+	}
+	div {
+		flex: 1;
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		align-content: center;
+	}
+	.logo-list {
+		align-items: center;
+	}
+	.comobi img {
+		width: 80px;
+	}
 }
 
 .header {
 	display: block;
 	width: 100%;
-	background-color: $header-background;
 
 	img {
 		max-width: 100%;
@@ -106,7 +126,6 @@ a[href^='tel:']::before {
 	position: relative;
 	margin-top: 0px;
 	padding: 1rem calc(max(5px, -25em + 50vw));
-	background-color: $header-background;
 
 	div {
 		display: flex;
@@ -267,5 +286,14 @@ section.home-section {
 @media only screen and (min-width: 768px) {
 	.btn-list {
 		flex-direction: row;
+	}
+	.footer {
+		flex-direction: row;
+		.comobi {
+			align-items: flex-start;
+		}
+	}
+	.logo-list {
+		align-items: flex-end!important;
 	}
 }
