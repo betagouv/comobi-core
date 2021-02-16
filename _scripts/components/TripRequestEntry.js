@@ -2,11 +2,7 @@ import React, { useState } from 'react'
 import htm from 'htm'
 import styled from 'styled-components'
 import escapeRegexp from 'escape-string-regexp'
-<<<<<<< HEAD
-const config = require('../../_config.yml')
-=======
 import config from '../../_config.yml'
->>>>>>> 1566d8f9fd82769aca8172f4e6cd8e2e3d053e07
 const html = htm.bind(React.createElement)
 
 const cityInputElement = styled.input`
