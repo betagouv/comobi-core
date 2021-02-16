@@ -1,0 +1,37 @@
+titre: <titre sur site>
+mail: <adresse mail de contact>
+tel: <numéro de téléphone de contact>
+nom: <nom de l'instance>
+formulaire: <adresse du formulaire d'inscription d'un conducteur>
+formulaire_passager: <adresse du formulaire d'inscription d'un passager>
+
+couleurs: 
+  bouton_rechercher: <couleur du bouton rechercher>
+  bouton_proposer: <couleur du bonton proposer>
+  odd_section_color: <couleur de fond des sections d'index pair>
+  header_btn_section: <couleur de fond de la section avec une liste de bouton dans le haut de page>
+
+bandeau:
+  image: <path de la bannière /image/[...]>
+  texte: <alt de l'image, affiché au survol avec la souris>
+
+liste_ville_restreinte: <oui ou non, restreindre la liste des villes dans le formulaire de recherche (non par défaut)>
+
+## Les sections suivantes ne sont pas à modifier
+sass:
+  sass_dir: _sass
+  style: compressed
+
+exclude:
+  - direct/
+  - outil-metier/
+
+code_source:
+  instance: https://github.com/betagouv/neutre.comobi.fr
+  comobi: https://github.com/betagouv/comobi
+
+defaults:
+  - scope:
+      path: "assets/img"
+    values:
+      image: true
