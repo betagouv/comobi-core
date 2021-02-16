@@ -88,7 +88,7 @@ a[href^='tel:']::before {
 		color: white;
 	}
 	img {
-		width: 50px;
+		width: 100px;
 		padding: 2px;
 	}
 	div {
@@ -109,7 +109,6 @@ a[href^='tel:']::before {
 .header {
 	display: block;
 	width: 100%;
-	background-color: $header-background;
 
 	img {
 		max-width: 100%;
@@ -127,7 +126,6 @@ a[href^='tel:']::before {
 	position: relative;
 	margin-top: 0px;
 	padding: 1rem calc(max(5px, -25em + 50vw));
-	background-color: $header-background;
 
 	div {
 		display: flex;
