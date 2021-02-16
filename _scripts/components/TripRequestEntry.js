@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import htm from 'htm'
 import styled from 'styled-components'
+import escapeRegexp from 'escape-string-regexp'
+import config from '../../_config.yml'
 const html = htm.bind(React.createElement)
 
 const cityInputElement = styled.input`
@@ -18,25 +20,39 @@ const datalistId = "valid-place-names"
 // This is a band-aid; the root cause has not been found
 const styledLabel = styled.label` display: block; `
 
+/** Si la liste est restreinte à une liste donnée
+alors la valeur saisie doit être comprise dans cette liste
+dans ce cas on ajouter une validation sur l'input
+*/
 const CityInput = ({ label, validPlaceNames, value, setValue }) => {
+    const validation = config.liste_ville_restreinte !== undefined && config.liste_ville_restreinte.toLowerCase() === "oui";
+    const pattern = validation ? validPlaceNames.map(s => escapeRegexp(s)).join('|') : undefined;
+    const validationMessage = `Vous devez saisir un de ces lieux : ${validPlaceNames.join(', ')}`
 
     return html`
-        <${styledLabel}>
-            <${styled.strong`
-                display: inline-block;
-                width: 4.5rem;
-            `}>${label}</strong>
-            <${cityInputElement}
-                type="text"
-                list=${datalistId}
-                value=${value}
-                onChange=${e => {
-                    e.target.setCustomValidity('');
-                    const value = e.target.value
-                    setValue(value)
-                }}
-            />
-        </label>
+    <${styledLabel}>
+        <${styled.strong`
+            display: inline-block;
+            width: 4.5rem;
+        `}>${label}</strong>
+        <${cityInputElement}
+            type="text"
+            list=${datalistId}
+            value=${value}
+            onChange=${e => {
+                e.target.setCustomValidity('');
+                const value = e.target.value
+                setValue(value)
+            }}
+            pattern=${validation ? pattern : undefined}
+            onInvalid=${validation ? e => {
+                e.target.setCustomValidity(validationMessage);
+            } : undefined}
+            onBlur=${validation ? e => {
+                e.target.checkValidity() // this triggers an 'invalid' event if input is invalid
+            } : undefined}
+        />
+    </label>
     `
 }
 
