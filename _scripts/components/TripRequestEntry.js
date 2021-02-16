@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import htm from 'htm'
 import styled from 'styled-components'
 import escapeRegexp from 'escape-string-regexp'
-const config = require('../../_config.yml')
+import config from '../../_config.yml'
 const html = htm.bind(React.createElement)
 
 const cityInputElement = styled.input`
@@ -50,7 +50,7 @@ const CityInput = ({ label, validPlaceNames, value, setValue }) => {
             } : undefined}
             onBlur=${validation ? e => {
                 e.target.checkValidity() // this triggers an 'invalid' event if input is invalid
-            }:undefined}
+            } : undefined}
         />
     </label>
     `
