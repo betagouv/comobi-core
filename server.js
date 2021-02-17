@@ -151,6 +151,12 @@ app.get('/recherche', function(req, res) {
 	})
 })
 
+app.get('/cgu', function(req, res) {
+	res.sendFile('cgu.html', {
+		root: __dirname
+	})
+})
+
 app.get('/*', function(req, res) {
 	res.sendFile('404.html', {
 		root: __dirname
