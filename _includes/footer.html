@@ -5,7 +5,7 @@
 			<a href="http://wwww.comobi.fr">site internet</a>
 			<a href="{{ site.code_source.comobi }}" target="_blank">code source Comobi</a>
 			<a href="{{ site.code_source.instance }}" target="_blank">code source {{ site.titre }}</a>
-			<a href="{{ site.lien_cgu }}">Conditions Générales D'utilisation</a>
+			<a href="{{ site.lien_cgu | default: '/cgu' }}">Conditions Générales D'utilisation</a>
 		</div>
 		<div class="center">
 				<p>Nous contacter - {{ site.titre }} <br /> </p>
