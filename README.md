@@ -37,6 +37,9 @@ L'idée est de généraliser et de rendre plus générique le projet Lot'ô car 
 - les pages statiques en markdown:
   - index.md
   - recherche.md
+#### Ajouter une nouvelle page
+- ajouter une page __.md___
+- ajouter une route dans le fichier server.js
 
 #### Base de connaissance de localisation
 
