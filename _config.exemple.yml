@@ -4,6 +4,7 @@ tel: <numéro de téléphone de contact>
 nom: <nom de l'instance>
 formulaire: <adresse du formulaire d'inscription d'un conducteur>
 formulaire_passager: <adresse du formulaire d'inscription d'un passager>
+lien_cgu: "/cgu"
 
 couleurs: 
   bouton_rechercher: <couleur du bouton rechercher>

@@ -151,6 +151,15 @@ app.get('/recherche', function(req, res) {
 	})
 })
 
+if (CONFIG.lien_cgu !== undefined && CONFIG.lien_cgu === "/cgu") {
+	// On s'attend à ce que la page soit sur le site
+	app.get('/cgu', function(req, res) {
+		res.sendFile('cgu.html', {
+			root: __dirname
+		})
+	})
+}
+
 app.get('/*', function(req, res) {
 	res.sendFile('404.html', {
 		root: __dirname
