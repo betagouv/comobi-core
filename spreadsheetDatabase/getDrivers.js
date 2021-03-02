@@ -25,6 +25,23 @@ const CONDUCTEUR_PROPS = [
 	'Remarques éventuelles'
 ]
 
+export const keepRelevantDrivers = (dataRows) => {
+	return dataRows
+		.map(row => {
+			const conducteur = Object.create(null)
+			CONDUCTEUR_PROPS.forEach((prop, i) => {
+				conducteur[prop] = row[i]
+			})
+			return conducteur
+		})
+		.filter(
+			c =>
+				c['Départ'] &&
+				c['Arrivée'] &&
+				(c['N° de téléphone'] || c['Adresse e-mail'])
+		)
+}
+
 export default function getDrivers() {
 	return new Promise((resolve, reject) => {
 		sheets.spreadsheets.values.get(
@@ -40,23 +57,7 @@ export default function getDrivers() {
 
 					// first row is column names, ignoring
 					const dataRows = rows.slice(1)
-
-					const conducteurs = dataRows
-						.map(row => {
-							const conducteur = Object.create(null)
-
-							CONDUCTEUR_PROPS.forEach((prop, i) => {
-								conducteur[prop] = row[i]
-							})
-							return conducteur
-						})
-						.filter(
-							c =>
-								c['Départ'] &&
-								c['Arrivée'] &&
-								(c['N° de téléphone'] || c['Adresse e-mail'])
-						)
-					resolve(conducteurs)
+					resolve(keepRelevantDrivers(dataRows))
 				}
 			}
 		)
