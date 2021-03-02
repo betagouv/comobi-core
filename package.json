@@ -11,7 +11,7 @@
 		"dev": "npm run dev:direct; PORT=5000 NODE_ENV=development nodenv -E .env _site/server.js --exec 'node -r esm'",
 		"dev:direct": "(NODE_ENV=development webpack --config webpack.config.js; jekyll build)",
 		"dev:outil-metier": "PORT=5001 NODE_ENV=development nodenv -E outil-metier/.env outil-metier/server.js --exec 'node -r esm'",
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"test": "ava"
 	},
 	"engines": {
 		"node": ">=12"
@@ -61,10 +61,16 @@
 	"devDependencies": {
 		"@babel/core": "^7.6.4",
 		"@babel/preset-env": "^7.6.3",
+		"ava": "^3.15.0",
 		"babel-loader": "^8.0.6",
 		"file-loader": "^4.2.0",
 		"js-yaml-loader": "^1.2.2",
 		"node-env-run": "^4.0.2",
 		"webpack-cli": "^4.2.0"
+	},
+	"ava": {
+		"require": [
+			"esm"
+		]
 	}
 }
