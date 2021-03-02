@@ -1,4 +1,5 @@
 import { google } from 'googleapis'
+import { parse, isBefore } from 'date-fns'
 
 const googleAPIKey = process.env.GOOGLE_API_KEY
 const googleDriverSpreadsheetId = process.env.GOOGLE_DRIVER_SPREADSHEET_ID
@@ -35,10 +36,17 @@ export const keepRelevantDrivers = (dataRows) => {
 			return conducteur
 		})
 		.filter(
-			c =>
-				c['Départ'] &&
+			c => {
+				let date
+				const jour = c['Jour']
+				if (jour) {
+					date = parse(jour, 'dd/MM/yyyy', new Date())
+				}
+				return c['Départ'] &&
 				c['Arrivée'] &&
-				(c['N° de téléphone'] || c['Adresse e-mail'])
+				(c['N° de téléphone'] || c['Adresse e-mail']) &&
+				(c['Jours'] || (c['Jour'] && isBefore(new Date(), date)))
+			}
 		)
 }
 

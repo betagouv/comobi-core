@@ -40,7 +40,7 @@ const tripWithoutDate = [
   'Je consens'
 ]
 
-const recurrentTrip = [
+/*const recurrentTrip = [
   '04/02/2021 17:59:27',
   'Lattes',
   'Montpellier',
@@ -50,18 +50,42 @@ const recurrentTrip = [
   '06:00:00',
   '17:00:00',
   'Le covoiturage régulier (partage des frais à définir avec le passager, ou alternance de véhicule etc.)',
-  'Audrey',
-  'Bramy',
-  '+33638814798',
-  'audrey.bramy@gmail.com',
+  'Test',
+  'Test',
+  '+336000000',
+  'tst@test.com',
+  'Email',
+  'Prospectus, Flyer',
+  'Je consens'
+]*/
+
+const tripWithDateInThePast = [
+  '04/02/2021 17:59:27',
+  'Lattes',
+  'Montpellier',
+  '',
+  '',
+  '01/02/2021',
+  '06:00:00',
+  '17:00:00',
+  'Le covoiturage régulier (partage des frais à définir avec le passager, ou alternance de véhicule etc.)',
+  'Test',
+  'Test',
+  '+336000000',
+  'tst@test.com',
   'Email',
   'Prospectus, Flyer',
   'Je consens'
 ]
 
-const dataRowTest = [ tripWithoutDate, recurrentTrip]
-
 test('server should not be send trip with no date', t => {
+  const dataRowTest = [ tripWithoutDate ]
   const relevantDrivers = keepRelevantDrivers(dataRowTest)
-  t.is(relevantDrivers.length, 1);
+  t.is(relevantDrivers.length, 0);
+});
+
+test('server should not be send trip with date in the past', t => {
+  const dataRowTest = [ tripWithDateInThePast ]
+  const relevantDrivers = keepRelevantDrivers(dataRowTest)
+  t.is(relevantDrivers.length, 0);
 });
