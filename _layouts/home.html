@@ -1,7 +1,7 @@
 ---
 layout: default
 ---
-{% if site.haut_de_page_liste_boutons == false or site.haut_de_page_liste_boutons == 'oui'  %}
+{% if site.haut_de_page_liste_boutons == nil or site.haut_de_page_liste_boutons == 'oui'  %}
 <section class="btn-list">
     <a href="/recherche" class="search" target="_blank">Rechercher un trajet</a>
     <a href="{{ site.formulaire }}" class="proposal" target="_blank">Proposer mon trajet</a>
