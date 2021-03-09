@@ -58,7 +58,7 @@ export default function DriversList({
 		)
 
 	const directTrips = tripsByAdditionalTime(time => time < 5, 1),
-		trips10 = tripsByAdditionalTime(time => time >= 10 && time < 20, 2),
+		trips10 = tripsByAdditionalTime(time => time >= 5 && time < 20, 2),
 		trips20 = tripsByAdditionalTime(time => time >= 20 && time < 45, 3)
 	
 	const hasNoTrip = directTrips === undefined && trips10 === undefined && trips20 === undefined;
@@ -102,7 +102,7 @@ export default function DriversList({
 			${trips10 &&
 				html`
 					<small key="10">
-						Un <em>détour de plus de 10 minutes</em> sera nécessaire pour vousrécupérer :</small>
+						Un <em>détour de plus de 5 minutes</em> sera nécessaire pour vousrécupérer :</small>
 					${trips10}
 				`}
 			${trips20 &&
