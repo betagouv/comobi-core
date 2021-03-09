@@ -1,5 +1,5 @@
 import { google } from 'googleapis'
-import { parse, isBefore } from 'date-fns'
+import { parse, isBefore, addDays } from 'date-fns'
 
 const googleAPIKey = process.env.GOOGLE_API_KEY
 const googleDriverSpreadsheetId = process.env.GOOGLE_DRIVER_SPREADSHEET_ID
@@ -40,7 +40,7 @@ export const keepRelevantDrivers = (dataRows) => {
 				let date
 				const jour = c['Jour']
 				if (jour) {
-					date = parse(jour, 'dd/MM/yyyy', new Date())
+					date = addDays(parse(jour, 'dd/MM/yyyy', new Date()), 1)
 				}
 				return c['Départ'] &&
 				c['Arrivée'] &&

@@ -19,7 +19,9 @@ export default function computeTripDetails(proposedTrips, tripRequest, positionB
     const tripDetailsByTrip = new Map()
 
     for(const proposedTrip of proposedTrips){
-        const tripPositionsWithDetour = [proposedTrip.origin, tripRequest.origin, tripRequest.destination, proposedTrip.destination].map(place => positionByPlace.get(place))
+        const tripPositionsWithDetour = 
+        [proposedTrip.origin, tripRequest.origin, tripRequest.destination, proposedTrip.destination]
+            .map(place => positionByPlace.get(place))
 
         // if not all positions have a place, do not compute
         if(tripPositionsWithDetour.every(p => Object(p) === p)){

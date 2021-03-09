@@ -1,5 +1,8 @@
-import test from 'ava';
-import { keepRelevantDrivers } from '../spreadsheetDatabase/getDrivers';
+import test from 'ava'
+import { keepRelevantDrivers } from '../spreadsheetDatabase/getDrivers'
+import { format, subDays  } from 'date-fns'
+import Store from 'baredux'
+import _actions from '../_scripts/actions.js'
 
 /*const CONDUCTEUR_PROPS = [
 	'Date',
@@ -61,11 +64,11 @@ const tripWithoutDate = [
 
 const tripWithDateInThePast = [
   '04/02/2021 17:59:27',
-  'Lattes',
+  'Sète',
   'Montpellier',
   '',
   '',
-  '01/02/2021',
+  format(subDays(new Date(), 1), 'dd/MM/yyyy'),
   '06:00:00',
   '17:00:00',
   'Le covoiturage régulier (partage des frais à définir avec le passager, ou alternance de véhicule etc.)',
@@ -78,14 +81,63 @@ const tripWithDateInThePast = [
   'Je consens'
 ]
 
+const tripWithTodayDate = [
+  '04/02/2021 17:59:27',
+  'Sète',
+  'Montpellier',
+  '',
+  '',
+  format(new Date(), 'dd/MM/yyyy'),
+  '06:00:00',
+  '17:00:00',
+  'Le covoiturage régulier (partage des frais à définir avec le passager, ou alternance de véhicule etc.)',
+  'Test',
+  'Test',
+  '+336000000',
+  'tst@test.com',
+  'Email',
+  'Prospectus, Flyer',
+  'Je consens'
+]
+
+// Test getDrivers() function
 test('server should not be send trip with no date', t => {
   const dataRowTest = [ tripWithoutDate ]
   const relevantDrivers = keepRelevantDrivers(dataRowTest)
   t.is(relevantDrivers.length, 0);
 });
 
-test('server should not be send trip with date in the past', t => {
+test('server should send trip with today date', t => {
   const dataRowTest = [ tripWithDateInThePast ]
   const relevantDrivers = keepRelevantDrivers(dataRowTest)
   t.is(relevantDrivers.length, 0);
+});
+
+test('server should not be send trip with date in the past', t => {
+  const dataRowTest = [ tripWithTodayDate ]
+  const relevantDrivers = keepRelevantDrivers(dataRowTest)
+  t.is(relevantDrivers.length, 1);
+});
+
+//
+const tripFromSèteToMontpellier = [
+  '04/02/2021 17:59:27',
+  'Sète',
+  'Montpellier',
+  '',
+  '',
+  format(new Date(), 'dd/MM/yyyy'),
+  '06:00:00',
+  '17:00:00',
+  'Le covoiturage régulier (partage des frais à définir avec le passager, ou alternance de véhicule etc.)',
+  'Test',
+  'Test',
+  '+336000000',
+  'tst@test.com',
+  'Email',
+  'Prospectus, Flyer',
+  'Je consens'
+]
+test('trip that correspond to the search from Sète to Montpellier should be displayed', t => {
+
 });
