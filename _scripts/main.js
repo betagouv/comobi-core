@@ -63,6 +63,7 @@ function renderUI(store) {
 
 	const proposedTrips = [...tripProposalsByTrip.keys()]
 
+	// TODO done in findrelevent blabla : to me removed ? 
 	const tripDetailsByTrip = computeTripDetails(
 		proposedTrips,
 		tripRequest,

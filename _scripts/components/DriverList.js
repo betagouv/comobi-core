@@ -20,7 +20,8 @@ export default function DriversList({
 	tripDetailsByTrip,
 	tripRequest
 }) {
-	const orderedTrips = [...tripProposalsByTrip.keys()]
+	// TODO : use findRelevantTripProposals
+	let orderedTrips = [...tripProposalsByTrip.keys()]
 		.filter(trip => tripDetailsByTrip.has(trip))
 		.map(trip => {
 			const tripDetails = tripDetailsByTrip.get(trip)
@@ -31,8 +32,9 @@ export default function DriversList({
 			const detour = computeDetour(originalDistance, distanceWithDetour)
 			return [trip, detour]
 		})
-		.sort(
-			([_1, { additionalTime: a1 }], [_2, { additionalTime: a2 }]) => a1 - a2
+	
+	orderedTrips.sort(
+		([_1, { additionalTime: a1 }], [_2, { additionalTime: a2 }]) => a1 - a2
 		)
 
 	if (!validTripRequest){
@@ -116,11 +118,13 @@ export default function DriversList({
 }
 
 const displayTrips = (key, tripProposalsByTrip, trips, tripRequest, filter) => {
+	console.log(displayTrips)
+	console.log(trips);
 	let selectedTrips = trips
 		.slice(0, 20)
 		.filter(filter)
 		.map(([trip], i) => {
-			
+			console.log([trip])
 			// get all tripProposal corresponding to the object trip {origin, destination}
 			const tripProposals = tripProposalsByTrip.get(trip)
 			return tripProposals.map(

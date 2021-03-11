@@ -1,3 +1,4 @@
+// this function has been moved in findeRelevantTripProposals
 import LatLon from 'geodesy/latlon-spherical.js';
 
 function distance2(p1, p2){
@@ -17,6 +18,13 @@ function distance(...points){
 
 export default function computeTripDetails(proposedTrips, tripRequest, positionByPlace){
     const tripDetailsByTrip = new Map()
+
+    console.log('proposedTrips')
+    console.log(proposedTrips)
+    console.log('tripRequest')
+    console.log(tripRequest)
+    console.log('positionByPlace')
+    console.log(positionByPlace.get("Montpellier"))
 
     for(const proposedTrip of proposedTrips){
         const tripPositionsWithDetour = 

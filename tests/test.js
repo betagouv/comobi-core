@@ -1,9 +1,7 @@
 import test from 'ava'
-import { keepRelevantDrivers } from '../spreadsheetDatabase/getDrivers'
+import { keepRelevantDrivers } from '../spreadsheetDatabase/getDrivers.js'
 import { format, subDays  } from 'date-fns'
-import Store from 'baredux'
-import _actions from '../_scripts/actions.js'
-
+import { findRelevantTripProposals } from '../server/findRelevantTripProposals.js'
 /*const CONDUCTEUR_PROPS = [
 	'Date',
 	'Départ',
@@ -119,25 +117,19 @@ test('server should not be send trip with date in the past', t => {
   t.is(relevantDrivers.length, 1);
 });
 
-//
-const tripFromSèteToMontpellier = [
-  '04/02/2021 17:59:27',
-  'Sète',
-  'Montpellier',
-  '',
-  '',
-  format(new Date(), 'dd/MM/yyyy'),
-  '06:00:00',
-  '17:00:00',
-  'Le covoiturage régulier (partage des frais à définir avec le passager, ou alternance de véhicule etc.)',
-  'Test',
-  'Test',
-  '+336000000',
-  'tst@test.com',
-  'Email',
-  'Prospectus, Flyer',
-  'Je consens'
-]
-test('trip that correspond to the search from Sète to Montpellier should be displayed', t => {
-
+test('trip that correspond to the search from Castries to Montpellier should be displayed', t => {
+  const proposedTrip = [
+    { origin: "castries", destination: "montpellier" },
+    { origin: "montpellier", destination: "castries" }, 
+    { origin: "Clapiers", destination: "Montpellier" }, 
+    { origin: "Montpellier", destination: "Clapiers" },
+  ]
+  const tripRequest = { origin: "castries", destination: "montpellier" };
+  const positionByPlace = { 
+    "castries": { latitude: 43.6183, longitude: 3.8592 },
+    "montpellier": { latitude: 43.610769, longitude: 3.876716 },
+    "clapiers": { latitude: 43.65, longitude: 3.8833 },
+  };
+  const relevantTrip = findRelevantTripProposals(tripRequest, tripProposalsByTrip, positionByPlace);
+  console.log(relevantTripWithPositions);
 });
