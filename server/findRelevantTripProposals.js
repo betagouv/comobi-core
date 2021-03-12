@@ -20,6 +20,7 @@ export default (tripRequest, tripProposalsByTrip, positionByPlace)  => {
 			return [trip, additionalTime]
 		})
 		.sort(
+			// @ts-ignore
 			([_1, additionalTime1], [_2, additionalTime2]) => additionalTime1 - additionalTime2
 		)
 }

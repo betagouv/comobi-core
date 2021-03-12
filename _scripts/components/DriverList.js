@@ -4,6 +4,7 @@ import htm from 'htm'
 import styled from 'styled-components'
 import TripProposal from './TripProposal'
 import findRelevantTripProposals  from '../../server/findRelevantTripProposals.js'
+// @ts-ignore
 import config from '../../_config.yml'
 
 const html = htm.bind(React.createElement)

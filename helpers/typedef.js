@@ -33,3 +33,18 @@
   * @property {number} [originalDistance=0]
   * @property {number} [distanceWithDetour=Infinity]
   */
+
+  /**
+ * @typedef {Object} State
+ * @property {Map<Trip, TripProposal>} tripProposalsByTrip
+ * @property {Map<string, Position>} positionByPlace
+ * @property {Trip} tripRequest
+ * @property {string[]} validPlaceNames
+ */
+
+ /**
+  * @typedef {Object} Store
+  * @param {State} state 
+  * @param {Map<string, any>} mutations
+  */
+
