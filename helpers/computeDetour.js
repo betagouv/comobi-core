@@ -1,10 +1,18 @@
+// @ts-check
+import "../helpers/typedef"
+
 const KM = 1000 // meters
 const AVERAGE_SPEED = 60 / 60 // km/min
 const STRAIGHT_LINE_TO_ROAD_DISTANCE_RATIO = 1.4
 
-export default (originalDistance, distanceWithDetour) => {
+/**
+ * 
+ * @param {TripDetails} tripDetails
+ * @return {number}
+ */
+export default (tripDetails) => {
 	const additionalDistanceKM =
-		((distanceWithDetour - originalDistance) *
+		((tripDetails.distanceWithDetour - tripDetails.originalDistance) *
 			STRAIGHT_LINE_TO_ROAD_DISTANCE_RATIO) /
 		KM
 
@@ -16,5 +24,6 @@ export default (originalDistance, distanceWithDetour) => {
 				: 'major-detour'
 
 	const additionalTime = additionalDistanceKM * AVERAGE_SPEED
-	return { additionalTime, detourClass }
+	// detourClass is never used so I removed it
+	return additionalTime
 }

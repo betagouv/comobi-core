@@ -12,7 +12,7 @@ const html = htm.bind(React.createElement)
 let Main = function({
 	tripProposalsByTrip,
 	tripRequest,
-	tripDetailsByTrip,
+	positionByPlace,
 	validPlaceNames,
 	onTripRequestChange
 }) {
@@ -32,8 +32,8 @@ let Main = function({
 			...${{
 				tripProposalsByTrip,
 				tripRequest,
-				tripDetailsByTrip,
 				validPlaceNames,
+				positionByPlace,
 				onTripRequestChange
 			}}<//>
 			<//>
