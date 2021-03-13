@@ -1,7 +1,7 @@
 // @ts-check
 import computeTripDetails from "../geography/computeTripDetails.js";
 import computeDetour from "../helpers/computeDetour.js";
-import "../helpers/typedef"
+import "../helpers/typedef.js"
 
 /**
  * @param {Trip}  tripRequest

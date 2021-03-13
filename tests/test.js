@@ -1,7 +1,8 @@
 import test from 'ava'
 import { keepRelevantDrivers } from '../spreadsheetDatabase/getDrivers.js'
 import { format, subDays  } from 'date-fns'
-import { findRelevantTripProposals } from '../server/findRelevantTripProposals.js'
+import findRelevantTripProposals from '../server/findRelevantTripProposals.js';
+
 /*const CONDUCTEUR_PROPS = [
 	'Date',
 	'Départ',

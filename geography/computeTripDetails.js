@@ -1,7 +1,7 @@
 // this function has been moved in findeRelevantTripProposals
 // @ts-check
 import LatLon from 'geodesy/latlon-spherical.js';
-import "../helpers/typedef"
+import "../helpers/typedef.js"
 
 /**
  * 

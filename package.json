@@ -13,6 +13,7 @@
 		"dev:outil-metier": "PORT=5001 NODE_ENV=development nodenv -E outil-metier/.env outil-metier/server.js --exec 'node -r esm'",
 		"test": "ava"
 	},
+	"type": "module",
 	"engines": {
 		"node": ">=12"
 	},

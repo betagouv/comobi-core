@@ -1,5 +1,5 @@
 // @ts-check
-import "../helpers/typedef"
+import "../helpers/typedef.js"
 
 const KM = 1000 // meters
 const AVERAGE_SPEED = 60 / 60 // km/min
