@@ -1,6 +1,9 @@
+import * as path from 'path'
 import express from 'express'
 import cors from 'cors'
 import got from 'got'
+import { fileURLToPath } from 'url';
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 import getLotocarPositionByPlace from './spreadsheetDatabase/getLotocarPositionByPlace.js'
 import positionByPlace from './geography/positionByPlace.js'
