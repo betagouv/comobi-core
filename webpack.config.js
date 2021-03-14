@@ -1,9 +1,9 @@
-// You can't use import statements here
-let webpack = require('webpack')
-let path = require('path')
-let common = require('./webpack.common.js')
+import * as path from 'path'
+import { common } from './webpack.common.js'
+import { fileURLToPath } from 'url';
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-module.exports = {
+export default {
 	...common,
 	entry: [
 		...(common.mode === 'development' ? ['webpack-hot-middleware/client'] : []),
