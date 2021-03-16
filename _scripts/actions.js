@@ -13,11 +13,8 @@ export default function _actions(store) {
 			const { origin, destination } = tripRequest
 			tripRequest = undefined
 			const trip = makeTrip(origin, destination)
-		
 			const proposedTrips = [...store.state.tripProposalsByTrip.keys()]
-		
 			const positionByPlace = store.state.positionByPlace
-		
 			const placesWithoutPositions = new Set([
 				...proposedTrips
 					.map(({ origin, destination }) => [origin, destination])
@@ -32,7 +29,6 @@ export default function _actions(store) {
 			const newPositionByPlaceP = getPlacesPosition(placesWithoutPositions)
 				.then(positionByPlace => {
 					store.mutations.addPositions(positionByPlace)
-		
 					if (
 						!store.state.positionByPlace.has(trip.origin) ||
 						!store.state.positionByPlace.has(trip.destination)
