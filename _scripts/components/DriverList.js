@@ -3,7 +3,7 @@ import React from 'react'
 import htm from 'htm'
 import styled from 'styled-components'
 import TripProposal from './TripProposal'
-import findRelevantTripProposals  from '../../server/findRelevantTripProposals.js'
+import { getAdditionnalTimeByTrip, getRelevantTrip }  from '../../server/findRelevantTripProposals.js'
 // @ts-ignore
 import config from '../../_config.yml'
 
@@ -36,114 +36,97 @@ export default function DriversList({
 			</div>
 		`
 	} else {
-		orderedTrips = findRelevantTripProposals(tripRequest, tripProposalsByTrip, positionByPlace);
-		const tripsByAdditionalTime = (request, key) =>
-			displayTrips(
-				key,
-				tripProposalsByTrip,
-				orderedTrips,
-				tripRequest,
-				([_, additionalTime]) => request(additionalTime)
-			)
+		orderedTrips = getAdditionnalTimeByTrip(tripRequest, tripProposalsByTrip, positionByPlace);
+		const directTripList = getRelevantTrip(tripProposalsByTrip, orderedTrips, time => time < 5),
+			trip10List = getRelevantTrip(tripProposalsByTrip, orderedTrips, time => time >= 5 && time < 20),
+			trip20List = getRelevantTrip(tripProposalsByTrip, orderedTrips, time => time >= 20 && time < 45);
 
-	const tripsByAdditionalTime = (request, key) =>
-		displayTrips(
-			key,
-			tripProposalsByTrip,
-			orderedTrips,
-			tripRequest,
-			([_, { additionalTime }]) => request(additionalTime)
-		)
+		const hasNoTrip = directTripList === undefined && trip10List === undefined && trip20List === undefined;
 
-	const directTrips = tripsByAdditionalTime(time => time < 5, 1),
-		trips10 = tripsByAdditionalTime(time => time >= 5 && time < 20, 2),
-		trips20 = tripsByAdditionalTime(time => time >= 20 && time < 45, 3)
-	
-	const hasNoTrip = directTrips === undefined && trips10 === undefined && trips20 === undefined;
-	
-	return html`
-		<${styled.div`
-			h2,
-			h3 {
-				margin-top: 1rem;
-				text-align: center;
-			}
-			ul {
-				margin: 0 auto;
-				max-width: 30rem;
-				margin-bottom: 3rem;
-			}
-
-				> small {
+		let directTripElementList, trip10ElementList, trips20ElementList;
+		if (!hasNoTrip) {
+			directTripElementList = directTripList !== undefined && displayTripList(1, tripRequest, directTripList),
+				trip10ElementList = trip10List !== undefined && displayTripList(2, tripRequest, trip10List),
+				trips20ElementList = trip20List !== undefined && displayTripList(3, tripRequest, trip20List);
+		}
+		
+		
+		
+		return html`
+			<${styled.div`
+				h2,
+				h3 {
+					margin-top: 1rem;
 					text-align: center;
-					display: block;
-					margin-bottom: 1.6rem;
+				}
+				ul {
+					margin: 0 auto;
+					max-width: 30rem;
+					margin-bottom: 3rem;
 				}
 
-			em {
-				background: yellow;
-				font-style: normal;
-			}
-		`}>
-			<h2 key="direct">${
-				tripRequestAsyncStatus === STATUS_PENDING
-					? `(recherche en cours)`
-					: hasNoTrip
-					? `(aucun résultat)`
-					: `Trajets disponibles`
-			}</h2>
-			${directTrips}
-			${(trips10 || trips20) &&
-				html`
-					<h3 key="indirect">Trajets indirects</h3>
-				`}
-			${trips10 &&
-				html`
-					<small key="10">
-						Un <em>détour de plus de 5 minutes</em> sera nécessaire pour vousrécupérer :</small>
-					${trips10}
-				`}
-			${trips20 &&
-				html`
-					<small key="20">
-						Un <em>détour conséquent (entre 20 et 45 minutes)</em> sera nécessaire pour vous récupérer :</small>
-					${trips20}
-				`}
-		</div>
-	`
-}
+					> small {
+						text-align: center;
+						display: block;
+						margin-bottom: 1.6rem;
+					}
 
+				em {
+					background: yellow;
+					font-style: normal;
+				}
+			`}>
+				<h2 key="direct">${
+					tripRequestAsyncStatus === STATUS_PENDING
+						? `(recherche en cours)`
+						: hasNoTrip
+						? `(aucun résultat)`
+						: `Trajets disponibles`
+				}</h2>
+				${directTripElementList}
+				${(trip10ElementList || trips20ElementList) &&
+					html`
+						<h3 key="indirect">Trajets indirects</h3>
+					`}
+				${trip10ElementList &&
+					html`
+						<small key="10">
+							Un <em>détour de plus de 5 minutes</em> sera nécessaire pour vousrécupérer :</small>
+						${trip10ElementList}
+					`}
+				${trips20ElementList &&
+					html`
+						<small key="20">
+							Un <em>détour conséquent (entre 20 et 45 minutes)</em> sera nécessaire pour vous récupérer :</small>
+						${trips20ElementList}
+					`}
+			</div>
+		`
+	}
+}
 /**
  * 
- * @param {*} key 
- * @param {*} tripProposalsByTrip 
- * @param {*} trips 
- * @param {*} tripRequest 
- * @param {*} filter 
+ * @param {number} keyElement 
+ * @param {TripProposal[]} tripListToDisplay 
+ * @param {Trip} tripRequest 
+ * @return
  */
-const displayTrips = (key, tripProposalsByTrip, trips, tripRequest, filter) => {
-	let selectedTrips = trips
-		.slice(0, 20)
-		.filter(filter)
-		.map(([trip], i) => {
-			// get all tripProposal corresponding to the object trip {origin, destination}
-			const tripProposals = tripProposalsByTrip.get(trip)
-			return tripProposals.map(
-				(tripProposal, j) => {
-					const key = `${trip.origin}${i+j}`;
-					return html`
-					<${TripProposal}
-						tripKey=${key}
-						tripProposal=${tripProposal}
-						tripRequest=${tripRequest}
-					/>
-				`
-				})
+const displayTripList = (keyElement, tripRequest, tripListToDisplay) => {
+	let tripTagElementList = tripListToDisplay
+		.map((tripProposal, i) => {
+			const key = `${tripRequest.origin}${keyElement+i}`;
+			return html`
+				<${TripProposal}
+					tripKey=${key}
+					tripProposal=${tripProposal}
+					tripRequest=${tripRequest}
+				/>
+			`
 			})
-	return selectedTrips.length === 0 ? undefined :
+	return tripTagElementList.length === 0 ? undefined :
 		html`
-			<ul key=${key} className="drivers-list">
-				${selectedTrips}
+			<ul key=${keyElement} className="drivers-list">
+				${tripTagElementList}
 			</ul>
 		`
 }
