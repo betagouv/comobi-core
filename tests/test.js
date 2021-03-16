@@ -1,7 +1,7 @@
 import test from 'ava'
 import { keepRelevantDrivers } from '../spreadsheetDatabase/getDrivers.js'
 import { format, subDays  } from 'date-fns'
-import findRelevantTripProposals from '../server/findRelevantTripProposals.js';
+import { getAdditionnalTimeByTrip, getRelevantTrip } from '../server/findRelevantTripProposals.js';
 
 /*const CONDUCTEUR_PROPS = [
 	'Date',
@@ -118,35 +118,13 @@ test('server should not be send trip with date in the past', t => {
   t.is(relevantDrivers.length, 1);
 });
 
-test('trip that correspond to the search from Castries to Montpellier should be displayed', t => {
-  const proposedTrip = [
-    { origin: "castries", destination: "montpellier" },
-    { origin: "montpellier", destination: "castries" }, 
-    { origin: "Clapiers", destination: "Montpellier" }, 
-    { origin: "Montpellier", destination: "Clapiers" },
-  ]
-  const tripRequest = { origin: "castries", destination: "montpellier" };
+const tripRequest = { origin: "castries", destination: "montpellier" };
 
-  let tripProposalsByTrip = new Map()
-  let trip = { origin: "castries", destination: "montpellier" }
-  tripProposalsByTrip.set(trip, [{
-      "Arrivée": "montpellier",
-      "Départ": "castries",
-      "Heure départ": "08:00:00",
-      Jour: "",
-      Jours: "Lundi, Mardi, Mercredi, Jeudi, Vendredi",
-      driver: {
-        Nom: "B.",
-        "Prénom": "audrey",
-        contact: "comobi@beta.gouv.fr",
-        lieu: "Corum",
-        modeContact: "Email"
-      }
-    }])
-  trip = { origin: "paris", destination: "toulon" }
-  tripProposalsByTrip.set(trip, [{
-    "Arrivée": "paris",
-    "Départ": "toulon",
+let tripProposalsByTrip = new Map()
+let trip = { origin: "castries", destination: "montpellier" }
+tripProposalsByTrip.set(trip, [{
+    "Arrivée": "montpellier",
+    "Départ": "castries",
     "Heure départ": "08:00:00",
     Jour: "",
     Jours: "Lundi, Mardi, Mercredi, Jeudi, Vendredi",
@@ -158,30 +136,61 @@ test('trip that correspond to the search from Castries to Montpellier should be 
       modeContact: "Email"
     }
   }])
-  trip = { origin: "clapiers", destination: "montpellier" }
-  tripProposalsByTrip.set(trip, [{
-    "Arrivée": "clapiers",
-    "Départ": "montpellier",
-    "Heure départ": "08:00:00",
-    Jour: "",
-    Jours: "Lundi, Mardi, Mercredi, Jeudi, Vendredi",
-    driver: {
-      Nom: "B.",
-      "Prénom": "audrey",
-      contact: "comobi@beta.gouv.fr",
-      lieu: "Corum",
-      modeContact: "Email"
-    }
-  }])
+trip = { origin: "paris", destination: "toulon" }
+tripProposalsByTrip.set(trip, [{
+  "Arrivée": "paris",
+  "Départ": "toulon",
+  "Heure départ": "08:00:00",
+  Jour: "",
+  Jours: "Lundi, Mardi, Mercredi, Jeudi, Vendredi",
+  driver: {
+    Nom: "B.",
+    "Prénom": "audrey",
+    contact: "comobi@beta.gouv.fr",
+    lieu: "Corum",
+    modeContact: "Email"
+  }
+}])
+trip = { origin: "clapiers", destination: "montpellier" }
+tripProposalsByTrip.set(trip, [{
+  "Arrivée": "clapiers",
+  "Départ": "montpellier",
+  "Heure départ": "08:00:00",
+  Jour: "",
+  Jours: "Lundi, Mardi, Mercredi, Jeudi, Vendredi",
+  driver: {
+    Nom: "B.",
+    "Prénom": "audrey",
+    contact: "comobi@beta.gouv.fr",
+    lieu: "Corum",
+    modeContact: "Email"
+  }
+}])
 
-  const positionByPlace = new Map(Object.entries({ 
-    "castries": { latitude: 43.6183, longitude: 3.8592 },
-    "montpellier": { latitude: 43.610769, longitude: 3.876716 },
-    "clapiers": { latitude: 43.65, longitude: 3.8833 },
-    "paris": { latitude: 48.8566969, longitude: 2.3514616 },
-    "toulong": { latitude: 43.1257311, longitude: 5.9304919 },
-  }));
-  
-  const relevantTrip = findRelevantTripProposals(tripRequest, tripProposalsByTrip, positionByPlace);
-  t.is(relevantTrip.length, 2);
+const positionByPlace = new Map(Object.entries({ 
+  "castries": { latitude: 43.6183, longitude: 3.8592 },
+  "montpellier": { latitude: 43.610769, longitude: 3.876716 },
+  "clapiers": { latitude: 43.65, longitude: 3.8833 },
+  "paris": { latitude: 48.8566969, longitude: 2.3514616 },
+  "toulon": { latitude: 43.1257311, longitude: 5.9304919 },
+}));
+
+test('additionnal trip according to { origin: "castries", destination: "montpellier" } should correctly been computed', t => {
+  const additionalTimeByTrip = getAdditionnalTimeByTrip(tripRequest, tripProposalsByTrip, positionByPlace);
+  console.log(additionalTimeByTrip);
+  t.is(additionalTimeByTrip[0][1], 0);
+  t.is(additionalTimeByTrip[1][1], 1.776497541647744);
+  t.is(additionalTimeByTrip[2][1], 105.8660527271877);
+});
+
+test('trip with additionnal time less than five minutes should been returned', t => {
+  const additionalTimeByTrip = getAdditionnalTimeByTrip(tripRequest, tripProposalsByTrip, positionByPlace);
+  const relevantTrip = getRelevantTrip(tripProposalsByTrip, additionalTimeByTrip, time => time < 5)
+  t.is(relevantTrip.length, 2)
+});
+
+test('trip with additionnal time between 20 and 45 minutes should been returned', t => {
+  const additionalTimeByTrip = getAdditionnalTimeByTrip(tripRequest, tripProposalsByTrip, positionByPlace);
+  const relevantTrip = getRelevantTrip(tripProposalsByTrip, additionalTimeByTrip, time > 45)
+  t.is(relevantTrip.length, 1)
 });
