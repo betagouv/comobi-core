@@ -30,6 +30,7 @@ function getAdditionnalTimeByTrip(tripRequest, tripProposalsByTrip, positionByPl
  * @param {Map<Trip, TripProposal[]>} tripProposalsByTrip - all trip proposals ordered by trip object
  * @param {AdditionalTimeByTrip[]} trips - all trip objects with additionnal time accordiing to a request
  * @param {function} filter - additionnal time filter
+ * @return {TripProposal[]}
  */
 function getRelevantTrip(tripProposalsByTrip, trips, filter) {
 	return trips
@@ -37,8 +38,7 @@ function getRelevantTrip(tripProposalsByTrip, trips, filter) {
 		.filter(({_, additionalTime}) => filter(additionalTime))
 		.map(({trip}) => {
 			// get all tripProposal corresponding to the object trip {origin, destination}
-			const tripProposals = tripProposalsByTrip.get(trip)
-			return tripProposals
+			return tripProposalsByTrip.get(trip)
 		}).flat()
 }
 
