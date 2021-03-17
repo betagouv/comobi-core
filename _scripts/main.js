@@ -11,7 +11,6 @@ import Main from './components/Main.js'
 import { makeTrip } from '../geography/driverToTrip'
 
 import _actions from './actions.js'
-import TripProposal from './components/TripProposal.js'
 
 const html = htm.bind(createElement)
 
@@ -87,6 +86,9 @@ const store = new Store(storeObject)
 
 const actions = _actions(store)
 
+/**
+ * @param {Store} store 
+ */
 function renderUI(store) {
 	const {
 		tripProposalsByTrip,
