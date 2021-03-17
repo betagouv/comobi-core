@@ -100,19 +100,19 @@ const tripWithTodayDate = [
 ]
 
 // Test getDrivers() function
-test('server should not be send trip with no date', t => {
+test('server should not send trip with no date', t => {
   const dataRowTest = [ tripWithoutDate ]
   const relevantDrivers = keepRelevantDrivers(dataRowTest)
   t.is(relevantDrivers.length, 0);
 });
 
-test('server should send trip with today date', t => {
+test('server should not send trip with date in the past', t => {
   const dataRowTest = [ tripWithDateInThePast ]
   const relevantDrivers = keepRelevantDrivers(dataRowTest)
   t.is(relevantDrivers.length, 0);
 });
 
-test('server should not be send trip with date in the past', t => {
+test('server should send trip with today date', t => {
   const dataRowTest = [ tripWithTodayDate ]
   const relevantDrivers = keepRelevantDrivers(dataRowTest)
   t.is(relevantDrivers.length, 1);
