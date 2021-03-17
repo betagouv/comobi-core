@@ -15,7 +15,6 @@ export default function ({
 	positionByPlace,
 	onTripRequestChange
 }) {
-	// tripDetailsByTrip can be removed  
 	return html`
 		<section className="trip-selection">
 			<${TripRequestEntry}

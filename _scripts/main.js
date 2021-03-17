@@ -14,8 +14,6 @@ import _actions from './actions.js'
 
 const html = htm.bind(createElement)
 
-// describe store
-
 /** @type {State} */
 const state = {
 	tripProposalsByTrip: new Map(),
@@ -32,9 +30,6 @@ const state = {
  * @param {Map<Trip, TripProposal>} tripProposalsByTrip
  */
 function addTripProposals(state, tripProposalsByTrip) {
-	// BUG if there are drivers for the same trip in both tripProposalsByTrip and state.tripProposalsByTrip, 
-	// only some are kept because they use the same key
-	// Use an array ? 
 	state.tripProposalsByTrip = new Map([
 		...state.tripProposalsByTrip,
 		...tripProposalsByTrip
@@ -145,7 +140,6 @@ const getTripProposals = (tripProposals) => {
 }
 
 // call server and initialize state tripProposals list
-// Question : Est-ce que cette fonction est appelée à plusieurs reprises ?
 // @ts-ignore
 json(`/driver-trip-proposals`).then(tripProposals => getTripProposals(tripProposals))
 
