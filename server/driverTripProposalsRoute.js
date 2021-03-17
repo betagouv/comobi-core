@@ -3,8 +3,6 @@ import getDrivers from '../spreadsheetDatabase/getDrivers.js'
 export const PASSAGER_CONTACT_DIRECT_ACCEPT = true;
 export const PASSAGER_CONTACT_DIRECT_REFUSE = false;
 
-const PASSAGER_CONTACT_DIRECT_NO_ANSWER = PASSAGER_CONTACT_DIRECT_REFUSE; // qui ne dit mot... ne consent pas
-
 export default function(makeDriverObject){
 
     return (req, res) => {
