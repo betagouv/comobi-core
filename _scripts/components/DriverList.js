@@ -12,8 +12,6 @@ const html = htm.bind(React.createElement)
 // TODO : and other status ?
 import {
 	STATUS_PENDING,
-	STATUS_ERROR,
-	STATUS_VALUE
 } from '../asyncStatusHelpers'
 
 export default function DriversList({
