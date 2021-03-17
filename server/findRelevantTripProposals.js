@@ -7,7 +7,7 @@ import "../helpers/typedef.js"
  * @param {Trip}  tripRequest
  * @param {Map<Trip, TripProposal[]>} tripProposalsByTrip
  * @param {Map<string, Position>} positionByPlace
- * @return {(Trip | number)[][]}
+ * @return {AdditionalTimeByTrip[]}
  */
 function getAdditionnalTimeByTrip(tripRequest, tripProposalsByTrip, positionByPlace) {
 	const proposedTrips = [...tripProposalsByTrip.keys()]
@@ -17,25 +17,25 @@ function getAdditionnalTimeByTrip(tripRequest, tripProposalsByTrip, positionByPl
 		.map(trip => {
 			const additionalTime = computeDetour(tripDetailsByTrip.get(trip))
 			// use another type ? set or map maybe ?
-			return [trip, additionalTime]
+			return {trip, additionalTime}
 		})
 		.sort(
 			// @ts-ignore
-			([_1, additionalTime1], [_2, additionalTime2]) => additionalTime1 - additionalTime2
+			({_1, additionalTime1}, {_2, additionalTime2}) => additionalTime1 - additionalTime2
 		)
 }
 
 /**
  * 
- * @param {*} tripProposalsByTrip - all trip proposals ordered by trip object
- * @param {*} trips - all trips object
- * @param {*} filter - additionnal time filter
+ * @param {Map<Trip, TripProposal[]>} tripProposalsByTrip - all trip proposals ordered by trip object
+ * @param {AdditionalTimeByTrip[]} trips - all trip objects with additionnal time accordiing to a request
+ * @param {function} filter - additionnal time filter
  */
 function getRelevantTrip(tripProposalsByTrip, trips, filter) {
 	return trips
 		.slice(0, 20)
-		.filter(([_, additionalTime]) => filter(additionalTime))
-		.map(([trip]) => {
+		.filter(({_, additionalTime}) => filter(additionalTime))
+		.map(({trip}) => {
 			// get all tripProposal corresponding to the object trip {origin, destination}
 			const tripProposals = tripProposalsByTrip.get(trip)
 			return tripProposals

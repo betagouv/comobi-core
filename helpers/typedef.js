@@ -20,6 +20,7 @@
  * @property {string} Jours
  * @property {string} Jour
  * @property {Driver} driver
+ * @property {number} additionalTime
  */
 
  /**
@@ -48,3 +49,8 @@
   * @param {Map<string, any>} mutations
   */
 
+  /**
+   * @typedef {Object} AdditionalTimeByTrip
+   * @param {Trip} trip
+   * @param {number} additionalTime
+   */

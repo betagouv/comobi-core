@@ -177,10 +177,9 @@ const positionByPlace = new Map(Object.entries({
 
 test('additionnal trip according to { origin: "castries", destination: "montpellier" } should correctly been computed', t => {
   const additionalTimeByTrip = getAdditionnalTimeByTrip(tripRequest, tripProposalsByTrip, positionByPlace);
-  console.log(additionalTimeByTrip);
-  t.is(additionalTimeByTrip[0][1], 0);
-  t.is(additionalTimeByTrip[1][1], 1.776497541647744);
-  t.is(additionalTimeByTrip[2][1], 105.8660527271877);
+  t.is(additionalTimeByTrip[0].additionalTime, 0);
+  t.is(additionalTimeByTrip[1].additionalTime, 105.8660527271877);
+  t.is(additionalTimeByTrip[2].additionalTime, 1.776497541647744 );
 });
 
 test('trip with additionnal time less than five minutes should been returned', t => {
@@ -191,6 +190,6 @@ test('trip with additionnal time less than five minutes should been returned', t
 
 test('trip with additionnal time between 20 and 45 minutes should been returned', t => {
   const additionalTimeByTrip = getAdditionnalTimeByTrip(tripRequest, tripProposalsByTrip, positionByPlace);
-  const relevantTrip = getRelevantTrip(tripProposalsByTrip, additionalTimeByTrip, time > 45)
+  const relevantTrip = getRelevantTrip(tripProposalsByTrip, additionalTimeByTrip, time => time > 45)
   t.is(relevantTrip.length, 1)
 });
