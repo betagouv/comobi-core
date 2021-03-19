@@ -6,6 +6,7 @@ const googleDriverSpreadsheetId = process.env.GOOGLE_DRIVER_SPREADSHEET_ID
 
 const sheets = google.sheets({ version: 'v4', auth: googleAPIKey })
 
+// TODO Change key format
 const CONDUCTEUR_PROPS = [
 	'Date',
 	'Départ',
@@ -13,8 +14,8 @@ const CONDUCTEUR_PROPS = [
 	'Lieu précis',
 	'Jours',
 	'Jour',
-	'Heure départ',
-	'Heure retour',
+	'heureDepart',
+	'heureRetour',
 	'Type de covoit',
 	'Prénom',
 	'Nom',

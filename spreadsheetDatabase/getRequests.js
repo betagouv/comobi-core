@@ -7,9 +7,9 @@ const sheets = google.sheets({ version: 'v4', auth: googleAPIKey });
 
 import {REQUEST_STATUS_KEY} from './requestStatusConstants.js'
 
-
+// TODO Change key format
 const REQUESTS_COLUMNS = [
-    'Date demande', 'Raisons', 'Départ', 'Arrivée', 'Date départ', 'heure départ', 'Motif', 'Retour', 'Heure', 'Prénom', 'Nom', 'N° de téléphone','Adresse e-mail', 'Communication', 'Informations supplémentaires', 'Motif de refus', REQUEST_STATUS_KEY
+    'Date demande', 'Raisons', 'Départ', 'Arrivée', 'Date départ', 'heureDepart', 'Motif', 'Retour', 'Heure', 'Prénom', 'Nom', 'N° de téléphone','Adresse e-mail', 'Communication', 'Informations supplémentaires', 'Motif de refus', REQUEST_STATUS_KEY
 ]
 
 

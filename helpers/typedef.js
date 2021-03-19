@@ -7,6 +7,8 @@
 
  /**
  * @typedef {Object} Driver
+ * @property {string} Prénom
+ * @property {string} Nom
  * @property {string} modeContact
  * @property {string} contact
  * @property {string} lieu
@@ -19,6 +21,7 @@
  * @property {string} Trajet
  * @property {string} Jours
  * @property {string} Jour
+ * @property {string} heureDepart
  * @property {Driver} driver
  * @property {number} additionalTime
  */

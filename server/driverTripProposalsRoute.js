@@ -29,8 +29,8 @@ export default function(makeDriverObject){
                     Trajet,
                     Jours,
                     Jour,
-                    'Heure départ': HeureDépart,
-                    'Heure retour': HeureRetour
+                    heureDepart: heureDepart,
+                    heureRetour: HeureRetour
                 } = driverTripProposal 
 
                 const driver = Object.freeze(makeDriverObject(driverTripProposal))
@@ -41,7 +41,7 @@ export default function(makeDriverObject){
                     Trajet,
                     Jours,
                     Jour,
-                    'Heure départ': HeureDépart,
+                    heureDepart: heureDepart,
                     driver
                 })
 
@@ -51,7 +51,7 @@ export default function(makeDriverObject){
                         Arrivée: Départ,
                         Trajet: undefined, // should be the reverse Trajet. Will this ever matter?
                         Jours,
-                        'Heure départ': HeureRetour,
+                        heureDepart: HeureRetour,
                         driver
                     })
                 }
