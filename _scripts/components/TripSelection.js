@@ -1,7 +1,8 @@
 import React from 'react'
 import htm from 'htm'
 
-import TripRequestEntry from './TripRequestEntry.js'
+//import TripRequestEntry from './TripRequestEntry.js'
+import SearchComponent from './SearchComponent'
 import DriverList from './DriverList.js'
 
 import { ASYNC_STATUS } from '../asyncStatusHelpers'
@@ -17,7 +18,7 @@ export default function ({
 }) {
 	return html`
 		<section className="trip-selection">
-			<${TripRequestEntry}
+			<${SearchComponent}
 				tripRequest=${tripRequest}
 				validPlaceNames=${validPlaceNames}
 				onTripRequestChange=${onTripRequestChange}
