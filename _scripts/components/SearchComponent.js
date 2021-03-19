@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import htm from 'htm'
 import CityInput from './CityInput'
+import DatePicker from 'react-datepicker'
+import TimePicker from 'react-time-picker'
 
 const html = htm.bind(React.createElement)
 
@@ -12,24 +14,12 @@ export default function SearchComponent({
     const [origin, setOrigin] = useState( tripRequest.origin )
     const [destination, setDestination] = useState( tripRequest.destination )
     const [startDate, setStartDate] = useState(new Date())
+    const [startTime, setStartTime] = useState(new Date())
 
     const reverseClicked = () => {
         setDestination(origin)
         setOrigin(destination)
     }
-
-    /**
-     * <label className="search-input  date-picker">
-            <strong>Date</strong>
-            <${DateTimePicker}
-                onChange=${setStartDate}
-                value=${startDate}
-                format="dd-MM-yy h:mm:ss"
-                minDate=${new Date()}
-            />
-        </label>
-     */
-
     return html `
     <form key="form" className="search-form" onSubmit=${e => {
         e.preventDefault()
@@ -55,7 +45,31 @@ export default function SearchComponent({
             value=${destination}
             setValue=${setDestination}
         />
+        <label className="search-input">
+            <strong>Date</strong>
+            <${DatePicker}
+                onChange=${setStartDate}
+                value=${startDate}
+                calendarIcon=${null}
+                format=${'dd-MM-y'}
+                minDate=${new Date()}
+                className="city-input"
+            />
+        </label>
+        <label className="search-input">
+            <strong>Time</strong>
+            <${TimePicker}
+                onChange=${setStartTime}
+                value=${startTime}
+                clockIcon=${null}
+                disableClock=${true}
+                format=${'HH:mm'}
+                className="city-input"
+            />
+        </label>
+        <div className="search-input">
         <button className="search-btn" type="submit">Rechercher</button>
+        </div>
     </form>
 `
 }

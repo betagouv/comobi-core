@@ -283,6 +283,58 @@ section.home-section {
 	stroke-width: 6;
 }
 
+.search-form {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	background-color: white;
+	margin-top: -50px;
+	padding: 10px;
+	border: 1px solid rgba(50, 66, 124, 0.05);
+	box-shadow: 0px 3px 3px rgba(211, 211, 211, 0.15);
+	border-radius: 4px;
+}
+
+.search-form .icon {
+	width: 24px;
+	height: 24px;
+	margin-top: 16px;
+}
+
+.search-form .search-btn {
+	display: flex;
+	flex: 1;
+	border: 1px solid black;
+	border-radius: 55px;
+	font-weight: 600;
+	font-size: 13px;
+	line-height: 16px;
+	align-items: center;
+	text-align: center;
+	color: #FFFFFF;
+	margin-top: 10px;
+	background: #282727;
+	padding: 10px;
+}
+
+.search-input {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	padding: 10px;
+}
+
+.city-input {
+	border: 1px solid #E6E6E6;
+	box-sizing: border-box;
+	border-radius: 5px;
+}
+
+.react-time-picker__wrapper {
+	border: none!important;
+}
+
 @media only screen and (min-width: 768px) {
 	.btn-list {
 		flex-direction: row;
