@@ -20,7 +20,7 @@ export default function TripProposal({
 		Arrivée,
 		Jours,
 		Jour,
-		'Heure départ': heureDépart,
+		heureDepart,
 		driver: { Prénom, Nom, contact, lieu, modeContact }
 	} = tripProposal
 	return html`
@@ -65,9 +65,9 @@ export default function TripProposal({
 									html`<span className="datetime">${Jours}</span>` : 
 									(Jour !== '') && html`<span className="datetime">Le ${Jour}</span>`
 									}
-									${heureDépart !== '-' &&
+									${heureDepart !== '-' &&
 										html`
-											<span className="datetime"> à ${heureDépart}</span>
+											<span className="datetime"> à ${heureDepart}</span>
 										`}
 								</span>
 							</div>
