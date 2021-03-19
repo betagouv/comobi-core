@@ -2,7 +2,7 @@
 import React from 'react'
 import htm from 'htm'
 import styled from 'styled-components'
-import TripProposal from './TripProposal'
+import TripComponent from './TripComponent'
 import { getAdditionnalTimeByTrip, getRelevantTrip }  from '../../server/findRelevantTripProposals.js'
 // @ts-ignore
 import config from '../../_config.yml'
@@ -13,8 +13,9 @@ const html = htm.bind(React.createElement)
 import {
 	STATUS_PENDING,
 } from '../asyncStatusHelpers'
+import TripProposal from './TripProposal'
 
-export default function DriversList({
+export default function DriverList({
 	tripProposalsByTrip,
 	tripRequestAsyncStatus,
 	validTripRequest,
@@ -114,10 +115,9 @@ const displayTripList = (keyElement, tripRequest, tripListToDisplay) => {
 		.map((tripProposal, i) => {
 			const key = `${tripRequest.origin}${keyElement+i}`;
 			return html`
-				<${TripProposal}
+				<${TripComponent}
 					tripKey=${key}
 					tripProposal=${tripProposal}
-					tripRequest=${tripRequest}
 				/>
 			`
 			})
