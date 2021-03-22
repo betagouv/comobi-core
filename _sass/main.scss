@@ -391,6 +391,73 @@ section.home-section {
 	}
 }
 
+.search-header {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background: #E5E5E5;
+	font-family: Source Sans Pro;
+	font-weight: normal;
+	.logo-title {
+		width: 241px;
+		height: 127.08px;
+		margin: 30px 0;
+	}
+	h1 {
+		display: flex;
+		font-size: 24px;
+		line-height: 30px;
+		align-items: center;
+		text-align: center;
+		margin-bottom: 60px;
+	}
+	.menu {
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-start;
+		align-items:	center;
+		background: #FFFFFF;
+		width: -moz-available;
+		padding: 10px 20px 0;
+		font-weight: normal;
+	}
+	.logo {
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		color: #26353F;
+		.instance-name {
+			font-weight: bold;
+			font-size: 24px;
+			line-height: 30px;
+			color: #26353F;
+			margin: 0;
+		}
+		.with-comobi {
+			display: flex;
+			flex-direction: row;
+			font-style: italic;
+			font-size: 13px;
+			line-height: 16px;
+			align-items: end;
+			padding-left: 5px;
+			img {
+				width: 68px;
+				height: 12.45px;
+			}
+		}	
+	}
+	.menu-item {
+		border-bottom: 2px solid #282727;
+		font-weight: 600;
+		font-size: 18px;
+		line-height: 50px;
+		color: #26353F;
+		margin: 0 15px;
+	}
+}
+
 @media only screen and (min-width: 768px) {
 	.btn-list {
 		flex-direction: row;
