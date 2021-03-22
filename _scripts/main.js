@@ -1,7 +1,7 @@
 // @ts-check
 import '../helpers/typedef.js'
 import { createElement } from 'react'
-import ReactDom, { render } from 'react-dom'
+import { render } from 'react-dom'
 import htm from 'htm'
 import Store from 'baredux'
 import { json } from 'd3-fetch'
