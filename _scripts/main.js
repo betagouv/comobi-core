@@ -1,7 +1,7 @@
 // @ts-check
 import '../helpers/typedef.js'
 import { createElement } from 'react'
-import { render } from 'react-dom'
+import ReactDom, { render } from 'react-dom'
 import htm from 'htm'
 import Store from 'baredux'
 import { json } from 'd3-fetch'
@@ -93,22 +93,20 @@ function renderUI(store) {
 	} = store.state
 
 	const { setAndPrepareForTripRequest } = actions
-	render(
-		html`
-			<${Main}
-				...${{
-				tripProposalsByTrip,
-				tripRequest,
-				positionByPlace,
-				validPlaceNames,
-				onTripRequestChange(tripRequest) {
-					setAndPrepareForTripRequest(tripRequest)
-				},
-			}}
-			/>
-		`,
-		document.querySelector('.react-component')
-	)
+	const app = html`
+		<${Main}
+			...${{
+			tripProposalsByTrip,
+			tripRequest,
+			positionByPlace,
+			validPlaceNames,
+			onTripRequestChange(tripRequest) {
+				setAndPrepareForTripRequest(tripRequest)
+			},
+		}}
+		/>
+	`
+	render(app,document.querySelector('.react-component'))
 }
 
 // add a listener: when the state is modified renderUI is called
