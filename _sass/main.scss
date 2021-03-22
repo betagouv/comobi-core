@@ -1,6 +1,6 @@
 $footer-background: #4682b4;
 $main-background: rgb(255, 255, 246);
-$main-font: 'Work Sans', sans-serif;
+$main-font: 'Source Sans Pro';
 $header-background: rgb(184, 228, 231);
 
 
@@ -217,13 +217,51 @@ section.home-section {
 	text-align: center;
 }
 
-.drivers-list {
-	list-style: none;
-	padding: 0;
-	margin: 0;
+.driver-list-table {
+	border-collapse: separate;
+	border-spacing: 0 1rem;
+	width: -moz-available;
+	thead {
+		th {
+			font-weight: 600;
+			font-size: 12px;
+			line-height: 15px;
+			align-items: center;
+			letter-spacing: 0.05em;
+			text-transform: uppercase;
+		}
+	}
+	td {
+		padding: 10px 0;
+	}
 }
 
-.drivers-list li.driver .trip-details {
+.inline-trip {
+	padding: 10px;
+	background: #FFFFFF;
+	box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.06);
+	font-family: Source Sans Pro;
+	font-style: normal;
+	font-weight: 600;
+	font-size: 15px;
+	line-height: 19px;
+	color: #282828;
+	.light {
+		font-weight: normal;
+	}
+	.place-number {
+		vertical-align: middle;
+	}
+}
+
+.available-trip-label {
+	font-style: normal;
+	font-size: 24px;
+	line-height: 30px;
+	color: #26353F;
+}
+
+.driver-list-table li.driver .trip-details {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
@@ -240,37 +278,37 @@ section.home-section {
 	margin: 0.5em;
 }
 
-.drivers-list li.driver .trip-details.minor-detour {
+.driver-list-table li.driver .trip-details.minor-detour {
 	border-color: green;
 }
 
-.drivers-list li.driver .trip-details.medium-detour {
+.driver-list-table li.driver .trip-details.medium-detour {
 	border-color: orange;
 }
 
-.drivers-list li.driver .trip-details.major-detour {
+.driver-list-table li.driver .trip-details.major-detour {
 	border-color: red;
 }
 
-.drivers-list li.driver .name {
+.driver-list-table li.driver .name {
 	display: block;
 	font-weight: bold;
 }
 
-.drivers-list li.driver .proposed-trip {
+.driver-list-table li.driver .proposed-trip {
 	display: block;
 }
 
-.drivers-list li.driver .proposed-trip .datetime {
+.driver-list-table li.driver .proposed-trip .datetime {
 	color: chocolate;
 }
 
-.drivers-list li.driver .contact {
+.driver-list-table li.driver .contact {
 	display: flex;
 	flex-direction: row;
 }
 
-.drivers-list li.driver .contact>* {
+.driver-list-table li.driver .contact>* {
 	flex: 1;
 }
 
@@ -300,9 +338,12 @@ section.home-section {
 	width: 24px;
 	height: 24px;
 	margin-top: 16px;
+	.search-btn {
+		margin-top: 10px;
+	}
 }
 
-.search-form .search-btn {
+.search-btn {
 	display: flex;
 	flex: 1;
 	border: 1px solid black;
@@ -313,7 +354,6 @@ section.home-section {
 	align-items: center;
 	text-align: center;
 	color: #FFFFFF;
-	margin-top: 10px;
 	background: #282727;
 	padding: 10px;
 }

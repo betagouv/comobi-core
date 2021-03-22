@@ -26,51 +26,47 @@ export default function TripComponent({ tripProposal, tripKey }) {
 		heureDepart,
 		driver: { Prénom, Nom, contact, lieu, modeContact }
 	} = tripProposal
-    /**
-   * ${(Jours !== '') ? 
-									html`<span className="datetime">${Jours}</span>` : 
-									(Jour !== '') && html`<span className="datetime">Le ${Jour}</span>`
-									}
-									${heureDepart !== '-' &&
-										html`
-											<span className="datetime"> à ${heureDepart}</span>
-										`}
-   */
 
-    /**
-     * @param {string} Jour 
-     * @returns
-     */
-    const getDate = (Jour) => {
-      const date = parse('02/11/2014', 'MM/dd/yyyy', new Date())
-      return { E: format(date, 'E'), dMM : format(date, 'd MM') }
-    }
-    return html`
-      <li className="inline-trip">
-        <div className="date">
-          <p>${(Jours !== '') ? 
-          html`<span className="datetime">${Jours}</span>` : 
-          (Jour !== '') && html`<span className="datetime">${getDate(Jour)}</span>`}
-          </p>
-          <p>
-          ${(Jour !== '') && html`<span className="datetime">${getDate(Jour)}</span>`}
-          </p>
-        </div>
-        <p>${heureDepart !== '-' &&
-          html`
-            <span className="datetime"> à ${heureDepart}</span>
-        `}</p>
-        <p>${Départ}</p>
-        <p>${Arrivée}</p>
-        <div className="place-number">
-          <img src="./imamges/icons/member.svg"/>
-          <img src="./imamges/icons/member.svg"/>
-        </div>
-        <button className="search-btn">Contacter ${Prénom}</button>
-      </div>
-    </li>
-  `
+  /**
+   * @param {string} Jour 
+   * @returns
+   */
+  const getDate = (Jour) => {
+    console.log(Jour)
+    const date = parse(Jour, 'MM/dd/yyyy', new Date())
+    const days = { E: format(date, 'E'), dMM : format(date, 'd LLL') }
+    console.log(days)
+    return { E: format(date, 'E'), dLLL : format(date, 'd LLL') }
+  }
+
+  const dateElement = html`
+  ${(Jours !== '') ?
+    html`<td className="datetime">${Jours}</td>` :
+    html`<td className="date">
+      ${(Jour !== '') && html`<span className="light">${getDate(Jour).E}</span>`}
+      ${(Jour !== '') && html`<span>${getDate(Jour).dLLL}</span>`}
+    </td>`
+  }`
+
+  return html`
+    <tr className="inline-trip">
+      ${dateElement}
+      ${heureDepart !== '-' && html`<td className="light">${heureDepart}</td>`}
+      <td>${Départ}</td>
+      <td>${Arrivée}</td>
+      <td className="place-number">
+        <img src="./images/icons/member.svg"/>
+        <img src="./images/icons/member.svg"/>
+      </td>
+      <td><button className="search-btn">Contacter ${Prénom}</button></td>
+    </tr>`
 }
+
+/**
+ * 
+ */
+
+
 // ADD DRIVER POPUP
 /*
 const trackDemande = whichButton => {

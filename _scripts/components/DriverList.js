@@ -3,6 +3,7 @@ import React from 'react'
 import htm from 'htm'
 import styled from 'styled-components'
 import TripComponent from './TripComponent'
+import AvalaibleTripLabel from './AvalaibleTripLabel'
 import { getAdditionnalTimeByTrip, getRelevantTrip }  from '../../server/findRelevantTripProposals.js'
 // @ts-ignore
 import config from '../../_config.yml'
@@ -58,17 +59,12 @@ export default function DriverList({
 					margin-top: 1rem;
 					text-align: center;
 				}
-				ul {
-					margin: 0 auto;
-					max-width: 30rem;
-					margin-bottom: 3rem;
-				}
 
-					> small {
-						text-align: center;
-						display: block;
-						margin-bottom: 1.6rem;
-					}
+				> small {
+					text-align: center;
+					display: block;
+					margin-bottom: 1.6rem;
+				}
 
 				em {
 					background: yellow;
@@ -123,8 +119,21 @@ const displayTripList = (keyElement, tripRequest, tripListToDisplay) => {
 			})
 	return tripTagElementList.length === 0 ? undefined :
 		html`
-			<ul key=${keyElement} className="drivers-list">
+			<${AvalaibleTripLabel}
+				TripListLength=${tripTagElementList.length}
+			/>
+			<table key=${keyElement} className="driver-list-table">
+				<thead>
+					<tr>
+						<th scope="col">dates</th>
+						<th scope="col"></th>
+						<th scope="col">départ</th>
+						<th scope="col">arrivée</th>
+						<th scope="col">place</th>
+						<th scope="col">contacter</th>
+					</tr>
+				</thead>
 				${tripTagElementList}
-			</ul>
+			</table>
 		`
 }
