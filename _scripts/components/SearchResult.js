@@ -14,9 +14,8 @@ const html = htm.bind(React.createElement)
 import {
 	STATUS_PENDING,
 } from '../asyncStatusHelpers'
-import TripProposal from './TripProposal'
 
-export default function DriverList({
+export default function SearchResult({
 	tripProposalsByTrip,
 	tripRequestAsyncStatus,
 	validTripRequest,
@@ -49,28 +48,9 @@ export default function DriverList({
 				trip10ElementList = trip10List !== undefined && displayTripList(2, tripRequest, trip10List),
 				trips20ElementList = trip20List !== undefined && displayTripList(3, tripRequest, trip20List);
 		}
-		
-		
-		
+
 		return html`
-			<${styled.div`
-				h2,
-				h3 {
-					margin-top: 1rem;
-					text-align: center;
-				}
-
-				> small {
-					text-align: center;
-					display: block;
-					margin-bottom: 1.6rem;
-				}
-
-				em {
-					background: yellow;
-					font-style: normal;
-				}
-			`}>
+			<div className='search-result'>
 				<h2 key="direct">${
 					tripRequestAsyncStatus === STATUS_PENDING
 						? `(recherche en cours)`

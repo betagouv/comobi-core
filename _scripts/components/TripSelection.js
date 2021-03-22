@@ -3,7 +3,7 @@ import htm from 'htm'
 
 //import TripRequestEntry from './TripRequestEntry.js'
 import SearchComponent from './SearchComponent'
-import DriverList from './DriverList.js'
+import SearchResult from './SearchResult.js'
 
 import { ASYNC_STATUS } from '../asyncStatusHelpers'
 
@@ -23,7 +23,7 @@ export default function ({
 				validPlaceNames=${validPlaceNames}
 				onTripRequestChange=${onTripRequestChange}
 			/>
-			<${DriverList}
+			<${SearchResult}
 				tripProposalsByTrip=${tripProposalsByTrip}
 				tripRequestAsyncStatus=${tripRequest[ASYNC_STATUS]}
 				validTripRequest=${tripRequest.destination !== '' &&

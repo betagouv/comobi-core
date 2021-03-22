@@ -375,6 +375,22 @@ section.home-section {
 	border: none!important;
 }
 
+.search-result {
+	h2, h3 {
+		margin-top: 1rem;
+		text-align: center;
+	}
+	> small {
+		text-align: center;
+		display: block;
+		margin-bottom: 1.6rem;
+	}
+	em {
+		background: yellow;
+		font-style: normal;
+	}
+}
+
 @media only screen and (min-width: 768px) {
 	.btn-list {
 		flex-direction: row;
