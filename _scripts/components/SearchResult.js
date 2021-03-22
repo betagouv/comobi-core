@@ -1,7 +1,6 @@
 // @ts-check
 import React from 'react'
 import htm from 'htm'
-import styled from 'styled-components'
 import TripComponent from './TripComponent'
 import AvalaibleTripLabel from './AvalaibleTripLabel'
 import { getAdditionnalTimeByTrip, getRelevantTrip }  from '../../server/findRelevantTripProposals.js'
