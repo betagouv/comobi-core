@@ -47,13 +47,10 @@ export default function SearchComponent({
         />
         <label className="search-input">
             <strong>Date</strong>
-            <${DatePicker}
+            <${DatePicker} 
+                selected=${startDate}
                 onChange=${setStartDate}
-                value=${startDate}
-                calendarIcon=${null}
-                format=${'dd-MM-y'}
-                minDate=${new Date()}
-                className="city-input"
+                
             />
         </label>
         <label className="search-input">

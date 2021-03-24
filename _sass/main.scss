@@ -171,7 +171,6 @@ section.home-section {
 	display: flex;
 	justify-content: center;
 	align-content: end;
-	background-color: $main-background;
 	ul {
     list-style-type: none;
 	}
@@ -356,6 +355,7 @@ section.home-section {
 	color: #FFFFFF;
 	background: #282727;
 	padding: 10px;
+	width: fit-content;
 }
 
 .search-input {
@@ -396,13 +396,15 @@ section.home-section {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	background: #E5E5E5;
+	background: rgba(246, 246, 246, 1);
 	font-family: Source Sans Pro;
 	font-weight: normal;
 	.logo-title {
 		width: 241px;
 		height: 127.08px;
 		margin: 30px 0;
+		background: #C4C4C4;
+		mix-blend-mode: saturation;
 	}
 	h1 {
 		display: flex;
@@ -415,12 +417,17 @@ section.home-section {
 	.menu {
 		display: flex;
 		flex-direction: row;
-		justify-content: flex-start;
+		justify-content: space-between;
 		align-items:	center;
 		background: #FFFFFF;
 		width: -moz-available;
 		padding: 10px 20px 0;
 		font-weight: normal;
+		.left {
+			display: flex;
+			flex-direction: left;
+			justify-content: flex-start;
+		}
 	}
 	.logo {
 		display: flex;
@@ -440,11 +447,13 @@ section.home-section {
 			font-style: italic;
 			font-size: 13px;
 			line-height: 16px;
-			align-items: end;
+			align-items: flex-start;
 			padding-left: 5px;
 			img {
 				width: 68px;
 				height: 12.45px;
+				margin-left: 8px;
+
 			}
 		}	
 	}
@@ -455,6 +464,45 @@ section.home-section {
 		line-height: 50px;
 		color: #26353F;
 		margin: 0 15px;
+	}
+}
+
+.search-content {
+	color: #26353F;
+	.content {
+		background: rgba(247, 247, 247, 0.5);
+	}
+	.partner-section {
+		background: rgba(246, 246, 246, 1);
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		.partner-logo-list {
+			display: flex;
+			flex-direction: row;
+			width: max-content;
+			flex-wrap: wrap;
+			margin: -10px;
+			* {
+				margin: 10px;
+				height: 90px;
+			}
+		}
+		.btn-section {
+			display: flex;
+			flex-direction: row;
+			justify-content: center;
+			align-items: center;
+			padding: 20px;
+			margin: -10px;
+			text-align: center;
+			* {
+				margin: 10px;
+			}
+			a {
+				text-decoration: underline;
+			}
+		}
 	}
 }
 
