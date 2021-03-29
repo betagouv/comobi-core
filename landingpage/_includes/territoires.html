@@ -1,0 +1,11 @@
+<section class="territoires">
+  <h2>Quels territoires utilisent déjà CoMobi ?</h2>
+  <div class="territoire-list">
+    <img src="images/france-map.png"/>
+    <ul>
+      {% for territoire in site.territoires %}
+        <li><a href="{{ territoire.adresse }}">{{ territoire.nom }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>

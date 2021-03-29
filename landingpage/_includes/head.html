@@ -1,0 +1,25 @@
+<head>
+  <title>{{ site.titre }}</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/assets/css/styles.css">
+	<link crossorigin="anonymous" rel="stylesheet">
+
+
+{% comment %} 
+Styles are added based on the page.styles variable
+This variable is defined in front-matter with:
+---
+styles:
+    - href: "./yo.css"
+    - href: "./font-maybe.css"
+---
+{% endcomment %}
+
+    {%- if page.styles -%} {%- for style in page.styles -%}
+    <link crossorigin="anonymous" rel="stylesheet" href="{{ style.href }}">
+    {%- endfor -%} {%- endif -%}
+
+</head>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: 'fr' }}">
+
+{% include head.html %}
+
+<body>
+
+  {% include header.html %}
+
+  <main>
+    {{ content }}
+    {% if site.territoires %}
+      {% include territoires.html %}
+    {% endif %}
+  </main>
+
+</body>
+
+</html>
