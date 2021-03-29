@@ -1,4 +1,4 @@
-$footer-background: #25637d;
+$footer-background:rgba(37, 99, 125, 0.6);
 $main-background: rgb(255, 255, 246) !default;
 $main-font: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 $font-color: #606c71;
@@ -105,6 +105,8 @@ section:nth-of-type(2n) {
 	flex-direction: row;
 	justify-content: space-between;
 	list-style: none;
+	padding: 0px 6.5rem;
+	flex-wrap: wrap;
 	li {
 		display: flex;
 		flex-direction: column;
@@ -133,11 +135,10 @@ section:nth-of-type(2n) {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	background: $footer-background;
+	background-color: $footer-background;
 	color: white;
 	padding: 1.3rem 4rem;
 	text-align: center;
-	width: 100%;
 	p {
 		margin: 0;
 	}
@@ -147,16 +148,18 @@ section:nth-of-type(2n) {
 	img {
 		width: 100px;
 		padding: 2px;
+		height: 50px;
 	}
 	div {
 		flex: 1;
 		width: 100%;
 		display: flex;
-		flex-direction: column;
+		flex-direction: row;
 		align-content: center;
 	}
 	.logo-list {
 		align-items: center;
+		justify-content: flex-end;
 	}
 	.comobi img {
 		width: 80px;
