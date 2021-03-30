@@ -8,9 +8,16 @@
   {% include header.html %}
 
   <main>
-    {{ content }}
+    {% assign sections = content | split: "<!-- section -->" %}
+    {% for section in sections offset:1 %}
+    <section class="home-section">
+      {{ section }}
+    </section>
+    {% endfor %}
     {% if site.territoires %}
+    <section class="home-section">
       {% include territoires.html %}
+    </section>
     {% endif %}
   </main>
   {% include footer.html %}

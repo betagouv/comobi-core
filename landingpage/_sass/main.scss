@@ -3,8 +3,8 @@ $main-background: rgb(255, 255, 246) !default;
 $main-font: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 $font-color: #606c71;
 $title-color: #25637d;
-$btn-background-color: #1c7293;
-$odd_section_color: #d2dce3;
+$btn-background-color: rgb(0, 0, 145);
+$odd_section_color: rgb(240,240,240);
 
 // Headers
 $header-heading-color: #fff !default;
@@ -28,14 +28,6 @@ body {
 	}
 }
 
-main {
-	max-width: 64rem;
-	padding: 2rem 6rem;
-	margin: 0 auto;
-	font-size: 1.1rem;
-}
-
-
 h1, h2, h3, h4, h5 {
 	font-family: 'Montserrat', sans-serif;
 }
@@ -58,7 +50,7 @@ h2 {
 }
 
 main {
-	padding: 1rem calc(max(5px, -25em + 50vw));
+	font-size: 1.1rem;
  	.btn {
  		text-decoration: none;
 		margin: 1.6rem auto;
@@ -67,35 +59,38 @@ main {
 		display: block;
 		border: 1px solid $btn-background-color;
 		color: white;
-		border-radius: 17px;
+		border-radius: 10px;
 		background-color: $btn-background-color;
 	}
 	img {
 		flex: 1;
 		width: 100%;
 		object-fit: contain;
-		height: 100px;
 	}
 }
 
-section:nth-of-type(2n) {
-	background-color: $odd_section_color;
-}
-
 .territoires {
+	display: flex;
+	img {
+		flex: 1;
+		width: 100%;
+		padding-right: 10px;
+	}
 	.territoire-list {
+
 		display: flex;
-		flex-direction: row;
+		flex-direction: column;
 		justify-content: center;
-		align-items: center;
-		img {
-			display: flex;
-			flex: 2;
-		}
+		align-items: flex-start;
+		flex: 3;
 		ul {
 			display: flex;
-			flex: 2;
 			flex-direction: column;
+			margin-top: 0;
+			margin-bottom: 40px;
+		}
+		a {
+			margin: 0;
 		}
 	}
 }
@@ -165,6 +160,15 @@ section:nth-of-type(2n) {
 		width: 80px;
 	}
 }
+
+section.home-section {
+	padding: 1rem calc(max(5px, -25em + 50vw));
+}
+
+section.home-section:nth-of-type(2n) {
+	background-color: $odd_section_color;
+}
+
 
 @media only screen and (min-width: 768px) {
 	.footer {
