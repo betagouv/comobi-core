@@ -1,9 +1,7 @@
-// You can't use import statements here
-const path = require("path");
-let webpack = require('webpack')
+import webpack from 'webpack'
 let devMode = process.env.NODE_ENV === 'development'
 
-module.exports = {
+export const common = {
 	module: {
 		rules: [
 			{

@@ -1,7 +1,14 @@
+// ts-check
 import delay from 'delay';
 import pRetry from 'p-retry';
 import got from 'got';
+import '../helpers/typedef.js';
 
+/**
+ * 
+ * @param {string} places
+ * @return {Promise<>} 
+ */
 export default function getPlacesPosition(places){
     return Promise.all([...places].map((place, i) => {
         const geoAPIURL = `https://geo.api.gouv.fr/communes?format=geojson&nom=${encodeURIComponent(place)}`

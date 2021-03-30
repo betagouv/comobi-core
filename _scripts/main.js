@@ -1,3 +1,5 @@
+// @ts-check
+import '../helpers/typedef.js'
 import { createElement } from 'react'
 import { render } from 'react-dom'
 import htm from 'htm'
@@ -7,50 +9,81 @@ import { json } from 'd3-fetch'
 import Main from './components/Main.js'
 
 import { makeTrip } from '../geography/driverToTrip'
-import computeTripDetails from '../geography/computeTripDetails'
 
 import _actions from './actions.js'
 
 const html = htm.bind(createElement)
 
-// describe store
-const store = new Store({
-	state: {
-		/* tripProposalsByTrip: A map with (origin, destination) object as key and tripProposal list as value
-		corresponding to this (origin, destination) object */
-		tripProposalsByTrip: new Map(),
-		positionByPlace: new Map(),
-		tripRequest: {
-			origin: '',
-			destination: ''
-		},
-		validPlaceNames: []
+/** @type {State} */
+const state = {
+	tripProposalsByTrip: new Map(),
+	positionByPlace: new Map(),
+	tripRequest: {
+		origin: '',
+		destination: ''
 	},
+	validPlaceNames: []
+}
+
+/**
+ * @param {State} state
+ * @param {Map<Trip, TripProposal>} tripProposalsByTrip
+ */
+function addTripProposals(state, tripProposalsByTrip) {
+	state.tripProposalsByTrip = new Map([
+		...state.tripProposalsByTrip,
+		...tripProposalsByTrip
+	])
+}
+
+/**
+ * @param {State} state 
+ * @param {Map<string, Position>} positionByPlace 
+ */
+function addPositions(state, positionByPlace) {
+	state.positionByPlace = new Map([
+		...state.positionByPlace,
+		...positionByPlace
+	])
+}
+
+/**
+ * 
+ * @param {State} state 
+ * @param {Trip} tripRequest 
+ */
+function setTripRequest(state, tripRequest) {
+	state.tripRequest = tripRequest
+}
+
+/**
+ * 
+ * @param {State} state 
+ * @param {string[]} validPlaceNames 
+ */
+function setValidPlaceNames(state, validPlaceNames) {
+	state.validPlaceNames = validPlaceNames
+}
+
+/** @type {Store} */
+const storeObject = {
+	state,
 	mutations: {
-		addTripProposals(state, tripProposalsByTrip) {
-			// BUG if there are drivers for the same trip in both tripProposalsByTrip and state.tripProposalsByTrip, only some are kept because they use the same key
-			state.tripProposalsByTrip = new Map([
-				...state.tripProposalsByTrip,
-				...tripProposalsByTrip
-			])
-		},
-		addPositions(state, positionByPlace) {
-			state.positionByPlace = new Map([
-				...state.positionByPlace,
-				...positionByPlace
-			])
-		},
-		setTripRequest(state, tripRequest) {
-			state.tripRequest = tripRequest
-		},
-		setValidPlaceNames(state, validPlaceNames) {
-			state.validPlaceNames = validPlaceNames
-		}
+		addTripProposals,
+		addPositions,
+		setTripRequest,
+		setValidPlaceNames,
 	}
-})
+}
+
+// @ts-ignore
+const store = new Store(storeObject)
 
 const actions = _actions(store)
 
+/**
+ * @param {Store} store 
+ */
 function renderUI(store) {
 	const {
 		tripProposalsByTrip,
@@ -58,24 +91,14 @@ function renderUI(store) {
 		tripRequest,
 		validPlaceNames
 	} = store.state
-	//const {setTripRequest} = store.mutations
-	const { setAndPrepareForTripRequest, toggleTripDisplay } = actions
 
-	const proposedTrips = [...tripProposalsByTrip.keys()]
-
-	const tripDetailsByTrip = computeTripDetails(
-		proposedTrips,
-		tripRequest,
-		positionByPlace
-	)
-
+	const { setAndPrepareForTripRequest } = actions
 	render(
 		html`
 			<${Main}
 				...${{
 				tripProposalsByTrip,
 				tripRequest,
-				tripDetailsByTrip,
 				positionByPlace,
 				validPlaceNames,
 				onTripRequestChange(tripRequest) {
@@ -96,8 +119,10 @@ store.subscribe(state => {
 // initial render
 renderUI(store)
 
-// call server and initialize state tripProposals list
-json(`/driver-trip-proposals`).then(tripProposals => {
+/**
+ * @param {TripProposal[]} tripProposals 
+ */
+const getTripProposals = (tripProposals) => {
 	const tripProposalsByTrip = new Map()
 	// a trip proposal is an object with trip and driver infos
 	for (const tripProposal of tripProposals) {
@@ -112,7 +137,11 @@ json(`/driver-trip-proposals`).then(tripProposals => {
 	}
 	// add the tripProposalsByTrip map in the store
 	store.mutations.addTripProposals(tripProposalsByTrip)
-})
+}
+
+// call server and initialize state tripProposals list
+// @ts-ignore
+json(`/driver-trip-proposals`).then(tripProposals => getTripProposals(tripProposals))
 
 // call server and initialize state validPlaceName
 json(`/valid-place-names`).then(store.mutations.setValidPlaceNames)

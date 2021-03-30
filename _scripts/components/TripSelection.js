@@ -11,8 +11,8 @@ const html = htm.bind(React.createElement)
 export default function ({
 	tripProposalsByTrip,
 	tripRequest,
-	tripDetailsByTrip,
 	validPlaceNames,
+	positionByPlace,
 	onTripRequestChange
 }) {
 	return html`
@@ -24,11 +24,11 @@ export default function ({
 			/>
 			<${DriverList}
 				tripProposalsByTrip=${tripProposalsByTrip}
-				tripDetailsByTrip=${tripDetailsByTrip}
 				tripRequestAsyncStatus=${tripRequest[ASYNC_STATUS]}
 				validTripRequest=${tripRequest.destination !== '' &&
 		tripRequest.origin !== ''}
 				tripRequest=${tripRequest}
+				positionByPlace=${positionByPlace}
 			/>
 		</section>
 	`
