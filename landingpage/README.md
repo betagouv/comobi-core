@@ -13,7 +13,7 @@ $ heroku login
 ```
 Ajouter le repo en remote
 ```
-$ git remote 
+$ git remote add https://git.heroku.com/comobi-landingpage.git
 ```
 Déployer les changements
 ```
