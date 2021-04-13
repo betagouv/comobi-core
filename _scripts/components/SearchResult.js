@@ -57,6 +57,7 @@ export default function SearchResult({
 						? `(aucun résultat)`
 						: `Trajets disponibles`
 				}</h2>
+				<h3 key="indirect">Trajets directs</h3>
 				${directTripElementList}
 				${(trip10ElementList || trips20ElementList) &&
 					html`
