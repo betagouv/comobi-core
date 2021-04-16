@@ -1,0 +1,1 @@
+<strong>Hello Search Component</strong>

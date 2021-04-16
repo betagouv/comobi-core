@@ -1,18 +1,8 @@
-// @ts-check
-import '../helpers/typedef.js'
-import { createElement } from 'react'
-import { render } from 'react-dom'
-import htm from 'htm'
+import Main from './components/Main.svelte'
+import page from 'page'
 import Store from 'baredux'
-import { json } from 'd3-fetch'
-
-import Main from './components/Main.js'
-
-import { makeTrip } from '../geography/driverToTrip'
-
 import _actions from './actions.js'
-
-const html = htm.bind(createElement)
+import { json } from 'd3-fetch'
 
 /** @type {State} */
 const state = {
@@ -25,11 +15,13 @@ const state = {
 	validPlaceNames: []
 }
 
+
+// Store Mutations
 /**
  * @param {State} state
  * @param {Map<Trip, TripProposal>} tripProposalsByTrip
  */
-function addTripProposals(state, tripProposalsByTrip) {
+ function addTripProposals(state, tripProposalsByTrip) {
 	state.tripProposalsByTrip = new Map([
 		...state.tripProposalsByTrip,
 		...tripProposalsByTrip
@@ -78,49 +70,37 @@ const storeObject = {
 
 // @ts-ignore
 const store = new Store(storeObject)
-
 const actions = _actions(store)
 
-/**
- * @param {Store} store 
- */
-function renderUI(store) {
-	const {
-		tripProposalsByTrip,
-		positionByPlace,
-		tripRequest,
-		validPlaceNames
-	} = store.state
+const svelteTarget = document.querySelector('.svelte-main')
 
-	const { setAndPrepareForTripRequest } = actions
-	const app = html`
-		<${Main}
-			...${{
-			tripProposalsByTrip,
-			tripRequest,
-			positionByPlace,
-			validPlaceNames,
-			onTripRequestChange(tripRequest) {
-				setAndPrepareForTripRequest(tripRequest)
-			},
-		}}
-		/>
-	`
-	render(app,document.querySelector('.react-component'))
+let currentComponent;
+let mapStateToProps;
+
+function replaceComponent(newComponent, _mapStateToProps){
+    if(!_mapStateToProps){
+        throw new Error('Missing _mapStateToProps in replaceComponent')
+    }
+
+    if(currentComponent)
+        currentComponent.$destroy()
+    
+    currentComponent = newComponent
+    mapStateToProps = _mapStateToProps
 }
 
-// add a listener: when the state is modified renderUI is called
-store.subscribe(state => {
-	renderUI(store)
-})
+function render(state){
+    const props = mapStateToProps(state);
+    currentComponent.$set(props)
+}
 
-// initial render
-renderUI(store)
+store.subscribe(render)
 
+// Initialize State
 /**
  * @param {TripProposal[]} tripProposals 
  */
-const getTripProposals = (tripProposals) => {
+ const getTripProposals = (tripProposals) => {
 	const tripProposalsByTrip = new Map()
 	// a trip proposal is an object with trip and driver infos
 	for (const tripProposal of tripProposals) {
@@ -144,3 +124,35 @@ json(`/driver-trip-proposals`).then(tripProposals => getTripProposals(tripPropos
 // call server and initialize state validPlaceName
 json(`/valid-place-names`).then(store.mutations.setValidPlaceNames)
 
+
+// Router
+page('/recherche', _ => {
+
+	function mapStateToProps(state){
+		const {
+			tripProposalsByTrip,
+			positionByPlace,
+			tripRequest,
+			validPlaceNames
+		} = store.state
+
+		const { setAndPrepareForTripRequest } = actions
+
+		return {
+			tripProposalsByTrip, 
+			tripRequest,
+			validPlaceNames,
+			positionByPlace,
+			onTripRequestChange(tripRequest) {
+				setAndPrepareForTripRequest(tripRequest)
+			}
+		}
+	}
+	const ressource = new Main({
+        target: svelteTarget,
+        props: mapStateToProps(store.state)
+    });
+    replaceComponent(ressource, mapStateToProps)
+})
+
+page.start()
