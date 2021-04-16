@@ -443,44 +443,6 @@ section.home-section {
 
 //// MENU //// 
 
-.search-header {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	background: rgba(246, 246, 246, 1);
-	font-family: $main-font;
-	font-weight: normal;
-	.logo {
-		display: flex;
-		flex-direction: column;
-		justify-content: flex-start;
-		color: #26353F;
-		.instance-name {
-			font-weight: bold;
-			font-size: 24px;
-			line-height: 30px;
-			color: #26353F;
-			margin: 0;
-		}
-		.with-comobi {
-			display: flex;
-			flex-direction: row;
-			font-style: italic;
-			font-size: 13px;
-			line-height: 16px;
-			align-items: flex-start;
-			padding-left: 5px;
-			img {
-				width: 68px;
-				height: 12.45px;
-				margin-left: 8px;
-
-			}
-		}	
-	}
-}
-
 .mobile-container {
 	display: block;
 	background: rgba(246, 246, 246, 1);
@@ -573,22 +535,22 @@ section.home-section {
 	}
 }
   
-  h1 {
+h1 {
 	font-size: 24px;
 	line-height: 30px;
 	align-items: center;
 	text-align: center;
 	margin-bottom: 60px;
 	margin-bottom: 3.5rem!important;
-  }
+}
 
-  .logo-title {
-	width: 241px;
-	height: 127.08px;
-	margin: 30px 0;
-	background: #C4C4C4;
-	mix-blend-mode: saturation;
-  }
+.logo-title {
+width: 241px;
+height: 127.08px;
+margin: 30px 0;
+background: #C4C4C4;
+mix-blend-mode: saturation;
+}
 
 @media only screen and (min-width: 768px) {
 	.btn-list {
@@ -621,6 +583,47 @@ section.home-section {
 		}
 		.mobile-icon {
 			display: none;
+		}
+	}
+	.mobile-container {
+		display: none;
+	}
+
+	.search-header {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		background: rgba(246, 246, 246, 1);
+		font-family: $main-font;
+		font-weight: normal;
+		.logo {
+			display: flex;
+			flex-direction: column;
+			justify-content: flex-start;
+			color: #26353F;
+			.instance-name {
+				font-weight: bold;
+				font-size: 24px;
+				line-height: 30px;
+				color: #26353F;
+				margin: 0;
+			}
+			.with-comobi {
+				display: flex;
+				flex-direction: row;
+				font-style: italic;
+				font-size: 13px;
+				line-height: 16px;
+				align-items: flex-start;
+				padding-left: 5px;
+				img {
+					width: 68px;
+					height: 12.45px;
+					margin-left: 8px;
+
+				}
+			}	
 		}
 	}
 
