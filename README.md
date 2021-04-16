@@ -3,13 +3,13 @@
 Le projet Comobi est issu du projet [Lot'ô car](https://www.lotocar.fr/).
 
 ## Historique [Lot'ô car](https://www.lotocar.fr/)
-[Lot'ô car](https://www.lotocar.fr/) a commencé avec une base de données dans un Google Spreadsheet à plusieurs feuilles gérée manuellement//.
+[Lot'ô car](https://www.lotocar.fr/) a commencé avec une base de données dans un Google Spreadsheet à plusieurs feuilles gérées manuellement//.
 
-Cette gestion et le service par-dessus sont chronophages ; notamment trouver des correspondances entre les conducteur.rice.s et les demandes de trajet. C'est pour cette raison, que nous avons travailler à d'abord à créer de petits outils indépendants qui permettent de libérer du temps à la personne qui fait ce travail manuellement.
+Cette gestion et le service par-dessus sont chronophages ; notamment trouver des correspondances entre les conducteur.rice.s et les demandes de trajet. C'est pour cette raison, que nous avons travaillé à d'abord à créer de petits outils indépendants qui permettent de libérer du temps à la personne qui fait ce travail manuellement.
 
 Le volume de données était encore raisonnable pour que Google Spreadsheet soit utile, et avait été retenu pour être utilisé comme base de données principale. Toutefois, l'interface en tableau n'est pas le bon outil pour certaines tâches (notamment la correspondance conducteur.rice.s/trajets). Une interface a donc été développée.
 
-[David Bruant](https://twitter.com/DavidBruant), [dtc innovation](https://dtc-innovation.org/), a été le développeur principale et référent technique du projet pour le moment
+[David Bruant](https://twitter.com/DavidBruant), [dtc innovation](https://dtc-innovation.org/), a été le développeur principal et référent technique du projet pour le moment
 
 ### Corresplot
 
@@ -21,12 +21,12 @@ Corresplot est une interface utilisateur permettant de faire la correspondance f
 Deux applications sont disponibles : 'Direct' et 'Outil-metier'
 
 ## Comobi
-L'idée est de généraliser et de rendre plus générique le projet Lot'ô car afin qu'il puisse être déployée facilement et rapidement.
+L'idée est de généraliser et de rendre plus générique le projet Lot'ô car afin qu'il puisse être déployé facilement et rapidement.
 
 ### Architecture
 - Jekyll permet de gérer la partie statique de l'application web :
   - _includes: les éléments pouvants être partagés entre les pages
-  - _layout: les template des pages
+  - _layout: les templates des pages
   - _sass: les fichiers de styles
 - Le framework React est utilisé pour les composants (en particulier aujourd'hui le formulaire de recherche)
   - _scripts : les composants
@@ -43,7 +43,7 @@ L'idée est de généraliser et de rendre plus générique le projet Lot'ô car 
 
 #### Base de connaissance de localisation
 
-Parfois des communes sont fusionnées ou alors, les personnes habitant quelque part utilisent des noms pour les lieux qui ne sont pas les noms officiels (source gouvernementale) ou utilisée dans les API existantes. Ou alors, elles utilisent des noms raccourcis ambigües (dans le Lot, quand on parle de "Villeneuve", il est évident duquel on parle, alors qu'il existe plusieurs villes en France avec le nom "Villeneuve")
+Parfois des communes sont fusionnées ou alors, les personnes habitant quelque part utilisent des noms pour les lieux qui ne sont pas les noms officiels (source gouvernementale) ou utilisés dans les API existantes. Ou alors, elles utilisent des noms raccourcis ambigus (dans le Lot, quand on parle de "Villeneuve", il est évident duquel on parle, alors qu'il existe plusieurs villes en France avec le nom "Villeneuve")
 Pour ces cas-là, nous mettons en place un Google Spreadsheet qui permet de consigner cette connaissance locale
 
 Ce Google Spreadsheet contient 3 colonnes :
@@ -75,7 +75,7 @@ $ npm run dev // start server
 Lorsque la branche master est déployée un build automatique est lancé par github comprenant les étapes suivantes : 
   - build des scripts react
   - build de l'application avec jekyll
-  - mise a jour d'une branche nommée Heroku
+  - mise à jour d'une branche nommée Heroku
 Sur heroku un build automatique est lancé quand la branche heroku est mise à jour sur github
 
 ### Langue
