@@ -5,6 +5,7 @@ import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
 import css from 'rollup-plugin-css-only';
 import yaml from '@rollup/plugin-yaml';
+import sveltePreprocess from 'svelte-preprocess';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -13,14 +14,15 @@ export default {
 	output: {
 		sourcemap: true,
 		format: 'iife',
-		file: 'frontend_build/bundle.js'
+		file: production? 'frontend_build/bundle.js' : '_site/frontend_build/bundle.js'
 	},
 	plugins: [
 		svelte({
 			compilerOptions: {
 				// enable run-time checks when not in production
 				dev: !production
-			}
+			},
+			preprocess: sveltePreprocess({})
 		}),
 		// we'll extract any component CSS out into
 		// a separate file - better for performance

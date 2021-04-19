@@ -3,6 +3,7 @@ import page from 'page'
 import Store from 'baredux'
 import _actions from './actions.js'
 import { json } from 'd3-fetch'
+import { makeTrip } from '../geography/driverToTrip'
 
 /** @type {State} */
 const state = {
@@ -54,6 +55,7 @@ function setTripRequest(state, tripRequest) {
  * @param {string[]} validPlaceNames 
  */
 function setValidPlaceNames(state, validPlaceNames) {
+	console.log(validPlaceNames)
 	state.validPlaceNames = validPlaceNames
 }
 
@@ -75,9 +77,10 @@ const actions = _actions(store)
 const svelteTarget = document.querySelector('.svelte-main')
 
 let currentComponent;
-let mapStateToProps;
+let mapStateToProps = () => {};
 
 function replaceComponent(newComponent, _mapStateToProps){
+	console.log('replaceComponent')
     if(!_mapStateToProps){
         throw new Error('Missing _mapStateToProps in replaceComponent')
     }
@@ -127,8 +130,9 @@ json(`/valid-place-names`).then(store.mutations.setValidPlaceNames)
 
 // Router
 page('/recherche', _ => {
-
+	console.log('/recherche')
 	function mapStateToProps(state){
+		console.log('mapStateToProps')
 		const {
 			tripProposalsByTrip,
 			positionByPlace,
@@ -137,7 +141,7 @@ page('/recherche', _ => {
 		} = store.state
 
 		const { setAndPrepareForTripRequest } = actions
-
+		console.log(validPlaceNames)
 		return {
 			tripProposalsByTrip, 
 			tripRequest,
