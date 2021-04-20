@@ -148,8 +148,8 @@ app.get('/', function(req, res) {
 	})
 })
 
-app.get('/recherche', function(req, res) {
-	res.sendFile('recherche.html', {
+app.get('/commentCaMarche', function(req, res) {
+	res.sendFile('commentCaMarche.html', {
 		root: __dirname
 	})
 })

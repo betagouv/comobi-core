@@ -94,7 +94,7 @@ function replaceComponent(newComponent, _mapStateToProps){
 
 function render(state){
     const props = mapStateToProps(state);
-    currentComponent.$set(props)
+	currentComponent.$set(props)
 }
 
 store.subscribe(render)
@@ -129,8 +129,7 @@ json(`/valid-place-names`).then(store.mutations.setValidPlaceNames)
 
 
 // Router
-page('/recherche', _ => {
-	console.log('/recherche')
+page('/', _ => {
 	function mapStateToProps(state){
 		console.log('mapStateToProps')
 		const {
