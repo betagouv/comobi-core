@@ -1,3 +1,68 @@
-<header class="header">
-  <img src="{{ site.bandeau.image }}" alt="{{ site.bandeau.texte }}" />
+
+<header class="search-header">
+  <div class="laptop-menu">
+    <div class="left">
+      <div class="logo">
+        <p class="instance-name">Azur</p> <!-- replace by instance name -->
+        <div class="with-comobi">avec <img src="images/logo-comobi-sfblack.svg"/></div>
+      </div>
+      <a class="menu-item" href="/">
+        Tous les trajets
+      </a>
+      <a class="menu-item" href="/commentCaMarche">
+        Comment ça marche ?
+      </a>
+    </div>
+    <div class="right">
+      <button class="search-btn proposer">Proposer un trajet</button>
+    </div>
+  </div>
+    <img class="logo-title" src="images/logo_comobi.svg" alt="logo comobi" />
+  <h1>Trouvez un <strong> covoiturage pour vous déplacer </strong> aux alentours de <strong> Valberg</strong></h1>
 </header>
+<!-- Simulate a smartphone / tablet -->
+<div class="mobile-container">
+  <div class="topnav">
+    <a href="javascript:void(0);" class="icon" onclick="menuFunction()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </a>
+    <div class="logo">
+      <p class="instance-name">Azur</p><!-- replace by instance name -->
+      <div class="with-comobi">avec <img src="images/logo-comobi-sfblack.svg"/></div>
+    </div>
+    <button class="search-btn">Proposer un trajet</button>
+    <div id="myLinks">
+      <a href="/">Tous les trajets</a>
+      <a href="/commentCaMarche">Comment ça marche ?</a>
+    </div>
+  </div>
+  <div>
+    <img class="logo-title" src="images/logo_comobi.svg" alt="logo comobi" />
+    <h1>Trouvez un <strong> covoiturage pour vous déplacer </strong> aux alentours de <strong> Valberg</strong></h1>
+  </div>
+</div>
+
+<script>
+function menuFunction() {
+  let myLinks = document.getElementById("myLinks");
+  if (myLinks.style.display === "block") {
+    myLinks.style.display = "none";
+  } else {
+    myLinks.style.display = "block";
+  }
+}
+
+function displayActiveMenuItem() {
+    let path = decodeURIComponent(window.location);
+    let menuItemList = document.getElementsByClassName("menu-item");
+    for(i=0 ; i < menuItemList.length ; i+=1) {
+      let item = menuItemList.item(i);
+        if (path === item.href) {
+            item.className += " active";
+        }
+    }
+}
+displayActiveMenuItem()
+</script>
