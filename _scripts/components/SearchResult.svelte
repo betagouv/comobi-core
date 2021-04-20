@@ -34,16 +34,6 @@
 	$: nbResult = directTripList.length + trip10List.length + trip20List.length
 </script>
 
-<style lang="scss">
-	.invalidTripRequest {
-		text-align: center;
-		margin-top: 2rem;
-		p {
-			margin-bottom: 0rem
-		}
-	}
-</style>
-
 {#if !validTripRequest}
 	<div class="invalidTripRequest">
 		<p>
@@ -81,3 +71,10 @@
 		{/if}
 	</div>
 {/if}
+
+<style lang="scss">
+	.invalidTripRequest {
+		text-align: center;
+		padding: 2rem 0;
+	}
+</style>

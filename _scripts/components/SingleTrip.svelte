@@ -40,3 +40,25 @@
   </td>
   <td><button class="search-btn">Contacter {Prénom}</button></td>
 </tr>
+
+<style lang="scss">
+.inline-trip {
+	padding: 10px;
+	background: #FFFFFF;
+	box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.06);
+	font-style: normal;
+	font-weight: 600;
+	font-size: 15px;
+	line-height: 19px;
+	color: #282828;
+	.light {
+		font-weight: normal;
+	}
+	.place-number {
+		vertical-align: middle;
+	}
+  td {
+		padding: 10px 15px;
+	}
+}
+</style>

@@ -22,3 +22,19 @@
         {/each}
     </table>
 {/if}
+
+<style lang="scss">
+	.driver-list-table {
+		border-collapse: separate;
+		border-spacing: 0 1rem;
+		width: -moz-available;
+		th {
+            font-weight: 600;
+            font-size: 12px;
+            line-height: 15px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            padding-left: 1rem;
+		}
+	}
+</style>
