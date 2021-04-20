@@ -6,12 +6,12 @@
         <p class="instance-name">Azur</p> <!-- replace by instance name -->
         <div class="with-comobi">avec <img src="images/logo-comobi-sfblack.svg"/></div>
       </div>
-      <div class="menu-item">
+      <a class="menu-item" href="/">
         Tous les trajets
-      </div>
-      <div class="menu-item">
+      </a>
+      <a class="menu-item" href="/howItWorks">
         Comment ça marche ?
-      </div>
+      </a>
     </div>
     <div class="right">
       <button class="search-btn proposer">Proposer un trajet</button>
@@ -34,8 +34,8 @@
     </div>
     <button class="search-btn">Proposer un trajet</button>
     <div id="myLinks">
-      <a href="#tous">Tous les trajets</a>
-      <a href="#faq">Comment ça marche ?</a>
+      <a href="/">Tous les trajets</a>
+      <a href="/howItWorks">Comment ça marche ?</a>
     </div>
   </div>
   <div>
@@ -46,11 +46,23 @@
 
 <script>
 function menuFunction() {
-  var myLinks = document.getElementById("myLinks");
+  let myLinks = document.getElementById("myLinks");
   if (myLinks.style.display === "block") {
     myLinks.style.display = "none";
   } else {
     myLinks.style.display = "block";
   }
 }
+
+function displayActiveMenuItem() {
+    let path = decodeURIComponent(window.location);
+    let menuItemList = document.getElementsByClassName("menu-item");
+    for(i=0 ; i < menuItemList.length ; i+=1) {
+      let item = menuItemList.item(i);
+        if (path === item.href) {
+            item.className += " active";
+        }
+    }
+}
+displayActiveMenuItem()
 </script>
