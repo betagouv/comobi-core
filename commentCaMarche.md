@@ -1,5 +1,5 @@
 ---
-layout: home
+layout: default
 ---
 # Pas de transports en communs ? votre territoire vous propose une solution facile ! 
  CoMobi est un outil minimaliste permettant à un territoire peu dense d’expérimenter la mise en place de covoiturage solidaire simplement et à moindre frais. Il permet : 
