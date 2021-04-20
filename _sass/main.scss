@@ -307,7 +307,6 @@ section.home-section {
 	color: #FFFFFF;
 	background: #282727;
 	padding: 10px;
-	margin-bottom: 0.5rem;
 }
 
 .search-input {
@@ -561,6 +560,9 @@ h1 {
 				display: flex;
 				flex-direction: left;
 				justify-content: flex-start;
+			}
+			.search-btn {
+				margin-bottom: 0.5rem;
 			}
 		}
 	}
