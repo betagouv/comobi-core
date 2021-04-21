@@ -1,5 +1,7 @@
 <script>
   import { parse, format } from 'date-fns'
+  import { getContext } from 'svelte'
+  import Modal from './Modal.svelte'
   
   export let tripProposal
   const getDate = (Jour) => {
@@ -15,6 +17,8 @@
 		heureDepart,
 		driver: { Prénom, Nom, contact, lieu, modeContact }
 	} = tripProposal
+
+  let modal;
   
 </script>
 
@@ -38,8 +42,19 @@
     <img alt="member" src="./images/icons/member.svg"/>
     <img alt="member" src="./images/icons/member.svg"/>
   </td>
-  <td><button class="search-btn">Contacter {Prénom}</button></td>
+  <td><button class="search-btn" on:click={() => modal.show()}>Contacter {Prénom}</button></td>
 </tr>
+<Modal bind:this={modal}>
+  <h3>{Prénom} {Nom}</h3>
+  {#if modeContact === 'Email'}
+    <a href="mailto:{contact}">{contact}</a>
+  {:else}
+    <a href="tel:{contact}">{contact}</a>
+    <p>Moyen de contact préfére : <br/>
+      > {modeContact}
+    </p>
+  {/if}
+</Modal>
 
 <style lang="scss">
 .inline-trip {
