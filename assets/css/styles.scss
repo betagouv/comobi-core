@@ -2,25 +2,7 @@
 ---
 @import "main";
 
-.search {
-	@extend .btn;
-	background-color: {{ site.couleurs.bouton_rechercher | default: '#199bb0' }};
-}
-
-.proposal {
-	@extend .btn;
-	background-color: {{ site.couleurs.bouton_proposer | default: '#22aa75' }};
-}
-
 section.home-section:nth-of-type(2n) {
 	background-color: {{ site.couleurs.odd_section_color | default: '#ecf0f1' }};
-}
-
-.header {
-	background-color: {{ site.couleurs.header_btn_section | default: '#b8e4e7' }};
-}
-
-.btn-list {
-	background-color: {{ site.couleurs.header_btn_section | default: '#b8e4e7' }};
 }
 
