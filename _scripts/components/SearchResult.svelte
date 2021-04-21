@@ -77,4 +77,23 @@
 		text-align: center;
 		padding: 2rem 0;
 	}
+	.search-result {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		h2, h3 {
+			margin-top: 1rem;
+			text-align: center;
+		}
+		> small {
+			text-align: center;
+			display: block;
+			margin-bottom: 1.6rem;
+		}
+		em {
+			background: yellow;
+			font-style: normal;
+	}
+}
 </style>

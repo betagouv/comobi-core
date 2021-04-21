@@ -20,9 +20,9 @@
 
 <tr class="inline-trip">
   {#if Jours !== ''}
-    <td class="datetime">{Jours}</td>
+    <td class="datetime" data-label="date">{Jours}</td>
   {:else}
-    <td class="date">
+    <td class="date" data-label="date">
       {#if Jour !== ''} 
         <span class="light">{getDate(Jour).E}</span>
         <span>{getDate(Jour).dLLL}</span>
@@ -30,10 +30,10 @@
     </td>
   {/if}
   {#if heureDepart !== '-'} 
-    <td class="light">{heureDepart}</td>
+    <td class="light" data-label="heure">{heureDepart}</td>
   {/if}
-  <td>{Départ}</td>
-  <td>{Arrivée}</td>
+  <td data-label="départ">{Départ} </td>
+  <td data-label="arrivée">{Arrivée}</td>
   <td class="place-number">
     <img alt="member" src="./images/icons/member.svg"/>
     <img alt="member" src="./images/icons/member.svg"/>
@@ -58,7 +58,25 @@
 		vertical-align: middle;
 	}
   td {
+    display: block;
 		padding: 10px 15px;
 	}
+  td:before {
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding-right: 0.5rem;
+  }
+}
+@media screen and (min-width: 768px) {
+  .inline-trip {
+    td {
+      display: table-cell;
+    }
+    td:before {
+    content: none;
+    }
+  }
 }
 </style>

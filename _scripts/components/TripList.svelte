@@ -15,20 +15,31 @@
                 <th scope="col">contacter</th>
             </tr>
         </thead>
-        {#each tripList as tripProposal}
-            <SingleTrip
-				{tripProposal}
-			/>
-        {/each}
+            {#each tripList as tripProposal}
+                <SingleTrip
+                    {tripProposal}
+                />
+            {/each}
     </table>
 {/if}
 
 <style lang="scss">
+@media (max-width: 768px) {
+    .driver-list-table {
+        thead {
+            display: none;
+        }
+        tr {
+            display: block;
+        }
+    }
+}
+@media only screen and (min-width: 768px) {
 	.driver-list-table {
 		border-collapse: separate;
 		border-spacing: 0 1rem;
 		width: -moz-available;
-		th {
+		tr th {
             font-weight: 600;
             font-size: 12px;
             line-height: 15px;
@@ -37,4 +48,5 @@
             padding-left: 1rem;
 		}
 	}
+}
 </style>

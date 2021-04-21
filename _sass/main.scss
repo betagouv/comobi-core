@@ -199,120 +199,6 @@ section.home-section {
 	}
 }
 
-//move
-.trip-request-entry a {
-	@extend .search;
-	width: max-content;
-	margin: 0 auto;
-}
-
-// TODO : Clean css
-.map {
-	flex: 1;
-	height: 100vh;
-}
-
-// à bouger
-.trip-selection {
-	margin: 0 auto;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
-.trip-request-entry {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
-
-.trip-request-entry .geography {}
-
-.trip-request-entry .geography label {
-	text-align: center;
-}
-
-.trip-request-entry .geography label input {
-	margin-left: 0.6rem;
-}
-
-.trip-request-entry button[type='submit'] {
-	padding: 0.5em;
-}
-
-.trip-request-entry .status {
-	text-align: center;
-}
-
-.available-trip-label {
-	font-style: normal;
-	font-size: 24px;
-	line-height: 30px;
-	color: #26353F;
-}
-
-.driver-list-table li.driver .trip-details {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-
-	padding: 1em;
-	border: 5px solid transparent;
-	border-radius: 50%;
-
-	width: 6em;
-	height: 6em;
-	text-align: center;
-	font-weight: bold;
-	margin: 0.5em;
-}
-
-.driver-list-table li.driver .trip-details.minor-detour {
-	border-color: green;
-}
-
-.driver-list-table li.driver .trip-details.medium-detour {
-	border-color: orange;
-}
-
-.driver-list-table li.driver .trip-details.major-detour {
-	border-color: red;
-}
-
-.driver-list-table li.driver .name {
-	display: block;
-	font-weight: bold;
-}
-
-.driver-list-table li.driver .proposed-trip {
-	display: block;
-}
-
-.driver-list-table li.driver .proposed-trip .datetime {
-	color: chocolate;
-}
-
-.driver-list-table li.driver .contact {
-	display: flex;
-	flex-direction: row;
-}
-
-.driver-list-table li.driver .contact>* {
-	flex: 1;
-}
-
-.map .driver-trip {
-	stroke-width: 2;
-}
-
-.map .trip-request {
-	stroke: purple;
-	stroke-width: 6;
-}
-////////
-
-
-// A DEPLACER ??? ///
 .search-btn {
 	display: flex;
 	flex: 1;
@@ -330,35 +216,6 @@ section.home-section {
 }
 .search-btn[href^='mailto:']::before {
 	content: '';
-}
-
-.search-input {
-	display: flex;
-	flex: 1;
-	flex-direction: column;
-	padding: 10px;
-}
-
-.city-input {
-	border: 1px solid #E6E6E6;
-	box-sizing: border-box;
-	border-radius: 5px;
-}
-
-.search-result {
-	h2, h3 {
-		margin-top: 1rem;
-		text-align: center;
-	}
-	> small {
-		text-align: center;
-		display: block;
-		margin-bottom: 1.6rem;
-	}
-	em {
-		background: yellow;
-		font-style: normal;
-	}
 }
 
 .search-content {
@@ -400,8 +257,6 @@ section.home-section {
 		}
 	}
 }
-
-///////
 
 //// HEADER //// 
 .logo {

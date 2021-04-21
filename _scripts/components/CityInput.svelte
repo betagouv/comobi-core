@@ -40,3 +40,17 @@
         } : undefined}
     />
 </label>
+
+<style>
+.city-input {
+	border: 1px solid #E6E6E6;
+	box-sizing: border-box;
+	border-radius: 5px;
+}
+.search-input {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	padding: 10px;
+}
+</style>

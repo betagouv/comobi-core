@@ -38,9 +38,7 @@
             validPlaceNames={validPlaceNames}
             bind:value={destination}
         />
-        <div class="search-input">
-            <button class="search-btn" type="submit">Rechercher</button>
-        </div>
+        <button class="search-btn" type="submit">Rechercher</button>
     </div>
     <img 
         alt="arrow"
@@ -82,6 +80,10 @@
 	}
 	.search-btn {
 		width: min-content;
+        display: flex;
+        flex: 1;
+        padding: 10px;
+        margin-left: 0.5rem;
 	}
 }
 @media only screen and (min-width: 768px) {

@@ -22,3 +22,12 @@ tripRequest.origin !== ''}
 		positionByPlace={positionByPlace}
 	/>
 </section>
+
+<style>
+.trip-selection {
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+</style>
