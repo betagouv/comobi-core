@@ -74,26 +74,6 @@ a[href^='tel:']::before {
 	content: '📞 ';
 }
 
-///// BTN ////
-.btn {
-	display: block;
-	border: none;
-	padding: 0.6rem 1rem;
-	margin: 0 5px;
-	color: white;
-}
-
-.contact-link {
-	background: rgba(147, 196, 125, 1);
-	color: white;
-	width: 14rem;
-}
-
-.simple {
-	background: none;
-	border: 1px solid black;
-}
-
 .footer {
 	display: flex;
 	flex-direction: column;
@@ -174,17 +154,6 @@ section.home-section {
 		width: 100%;
 		object-fit: contain;
 		height: 100px;
-	}
-}
-
-// move
-.react-component {
-	padding: 1rem calc(max(5px, -25em + 50vw));
-	display: flex;
-	justify-content: center;
-	align-content: end;
-	ul {
-    list-style-type: none;
 	}
 }
 
