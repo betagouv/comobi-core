@@ -228,7 +228,7 @@ section.home-section {
 		font-size: 24px;
 		line-height: 30px;
 		color: #26353F;
-		margin: 0;
+		margin: 0.5rem 0 0 0;
 	}
 	.with-comobi {
 		display: flex;
@@ -333,7 +333,9 @@ section.home-section {
 		font-family: $main-font;
 		font-weight: normal;
 
-
+		.search-btn {
+			position: unset;
+		}
 		.menu {
 			display: flex;
 			flex-direction: row;
