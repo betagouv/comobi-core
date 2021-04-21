@@ -23,7 +23,7 @@ body {
 	display: flex;
 	flex-direction: column;
 	margin: 0px;
-	.header, .footer {
+	.footer {
 		flex-shrink: 0;
 	}
 }
@@ -125,17 +125,6 @@ a[href^='tel:']::before {
 	}
 	.comobi img {
 		width: 80px;
-	}
-}
-
-.header {
-	display: block;
-	width: 100%;
-
-	img {
-		max-width: 100%;
-		object-fit: contain;
-		min-height: 5vh;
 	}
 }
 
@@ -289,14 +278,7 @@ section.home-section {
 	}	
 }
 
-.search-header {
-	/*display: block;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	font-family: $main-font;
-	font-weight: normal;*/
+.header {
 	display: block;
 	background: rgba(246, 246, 246, 1);
 	font-family: $main-font;
@@ -373,7 +355,7 @@ section.home-section {
 		background-color: #FFFFFF;
 		margin-left: 1rem;
 	}
-	.search-header {
+	.header {
 		display: block;
 		display: flex;
 		flex-direction: column;
