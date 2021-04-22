@@ -5,7 +5,7 @@
 $footer-background: #4682b4;
 $main-background: rgb(255, 255, 246);
 $main-font: 'Source Sans Pro';
-$header-background: rgb(184, 228, 231);
+$header-background: rgba(246, 246, 246, 1);
 
 
 .current {
@@ -56,11 +56,12 @@ h2 {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	background-color: $header-background;
 }
 .logo-title {
-	width: -moz-available;
-	max-width: 30rem;
+	max-width: 20rem;
 	margin: 2rem 0;
+	max-height: 10rem;
 }
 
 a {
@@ -181,37 +182,38 @@ section.home-section {
 	.content {
 		background: rgba(247, 247, 247, 0.5);
 	}
-	.partner-section {
-		background: rgba(246, 246, 246, 1);
+}
+
+.partner-section {
+	display: flex;
+	background: rgba(246, 246, 246, 1);
+	flex-direction: column;
+	align-items: center;
+	padding: 2rem 0;
+	text-align: center;
+	.partner-logo-list {
 		display: flex;
-		flex-direction: column;
-		align-items: center;
-		padding: 2rem 0;
-		text-align: center;
-		.partner-logo-list {
-			display: flex;
-			flex-direction: row;
-			flex-wrap: wrap;
-			justify-content: center;
-			* {
-				margin: 10px;
-				height: 90px;
-			}
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: center;
+		* {
+			margin: 10px;
+			height: 90px;
 		}
-		.btn-section {
-			display: flex;
-			flex-direction: row;
-			justify-content: center;
-			align-items: center;
-			padding: 20px;
-			text-align: center;
-			flex-wrap: wrap;
-			* {
-				margin: 10px;
-			}
-			a {
-				text-decoration: underline;
-			}
+	}
+	.btn-section {
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		padding: 20px;
+		text-align: center;
+		flex-wrap: wrap;
+		* {
+			margin: 10px;
+		}
+		a {
+			text-decoration: underline;
 		}
 	}
 }
@@ -309,7 +311,45 @@ section.home-section {
 	}
 }
 
+// Comment ça marche
+.how-it-works {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 2rem 0;
+	background-color: (246, 246, 246, 0.5);
+	.slogan-list {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		.slogan {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			text-align: center;
+			padding: 0.5rem 2rem;
+		}
+	}
+}
+
 @media only screen and (min-width: 768px) {
+	// Comment ça marche
+	.how-it-works {
+		.slogan-list {
+			display: flex;
+			flex-direction: row;
+			justify-content: center;
+			align-items: center;
+			.slogan {
+				display: flex;
+				flex-direction: column;
+				align-items: flex-start;
+				padding: 0;
+			}
+		}
+	}
 	.footer {
 		flex-direction: row;
 		.comobi {

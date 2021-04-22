@@ -1,0 +1,18 @@
+---
+layout: default
+---
+<section class="how-it-works">
+    {% if page.slogans != nil %}
+    <div class="slogan-list">
+        {% for slogan in page.slogans %}
+        <div class="slogan">
+            <img src="{{ slogan.icon }}"/>
+            <h3>{{ slogan.title }}</h3>
+            <p>{{ slogan.msg }}</p>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    <a class="search-btn" href="{{ site.formulaire }}">Proposer un trajet</a>
+</section>
+{{ content }}

@@ -20,11 +20,11 @@
       <a class="search-btn" href="{{ site.formulaire }}">Proposer un trajet</a>
     </div>
   </div>
-  <div class="header-title">
-    <img class="logo-title" src="images/logo-long-web.png" alt="logo comobi" />
-    <h1>Trouvez un <strong> covoiturage pour vous déplacer </strong> aux alentours de <strong> Valberg</strong></h1>
-  </div>
 </header>
+<div class="header-title">
+  <img class="logo-title" src="{{ page.title-img | images/logo-long-web.png }}" alt="logo comobi" />
+  <h1>{{ page.title | Trouvez un covoiturage pour vous déplacer }}</h1>
+</div>
 
 <script>
 function menuFunction() {
