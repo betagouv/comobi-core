@@ -251,7 +251,7 @@ section.home-section {
 
 .header {
 	display: block;
-	background: rgba(246, 246, 246, 1);
+	background: #FFFFFF;
 	font-family: $main-font;
 	width: -moz-available;
 	font-weight: normal;
@@ -318,7 +318,8 @@ section.home-section {
 	justify-content: center;
 	align-items: center;
 	padding: 2rem 0;
-	background-color: (246, 246, 246, 0.5);
+	background-color: rgba(247, 247, 247, 0.5);
+	width: 100%;
 	.slogan-list {
 		display: flex;
 		flex-direction: column;
@@ -332,11 +333,28 @@ section.home-section {
 			padding: 0.5rem 2rem;
 		}
 	}
+	.explaination {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: flex-start;
+		width: 100%;
+		margin: 3rem 0;
+		padding: 0 3rem;
+	}
 }
+.faq {
+	background-color: rgba(246, 246, 246, 1);
+	padding: 3rem;
+}
+
+
+
 
 @media only screen and (min-width: 768px) {
 	// Comment ça marche
 	.how-it-works {
+		padding: 2rem 4rem;
 		.slogan-list {
 			display: flex;
 			flex-direction: row;
@@ -347,6 +365,7 @@ section.home-section {
 				flex-direction: column;
 				align-items: flex-start;
 				padding: 0;
+				text-align: left;
 			}
 		}
 	}
@@ -381,7 +400,6 @@ section.home-section {
 			flex-direction: row;
 			justify-content: space-between;
 			align-items:	center;
-			background: #FFFFFF;
 			width: -moz-available;
 			font-weight: normal;
 		}
