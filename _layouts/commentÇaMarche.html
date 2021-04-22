@@ -15,4 +15,9 @@ layout: default
     {% endif %}
     <a class="search-btn" href="{{ site.formulaire }}">Proposer un trajet</a>
 </section>
-{{ content }}
+<!-- est-ce que je pourrais éviter le for ? -->
+{% for page in site.pages %}
+    {% if page.name == "faq.md" %}
+        {% include faq.html content=page.content %}
+    {% endif %}
+{% endfor %}
