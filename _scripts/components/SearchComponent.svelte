@@ -5,8 +5,6 @@
     export let validPlaceNames
     export let onTripRequestChange
 
-    console.log('search component ', validPlaceNames)
-
     let origin = tripRequest.origin
     let destination = tripRequest.destination
 

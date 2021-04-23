@@ -55,7 +55,6 @@ function setTripRequest(state, tripRequest) {
  * @param {string[]} validPlaceNames 
  */
 function setValidPlaceNames(state, validPlaceNames) {
-	console.log(validPlaceNames)
 	state.validPlaceNames = validPlaceNames
 }
 
@@ -80,7 +79,6 @@ let currentComponent;
 let mapStateToProps = () => {};
 
 function replaceComponent(newComponent, _mapStateToProps){
-	console.log('replaceComponent')
     if(!_mapStateToProps){
         throw new Error('Missing _mapStateToProps in replaceComponent')
     }
@@ -131,7 +129,6 @@ json(`/valid-place-names`).then(store.mutations.setValidPlaceNames)
 // Router
 page('/', _ => {
 	function mapStateToProps(state){
-		console.log('mapStateToProps')
 		const {
 			tripProposalsByTrip,
 			positionByPlace,
@@ -140,7 +137,6 @@ page('/', _ => {
 		} = store.state
 
 		const { setAndPrepareForTripRequest } = actions
-		console.log(validPlaceNames)
 		return {
 			tripProposalsByTrip, 
 			tripRequest,

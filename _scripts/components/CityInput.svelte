@@ -6,8 +6,6 @@
     export let validPlaceNames
     export let value
 
-    console.log(validPlaceNames)
-
     const validation = config.liste_ville_restreinte !== undefined && config.liste_ville_restreinte.toLowerCase() === 'oui'
     
     let validationMessage
