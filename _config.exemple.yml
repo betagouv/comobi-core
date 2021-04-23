@@ -12,10 +12,6 @@ couleurs:
   odd_section_color: <couleur de fond des sections d'index pair>
   header_btn_section: <couleur de fond de la section avec une liste de bouton dans le haut de page>
 
-bandeau:
-  image: <path de la bannière /image/[...]>
-  texte: <alt de l'image, affiché au survol avec la souris>
-
 liste_ville_restreinte: <oui ou non, restreindre la liste des villes dans le formulaire de recherche (non par défaut)>
 
 ## Les sections suivantes ne sont pas à modifier
