@@ -14,6 +14,11 @@ couleurs:
 
 liste_ville_restreinte: <oui ou non, restreindre la liste des villes dans le formulaire de recherche (non par défaut)>
 
+liste-logo:
+  - <image url>
+  - <image url>
+  - <image url>
+
 ## Les sections suivantes ne sont pas à modifier
 sass:
   sass_dir: _sass
