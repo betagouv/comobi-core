@@ -27,7 +27,7 @@ body {
 	margin: 0;
 	line-height: 1.15;
 	font-size: $font-size;
-	font-size: $font-weigth;
+	font-weight: $font-weigth;
 	.footer {
 		flex-shrink: 0;
 	}
@@ -179,7 +179,7 @@ section.home-section {
 	color: #FFFFFF;
 	background: #282727;
 	padding: 10px;
-	text-decoration: none!important;
+	text-decoration: none;
 }
 .search-btn[href^='mailto:']::before {
 	content: '';
