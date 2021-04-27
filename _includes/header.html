@@ -2,7 +2,7 @@
 <header class="header">
   <div class="menu">
     <div class="topnav">
-      <a href="javascript:void(0);" class="icon" onclick="menuFunction()">
+      <a class="icon" onclick="openMobileMenu()">
         <span></span>
         <span></span>
         <span></span>
@@ -27,7 +27,7 @@
 </div>
 
 <script>
-function menuFunction() {
+function openMobileMenu() {
   let menuItemListElements = document.getElementsByClassName("menu-item-list");
   if (menuItemListElements.length > 0) {
     let menuItemList = menuItemListElements.item(0);
