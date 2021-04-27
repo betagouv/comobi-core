@@ -7,6 +7,7 @@ $main-background: rgb(255, 255, 246);
 $main-font: 'Source Sans Pro';
 $header-background: rgba(246, 246, 246, 1);
 $font-size: 1rem;
+$line-height: 1.15rem;
 $font-weigth: 400;
 
 
@@ -25,7 +26,7 @@ body {
 	display: flex;
 	flex-direction: column;
 	margin: 0;
-	line-height: 1.15;
+	line-height: $line-height;
 	font-size: $font-size;
 	font-weight: $font-weigth;
 	.footer {
@@ -49,7 +50,7 @@ table {
 	font-family: $main-font;
 }
 
-h1 {
+.header-title h1 {
 	font-size: 1.5rem;
 	line-height: 1.9rem;
 	align-items: center;
@@ -77,12 +78,6 @@ a {
 	text-decoration: none;
 	color: rgb(0, 123, 255);
 }
-a[href^='mailto:']::before {
-	content: '📧 ';
-}
-a[href^='tel:']::before {
-	content: '📞 ';
-}
 
 .footer {
 	display: flex;
@@ -98,8 +93,14 @@ a[href^='tel:']::before {
 	a {
 		color: white;
 	}
+	a[href^='mailto:']::before {
+		content: '📧 ';
+	}
+	a[href^='tel:']::before {
+		content: '📞 ';
+	}
 	img {
-		width: 100px;
+		width: 6.25rem;
 		padding: 2px;
 	}
 	div {
@@ -113,7 +114,7 @@ a[href^='tel:']::before {
 		align-items: center;
 	}
 	.comobi img {
-		width: 80px;
+		width: 5rem;
 	}
 }
 
@@ -162,27 +163,25 @@ section.home-section {
 		margin: 0px auto;
 		width: 100%;
 		object-fit: contain;
-		height: 100px;
+		height: 6.25rem;
 	}
 }
 
 .search-btn {
 	display: flex;
+	font-family: $main-font;
 	flex: 1;
 	border: 1px solid black;
-	border-radius: 55px;
+	border-radius: 3.4rem;
 	font-weight: 600;
-	font-size: 13px;
-	line-height: 16px;
+	font-size: $font-size;
+	line-height: $line-height;
 	align-items: center;
 	text-align: center;
 	color: #FFFFFF;
 	background: #282727;
-	padding: 10px;
+	padding: 0.625rem;
 	text-decoration: none;
-}
-.search-btn[href^='mailto:']::before {
-	content: '';
 }
 
 .search-content {
@@ -205,8 +204,8 @@ section.home-section {
 		flex-wrap: wrap;
 		justify-content: center;
 		* {
-			margin: 10px;
-			height: 90px;
+			margin: 0.5rem;
+			height: 5.5rem;
 		}
 	}
 	.btn-section {
@@ -214,11 +213,11 @@ section.home-section {
 		flex-direction: row;
 		justify-content: center;
 		align-items: center;
-		padding: 20px;
+		padding: 1.25rem;
 		text-align: center;
 		flex-wrap: wrap;
 		* {
-			margin: 10px;
+			margin: 0.5rem;
 		}
 		a {
 			text-decoration: underline;
@@ -232,11 +231,11 @@ section.home-section {
 	flex-direction: column;
 	justify-content: flex-start;
 	color: #26353F;
-	margin-left: 61px;
+	margin-left: 4rem;
 	.instance-name {
 		font-weight: bold;
-		font-size: 24px;
-		line-height: 30px;
+		font-size: 1.5rem;
+		line-height: 1.8rem;
 		color: #26353F;
 		margin: 0.5rem 0 0 0;
 	}
@@ -244,14 +243,14 @@ section.home-section {
 		display: flex;
 		flex-direction: row;
 		font-style: italic;
-		font-size: 13px;
-		line-height: 16px;
+		font-size: 1rem;
+		line-height: 1rem;
 		align-items: flex-start;
-		padding-left: 5px;
+		padding-left: 0.5rem;
 		img {
-			width: 68px;
-			height: 12.45px;
-			margin-left: 8px;
+			width: 4.25rem;
+			height: 0.8rem;
+			margin-left: 0.5rem;
 
 		}
 	}	

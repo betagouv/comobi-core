@@ -46,6 +46,7 @@
             letter-spacing: 0.05em;
             text-transform: uppercase;
             padding-left: 1rem;
+            text-align: left;
 		}
 	}
 }
