@@ -42,8 +42,10 @@
 <style>
 .city-input {
 	border: 1px solid #E6E6E6;
-	box-sizing: border-box;
-	border-radius: 5px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    line-height: 1.75;
+    overflow: visible;
 }
 .search-input {
 	display: flex;
