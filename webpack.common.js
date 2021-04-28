@@ -12,6 +12,10 @@ export const common = {
 				}
 			},
 			{
+				test: /\.(css|scss)$/,
+        use: ["style-loader", "css-loader"],
+			},
+			{
 				test: /\.html$/,
 				use: [
 					{

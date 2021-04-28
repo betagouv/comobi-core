@@ -1,21 +1,35 @@
+<section class="partner-section">
+	<p>Azur Covoiturage existe grâce au soutien de nombreux partenaires</p>
+	<p>Nous les remercions chaleureusement !</p>
+	<div class="partner-logo-list">
+	  <!-- Liste logo obligatoires -->
+	  <img src="images/ademe_logo.jpg"/>
+	  <img src="images/ANCT_Logo.jpg"/>
+	  <img src="images/beta_gouv_logo.jpg"/>
+	  <!-- Logo en plus -->
+	  {% for logo in site.liste-logo %}
+	  	<img src="{{ logo.url }}"/>
+	  {% endfor %}
+	</div>
+	<p>Vous souhaitez mettre en place du covoiturage sur votre territoire ?</p>
+	<p>Comobi est gratuit, open-source, et vous propose un accompagnement personnalisé !</p>
+	<div class="btn-section">
+	  <a class="search-btn" href="mailto:{{ site.mail }}" >Demander une démonstration</a>
+	  <a href="{{ site.code_source.instance }}" target="_blank">Contribuer au code source</a>
+	</div>
+  </section>
 <footer>
 	<section class="footer">
-		<div class="comobi">
+		<div>
 			<p>Distribué par <img src="images/logo-comobi-sfb.png" /> </p>
 			<a href="http://www.comobi.fr">site internet</a>
 			<a href="{{ site.code_source.comobi }}" target="_blank">code source Comobi</a>
-			<a href="{{ site.code_source.instance }}" target="_blank">code source {{ site.titre }}</a>
 			<a href="{{ site.lien_cgu | default: '/cgu' }}">Conditions Générales D'utilisation</a>
 		</div>
-		<div class="center">
+		<div>
 				<p>Nous contacter - {{ site.titre }} <br /> </p>
 				<p>Email :  <a href="mailto:{{ site.mail }}">{{ site.mail }} </a></p>
 				<p>Tél : <a href="tel:{{ site.tel }}">{{ site.tel }} </a> </p>
-		</div>
-		<div class="logo-list">
-				<img src="images/ANCT_logo.jpg"/>
-				<img src="images/beta_gouv_logo.jpg"/>
-				<img src="images/ademe_logo.jpg"/>
 		</div>
 	</section>
 </footer>

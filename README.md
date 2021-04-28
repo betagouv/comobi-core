@@ -17,8 +17,6 @@ Corresplot est une interface utilisateur permettant de faire la correspondance f
 
 [Organisation du travail](https://github.com/DavidBruant/lotocar/projects/1?fullscreen=true)
 
-### Architecture
-Deux applications sont disponibles : 'Direct' et 'Outil-metier'
 
 ## Comobi
 L'idée est de généraliser et de rendre plus générique le projet Lot'ô car afin qu'il puisse être déployé facilement et rapidement.
@@ -37,7 +35,9 @@ L'idée est de généraliser et de rendre plus générique le projet Lot'ô car 
 - les pages statiques en markdown:
   - index.md
   - recherche.md
+
 #### Ajouter une nouvelle page
+
 - ajouter une page __.md___
 - ajouter une route dans le fichier server.js
 
@@ -55,7 +55,12 @@ Ce Google Spreadsheet contient 3 colonnes :
 
 Pour trouver les **latitude/longitude**, une manière de faire consiste à aller dans Google Maps, viser le lieu que l'on souhaite, faire un **clic droit**, sélectionner "Plus d'infos sur cet endroit" et en bas de l'écran, on peut voir les latitude/longitude
 
-### Installation
+
+### Pour développer en local
+
+#### Première fois
+
+- Créer un fichier `_config.yml` (par exemple, en prenant ce modèle : https://github.com/betagouv/neutre.comobi.fr/blob/main/_config.yml )
 - Créer un projet dans la [console Google](https://console.developers.google.com)
 - Créer une "clé API" (pas Oauth)
 - Créer un fichier `.env` avec les variables d'environnement:
@@ -63,13 +68,22 @@ Pour trouver les **latitude/longitude**, une manière de faire consiste à aller
   - `GOOGLE_DRIVER_SPREADSHEET_ID` : identifiant du Google Spreadsheet qui sert de base de donnée
   - `LOCALISATION_KNOWLEDGE_GOOGLE_SPREADSHEET_ID` : identifiant du Google Spreadsheet qui sert de base de connaissance pour la localisation
 
-### Pour développer en local
+Lancer
+```sh
+# Pour créer un premier build, avec notamment la création du dossier _site
+npm run build:jekyll
+```
+
+
+#### Au quotidien
 
 Pour lancer l'application "trajets direct" : 
+
+```sh
+npm run dev # start server
 ```
-$ npm run dev:direct // build, create frontend_build and update _site
-$ npm run dev // start server
-```
+
+
 
 ### Déploiement sur heroku
 Lorsque la branche master est déployée un build automatique est lancé par github comprenant les étapes suivantes : 

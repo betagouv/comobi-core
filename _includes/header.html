@@ -1,3 +1,54 @@
+
 <header class="header">
-  <img src="{{ site.bandeau.image }}" alt="{{ site.bandeau.texte }}" />
+  <div class="menu">
+    <div class="topnav">
+      <a class="icon" onclick="openMobileMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </a>
+      <div class="logo">
+        <p class="instance-name">{{ site.titre | "CoMobi" }}</p>
+        <div class="with-comobi">avec <img src="images/logo-comobi-sfblack.svg"/></div>
+      </div>
+      <div class="menu-item-list">
+        <a class="menu-item" href="/">Tous les trajets</a>
+        <a class="menu-item" href="/commentCaMarche">Comment ça marche ?</a>
+      </div>
+    </div>
+    <div class="right">
+      <a class="search-btn" href="{{ site.formulaire }}">Proposer un trajet</a>
+    </div>
+  </div>
 </header>
+
+<script>
+function openMobileMenu() {
+  let menuItemListElements = document.getElementsByClassName("menu-item-list");
+  if (menuItemListElements.length > 0) {
+    let menuItemList = menuItemListElements.item(0);
+    if (menuItemList.style.display === "block") {
+      menuItemList.style.display = "none";
+    } else {
+      menuItemList.style.display = "block";
+    }
+  }
+}
+
+function displayActiveMenuItem() {
+    let path = decodeURIComponent(window.location);
+    let menuItemList = document.getElementsByClassName("menu-item-list");
+    if (menuItemList.length > 0) {
+      let menuItem = menuItemList.item(0).children;
+      for(i=0 ; i < menuItem.length ; i+=1) {
+        let item = menuItem.item(i);
+          if (path === item.href) {
+              item.className += " active";
+          }
+      }
+    } else {
+      throw "there is no menu item";
+    }
+}
+displayActiveMenuItem()
+</script>
