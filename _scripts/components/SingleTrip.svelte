@@ -39,8 +39,8 @@
   <td data-label="départ">{Départ} </td>
   <td data-label="arrivée">{Arrivée}</td>
   <!--<td class="place-number">
-    <img alt="member" src="./images/icons/member.svg"/>
-    <img alt="member" src="./images/icons/member.svg"/>
+    <img alt="member" src="./generic-images/icons/member.svg"/>
+    <img alt="member" src="./generic-images/icons/member.svg"/>
   </td>-->
   <td><button class="search-btn" on:click={() => modal.show()}>Contacter {Prénom}</button></td>
 </tr>

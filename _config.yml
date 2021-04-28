@@ -12,13 +12,13 @@ couleurs:
   header_btn_section: "#c9d622"
 
 bandeau:
-  image: "/images/banniere-neutre.png"
+  image: "/generic-images/banniere-neutre.png"
   texte: "Bandeau Neutre"
 
 liste-logo:
-  - images/ademe_logo.jpg
-  - images/ANCT_Logo.jpg
-  - images/beta_gouv_logo.jpg
+  - generic-images/ademe_logo.jpg
+  - generic-images/ANCT_Logo.jpg
+  - generic-images/beta_gouv_logo.jpg
 
 ## Les sections suivantes ne sont pas à modifier
 sass:

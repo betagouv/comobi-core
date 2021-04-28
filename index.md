@@ -8,5 +8,5 @@ styles:
   - href: "./frontend_build/bundle.css"
 
 title: Trouvez un covoiturage pour vous déplacer pour vos trajets réguliers
-title-img: images/logo-long-web.png
+title-img: generic-images/logo-long-web.png
 ---
