@@ -13,9 +13,3 @@ slogans:
     icon: images/icons/economique.svg
     msg: Mettez vous d’accord sur un partage juste des frais sur vos trajets.
 ---
-# Blalblele
-J'ai quand même envie d'écrire ici wesh
-Mais oui
-## Vas y donc pas de soucis
-# Prfk
-sdfsf
