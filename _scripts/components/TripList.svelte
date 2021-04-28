@@ -24,8 +24,10 @@
 {/if}
 
 <style lang="scss">
-@media (max-width: 768px) {
-    .driver-list-table {
+/*@media (max-width: 48rem) {
+    
+}*/
+.driver-list-table {
         thead {
             display: none;
         }
@@ -33,16 +35,14 @@
             display: block;
         }
     }
-}
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 48rem) {
 	.driver-list-table {
-		border-collapse: separate;
-		border-spacing: 0 1rem;
-		width: -moz-available;
+		border-collapse: collapse;
+		width: 100%;
 		tr th {
             font-weight: 600;
-            font-size: 12px;
-            line-height: 15px;
+            font-size: 0.8rem;
+            line-height: 1rem;
             letter-spacing: 0.05em;
             text-transform: uppercase;
             padding-left: 1rem;

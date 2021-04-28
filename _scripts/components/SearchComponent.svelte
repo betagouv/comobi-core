@@ -51,11 +51,11 @@
 	display: flex;
 	flex-direction: row;
 	background-color: white;
-	margin-top: -50px;
 	padding: 10px;
 	border: 1px solid rgba(50, 66, 124, 0.05);
 	box-shadow: 0px 3px 3px rgba(211, 211, 211, 0.15);
 	border-radius: 4px;
+    transform: translateY(-3em);
 	.input-list {
 		display: flex;
 		flex: 10;
@@ -84,10 +84,9 @@
         margin-left: 0.5rem;
 	}
 }
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 48rem) {
     .search-form {
         background-color: white;
-        margin-top: -3rem;
         max-width: 50rem;
         .input-list {
             display: flex;

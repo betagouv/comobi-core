@@ -72,6 +72,9 @@ h2 {
 	max-width: 20rem;
 	margin: 2rem 0;
 	max-height: 10rem;
+	&.hiw {
+		filter: grayscale(100%);
+	}
 }
 
 a {
@@ -115,55 +118,6 @@ a {
 	}
 	.comobi img {
 		width: 5rem;
-	}
-}
-
-.btn-list {
-	display: flex;
-	flex-direction: column;
-	-moz-box-align: center;
-	align-items: center;
-	max-width: 100%;
-	position: relative;
-	margin-top: 0px;
-	padding: 1rem calc(max(5px, -25em + 50vw));
-
-	div {
-		display: flex;
-		flex-direction: row;
-		justify-content: space-evenly;
-		width: 100%;
-	}
-	a {
-		display: flex;
-		-moz-box-pack: center;
-		justify-content: center;
-		text-decoration: none;
-		margin: 0.5rem auto;
-	}
-}
-
-section.home-section {
-	padding: 1rem calc(max(5px, -25em + 50vw));
-	.large {
-		width: 100%;
-		margin: 0px auto;
-		display: block;
-		object-fit: contain;
-		height: 100%;
-	}
- 	.btn {
- 		text-decoration: none;
-		margin: 0.6rem auto;
-		width: max-content;
-		padding: 0.8rem;
-	}
-	img {
-		display: block;
-		margin: 0px auto;
-		width: 100%;
-		object-fit: contain;
-		height: 6.25rem;
 	}
 }
 
@@ -260,7 +214,7 @@ section.home-section {
 	display: block;
 	background: #FFFFFF;
 	font-family: $main-font;
-	width: -moz-available;
+	width: 100%;
 	font-weight: normal;
 	margin: auto;
 	height: 500px;
@@ -340,14 +294,41 @@ section.home-section {
 			padding: 0.5rem 2rem;
 		}
 	}
-	.explaination {
+	.explanation {
 		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: flex-start;
-		width: 100%;
+		flex-direction: row;
+		justify-content: space-around;
 		margin: 3rem 0;
 		padding: 0 3rem;
+		width: 100%;
+		align-items: center;
+
+		:nth-child(1) {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: flex-start;
+			p span {
+				border: 2px solid grey;
+				border-radius: 50%;
+				width: 2em;
+				height: 2em;
+				display: inline-block;
+				text-align: center;
+				line-height: 1.7em;
+			}
+		}
+		img {
+			display: none;
+			@media only screen and (min-width: 48rem) {
+				display: flex;
+				height: 12rem;
+				width: 17rem;
+				object-fit: cover;
+				object-position: left;
+				filter: grayscale(100%);
+			}
+		}
 	}
 }
 .faq {
@@ -355,10 +336,7 @@ section.home-section {
 	padding: 3rem;
 }
 
-
-
-
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 48rem) {
 	// Comment ça marche
 	.how-it-works {
 		padding: 2rem 4rem;
@@ -366,23 +344,24 @@ section.home-section {
 			display: flex;
 			flex-direction: row;
 			justify-content: center;
-			align-items: center;
+			align-items: flex-start;
 			.slogan {
 				display: flex;
+				flex: 1;
 				flex-direction: column;
 				align-items: flex-start;
-				padding: 0;
+				padding: 0 0.5rem;
 				text-align: left;
 			}
 		}
 	}
 	.footer {
 		flex-direction: row;
-		.comobi {
+		:nth-child(1) {
 			align-items: flex-start;
 		}
-		.center {
-			align-items: flex-end!important;
+		:nth-child(2) {
+			align-items: flex-end;
 		}
 	}
 
@@ -407,7 +386,7 @@ section.home-section {
 			flex-direction: row;
 			justify-content: space-between;
 			align-items:	center;
-			width: -moz-available;
+			width: 100%;
 			font-weight: normal;
 		}
 

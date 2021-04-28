@@ -38,10 +38,10 @@
   {/if}
   <td data-label="départ">{Départ} </td>
   <td data-label="arrivée">{Arrivée}</td>
-  <td class="place-number">
+  <!--<td class="place-number">
     <img alt="member" src="./images/icons/member.svg"/>
     <img alt="member" src="./images/icons/member.svg"/>
-  </td>
+  </td>-->
   <td><button class="search-btn" on:click={() => modal.show()}>Contacter {Prénom}</button></td>
 </tr>
 <Modal bind:this={modal}>
@@ -69,12 +69,13 @@
 	.light {
 		font-weight: normal;
 	}
-	.place-number {
+	/*.place-number {
 		vertical-align: middle;
-	}
+	}*/
   td {
     display: block;
 		padding: 10px 15px;
+    text-transform: capitalize;
 	}
   td:before {
     content: attr(data-label);
@@ -84,7 +85,7 @@
     padding-right: 0.5rem;
   }
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 48rem) {
   .inline-trip {
     td {
       display: table-cell;

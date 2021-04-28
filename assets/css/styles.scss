@@ -1,8 +1,3 @@
 ---
 ---
 @import "main";
-
-section.home-section:nth-of-type(2n) {
-	background-color: {{ site.couleurs.odd_section_color | default: '#ecf0f1' }};
-}
-
