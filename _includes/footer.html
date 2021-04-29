@@ -3,9 +3,9 @@
 	<p>Nous les remercions chaleureusement !</p>
 	<div class="partner-logo-list">
 	  <!-- Liste logo obligatoires -->
-	  <img src="images/ademe_logo.jpg"/>
-	  <img src="images/ANCT_Logo.jpg"/>
-	  <img src="images/beta_gouv_logo.jpg"/>
+	  <img src="generic-images/ademe_logo.jpg"/>
+	  <img src="generic-images/ANCT_Logo.jpg"/>
+	  <img src="generic-images/beta_gouv_logo.jpg"/>
 	  <!-- Logo en plus -->
 	  {% for logo in site.liste-logo %}
 	  	<img src="{{ logo.url }}"/>
@@ -21,7 +21,7 @@
 <footer>
 	<section class="footer">
 		<div>
-			<p>Distribué par <img src="images/logo-comobi-sfb.png" /> </p>
+			<p>Distribué par <img src="generic-images/logo-comobi-sfb.png" /> </p>
 			<a href="http://www.comobi.fr">site internet</a>
 			<a href="{{ site.code_source.comobi }}" target="_blank">code source Comobi</a>
 			<a href="{{ site.lien_cgu | default: '/cgu' }}">Conditions Générales D'utilisation</a>

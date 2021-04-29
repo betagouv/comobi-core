@@ -28,7 +28,7 @@
         <img 
             alt="arrow"
             class="laptop-icon" 
-            src="./images/icons/double-arrow.svg"
+            src="./generic-images/icons/double-arrow.svg"
             on:click={reverseClicked}
         />
         <CityInput
@@ -41,7 +41,7 @@
     <img 
         alt="arrow"
         class="mobile-icon" 
-        src="./images/icons/double-arrow.svg"
+        src="./generic-images/icons/double-arrow.svg"
         on:click={reverseClicked}
     />  
 </form>
