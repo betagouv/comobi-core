@@ -3,6 +3,7 @@
 Le projet Comobi est issu du projet [Lot'ô car](https://www.lotocar.fr/).
 
 ## Historique [Lot'ô car](https://www.lotocar.fr/)
+
 [Lot'ô car](https://www.lotocar.fr/) a commencé avec une base de données dans un Google Spreadsheet à plusieurs feuilles gérées manuellement//.
 
 Cette gestion et le service par-dessus sont chronophages ; notamment trouver des correspondances entre les conducteur.rice.s et les demandes de trajet. C'est pour cette raison, que nous avons travaillé à d'abord à créer de petits outils indépendants qui permettent de libérer du temps à la personne qui fait ce travail manuellement.
@@ -15,26 +16,38 @@ Le volume de données était encore raisonnable pour que Google Spreadsheet soit
 
 Corresplot est une interface utilisateur permettant de faire la correspondance facilement entre un.e conducteur.rice et une demande de trajet dans le Lot
 
-[Organisation du travail](https://github.com/DavidBruant/lotocar/projects/1?fullscreen=true)
-
 
 ## Comobi
+
 L'idée est de généraliser et de rendre plus générique le projet Lot'ô car afin qu'il puisse être déployé facilement et rapidement.
 
+
+### Organisation générale
+
+Le [repository github comobi-core](https://github.com/betagouv/comobi-core) contient ce qui est commun à toutes les instances (notamment le serveur qui discute avec la base de données) 
+
+Chaque instance est créé comme un repo github contenant uniquement les fichiers de contenu (textes, image, etc.) spécifiques à cette instance. Voir le [repo betagouv/neutre.comobi.fr](https://github.com/betagouv/neutre.comobi.fr) en exemple.
+
+Chaque instance, au déploiement, tire la dernière version de la branche `main` de `comobi-core` et redéploie la combinaison de comobi-core et de ses propres fichiers
+
+Actuellement, et pour des raisons historiques, les données sont stockées dans un Google Spreadsheet alimenté par les réponses à un Google Form. [Nous planifions de transitionner vers une base de données MongoDB](https://github.com/betagouv/comobi-core/issues/30)
+
+
 ### Architecture
-- Jekyll permet de gérer la partie statique de l'application web :
-  - _includes: les éléments pouvants être partagés entre les pages
-  - _layout: les templates des pages
-  - _sass: les fichiers de styles
-- Le framework React est utilisé pour les composants (en particulier aujourd'hui le formulaire de recherche)
-  - _scripts : les composants
-- Express est utilisé pour la partie serveur. Les fichiers sont séparés en différents sous dossiers et utilisés à la fois par l'application principale mais pouvant être utilisée par l'application 'outil-métier' (qui n'est pas encore utilisé dans le cadre de CoMobi)
-  - server : fonctions en rapport avec les trajets et les lieux
-  - spreadsheetDatabase : les fonctions permettant d'accèder aux données
-  - server.js : instanciation d'une application express et gestion des routes
+
+- [Jekyll](jekyllrb.com/) permet de gérer la partie statique de l'application web :
+  - `_includes`: les éléments pouvants être partagés entre les pages
+  - `_layout`: les templates des pages
+  - `_sass`: les fichiers de styles
+- Le framework [Svelte](svelte.dev/) est utilisé pour les composants d'interface (en particulier aujourd'hui le formulaire de recherche)
+  - `_scripts` : le code côté client dont les composants d'interface
+- [Express](expressjs.com) est utilisé pour la partie serveur. Les fichiers sont séparés en différents sous dossiers et utilisés à la fois par l'application principale mais pouvant être utilisée par l'application 'outil-métier' (qui n'est pas encore utilisé dans le cadre de CoMobi)
+  - `server` : fonctions en rapport avec les trajets et les lieux
+  - `spreadsheetDatabase` : les fonctions permettant d'accèder aux données
+  - `server.js` : instanciation d'une application express et gestion des routes
 - les pages statiques en markdown:
-  - index.md
-  - recherche.md
+  - `index.md`
+  - `recherche.md`
 
 #### Ajouter une nouvelle page
 
@@ -85,12 +98,13 @@ npm run dev # start server
 
 
 
-### Déploiement sur heroku
-Lorsque la branche master est déployée un build automatique est lancé par github comprenant les étapes suivantes : 
-  - build des scripts react
+### Déploiement sur Clever Cloud
+
+Lorsque la branche `main` est modifiée un build automatique est lancé via une github action comprenant les étapes suivantes : 
+  - build du JS front-end
   - build de l'application avec jekyll
-  - mise à jour d'une branche nommée Heroku
-Sur heroku un build automatique est lancé quand la branche heroku est mise à jour sur github
+  - `git push` sur une branche nommée `deploy`
+Sur Clever Cloud un build automatique est lancé quand la branche `deploy` est mise à jour sur github
 
 ### Langue
 
