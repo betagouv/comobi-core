@@ -82,6 +82,7 @@
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
+		padding-bottom: 4rem;
 		h2, h3 {
 			margin-top: 1rem;
 			text-align: center;
