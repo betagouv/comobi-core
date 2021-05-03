@@ -31,7 +31,7 @@ include:
 
 code_source:
   instance: "https://github.com/betagouv/neutre.comobi.fr"
-  comobi: "https://github.com/betagouv/comobi"
+  comobi: "https://github.com/betagouv/comobi-core"
 
 defaults:
   - scope:

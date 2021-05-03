@@ -51,6 +51,5 @@
 	display: flex;
 	flex: 1;
 	flex-direction: column;
-	padding: 0.8rem;
 }
 </style>
