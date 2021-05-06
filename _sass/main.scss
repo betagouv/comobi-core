@@ -55,7 +55,11 @@ table {
 	line-height: 1.9rem;
 	align-items: center;
 	text-align: center;
-	margin-bottom: 3.5rem;
+	width: 100%;
+	padding: 1rem;
+	&.title {
+		margin-bottom: 3.5rem;
+	}
 }
 
 h2 {
@@ -67,6 +71,12 @@ h2 {
 	flex-direction: column;
 	align-items: center;
 	background-color: $header-background;
+	.bandeau {
+		width: 100%;
+		+h1 {
+			padding-bottom: 3.5rem;
+		}
+	}
 }
 .logo-title {
 	max-width: 20rem;

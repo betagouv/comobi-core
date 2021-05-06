@@ -7,6 +7,11 @@ scripts:
 styles:
   - href: "./frontend_build/bundle.css"
 
+bandeau:
+  img: "generic-images/banniere-developpement.png"
+  title: "Salut c'est le titre"
+  background: "blue"
+
 title: Trouvez un covoiturage pour vous déplacer pour vos trajets réguliers
 title-img: generic-images/logo-long-web.png
 ---
