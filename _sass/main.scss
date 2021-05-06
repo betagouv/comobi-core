@@ -57,6 +57,8 @@ table {
 	text-align: center;
 	width: 100%;
 	padding: 1rem;
+	margin: 0;
+
 	&.title {
 		margin-bottom: 3.5rem;
 	}
@@ -73,8 +75,12 @@ h2 {
 	background-color: $header-background;
 	.bandeau {
 		width: 100%;
-		+h1 {
-			padding-bottom: 3.5rem;
+		min-height: 5rem;
+	}
+
+	&.home {
+		h1{
+			padding-bottom: 4rem;
 		}
 	}
 }
@@ -265,164 +271,4 @@ a {
 	}
 }
 
-// Comment ça marche
-.how-it-works {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	padding: 2rem 0;
-	background-color: rgba(247, 247, 247, 0.5);
-	width: 100%;
-	.slogan-list {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		.slogan {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			text-align: center;
-			padding: 0.5rem 2rem;
-		}
-	}
-	.explanation {
-		display: flex;
-		flex-direction: row;
-		justify-content: space-around;
-		margin: 3rem 0;
-		padding: 0 3rem;
-		width: 100%;
-		align-items: center;
-
-		:nth-child(1) {
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			align-items: flex-start;
-			p span {
-				border: 2px solid grey;
-				border-radius: 50%;
-				width: 2em;
-				height: 2em;
-				display: inline-block;
-				text-align: center;
-				line-height: 1.7em;
-			}
-		}
-		img {
-			display: none;
-			@media only screen and (min-width: 48rem) {
-				display: flex;
-				height: 12rem;
-				width: 17rem;
-				object-fit: cover;
-				object-position: left;
-				filter: grayscale(100%);
-			}
-		}
-	}
-}
-.faq {
-	background-color: rgba(246, 246, 246, 1);
-	padding: 3rem;
-}
-
-@media only screen and (min-width: 48rem) {
-	// Comment ça marche
-	.how-it-works {
-		padding: 2rem 4rem;
-		.slogan-list {
-			display: flex;
-			flex-direction: row;
-			justify-content: center;
-			align-items: flex-start;
-			.slogan {
-				display: flex;
-				flex: 1;
-				flex-direction: column;
-				align-items: flex-start;
-				padding: 0 0.5rem;
-				text-align: left;
-			}
-		}
-	}
-	.footer {
-		flex-direction: row;
-		:nth-child(1) {
-			align-items: flex-start;
-		}
-		:nth-child(2) {
-			align-items: flex-end;
-		}
-	}
-
-	.logo {
-		background-color: #FFFFFF;
-		margin-left: 1rem;
-	}
-	.header {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		font-family: $main-font;
-		font-weight: normal;
-
-		.header-button {
-			display: flex;
-			.search-btn {
-				position: unset;
-			}
-		}
-		.menu {
-			display: flex;
-			flex-direction: row;
-			justify-content: space-between;
-			align-items:	center;
-			width: 100%;
-			font-weight: normal;
-		}
-
-		.topnav {
-			display: flex;
-			flex-direction: left;
-			justify-content: flex-start;
-			a.icon {
-				display: none;
-			}
-			.menu-item-list {
-				display: flex;
-				background-color: #FFFFFF;
-			}
-		
-			.menu-item-list .menu-item {
-				color: black;
-				margin: 0 0.5rem;
-				&:nth-child(3) {
-					display: none;
-				}
-				
-			}
-			.active {
-				border-bottom: 4px solid;
-			}
-			.menu-item-list a:hover {
-				border-bottom: 4px solid;
-				text-decoration: none;
-				background-color: #FFFFFF;
-				color: black;
-			}
-			.menu-item-list a:active {
-				border-bottom: 4px solid;
-			}
-		}
-	}
-	.partner-section {
-		.partner-logo-list {
-		flex-direction: row;
-		max-width: 60%;
-		}
-	}
-}
+@import './how-it-works.scss';

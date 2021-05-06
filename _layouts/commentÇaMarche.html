@@ -2,15 +2,7 @@
 layout: default
 ---
 <div class="header-title">
-    {% if page.bandeau %}
-    <img class="bandeau" src="{{ page.bandeau.img }}" alt="{{ page.bandeau.alt | default: 'bandeau' }}" />
-    {% if page.bandeau.title %}
-        <h1 style="background: {{ page.bandeau.background }};">{{ page.bandeau.title }}</h1>
-    {% endif %}
-    {% else %}
-    <img class="logo-title hiw" src="{{ page.title-img | default: 'generic-images/logo-long-web.png' }}" alt="logo comobi" />
-    <h1 class="title">{{ page.title | default: 'Trouvez un covoiturage pour vous déplacer' }}</h1>
-    {% endif %}
+    {% include page-bandeau.html %}
 </div>
 
 <section class="how-it-works">

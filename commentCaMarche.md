@@ -1,7 +1,15 @@
 ---
 layout: commentÇaMarche
-title: Conducteurs vous avez un super pouvoir !
-title-img: generic-images/conducteur.svg
+
+image:
+  url: "generic-images/conducteur.svg"
+  alt: "volant d'encouragement"
+  bandeau: false
+
+title:  # Optionnel
+  text: Conducteurs vous avez un super pouvoir !
+  background: antiquewhite
+
 slogans:
   - title: Solidaire !
     icon: generic-images/icons/solidaire.svg
