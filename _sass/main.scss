@@ -11,6 +11,9 @@ $line-height: 1.15rem;
 $font-weigth: 400;
 
 
+@import './how-it-works.scss';
+
+
 .current {
   color: green;
 }
@@ -271,4 +274,85 @@ a {
 	}
 }
 
-@import './how-it-works.scss';
+
+
+@media only screen and (min-width: 48rem) {
+
+	.footer {
+		flex-direction: row;
+		:nth-child(1) {
+			align-items: flex-start;
+		}
+		:nth-child(2) {
+			align-items: flex-end;
+		}
+	}
+
+	.logo {
+		background-color: #FFFFFF;
+		margin-left: 1rem;
+	}
+	.header {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		font-family: $main-font;
+		font-weight: normal;
+
+		.header-button {
+			display: flex;
+			.search-btn {
+				position: unset;
+			}
+		}
+		.menu {
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			align-items:	center;
+			width: 100%;
+			font-weight: normal;
+		}
+
+		.topnav {
+			display: flex;
+			flex-direction: left;
+			justify-content: flex-start;
+			a.icon {
+				display: none;
+			}
+			.menu-item-list {
+				display: flex;
+				background-color: #FFFFFF;
+			}
+		
+			.menu-item-list .menu-item {
+				color: black;
+				margin: 0 0.5rem;
+				&:nth-child(3) {
+					display: none;
+				}
+				
+			}
+			.active {
+				border-bottom: 4px solid;
+			}
+			.menu-item-list a:hover {
+				border-bottom: 4px solid;
+				text-decoration: none;
+				background-color: #FFFFFF;
+				color: black;
+			}
+			.menu-item-list a:active {
+				border-bottom: 4px solid;
+			}
+		}
+	}
+	.partner-section {
+		.partner-logo-list {
+		flex-direction: row;
+		max-width: 60%;
+		}
+	}
+}
