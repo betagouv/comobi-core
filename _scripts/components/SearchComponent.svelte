@@ -27,8 +27,10 @@
         />
         <img 
             alt="arrow"
-            class="laptop-icon" 
+            class="icon" 
             src="./generic-images/icons/double-arrow.svg"
+            width="25px"
+            height="25px"
             on:click={reverseClicked}
         />
         <CityInput
@@ -37,13 +39,7 @@
             bind:value={destination}
         />
         <button class="search-btn" type="submit">Rechercher</button>
-    </div>
-    <img 
-        alt="arrow"
-        class="mobile-icon" 
-        src="./generic-images/icons/double-arrow.svg"
-        on:click={reverseClicked}
-    />  
+    </div> 
 </form>
 
 <style lang="scss">
@@ -51,7 +47,7 @@
 	display: flex;
 	flex-direction: row;
 	background-color: white;
-	padding: 10px;
+	padding: 1rem 2rem;
 	border: 1px solid rgba(50, 66, 124, 0.05);
 	box-shadow: 0px 3px 3px rgba(211, 211, 211, 0.15);
 	border-radius: 4px;
@@ -61,27 +57,20 @@
 		flex: 10;
 		flex-direction: column;
 	}
-	.mobile-icon {
-		display: flex;
-	}
-	.laptop-icon {
-		display: none;
-	}
+
 	img {
-		display: flex;
-		flex: 1;
-		align-self: self-start;
-		margin-top: 34px !important;
-		width: 24px;
-		height: 24px;
-		margin-top: 16px;
+        align-self: center;
+        transform: rotate(90deg);
+        @media only screen and (min-width: 48rem) {
+            transform: none;
+            margin: 0 1.5rem;
+        }
 	}
 	.search-btn {
-		width: min-content;
-        display: flex;
-        flex: 1;
         padding: 10px;
-        margin-left: 0.5rem;
+        @media only screen and (min-width: 48rem) {
+            margin-left: 0.5rem;
+        }
 	}
 }
 @media only screen and (min-width: 48rem) {
@@ -93,12 +82,6 @@
             flex-direction: row;
             justify-content: space-between;
             align-items: center;
-        }
-        .laptop-icon {
-            display: flex;
-        }
-        .mobile-icon {
-            display: none;
         }
     }
 }

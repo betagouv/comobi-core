@@ -1,0 +1,84 @@
+
+// Comment ça marche
+.how-it-works {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	
+	background-color: rgba(247, 247, 247, 0.5);
+	
+	width: 100%;
+	padding: 2rem 0;
+
+	@media only screen and (min-width: 48rem) {
+		padding: 2rem 4rem;
+	}
+
+	.slogan-list {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+
+		@media only screen and (min-width: 48rem) {
+			flex-direction: row;
+			align-items: flex-start;
+		}
+
+		.slogan {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			text-align: center;
+			padding: 0.5rem 2rem;
+
+			@media only screen and (min-width: 48rem) {
+				flex: 1;
+				align-items: flex-start;
+				padding: 0 0.5rem;
+				text-align: left;
+			}
+		}
+	}
+	.explanation {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-around;
+		margin: 3rem 0;
+		padding: 0 3rem;
+		width: 100%;
+		align-items: center;
+
+		:nth-child(1) {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: flex-start;
+			p span {
+				border: 2px solid grey;
+				border-radius: 50%;
+				width: 2em;
+				height: 2em;
+				display: inline-block;
+				text-align: center;
+				line-height: 1.7em;
+			}
+		}
+		img {
+			display: none;
+			@media only screen and (min-width: 48rem) {
+				display: flex;
+				height: 12rem;
+				width: 17rem;
+				object-fit: cover;
+				object-position: left;
+				filter: grayscale(100%);
+			}
+		}
+	}
+}
+.faq {
+	background-color: rgba(246, 246, 246, 1);
+	padding: 3rem;
+}

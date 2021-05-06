@@ -29,12 +29,12 @@ try {
   console.log(e);
 }
 
-const LOT_CODE = process.env.CODE_DEPARTEMENT || '34'
+const code_departement = CONFIG.code_departement
 // get all cities for the herault depatment
-const lotGeojsonP = got(
-	`https://geo.api.gouv.fr/departements/${LOT_CODE}/communes?format=geojson`,
+const departmentGeojsonP = code_departement !== undefined ? got(
+	`https://geo.api.gouv.fr/departements/${code_departement}/communes?format=geojson`,
 	{ json: true }
-).then(({ body }) => body)
+).then(({ body }) => body) : Promise.resolve(undefined)
 
 const lotocarPositionByPlaceP = getLotocarPositionByPlace()
 
@@ -48,33 +48,22 @@ const getPlaceNameList = (positionByPlace) => {
 const validPlaceNamesP = CONFIG.liste_ville_restreinte !== undefined && CONFIG.liste_ville_restreinte.toLowerCase() === "oui" ? 
 	lotocarPositionByPlaceP.then(positionByPlace => [...getPlaceNameList(positionByPlace)])
 	: Promise.all([
-		lotGeojsonP,
+		departmentGeojsonP,
 		lotocarPositionByPlaceP
 	])
-		.then(([lotGeojson, positionByPlace]) => {
+		.then(([departmentGeojson, positionByPlace]) => {
 			const placeNames = getPlaceNameList(positionByPlace);
-
-			const communes = lotGeojson.features
-			for (const commune of communes) {
-				const placeName = commune.properties.nom
-				placeNames.add(placeName)
+			if(departmentGeojson !== undefined) {
+				const communes = departmentGeojson.features
+				for (const commune of communes) {
+					const placeName = commune.properties.nom
+					placeNames.add(placeName)
+				}
 			}
 			return [...placeNames]
 		})
 
-/*if (devMode) {
-	app.use(
-		middleware(compiler, {
-			hot: true,
-			publicPath: '/build/'
-			// webpack-dev-middleware options
-		})
-	)
-}*/
-
 app.use(express.static(__dirname))
-
-//app.get('/', (req, res) => res.redirect('/Corresplot/'))
 
 function makeDriverObject(driverTripProposal) {
 	const {
@@ -183,7 +172,7 @@ app.listen(PORT, () =>
 )
 
 // # Initialize data
-lotGeojsonP
+departmentGeojsonP
 	.then(lotGeojson => {
 		const communes = lotGeojson.features
 
