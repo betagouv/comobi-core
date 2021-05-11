@@ -27,8 +27,9 @@ layout: default
         <a class="search-btn" href="{{ site.formulaire }}">Je propose un trajet</a>
     </div>
     <img 
-        src="{{ page.conducteur-image.url | default: 'generic-images/logo-long-web.png' }}" 
-        alt="{{ page.conducteur-image.alt | default: 'voiture' }}"/>
+        src="{{ page.conducteur-img.url }}" 
+        alt="{{ page.conducteur-img.alt }}"
+        height="{{ page.conducteur-img.height }}"/>
     </div>
 </section>
 <!-- est-ce que je pourrais éviter le for ? -->

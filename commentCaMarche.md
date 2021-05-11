@@ -22,6 +22,7 @@ slogans:
     msg: Mettez vous d’accord sur un partage juste des frais sur vos trajets.
 
 conducteur-img:
-  url: "generic-images/logo-long-web.png"
+  url: "generic-images/voiture-comobi.png"
   alt: "voiture"
+  height: "15px"
 ---
