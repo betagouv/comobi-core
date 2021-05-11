@@ -14,6 +14,6 @@ image:
   bandeau: true
 
 title:  # Optionnel
-  text: Conducteurs, bonjoir !
+  text: "Conducteurs, bonjoir !"
   background: "#c9d622"
 ---
