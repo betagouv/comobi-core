@@ -1,7 +1,7 @@
 {% if page.image.bandeau %}
 <img class="bandeau" src="{{ page.image.url }}" alt="{{ page.image.alt | default: 'bandeau' }}" />
 {% else %}
-<img class="logo-title hiw" src="{{ page.image.url | default: 'generic-images/logo-long-web.png' }}" alt="logo comobi" />
+<img class="logo-title hiw" src="{{ page.image.url }}" alt="logo comobi" />
 {% endif %}
 
 {% if page.title %}
