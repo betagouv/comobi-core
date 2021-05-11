@@ -2,13 +2,13 @@
 layout: commentÇaMarche
 
 image:
-  url: "generic-images/conducteur.svg"
+  url: "generic-images/voiture-comobi.png"
   alt: "volant d'encouragement"
   bandeau: false
 
 title:  # Optionnel
   text: Conducteurs vous avez un super pouvoir !
-  background: antiquewhite
+  background: "#f6f6f6"
 
 slogans:
   - title: Solidaire !
