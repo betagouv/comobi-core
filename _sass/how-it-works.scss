@@ -43,12 +43,16 @@
 	}
 	.explanation {
 		display: flex;
-		flex-direction: row;
+		flex-direction: column;
 		justify-content: space-around;
 		margin: 3rem 0;
 		padding: 0 3rem;
 		width: 100%;
 		align-items: center;
+			
+		@media only screen and (min-width: 48rem) {
+			flex-direction: row;
+		}
 
 		:nth-child(1) {
 			display: flex;
@@ -67,11 +71,8 @@
 			}
 		}
 		img {
-			@media only screen and (min-width: 48rem) {
-				display: flex;
-				flex: 1;
-				object-fit: contain;
-			}
+			flex: 1;
+			object-fit: contain;
 		}
 	}
 }
