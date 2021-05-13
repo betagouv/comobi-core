@@ -43,7 +43,7 @@
 	}
 	.explanation {
 		display: flex;
-		flex-direction: row;
+		flex-direction: column;
 		justify-content: space-around;
 		margin: 3rem 0;
 		padding: 0 3rem;
@@ -51,7 +51,7 @@
 		align-items: center;
 			
 		@media only screen and (min-width: 48rem) {
-			flex-direction: column;
+			flex-direction: row;
 		}
 
 		:nth-child(1) {
