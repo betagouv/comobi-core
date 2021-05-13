@@ -52,6 +52,7 @@
 
 		:nth-child(1) {
 			display: flex;
+			flex: 1;
 			flex-direction: column;
 			justify-content: center;
 			align-items: flex-start;
@@ -66,13 +67,10 @@
 			}
 		}
 		img {
-			display: none;
 			@media only screen and (min-width: 48rem) {
 				display: flex;
-				height: 12rem;
-				width: 17rem;
-				object-fit: cover;
-				object-position: left;
+				flex: 1;
+				object-fit: contain;
 			}
 		}
 	}
