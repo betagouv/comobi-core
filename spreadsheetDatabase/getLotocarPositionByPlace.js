@@ -1,13 +1,10 @@
 import { google } from 'googleapis'
 
 const googleAPIKey = process.env.GOOGLE_API_KEY
-const googleDriverSpreadsheetId =
-	process.env.LOCALISATION_KNOWLEDGE_GOOGLE_SPREADSHEET_ID
-
 const sheets = google.sheets({ version: 'v4', auth: googleAPIKey })
 
 // This function provides local-specific knowledge about positions in the Lot
-export default function getLotocarPositionByPlace() {
+export default function getLotocarPositionByPlace(googleDriverSpreadsheetId) {
 	return new Promise((resolve, reject) => {
 		googleDriverSpreadsheetId == null
 			? resolve(new Map())
