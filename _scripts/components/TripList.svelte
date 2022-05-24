@@ -15,10 +15,8 @@
                 <th scope="col">contacter</th>
             </tr>
         </thead>
-            {#each tripList as tripProposal}
-                <SingleTrip
-                    {tripProposal}
-                />
+            {#each tripList as tripProposal (tripProposal)}
+                <SingleTrip {tripProposal} />
             {/each}
     </table>
 {/if}
