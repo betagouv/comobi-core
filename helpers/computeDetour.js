@@ -16,14 +16,7 @@ export default (tripDetails) => {
 			STRAIGHT_LINE_TO_ROAD_DISTANCE_RATIO) /
 		KM
 
-	const detourClass =
-		additionalDistanceKM <= 5 * AVERAGE_SPEED
-			? 'minor-detour'
-			: additionalDistanceKM <= 15 * AVERAGE_SPEED
-				? 'medium-detour'
-				: 'major-detour'
-
 	const additionalTime = additionalDistanceKM * AVERAGE_SPEED
-	// detourClass is never used so I removed it
+
 	return additionalTime
 }
