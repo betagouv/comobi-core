@@ -36,7 +36,7 @@ const departmentGeojsonP = code_departement !== undefined ? got(
 	{ json: true }
 ).then(({ body }) => body) : Promise.resolve(undefined)
 
-const lotocarPositionByPlaceP = getLotocarPositionByPlace()
+const lotocarPositionByPlaceP = getLotocarPositionByPlace(CONFIG.liste_noms_locaux_lieux)
 
 const getPlaceNameList = (positionByPlace) => {
 	const placeNames = new Set()

@@ -79,7 +79,6 @@ Pour trouver les **latitude/longitude**, une manière de faire consiste à aller
 - Créer un fichier `.env` avec les variables d'environnement:
   - `GOOGLE_API_KEY` : clef d'API créée ci-dessus
   - `GOOGLE_DRIVER_SPREADSHEET_ID` : identifiant du Google Spreadsheet qui sert de base de donnée
-  - `LOCALISATION_KNOWLEDGE_GOOGLE_SPREADSHEET_ID` : identifiant du Google Spreadsheet qui sert de base de connaissance pour la localisation
 
 Lancer
 ```sh
@@ -95,8 +94,6 @@ Pour lancer l'application "trajets direct" :
 ```sh
 npm run dev # start server
 ```
-
-
 
 ### Déploiement sur Clever Cloud
 

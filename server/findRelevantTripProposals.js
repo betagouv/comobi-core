@@ -14,9 +14,13 @@ function getAdditionnalTimeByTrip(tripRequest, tripProposalsByTrip, positionByPl
 	const tripDetailsByTrip = computeTripDetails(proposedTrips, tripRequest, positionByPlace);
 	return proposedTrips
 		.filter(trip => tripDetailsByTrip.has(trip)) // why ?
+		.filter(trip => {
+			const {originalDistance, distanceWithDetour} = tripDetailsByTrip.get(trip)
+			console.log(trip, (distanceWithDetour / originalDistance))
+			return (distanceWithDetour / originalDistance) <= 1.8
+		})
 		.map(trip => {
 			const additionalTime = computeDetour(tripDetailsByTrip.get(trip))
-			// use another type ? set or map maybe ?
 			return {trip, additionalTime}
 		})
 		.sort(
