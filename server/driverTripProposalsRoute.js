@@ -9,8 +9,8 @@ export default function(makeDriverObject){
         getDrivers()
         .then(function cleanupDriverTripProposals(driverTripProposals) {
             for (const driverTripProposal of driverTripProposals) {
-                driverTripProposal['Départ'] = driverTripProposal['Départ'].trim()
-                driverTripProposal['Arrivée'] = driverTripProposal['Arrivée'].trim()
+                driverTripProposal['Départ'] = driverTripProposal['Départ'].trim().toLowerCase()
+                driverTripProposal['Arrivée'] = driverTripProposal['Arrivée'].trim().toLowerCase()
                 
                 const passagerDirectValue = driverTripProposal['Consentement'] && 
                     driverTripProposal['Consentement'].trim() || '';
