@@ -1,4 +1,4 @@
-{% if page.image %}
+{% if page.image.bandeau %}
 <img class="bandeau" src="{{ page.image.url }}" alt="{{ page.image.alt | default: 'bandeau' }}" />
 {% else %}
 <img class="logo-title hiw" src="{{ page.image.url }}" alt="logo comobi" />
