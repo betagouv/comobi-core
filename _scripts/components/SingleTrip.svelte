@@ -1,13 +1,12 @@
 <script>
   import { parse, format } from 'date-fns'
-  import { getContext } from 'svelte'
+  import { fr } from 'date-fns/locale'
   import Modal from './Modal.svelte'
   
   export let tripProposal
   const getDate = (Jour) => {
-    const date = parse(Jour, 'MM/dd/yyyy', new Date())
-    const days = { E: format(date, 'E'), dMM : format(date, 'd LLL') }
-    return { E: format(date, 'E'), dLLL : format(date, 'd LLL') }
+    const date = parse(Jour, 'dd/MM/yyyy', new Date())
+    return { E: format(date, 'E', { locale: fr }), dLLL : format(date, 'd LLL', { locale: fr }) }
   }
   const {
 		Départ,
@@ -15,7 +14,7 @@
 		Jours,
 		Jour,
 		heureDepart,
-		driver: { Prénom, Nom, contact, lieu, modeContact }
+		driver: { Prénom, Nom, contacts, modeContact }
 	} = tripProposal
 
   let modal;
