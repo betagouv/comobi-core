@@ -32,6 +32,12 @@
 	$: trip10List = getRelevantTrip(tripProposalsByTrip, orderedTrips, makeTimeFilter(5, 20))
 	$: trip20List = getRelevantTrip(tripProposalsByTrip, orderedTrips, makeTimeFilter(20, 45))
 	$: nbResult = directTripList.length + trip10List.length + trip20List.length
+	$: emailSubject = `Je cherche un trajet entre ${tripRequest.origin} et ${tripRequest.destination}`
+	$: emailBody = `Bonjour, %0D%0D`
+		+ `Je suis à la recherche d'un trajet entre `
+		+ `${tripRequest.origin} et ${tripRequest.destination} `
+		+ `le [DATE A COMPLETER] à [HEURE A COMPLETER]. %0D%0D`
+		+ `En vous remerciant,%0D%0DBonne journée.`
 </script>
 
 {#if !validTripRequest}
@@ -68,6 +74,11 @@
 						<TripList tripList={trip20List}/>
 					{/if}
 			{/if}
+		{/if}
+		{#if config.mail }
+			<a href={`mailto:${config.mail}?subject=${emailSubject}&body=${emailBody}`}>
+				Je souhaite être alerté.e des nouveaux trajets pour cette recherche par email ({`${config.mail}`}).
+			</a>
 		{/if}
 	</div>
 {/if}
