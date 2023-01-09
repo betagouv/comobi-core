@@ -3,6 +3,7 @@
   import { fr } from 'date-fns/locale'
   import Modal from './Modal.svelte'
   
+  /** @type {TripProposal} */
   export let tripProposal
   const getDate = (Jour) => {
     const date = parse(Jour, 'dd/MM/yyyy', new Date())
@@ -14,7 +15,7 @@
 		Jours,
 		Jour,
 		heureDepart,
-		driver: { Prénom, Nom, contacts, modeContact }
+		driver: { Prénom, Nom, contact, modeContact }
 	} = tripProposal
 
   let modal;
