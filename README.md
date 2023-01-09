@@ -71,6 +71,18 @@ Pour trouver les **latitude/longitude**, une manière de faire consiste à aller
 
 ### Pour développer en local
 
+#### Installer jekyll et ses pré-requis
+En suivant la [documentation jekyll](https://jekyllrb.com/docs/)
+
+#### Installer nodejs
+En suivant la [documentation nodejs](https://nodejs.org/en/download/)
+
+#### Installer les dépendances
+```
+npm install
+bundle install
+```
+
 #### Première fois
 
 - Créer un fichier `_config.yml` (par exemple, en prenant ce modèle : https://github.com/betagouv/neutre.comobi.fr/blob/main/_config.yml )
@@ -85,7 +97,6 @@ Lancer
 # Pour créer un premier build, avec notamment la création du dossier _site
 npm run build:jekyll
 ```
-
 
 #### Au quotidien
 
